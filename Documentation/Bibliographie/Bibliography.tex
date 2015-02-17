@@ -1,0 +1,210 @@
+%% Based on a TeXnicCenter-Template by Tino Weinkauf.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HEADER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,twoside,10pt]{report}
+% Alternative Options:
+%	Paper Size: a4paper / a5paper / b5paper / letterpaper / legalpaper / executivepaper
+% Duplex: oneside / twoside
+% Base Font Size: 10pt / 11pt / 12pt
+
+
+%% Language %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[francais]{babel} %francais, polish, spanish, ...
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{lmodern} %Type1-font for non-english texts and characters
+
+
+%% Packages for Graphics & Figures %%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx} %%For loading graphic files
+%\usepackage{subfig} %%Subfigures inside a figure
+%\usepackage{pst-all} %%PSTricks - not useable with pdfLaTeX
+
+%% Please note:
+%% Images can be included using \includegraphics{Dateiname}
+%% resp. using the dialog in the Insert menu.
+%% 
+%% The mode "LaTeX => PDF" allows the following formats:
+%%   .jpg  .png  .pdf  .mps
+%% 
+%% The modes "LaTeX => DVI", "LaTeX => PS" und "LaTeX => PS => PDF"
+%% allow the following formats:
+%%   .eps  .ps  .bmp  .pict  .pntg
+
+
+%% Math Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+
+
+%% Line Spacing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{setspace}
+%\singlespacing        %% 1-spacing (default)
+%\onehalfspacing       %% 1,5-spacing
+%\doublespacing        %% 2-spacing
+
+
+%% Other Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{a4wide} %%Smaller margins = more text per page.
+\usepackage{fancyhdr} %%Fancy headings
+%\usepackage{longtable} %%For tables, that exceed one page
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Remarks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% TODO:
+% 1. Edit the used packages and their options (see above).
+% 2. If you want, add a BibTeX-File to the project
+%    (e.g., 'literature.bib').
+% 3. Happy TeXing!
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Options / Modifications
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\input{options} %You need a file 'options.tex' for this
+%% ==> TeXnicCenter supplies some possible option files
+%% ==> with its templates (File | New from Template...).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\pagestyle{empty} %No headings for the first pages.
+
+
+%% Title Page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ==> Write your text here or include other files.
+
+%% The simple version:
+\title{Projet de Programmation}
+\author{Alexandre Kervadec, Guillaume Verdugo, Jeremy Arrestier, Thibaut Fabre}
+%\date{} %%If commented, the current date is used.
+\maketitle
+
+%% The nice version:
+%\input{titlepage} %%You need a file 'titlepage.tex' for this.
+%% ==> TeXnicCenter supplies a possible titlepage file
+%% ==> with its templates (File | New from Template...).
+
+
+%% Inhaltsverzeichnis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents %Table of contents
+\cleardoublepage %The first chapter should start on an odd page.
+
+\pagestyle{plain} %Now display headings: headings / fancy / ...
+
+
+
+%% Chapters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ==> Write your text here or include other files.
+
+%\input{intro} %You need a file 'intro.tex' for this.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ==> Eléments bibliographiques et présentation du projet:
+
+\chapter{Étude préalable des références et de l'existant}\label{ref_existant}
+
+
+\section{Compréhension du sujet}\label{comprehension_sujet}
+
+Afin de comprendre au mieux la prosodie, l'article \cite{bachorowski1999vocal} nous permet de mettre une définition sur ce terme technique.
+
+L'article \cite{auberge2002prosodie} nous donne des notions sur les émotions que l'on peut passer avec la voix, alors que le livre \cite{ekman2003unmasking} nous aide sur les expressions faciales.
+
+Enfin, le document \cite{fourer:hal-00992083} nous offre une approche sociétale du problème avec une étude sur la prosodie attitudinale pour la langue japonaise.
+
+
+
+\section{Références sur la transformation de la voix}\label{ref_transfo_voix}
+
+Le cours de Ricardo Gutierrez-Osuna \cite{Gutierrez-Osuna:ISP-PMS} et l'article de l'IEEE Signal Processing Letters \cite{haagen1994transformation} sont des descriptions physiques de la modulation et modification de la voix.
+
+L'extrait de la IEEE International Conference on Acoustique de 1998 \cite{Acero:ICASSP98-II-881} décrit deux possibles modifications prosodiques.
+
+Le document de Véronique Aubergé \cite{auberge2002gestalt} nous offre une approche par la méthode Gestalt de la prosodie.
+
+Dans cet article du journal Voice transformation using PSOLA technique \cite{valbret1992voice}, un système de conversion de voix utilisant PSOLA et un module pour les transformations spectrales sont étudiés.
+
+\section{Références sur la faciale}\label{ref_transfo_faciales}
+
+Le document \cite{beskow1995rule} expose une approche sur la définition de règles de synchronisation des expressions faciales et particulièrement buccales par rapport à un certain discours.
+
+Le document \cite{matsumoto1992american} est utile dans le sens qu'il porte sur l'étude de la prosodie faciale, et ce afin de pouvoir détecter l'ethnie du protagoniste, ce qui nous est utile car le projet porte sur trois langues : le français, l'anglais (américain) et le japonais.
+
+
+\section{État de l'art}\label{state_of_the_art}
+
+L'article \cite{rouas2006identification} nous donne une ligne directrice pour tout ce qui touche la reconnaissance des différents dialectes arabes. En d'autres termes, malgré une proximité géographique et linguistique, la prosodie permet la différenciation.
+L'article de la revue en ligne Alsic \cite{10.4000/alsic.332} nous apporte un point sur l'état actuel de l'art en matière de logiciel pour l'apprentissage de la prosodie, ce qui est proche de ce que l'on cherche à développer.
+
+\section{Programmation avec du contenu vidéo}
+
+Les articles \cite{ghanbari1999video} et \cite{he2013introduction} nous ont permis de mieux comprendre le concept d'encodage des vidéos et l'utilisation de \textit{Codecs} pour pouvoir décoder ces vidéos afin de les lire.
+
+\section{Ergonomie}
+
+L'article \cite{lente2014scenariser} est une étude sur la “collaboration entre Ergonomie, Design et Ingénierie”, qui nous offre une façon de procéder afin de réaliser une ergonomie des plus efficace.
+
+\section{Base de données}
+
+Durant ce projet, il a fallu trouver le système de base de données le plus adapté à nos besoins. Pour ce faire, nous nous sommes appuyés sur l'article \cite{strauchnosql}, disséquant l'architecture \textit{NoSQL} (Not Only SQL).
+Nous tournant finalement vers le \textit{SGBDR} (Système de Gestion de Base de Données Relationnelles) \textit{SQLite}, nous nous sommes informés sur l'utilisation et les finalités de ce logiciel avec le livre \cite{kreibich2010using}.
+
+
+
+%% <== Fin de Eléments bibliographiques et présentation du projet
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% BIBLIOGRAPHY AND OTHER LISTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% A small distance to the other stuff in the table of contents (toc)
+\addtocontents{toc}{\protect\vspace*{\baselineskip}}
+
+%% The Bibliography
+%% ==> You need a file 'literature.bib' for this.
+%% ==> You need to run BibTeX for this (Project | Properties... | Uses BibTeX)
+\addcontentsline{toc}{chapter}{Bibliographie} %'Bibliography' into toc
+\nocite{*} %Even non-cited BibTeX-Entries will be shown.
+\bibliographystyle{plain} %Style of Bibliography: plain / apalike / amsalpha / ...
+\bibliography{literature} %You need a file 'literature.bib' for this.
+
+%% The List of Figures
+%\clearpage
+%\addcontentsline{toc}{chapter}{List of Figures}
+%\listoffigures
+
+%% The List of Tables
+%\clearpage
+%\addcontentsline{toc}{chapter}{List of Tables}
+%\listoftables
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% APPENDICES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+%% ==> Write your text here or include other files.
+
+%\input{FileName} %You need a file 'FileName.tex' for this.
+
+
+\end{document}
+
