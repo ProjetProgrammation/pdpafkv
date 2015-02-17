@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Main;
+package BDD;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
