@@ -1,0 +1,11 @@
+\select@language {french}
+\contentsline {chapter}{\numberline {1}\IeC {\'E}tude pr\IeC {\'e}alable des r\IeC {\'e}f\IeC {\'e}rences et de l'existant}{3}
+\contentsline {section}{\numberline {1.1}Compr\IeC {\'e}hension du sujet}{3}
+\contentsline {section}{\numberline {1.2}R\IeC {\'e}f\IeC {\'e}rences sur la transformation de la voix}{3}
+\contentsline {section}{\numberline {1.3}R\IeC {\'e}f\IeC {\'e}rences sur la faciale}{3}
+\contentsline {section}{\numberline {1.4}\IeC {\'E}tat de l'art}{4}
+\contentsline {section}{\numberline {1.5}Programmation avec du contenu vid\IeC {\'e}o}{4}
+\contentsline {section}{\numberline {1.6}Ergonomie}{4}
+\contentsline {section}{\numberline {1.7}Base de donn\IeC {\'e}es}{4}
+\vspace *{\baselineskip }
+\contentsline {chapter}{Bibliographie}{4}
