@@ -13,14 +13,21 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPaneBuilder;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -47,17 +54,34 @@ public class Start extends Application {
         final TextField birthday = new TextField();        
         final TextField motherTongue = new TextField();
         final TextField yearStudying = new TextField();
-        
         //Date format
         birthday.setPromptText("Par exemple : 12/07/1998");
-        final SimpleDateFormat format = new SimpleDateFormat("mm/dd/yyyy");
+        
+        
+        //Groupe de Radio Buttons
+        final ToggleGroup choose = new ToggleGroup();
+
+        //Création + personnalisation des radio buttons
+        final RadioButton french = new RadioButton();
+        french.setText("French");
+        french.setToggleGroup(choose);
+        final RadioButton japanese = new RadioButton();
+        japanese.setText("Japanese");
+        japanese.setToggleGroup(choose);
+        final RadioButton english = new RadioButton();
+        english.setText("English");
+        english.setToggleGroup(choose);
+        final RadioButton portuguese = new RadioButton();
+        portuguese.setText("Portuguese");
+        portuguese.setToggleGroup(choose);
+        
         
         //Bouton d'accès à la suite du programme
-        Button btn = new Button();
-        btn.setText("Dis moi qui est ce ?");
+        Button access = new Button();
+        access.setText("Accéder");
         
         //Action du bouton
-        btn.setOnAction(new EventHandler<ActionEvent>() {    
+        access.setOnAction(new EventHandler<ActionEvent>() {    
             @Override
             public void handle(ActionEvent event) {
                 
@@ -65,39 +89,53 @@ public class Start extends Application {
                 String ln = lastName.getText().toString();
                 String fn = firstName.getText().toString();
                 String mt = motherTongue.getText().toString();
-                try {
-                    Date date = format.parse(birthday.getText());
-                } catch (ParseException ex) {
-                    Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                String bd = birthday.getText().toString();
                 int ys = Integer.parseInt(yearStudying.getText().toString());
+                
                 // Création de l'utilisateur
-                User us = new User(ln,fn,"26/02/1991",mt,ys);
+                User us = new User(ln,fn,bd,mt,ys);
                 // Affichage pour voir si ajout OK               
                 System.out.println(us.toString());
             }
         });
+
         
         
-        //Création + ajout au layout
+        //Création layout
         GridPane root = new GridPane();
-        root.add(lLN,1,1);
-        root.add(lFN,1,2);
-        root.add(lB,1,3);
-        root.add(lMT,1,4);
-        root.add(lYS,1,5);
-        root.add(lastName,2,1);
-        root.add(firstName,2,2);
-        root.add(birthday,2,3);
-        root.add(motherTongue,2,4);
-        root.add(yearStudying,2,5);
-        root.add(btn,2,6);
+        GridPane user = new GridPane();
+        VBox language = new VBox();
+        
+        //Affectation Layout root
+        root.add(user,1,2);
+        root.add(language, 2, 1);
+        root.add(access,2,2);
+        
+        //Affectation Layout language
+        language.getChildren().add(english);
+        language.getChildren().add(french);
+        language.getChildren().add(japanese);
+        language.getChildren().add(portuguese);
+        
+        
+        //Affection Layout user
+        user.add(lLN,1,1);
+        user.add(lFN,1,2);
+        user.add(lB,1,3);
+        user.add(lMT,1,4);
+        user.add(lYS,1,5);
+        user.add(lastName,2,1);
+        user.add(firstName,2,2);
+        user.add(birthday,2,3);
+        user.add(motherTongue,2,4);
+        user.add(yearStudying,2,5);
         
         //Création de la scène avec ajour du layout
-        Scene scene = new Scene(root, 300, 250);
+        //Scene scene = new Scene(root, 300, 250);
+        Scene scene = new Scene(StackPaneBuilder.create().children(root).build());
         
         //Configuration du Stage
-        primaryStage.setTitle("Hello San Francisco");
+        primaryStage.setTitle("Prosodic Adventure");
         primaryStage.setScene(scene);
         primaryStage.show();
         

@@ -37,7 +37,7 @@ public class User {
         this.motherTongue = motherTongue;
         this.yearStudying = yearStudying;
     }
-
+    
     //Méthode toString pour
     @Override
     public String toString() {
