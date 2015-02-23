@@ -1,12 +1,8 @@
 package GUI;
 
-import javafx.geometry.Orientation;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
-import javafx.scene.effect.Reflection;
 import javafx.scene.paint.Color;
-import static javafx.scene.paint.Color.BLACK;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
@@ -14,8 +10,11 @@ import javafx.scene.shape.Rectangle;
 
 public class TestGUI extends Parent{
         
+    private int nombre = 1;
+    
     public TestGUI(){
-               
+        
+        
         //Zone pour les video
         Rectangle fond_video = new Rectangle();
         fond_video.setWidth(750);
@@ -68,6 +67,7 @@ public class TestGUI extends Parent{
         this.getChildren().add(validate);
         this.getChildren().add(fond_video);
         this.getChildren().add(fond_son);
+        
         
     }
 }

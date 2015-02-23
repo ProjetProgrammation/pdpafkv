@@ -7,14 +7,7 @@
 package GUI;
 
 import Result.User;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -22,10 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPaneBuilder;
 import javafx.scene.layout.VBox;
@@ -39,7 +29,7 @@ public class Start extends Application {
     
     //Création de l'interface graphique
     @Override
-    public void start(Stage primaryStage) {
+    public void start(final Stage primaryStage) {
         
         //Création des labels
         Label lLN = new Label("Last Name");
@@ -90,28 +80,34 @@ public class Start extends Application {
             public void handle(ActionEvent event) {
                 
                 if (lastName.equals("") && firstName.equals("") && motherTongue.equals("") && birthday.equals("") && yearStudying.equals("") && choose.getSelectedToggle().isSelected()==false){
-                    
+                    //We'll se, mettre une croix à coté de celui pas ou mal rempli
                 }
-                //Récupération données dans les champs
-                String ln = lastName.getText().toString();
-                String fn = firstName.getText().toString();
-                String mt = motherTongue.getText().toString();
-                String bd = birthday.getText().toString();
-                int ys = Integer.parseInt(yearStudying.getText().toString());
-                
-                
-                // Création de l'utilisateur
-                User us = new User(ln,fn,bd,mt,ys);
-                
-                System.out.println(choose.selectedToggleProperty().toString());
-                
-                // Affichage pour voir si ajout OK
-                System.out.println(us.toString());
+                else{
+                    
+                    //Récupération données dans les champs
+                    String ln = lastName.getText().toString();
+                    String fn = firstName.getText().toString();
+                    String mt = motherTongue.getText().toString();
+                    String bd = birthday.getText().toString();
+                    int ys = Integer.parseInt(yearStudying.getText().toString());
+
+                    // Création de l'utilisateur
+                    User us = new User(ln,fn,bd,mt,ys);
+                    
+                    // Affichage du bouton sélectionné.
+                    System.out.println(choose.selectedToggleProperty().toString());
+
+                    // Affichage pour voir si ajout OK
+                    System.out.println(us.toString());
+                    
+                    TestGUI tGUI = new TestGUI();
+                    Scene scene = new Scene(StackPaneBuilder.create().children(tGUI).build());
+                    primaryStage.setScene(scene);
+                    primaryStage.show();
+                }
             }
         });
 
-        
-        
         //Création layout
         GridPane root = new GridPane();
         GridPane user = new GridPane();
@@ -140,6 +136,7 @@ public class Start extends Application {
         user.add(birthday,2,3);
         user.add(motherTongue,2,4);
         user.add(yearStudying,2,5);
+        
         
         //Création de la scène avec ajour du layout
         //Scene scene = new Scene(root, 300, 250);
