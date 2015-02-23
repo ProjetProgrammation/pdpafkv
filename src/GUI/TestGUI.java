@@ -21,14 +21,8 @@ public class TestGUI extends Parent{
         fond_video.setHeight(700);
         fond_video.setArcWidth(50);
         fond_video.setArcHeight(50);
-        fond_video.setFill( //on remplie notre rectangle avec un dégradé
-            new LinearGradient(0f, 0f, 0f, 1f, true, CycleMethod.NO_CYCLE,
-                new Stop[] {
-                    new Stop(0, Color.web("#333333")),
-                    new Stop(1, Color.web("#000000"))
-                }
-            )
-        );
+        fond_video.setFill(Color.WHITE);
+        fond_video.setStroke(Color.BLACK);
         
         //Zone pour le son
         
@@ -37,18 +31,22 @@ public class TestGUI extends Parent{
         fond_son.setHeight(400);
         fond_son.setArcWidth(50);
         fond_son.setArcHeight(50);
-        fond_son.setFill( //on remplie notre rectangle avec un dégradé
-            new LinearGradient(0f, 0f, 0f, 1f, true, CycleMethod.NO_CYCLE,
-                new Stop[] {
-                    new Stop(0, Color.web("#333333")),
-                    new Stop(1, Color.web("#000000"))
-                }
-            )
-        );
+        fond_son.setFill(Color.WHITE);
+        fond_son.setStroke(Color.BLACK);
         
         //Zone pour les boutons
         Button mix = new Button("Mix");
         Button validate = new Button("Validate");
+        
+                //Zone pour la question
+        
+        Rectangle fond_question = new Rectangle();
+        fond_question.setWidth(1600);
+        fond_question.setHeight(150);
+        fond_question.setArcWidth(50);
+        fond_question.setArcHeight(50);
+        fond_question.setFill(Color.WHITE);
+        fond_question.setStroke(Color.BLACK);
         
                     
         //Position et ajout
@@ -57,15 +55,22 @@ public class TestGUI extends Parent{
         
         fond_son.setTranslateX(950);
         fond_son.setTranslateY(250);
+        
+        fond_question.setTranslateX(100);
+        fond_question.setTranslateY(50);
                 
         mix.setTranslateX(1200);
         mix.setTranslateY(800);
         validate.setTranslateX(1400);
         validate.setTranslateY(800);
-        
+          
         this.getChildren().add(mix);
         this.getChildren().add(validate);
+        
         this.getChildren().add(fond_video);
+        
+        this.getChildren().add(fond_question);
+        
         this.getChildren().add(fond_son);
         
         
