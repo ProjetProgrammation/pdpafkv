@@ -94,18 +94,17 @@ public class UserGUI {
                     int ys = Integer.parseInt(yearStudying.getText().toString());
 
                     // Création de l'utilisateur
-                    User us = new User(ln,fn,bd,mt,ys);
+                    //User us = new User(ln,fn,bd,mt,ys);
                     
                     // Affichage du bouton sélectionné.
                     System.out.println(choose.selectedToggleProperty().toString());
 
                     // Affichage pour voir si ajout OK
-                    System.out.println(us.toString());
+                    //System.out.println(us.toString());
                     
-                    TestGUI tGUI = new TestGUI();
-                    Scene scene = new Scene(StackPaneBuilder.create().children(tGUI).build());
-                    stage.setScene(scene);
-                    stage.show();
+                    TestGUI tGUI = new TestGUI(stage);
+                    /*stage.setScene(scene);
+                    stage.show();*/
                 }
             }
         });
