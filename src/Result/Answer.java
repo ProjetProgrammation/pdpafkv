@@ -12,4 +12,18 @@ package Result;
  */
 public class Answer {
     
+    private User user;
+
+    public Answer(User user) {
+        this.user = user;
+    }
+    
+    public void extract(){
+        
+        
+        
+        
+    }
+     
+    
 }
