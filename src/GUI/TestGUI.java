@@ -18,6 +18,7 @@ public class TestGUI extends Parent{
     private int nombre = 1;
     private int nbQuestion;
     private Stage stage;
+    private QuestionGUI question;
     
     public TestGUI(Stage primaryStage, int nbQuest){
         
@@ -56,6 +57,7 @@ public class TestGUI extends Parent{
         fond_question.setFill(Color.WHITE);
         fond_question.setStroke(Color.BLACK);
         
+        
                     
         //Position et ajout
         /*fond_video.setTranslateX(100);
@@ -78,6 +80,7 @@ public class TestGUI extends Parent{
         this.getChildren().add(fond_question);
         this.getChildren().add(fond_son);*/
         
+        
         BorderPane root = new BorderPane();
         VBox right = new VBox();
         right.getChildren().add(fond_son);
@@ -88,8 +91,6 @@ public class TestGUI extends Parent{
         root.setLeft(fond_video);
         root.setRight(right);
         right.setAlignment(Pos.CENTER);
-        
-        
         
         Scene scene = new Scene(root);
         this.stage.setScene(scene);
