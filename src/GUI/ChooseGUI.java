@@ -23,6 +23,7 @@ public class ChooseGUI {
 
     private Stage stage;
     
+    
     public ChooseGUI(Stage primaryStage) {
         this.stage=primaryStage;
         this.launchChooseGUI();
@@ -44,7 +45,7 @@ public class ChooseGUI {
         });
         
         //Action button learnOption
-        learnOption.setOnAction(new EventHandler<ActionEvent>() {
+        testOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
                 TestGUI tGUI = new TestGUI(stage,20);

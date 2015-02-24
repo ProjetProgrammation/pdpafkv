@@ -14,15 +14,14 @@ import javafx.stage.Stage;
  * @author Thibaut
  */
 public class Start extends Application {
-    
-    
+        
     @Override
     public void start(Stage primaryStage) {
-        
+               
         //Création d'un objet UserGUI pour faire apparaitre interface
         new UserGUI(primaryStage);
                
-    }
+    }  
 
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
