@@ -94,13 +94,13 @@ public class UserGUI {
                     int ys = Integer.parseInt(yearStudying.getText());*/
 
                     // Création de l'utilisateur
-                    //User us = new User(ln,fn,bd,mt,ys);
+                    User us = new User(ln,fn,bd,mt,ys);
                     
                     // Affichage du bouton sélectionné.
                     //System.out.println(choose.selectedToggleProperty().toString());
 
                     // Affichage pour voir si ajout OK
-                    //System.out.println(us.toString());
+                    System.out.println(us.toString());
                     
                     ChooseGUI cGUI = new ChooseGUI(stage);
                     /*stage.setScene(scene);
