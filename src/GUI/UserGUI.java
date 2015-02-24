@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Result.Extraction;
 import Result.User;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -101,8 +102,12 @@ public class UserGUI {
 
                     // Affichage pour voir si ajout OK
                     //System.out.println(us.toString());
+                    Extraction medias = new Extraction("..\\pdpafkv\\src\\Result\\Medias.txt");
+                    medias.extraire();
                     
                     ChooseGUI cGUI = new ChooseGUI(stage);
+                    
+                   
                     /*stage.setScene(scene);
                     stage.show();*/
                 //}
