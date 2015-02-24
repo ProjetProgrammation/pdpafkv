@@ -17,16 +17,12 @@ import javafx.scene.text.Text;
  * @author Jeremy
  */
 public class QuestionGUI extends Parent {
-    public String text;//texte de la question, c'est une variable public pour qu'elle puisse être lue depuis les autres classes
-    private int positionX = 0;//abscisse
-    private int positionY = 0;//ordonnée de la question
+    public String text;//texte de la question, c'est une variable public pour qu'elle puisse être lue depuis les autres classe
     
     Text texte_entier = new Text();
     
-    public QuestionGUI(String l, int posX, int posY){
+    public QuestionGUI(String l){
         text =  new String(l);
-        positionX = posX;
-        positionY = posY;
         
         
         texte_entier = new Text(text);
@@ -42,8 +38,6 @@ public class QuestionGUI extends Parent {
         texte_entier.setEffect(li);
         
         this.getChildren().add(texte_entier);//ajout de la lettre de la touche
-        
-        this.setTranslateX(positionX);//positionnement de la touche sur le clavier
-        this.setTranslateY(positionY);
+
 }
 }
