@@ -100,7 +100,7 @@ public class UserGUI {
                     // Affichage du bouton sélectionné.
                     //System.out.println(choose.selectedToggleProperty().toString());
 
-                    // Affichage pour voir si ajout OK
+                    //Affichage pour voir si ajout OK
                     //System.out.println(us.toString());
                     Extraction medias = new Extraction("..\\pdpafkv\\src\\Result\\Medias.txt");
                     medias.extraire();
