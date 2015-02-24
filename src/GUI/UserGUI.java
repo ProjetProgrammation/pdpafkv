@@ -81,17 +81,17 @@ public class UserGUI {
             @Override
             public void handle(ActionEvent event) {
                 
-                if (lastName.equals("") && firstName.equals("") && motherTongue.equals("") && birthday.equals("") && yearStudying.equals("") && choose.getSelectedToggle().isSelected()==false){
+                /*if (lastName.equals("") && firstName.equals("") && motherTongue.equals("") && birthday.equals("") && yearStudying.equals("") && choose.getSelectedToggle().isSelected()==false){
                     //We'll se, mettre une croix à coté de celui pas ou mal rempli
                 }
                 else{
                     
                     //Récupération données dans les champs
-                    String ln = lastName.getText().toString();
-                    String fn = firstName.getText().toString();
-                    String mt = motherTongue.getText().toString();
-                    String bd = birthday.getText().toString();
-                    int ys = Integer.parseInt(yearStudying.getText().toString());
+                    String ln = lastName.getText();
+                    String fn = firstName.getText();
+                    String mt = motherTongue.getText();
+                    String bd = birthday.getText();
+                    int ys = Integer.parseInt(yearStudying.getText());*/
 
                     // Création de l'utilisateur
                     //User us = new User(ln,fn,bd,mt,ys);
@@ -105,7 +105,7 @@ public class UserGUI {
                     ChooseGUI cGUI = new ChooseGUI(stage);
                     /*stage.setScene(scene);
                     stage.show();*/
-                }
+                //}
             }
         });
 
