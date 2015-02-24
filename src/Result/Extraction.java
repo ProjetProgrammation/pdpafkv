@@ -8,7 +8,9 @@ package Result;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import static jdk.nashorn.internal.objects.NativeRegExp.test;
 
 /**
  *
@@ -36,27 +38,42 @@ public class Extraction {
                    while ((ligne=br.readLine())!=null){              
                         if(nombre >= 5 && ligne.contains("\"")){
                             if (nomMedia == ""){
-                               
-                                nomMedia = ligne;
-                                
+                                String[] infos = ligne.split(":");
+                                Pattern pattern = Pattern.compile("([a-zA-Z1-9]| )+");
+                                Matcher matcher = pattern.matcher(infos[1]);
+                                while(matcher.find()){
+                                    nomMedia = matcher.group();
+                                }
                             }
                             else if(nomMedia != "" && Emotion ==""){
-                                Emotion = ligne;
+                                 String[] infos = ligne.split(":");
+                                Pattern pattern = Pattern.compile("([a-zA-Z1-9]| )+");
+                                Matcher matcher = pattern.matcher(infos[1]);
+                                while(matcher.find()){
+                                    Emotion = matcher.group();
+                                }
                             }
-                            else if(nomMedia != "" && Emotion !="" && Chemin == ""){
-                                Chemin = ligne;
-                                System.out.println(nomMedia + Emotion + Chemin);
+                            else if(nomMedia !="" && Emotion !="" && Chemin ==""){
+                                String[] infos = ligne.split(":");
+                                Pattern pattern = Pattern.compile("([a-zA-Z1-9]| |\\.)+");
+                                Matcher matcher = pattern.matcher(infos[1]);
+                                while(matcher.find()){
+                                    Chemin = matcher.group();
+                                }
+                         
+                                System.out.println(nomMedia + "    " + Emotion+ "    " + Chemin + "\n");
                                 nomMedia = "";
                                 Emotion = "";
                                 Chemin = "";
-                            }                                    
-                      }
+                            } 
+                        
+                        }
                         nombre ++;
-		}
-		br.close(); 
-           }
-           catch(Exception e){
+                    }
+            br.close(); 
+        }
+        catch(Exception e){
                System.out.println("Erreur de chargement de fichier");
-           }
+        }
     }
 }
