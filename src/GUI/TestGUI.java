@@ -1,5 +1,6 @@
 package GUI;
 
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,11 +16,13 @@ import javafx.stage.Stage;
 public class TestGUI extends Parent{
         
     private int nombre = 1;
+    private int nbQuestion;
     private Stage stage;
     
-    public TestGUI(Stage primaryStage){
+    public TestGUI(Stage primaryStage, int nbQuest){
         
         this.stage=primaryStage;
+        this.nbQuestion=nbQuest;
         
         //Zone pour les video
         Rectangle fond_video = new Rectangle();
@@ -84,7 +87,7 @@ public class TestGUI extends Parent{
         root.setTop(fond_question);
         root.setLeft(fond_video);
         root.setRight(right);
-        
+        right.setAlignment(Pos.CENTER);
         
         
         
@@ -96,4 +99,5 @@ public class TestGUI extends Parent{
         this.stage.show();
         
     }
+    
 }

@@ -18,12 +18,5 @@ public class Answer {
         this.user = user;
     }
     
-    public void extract(){
-        
-        
-        
-        
-    }
-     
-    
+   
 }

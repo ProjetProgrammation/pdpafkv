@@ -32,7 +32,7 @@ public class UserGUI {
         this.launchUserGUI();
     }
     
-    public void launchUserGUI() {
+    private void launchUserGUI() {
         //Création des labels
         Label lLN = new Label("Last Name");
         Label lFN = new Label("First Name");
@@ -97,12 +97,12 @@ public class UserGUI {
                     //User us = new User(ln,fn,bd,mt,ys);
                     
                     // Affichage du bouton sélectionné.
-                    System.out.println(choose.selectedToggleProperty().toString());
+                    //System.out.println(choose.selectedToggleProperty().toString());
 
                     // Affichage pour voir si ajout OK
                     //System.out.println(us.toString());
                     
-                    TestGUI tGUI = new TestGUI(stage);
+                    ChooseGUI cGUI = new ChooseGUI(stage);
                     /*stage.setScene(scene);
                     stage.show();*/
                 }
