@@ -4,12 +4,14 @@ import javafx.scene.Parent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.Reflection;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -40,13 +42,19 @@ public class VideoGUI extends Parent {
         GridPane zoneVideo = new GridPane();
         
         //Zone pour les video
-        Rectangle fond_video = new Rectangle();
+        /*Rectangle fond_video = new Rectangle();
         fond_video.setWidth(300);
         fond_video.setHeight(300);
         fond_video.setArcWidth(50);
         fond_video.setArcHeight(50);
         fond_video.setFill(Color.WHITE);
-        fond_video.setStroke(Color.BLACK);
+        fond_video.setStroke(Color.BLACK);*/
+        FlowPane fond_video = new FlowPane();
+        fond_video.setVgap(8);
+        fond_video.setHgap(4);
+        fond_video.setPrefWrapLength(300);
+        fond_video.setPadding(new Insets(15, 12, 15, 12));
+        fond_video.setStyle("-fx-background-color: #336699; -fx-border-color: #000000;");
 
         //création des boutons
         ToggleGroup groupe = new ToggleGroup();
@@ -80,8 +88,9 @@ public class VideoGUI extends Parent {
         zoneVideo.add(b6, 2, 1);
         zoneVideo.setHgap(20);
         zoneVideo.setAlignment(Pos.CENTER);
-        
+                
+        fond_video.getChildren().add(zoneVideo);
         this.getChildren().add(fond_video);
-        this.getChildren().add(zoneVideo);
+        //this.getChildren().add(zoneVideo);
     }
 }

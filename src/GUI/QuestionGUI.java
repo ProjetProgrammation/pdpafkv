@@ -5,9 +5,11 @@
  */
 package GUI;
 
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -29,14 +31,19 @@ public class QuestionGUI extends Parent {
     private void launchQuest(){
         
         //Zone pour la question
-        Rectangle fond_question = new Rectangle();
+        /*Rectangle fond_question = new Rectangle();
         fond_question.setWidth(800);
         fond_question.setHeight(15);
         fond_question.setArcWidth(50);
         fond_question.setArcHeight(50);
         fond_question.setFill(Color.WHITE);
-        fond_question.setStroke(Color.BLACK);
-        this.getChildren().add(fond_question);
+        fond_question.setStroke(Color.BLACK);*/
+        FlowPane fond_question = new FlowPane();
+        fond_question.setVgap(8);
+        fond_question.setHgap(4);
+        fond_question.setPrefWrapLength(300);
+        fond_question.setPadding(new Insets(15, 12, 15, 12));
+        fond_question.setStyle("-fx-background-color: #99CCFF; -fx-border-color: #000000;");
         
         //Question
         this.text="Ici sera la question";
@@ -53,7 +60,7 @@ public class QuestionGUI extends Parent {
         li.setLight(light);
         this.texte_entier.setEffect(li);
         
-        
-        this.getChildren().add(texte_entier);//ajout de la lettre de la touche
+        this.getChildren().add(texte_entier);//ajout du texte a la zone
+        this.getChildren().add(fond_question);
     }
 }

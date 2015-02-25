@@ -90,7 +90,7 @@ public class TestGUI extends Parent{
         root.add(question,0,0,3,1);
         root.add(video,0,1,1,3);
         root.add(son,2,1,1,3);
-        root.add(hb,0,4);
+        //root.add(hb,0,4);
         root.add(mix,1,4);
         root.add(validate,2,4);
         

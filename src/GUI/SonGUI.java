@@ -8,11 +8,15 @@ package GUI;
 import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -34,16 +38,21 @@ public class SonGUI extends Parent {
 
     private void launchSonGUI(){
         
-        GridPane zoneSon = new GridPane();
-        
         //Zone pour le son
-        Rectangle fond_son = new Rectangle();
+        /*Rectangle fond_son = new Rectangle();
         fond_son.setWidth(300);
         fond_son.setHeight(200);
         fond_son.setArcWidth(50);
         fond_son.setArcHeight(50);
         fond_son.setFill(Color.WHITE);
-        fond_son.setStroke(Color.BLACK);
+        fond_son.setStroke(Color.BLACK);*/
+        
+        FlowPane fond_son = new FlowPane();
+        fond_son.setVgap(8);
+        fond_son.setHgap(4);
+        fond_son.setPrefWrapLength(300);
+        fond_son.setPadding(new Insets(15, 12, 15, 12));
+        fond_son.setStyle("-fx-background-color: #336699; -fx-border-color: #000000;");
 
         //Fichier Aucio
         javafx.scene.control.Button b4 = new javafx.scene.control.Button();
@@ -77,6 +86,8 @@ public class SonGUI extends Parent {
         b6.setFocusTraversable(false);
         b1.setSelected(true);
         
+        GridPane zoneSon = new GridPane();
+                
         //on ajoute les boutons au layout
         zoneSon.setPrefSize(200, 200);
         zoneSon.add(b1, 0, 0);
@@ -88,8 +99,9 @@ public class SonGUI extends Parent {
         zoneSon.setHgap(20);
         zoneSon.setAlignment(Pos.CENTER);
         
+        fond_son.getChildren().add(zoneSon);
         this.getChildren().add(fond_son);
-        this.getChildren().add(zoneSon);
+        //this.getChildren().add(zoneSon);
    }
          public void appuyer(){
             mediaPlayer.play();
