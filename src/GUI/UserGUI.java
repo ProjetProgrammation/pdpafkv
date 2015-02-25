@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Result.Extraction;
 import Result.User;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,7 +16,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPaneBuilder;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -99,10 +99,14 @@ public class UserGUI {
                     // Affichage du bouton sélectionné.
                     //System.out.println(choose.selectedToggleProperty().toString());
 
-                    // Affichage pour voir si ajout OK
+                    //Affichage pour voir si ajout OK
                     //System.out.println(us.toString());
+                    Extraction medias = new Extraction("..\\pdpafkv\\src\\Result\\Medias.txt");
+                    medias.extraire();
                     
                     ChooseGUI cGUI = new ChooseGUI(stage);
+                    
+                   
                     /*stage.setScene(scene);
                     stage.show();*/
                 //}

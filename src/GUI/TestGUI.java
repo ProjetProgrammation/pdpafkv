@@ -1,112 +1,112 @@
 package GUI;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+
 
 public class TestGUI extends Parent{
         
     private int nombre = 1;
     private int nbQuestion;
-    private Stage stage;
-    private QuestionGUI question;
-    private SonGUI son;
+    private final Stage stage;
     
     public TestGUI(Stage primaryStage, int nbQuest){
         
         this.stage=primaryStage;
         this.nbQuestion=nbQuest;
-        question = new QuestionGUI("test");
-        son = new SonGUI();
+        this.launchTestGUI();
+
+    }
+    private void launchTestGUI(){
+            
+        QuestionGUI question = new QuestionGUI();
+        SonGUI son = new SonGUI();
+        VideoGUI video = new VideoGUI();
+        /*final Slider slider = new Slider();
+        slider.setMin(0);
+        slider.setMax(50);*/
         
-        //Zone pour les video
-        Rectangle fond_video = new Rectangle();
-        fond_video.setWidth(750);
-        fond_video.setHeight(700);
-        fond_video.setArcWidth(50);
-        fond_video.setArcHeight(50);
-        fond_video.setFill(Color.WHITE);
-        fond_video.setStroke(Color.BLACK);
-        
-        //Zone pour le son
-        Rectangle fond_son = new Rectangle();
-        fond_son.setWidth(750);
-        fond_son.setHeight(400);
-        fond_son.setArcWidth(50);
-        fond_son.setArcHeight(50);
-        fond_son.setFill(Color.WHITE);
-        fond_son.setStroke(Color.BLACK);
-        
+   
         //Zone pour les boutons
+        Image imageMix = new Image(getClass().getResourceAsStream("mixer8.png"));
+        Image imageValid = new Image(getClass().getResourceAsStream("confirmation.png"));
         Button mix = new Button("Mix");
         Button validate = new Button("Validate");
         
-        //Zone pour la question
-    
-        Rectangle fond_question = new Rectangle();
-        fond_question.setWidth(1600);
-        fond_question.setHeight(150);
-        fond_question.setArcWidth(50);
-        fond_question.setArcHeight(50);
-        fond_question.setFill(Color.WHITE);
-        fond_question.setStroke(Color.BLACK);
+        //slider
+        
+        final ProgressBar pb = new ProgressBar(0);
+        /*final ProgressIndicator pi = new ProgressIndicator(0);
+ 
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov,
+                Number old_val, Number new_val) {
+                pb.setProgress(new_val.doubleValue()/50);
+                pi.setProgress(new_val.doubleValue()/50);
+            }
+        });*/
+        
+        HBox hb = new HBox();
+        hb.setSpacing(5);
+        hb.setAlignment(Pos.CENTER);
+        hb.getChildren().addAll(pb);
+        
+       // BorderPane mainborder = new BorderPane();        
+        GridPane root = new GridPane();
+        
+        /*mainborder.autosize();
+        mainborder.setTop(root);*/
+        
+        root.setHgap(20);
+        root.setVgap(20);
+        ColumnConstraints col1 = new ColumnConstraints();
+        col1.setPercentWidth(33);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setPercentWidth(34);
+        ColumnConstraints col3 = new ColumnConstraints();
+        col3.setPercentWidth(33);
+        root.getColumnConstraints().addAll(col1,col2,col3);
+        root.setGridLinesVisible(true);
+        
+        root.setAlignment(Pos.CENTER);
+        
+        root.add(question,0,0,3,1);
+        root.add(video,0,1,1,3);
+        root.add(son,2,1,1,3);
+        root.add(hb,0,4);
+        root.add(mix,1,4);
+        root.add(validate,2,4);
+        
+        GridPane.setHalignment(question, HPos.CENTER);
+        GridPane.setHalignment(son, HPos.CENTER);   
+        GridPane.setHalignment(video, HPos.CENTER);
+        GridPane.setHalignment(mix, HPos.CENTER);
+        GridPane.setHalignment(validate, HPos.CENTER);
         
         
-                    
-        //Position et ajout
-        /*fond_video.setTranslateX(100);
-        fond_video.setTranslateY(250);
-        
-        fond_son.setTranslateX(950);
-        fond_son.setTranslateY(250);
-        
-        fond_question.setTranslateX(100);
-        fond_question.setTranslateY(50);
-                
-        mix.setTranslateX(1200);
-        mix.setTranslateY(800);
-        validate.setTranslateX(1400);
-        validate.setTranslateY(800);
-          
-        this.getChildren().add(mix);
-        this.getChildren().add(validate);
-        this.getChildren().add(fond_video);
-        this.getChildren().add(fond_question);
-        this.getChildren().add(fond_son);*/
-        
-        
-        
-        BorderPane root = new BorderPane();
-        VBox right = new VBox();
-        
-        //right.getChildren().add(fond_son);
-        right.getChildren().add(son);
-        right.getChildren().add(mix);
-        right.getChildren().add(validate);
-        
-        root.setTop(question);
-        root.setAlignment(question, Pos.CENTER);
-        //root.setTop(fond_question);
-        root.setLeft(fond_video);
-        root.setRight(right);
-        right.setAlignment(Pos.CENTER);
-        
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root,1400,800);
         this.stage.setScene(scene);
-        this.stage.setResizable(true);
-        
+        this.stage.setResizable(false);
+        this.stage.sizeToScene();
         this.stage.hide();
         this.stage.show();
         
-    }
-    
+    } 
 }
