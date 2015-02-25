@@ -5,11 +5,16 @@
  */
 package GUI;
 
+import java.net.URL;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -18,7 +23,10 @@ import javafx.scene.shape.Rectangle;
  * @author Jeremy
  */
 public class SonGUI extends Parent {
-          
+    
+    final URL resource = getClass().getResource("mario.mp3");
+    final Media media = new Media(resource.toString());
+    final MediaPlayer mediaPlayer = new MediaPlayer(media);      
     
     public SonGUI(){
         this.launchSonGUI();
@@ -37,18 +45,28 @@ public class SonGUI extends Parent {
         fond_son.setFill(Color.WHITE);
         fond_son.setStroke(Color.BLACK);
 
+        //Fichier Aucio
+        javafx.scene.control.Button b4 = new javafx.scene.control.Button();
+        b4.setText("Read");
+        
+        //Action du bouton
+        b4.setOnAction(new EventHandler<ActionEvent>() {    
+            @Override
+            public void handle(ActionEvent event) {
+                    appuyer();
+            }
+        });
+        
         //création des boutons
         ToggleGroup groupe = new ToggleGroup();
         RadioButton b1 = new RadioButton();
         RadioButton b2 = new RadioButton();
         RadioButton b3 = new RadioButton();
-        RadioButton b4 = new RadioButton();
         RadioButton b5 = new RadioButton();
         RadioButton b6 = new RadioButton();
         b1.setToggleGroup(groupe);
         b2.setToggleGroup(groupe);
         b3.setToggleGroup(groupe);
-        b4.setToggleGroup(groupe);
         b5.setToggleGroup(groupe);
         b6.setToggleGroup(groupe);
         b1.setFocusTraversable(false);
@@ -72,7 +90,8 @@ public class SonGUI extends Parent {
         
         this.getChildren().add(fond_son);
         this.getChildren().add(zoneSon);
-        
-        
-    }
+   }
+         public void appuyer(){
+            mediaPlayer.play();
+    } 
 }

@@ -14,7 +14,7 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -68,7 +68,12 @@ public class TestGUI extends Parent{
         hb.setAlignment(Pos.CENTER);
         hb.getChildren().addAll(pb);
         
+       // BorderPane mainborder = new BorderPane();        
         GridPane root = new GridPane();
+        
+        /*mainborder.autosize();
+        mainborder.setTop(root);*/
+        
         root.setHgap(20);
         root.setVgap(20);
         ColumnConstraints col1 = new ColumnConstraints();
