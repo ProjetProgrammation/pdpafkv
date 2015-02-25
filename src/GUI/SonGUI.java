@@ -30,7 +30,7 @@ public class SonGUI extends Parent {
         
         //Zone pour le son
         Rectangle fond_son = new Rectangle();
-        fond_son.setWidth(400);
+        fond_son.setWidth(300);
         fond_son.setHeight(200);
         fond_son.setArcWidth(50);
         fond_son.setArcHeight(50);

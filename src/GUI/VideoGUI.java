@@ -4,6 +4,7 @@ import javafx.scene.Parent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -36,12 +37,12 @@ public class VideoGUI extends Parent {
     private void launchVideoGUI(){
         
     
-        GridPane gridpane = new GridPane();
+        GridPane zoneVideo = new GridPane();
         
         //Zone pour les video
         Rectangle fond_video = new Rectangle();
-        fond_video.setWidth(750);
-        fond_video.setHeight(700);
+        fond_video.setWidth(300);
+        fond_video.setHeight(300);
         fond_video.setArcWidth(50);
         fond_video.setArcHeight(50);
         fond_video.setFill(Color.WHITE);
@@ -70,16 +71,17 @@ public class VideoGUI extends Parent {
         b1.setSelected(true);
         
         //on ajoute les boutons au layout
-        gridpane.setPrefSize(200, 200);
-        gridpane.add(b1, 0, 0);
-        gridpane.add(b2, 1, 0);
-        gridpane.add(b3, 2, 0);
-        gridpane.add(b4, 0, 1);
-        gridpane.add(b5, 1, 1);
-        gridpane.add(b6, 2, 1);
-        gridpane.setHgap(20);
+        zoneVideo.setPrefSize(200, 200);
+        zoneVideo.add(b1, 0, 0);
+        zoneVideo.add(b2, 1, 0);
+        zoneVideo.add(b3, 2, 0);
+        zoneVideo.add(b4, 0, 1);
+        zoneVideo.add(b5, 1, 1);
+        zoneVideo.add(b6, 2, 1);
+        zoneVideo.setHgap(20);
+        zoneVideo.setAlignment(Pos.CENTER);
         
         this.getChildren().add(fond_video);
-        this.getChildren().add(gridpane);
+        this.getChildren().add(zoneVideo);
     }
 }
