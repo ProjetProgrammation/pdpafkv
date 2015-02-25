@@ -1,0 +1,14 @@
+{ 
+   "Extraction": { 
+              "Jacquie": {
+                    Question1: [ 
+                      { "Emotion": "OuainOuains" }
+                      { "Trouvé": "non" }
+                   ]
+                    Question2: [ 
+                      { "Emotion": "rire" }
+                      { "Trouvé": "oui" }
+                   ]
+            }
+    }
+}

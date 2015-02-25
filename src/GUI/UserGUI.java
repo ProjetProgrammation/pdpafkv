@@ -101,7 +101,7 @@ public class UserGUI {
 
                     //Affichage pour voir si ajout OK
                     //System.out.println(us.toString());
-                    Extraction medias = new Extraction("..\\pdpafkv\\src\\Result\\Medias.txt");
+                    Extraction medias = new Extraction("..\\pdpafkv\\src\\Result\\Résultats.txt");
                     medias.extraire();
                     
                     ChooseGUI cGUI = new ChooseGUI(stage);
@@ -118,6 +118,7 @@ public class UserGUI {
         GridPane user = new GridPane();
         VBox language = new VBox();
         
+         language.setStyle("-fx-background-color: palegreen; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;");
         //Affectation Layout root
         root.add(user,1,2);
         root.add(language, 2, 1);
@@ -145,7 +146,7 @@ public class UserGUI {
         
         //Création de la scène avec ajour du layout
         //Scene scene = new Scene(root, 300, 250);
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root,650,350);
         this.stage.setScene(scene);
         this.stage.setResizable(true);
         
