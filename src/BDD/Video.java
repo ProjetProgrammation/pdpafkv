@@ -10,8 +10,9 @@
  */
 public class Video {
 
+	private int id;
 	private String name;
-	private String file_path;
+	private String filePath;
 	private String format;
 	private Language language;
 
@@ -22,7 +23,8 @@ public class Video {
 		this.language=new Language();
 	}
 
-	public Video(String name, String file_path, String format, Language language){
+	public Video(int id, String name, String file_path, String format, Language language){
+		this.id=id;
 		this.name=new String(name);
 		this.filePath=new String(filePath);
 		this.format=new String(format);
@@ -30,51 +32,63 @@ public class Video {
 	}
 
 	/**
-	* Getter de name.
+	* Getter de id
+	* @return L'attribut id
+	*/
+	public int getId(){return this.id;}
+
+	/**
+	* Getter de name
 	* @return L'attribut name
 	*/
-	public String getName(){return this.name}
+	public String getName(){return this.name;}
 
 	/**
-	* Getter de filePath.
+	* Getter de filePath
 	* @return L'attribut filePath
 	*/
-	public String getFilePath(){return this.filePath}
+	public String getFilePath(){return this.filePath;}
 
 	/**
-	* Getter de format.
+	* Getter de format
 	* @return L'attribut format
 	*/
-	public String getFormat(){return this.format}
+	public String getFormat(){return this.format;}
 
 	/**
-	* Getter de language.
+	* Getter de language
 	* @return L'attribut language
 	*/
-	public Language getLanguage(){return this.language.getLanguage()}
+	public Language getLanguage(){return this.language;}
 
 
 	/**
-	* Setter de name.
-	* @param name Le nom de la langue.
+	* Setter de id
+	* @param id L'id de la vidéo
+	*/
+	public void setId(int id){this.id=id;}
+
+	/**
+	* Setter de name
+	* @param name Le nom de la vidéo
 	*/
 	public void setName(String name){this.name=name;}
 
 	/**
-	* Setter de filePath.
+	* Setter de filePath
 	* @return L'attribut filePath
 	*/
-	public String getFilePath(String filePath){this.filePath=filePath}
+	public void setFilePath(String filePath){this.filePath=filePath;}
 
 	/**
-	* Setter de format.
+	* Setter de format
 	* @return L'attribut format
 	*/
-	public String getFormat(String format){this.format=format}
+	public void setFormat(String format){this.format=format;}
 
 	/**
-	* Setter de language.
+	* Setter de language
 	* @return L'attribut language
 	*/
-	public Language getLanguage(Language language){this.language.setLanguage(language)}
+	public void setLanguage(Language language){this.language=language;}
 }
