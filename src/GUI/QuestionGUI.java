@@ -31,12 +31,11 @@ public class QuestionGUI extends Parent {
         //Zone pour la question
         Rectangle fond_question = new Rectangle();
         fond_question.setWidth(800);
-        fond_question.setHeight(150);
+        fond_question.setHeight(15);
         fond_question.setArcWidth(50);
         fond_question.setArcHeight(50);
         fond_question.setFill(Color.WHITE);
         fond_question.setStroke(Color.BLACK);
-        
         this.getChildren().add(fond_question);
         
         //Question
@@ -47,6 +46,7 @@ public class QuestionGUI extends Parent {
         this.texte_entier.setX(25);
         this.texte_entier.setY(45);
         
+        
         Light.Distant light = new Light.Distant();
         light.setAzimuth(-45.0);
         Lighting li = new Lighting();
@@ -55,6 +55,5 @@ public class QuestionGUI extends Parent {
         
         
         this.getChildren().add(texte_entier);//ajout de la lettre de la touche
-        
     }
 }
