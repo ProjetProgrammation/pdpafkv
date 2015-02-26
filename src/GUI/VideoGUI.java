@@ -42,8 +42,9 @@ public class VideoGUI extends Parent {
         FlowPane fond_video = new FlowPane();
         fond_video.setVgap(8);
         fond_video.setHgap(4);
+        fond_video.autosize();        
         //fond_video.setPrefWrapLength(300);
-        fond_video.setPadding(new Insets(15, 12, 15, 12));
+        //fond_video.setPadding(new Insets(15, 12, 15, 12));
         fond_video.setStyle("-fx-background-color: #336699; -fx-border-color: #000000;");
 
         //création des boutons
@@ -69,7 +70,7 @@ public class VideoGUI extends Parent {
         b1.setSelected(true);
         
         //on ajoute les boutons au layout
-        zoneVideo.setPrefSize(200, 200);
+        zoneVideo.autosize();
         zoneVideo.add(b1, 0, 0);
         zoneVideo.add(b2, 1, 0);
         zoneVideo.add(b3, 2, 0);
