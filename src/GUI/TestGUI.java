@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 public class TestGUI extends Parent{
         
+    
     private int nombre = 1;
     private int nbQuestion;
     private final Stage stage;
@@ -33,9 +34,6 @@ public class TestGUI extends Parent{
         QuestionGUI question = new QuestionGUI(langSel);
         SonGUI son = new SonGUI(langSel);
         VideoGUI video = new VideoGUI(langSel);
-        /*final Slider slider = new Slider();
-        slider.setMin(0);
-        slider.setMax(50);*/
         
    
         //Zone pour les boutons
@@ -70,9 +68,11 @@ public class TestGUI extends Parent{
         
         root.setHgap(20);
         root.setVgap(20);
+        root.prefWidth(100.0);
         root.setPadding(new Insets(20, 20, 20, 20));
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setPercentWidth(33);
+        
         ColumnConstraints col2 = new ColumnConstraints(50);
         col2.setPercentWidth(33);
         ColumnConstraints col3 = new ColumnConstraints();
@@ -98,8 +98,7 @@ public class TestGUI extends Parent{
         
         Scene scene = new Scene(root,1400,800);
         this.stage.setScene(scene);
-        //this.stage.setResizable(false);
-        this.stage.sizeToScene();
+        
         this.stage.hide();
         this.stage.show();
         

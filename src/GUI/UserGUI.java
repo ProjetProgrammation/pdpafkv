@@ -59,20 +59,19 @@ public class UserGUI {
         //Création + personnalisation des radio buttons
         final RadioButton french = new RadioButton();
         french.setText("French");
-        french.setId("Fr");
-        french.setUserData(new Language("French"));
+        french.setUserData(new Language("french"));
         french.setToggleGroup(choose);
         final RadioButton japanese = new RadioButton();
         japanese.setText("Japanese");
-        japanese.setId("Jap");
+        japanese.setUserData(new Language("japanese"));
         japanese.setToggleGroup(choose);
         final RadioButton english = new RadioButton();
         english.setText("English");
-        english.setId("Eng");
+        english.setUserData("english");
         english.setToggleGroup(choose);
         final RadioButton portuguese = new RadioButton();
         portuguese.setText("Portuguese");
-        portuguese.setId("Por");
+        portuguese.setUserData("portugese");
         portuguese.setToggleGroup(choose);
         
         
@@ -99,9 +98,7 @@ public class UserGUI {
                     //User us = new User(ln,fn,bd,mt,ys);
 
                     // Affichage du bouton sélectionné.
-                    // System.out.println(choose.selectedToggleProperty().get().getUserData());
                     Language languageSelect = (Language)choose.selectedToggleProperty().get().getUserData();
-                    System.out.println(languageSelect.getName());
 
 
                     //Affichage pour voir si ajout OK
@@ -120,9 +117,10 @@ public class UserGUI {
         
          language.setStyle("-fx-background-color: palegreen; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;");
         //Affectation Layout root
-        root.add(user,1,2);
-        root.add(language, 2, 1);
-        root.add(access,2,2);
+        root.add(user,0,1);
+        root.add(language,1,0);
+        root.add(access,1,1);
+        
         
         //Affectation Layout language
         language.getChildren().add(english);
@@ -146,9 +144,11 @@ public class UserGUI {
         
         //Création de la scène avec ajour du layout
         Scene scene = new Scene(root,650,350);
+        
         this.stage.setScene(scene);
         this.stage.setResizable(true);
-        
+        this.stage.centerOnScreen();
+        this.stage.setHeight(100.0);
         this.stage.hide();
         this.stage.show();
     }
