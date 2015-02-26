@@ -41,16 +41,16 @@ public class SonGUI extends Parent {
         FlowPane fond_son = new FlowPane();
         fond_son.setVgap(8);
         fond_son.setHgap(4);
-        fond_son.setPrefWrapLength(300);
+        //fond_son.setPrefWrapLength(300);
         fond_son.setPadding(new Insets(15, 12, 15, 12));
         fond_son.setStyle("-fx-background-color: #336699; -fx-border-color: #000000;");
 
         //Fichier Aucio
-        javafx.scene.control.Button b4 = new javafx.scene.control.Button();
-        b4.setText("Read");
+        javafx.scene.control.Button b1 = new javafx.scene.control.Button();
+        b1.setText("Read");
         
         //Action du bouton
-        b4.setOnAction(new EventHandler<ActionEvent>() {    
+        b1.setOnAction(new EventHandler<ActionEvent>() {    
             @Override
             public void handle(ActionEvent event) {
                     appuyer();
@@ -59,12 +59,12 @@ public class SonGUI extends Parent {
         
         //création des boutons
         ToggleGroup groupe = new ToggleGroup();
-        RadioButton b1 = new RadioButton();
+        RadioButton b4 = new RadioButton();
         RadioButton b2 = new RadioButton();
         RadioButton b3 = new RadioButton();
         RadioButton b5 = new RadioButton();
         RadioButton b6 = new RadioButton();
-        b1.setToggleGroup(groupe);
+        b4.setToggleGroup(groupe);
         b2.setToggleGroup(groupe);
         b3.setToggleGroup(groupe);
         b5.setToggleGroup(groupe);
@@ -75,7 +75,7 @@ public class SonGUI extends Parent {
         b4.setFocusTraversable(false);
         b5.setFocusTraversable(false);
         b6.setFocusTraversable(false);
-        b1.setSelected(true);
+        b4.setSelected(true);
         
         GridPane zoneSon = new GridPane();
                 

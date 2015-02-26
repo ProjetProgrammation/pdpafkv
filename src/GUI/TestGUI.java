@@ -69,14 +69,15 @@ public class TestGUI extends Parent{
         
         root.setHgap(20);
         root.setVgap(20);
+        root.setPadding(new Insets(20, 20, 20, 20));
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setPercentWidth(33);
-        ColumnConstraints col2 = new ColumnConstraints();
-        col2.setPercentWidth(34);
+        ColumnConstraints col2 = new ColumnConstraints(50);
+        col2.setPercentWidth(33);
         ColumnConstraints col3 = new ColumnConstraints();
         col3.setPercentWidth(33);
         root.getColumnConstraints().addAll(col1,col2,col3);
-        root.setGridLinesVisible(true);
+        root.setGridLinesVisible(false);
         
         root.setAlignment(Pos.CENTER);
         
@@ -96,7 +97,7 @@ public class TestGUI extends Parent{
         
         Scene scene = new Scene(root,1400,800);
         this.stage.setScene(scene);
-        this.stage.setResizable(false);
+        //this.stage.setResizable(false);
         this.stage.sizeToScene();
         this.stage.hide();
         this.stage.show();
