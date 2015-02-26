@@ -36,7 +36,7 @@ public class DataBase {
 	* Exécute les requêtes SQL permettant de créer les tables dans la base de données dataBase.db
 	*/
 	public void createTables(){
-		Connection c = null;
+            Connection c = null;
 	    Statement stmt = null;
 	    try {
 	      Class.forName("org.sqlite.JDBC");
