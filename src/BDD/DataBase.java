@@ -20,7 +20,7 @@ public class DataBase {
 	/**
 	* Etabli une connection avec la base de données dataBase.db
 	*/
-	private void connexion(){
+	public void connexion(){
 	    Connection c = null;
 	    try {
 	      Class.forName("org.sqlite.JDBC");
