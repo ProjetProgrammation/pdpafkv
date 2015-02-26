@@ -6,6 +6,7 @@
 package GUI;
 
 import BDD.Language;
+import Controller.SelectMedia;
 import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -37,7 +38,6 @@ public class SonGUI extends Parent {
     private void launchSonGUI(){
         
         
-        
         FlowPane fond_son = new FlowPane();
         fond_son.setVgap(8);
         fond_son.setHgap(4);
@@ -49,6 +49,7 @@ public class SonGUI extends Parent {
         javafx.scene.control.Button b1 = new javafx.scene.control.Button();
         b1.setText("Read");
         
+        
         //Action du bouton
         b1.setOnAction(new EventHandler<ActionEvent>() {    
             @Override
@@ -56,6 +57,11 @@ public class SonGUI extends Parent {
                     appuyer();
             }
         });
+        
+        for (int i=0; i<10; i++){
+            
+            
+        }
         
         //création des boutons
         ToggleGroup groupe = new ToggleGroup();
