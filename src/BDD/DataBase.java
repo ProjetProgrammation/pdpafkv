@@ -204,11 +204,85 @@ public class DataBase {
 		System.out.println("Records created successfully");
 	}
 
-	public void addLanguage(Language language){}
+	/**
+	*	Ajout d'un langage dans la base de données dataBase.db
+	*	@param name La langue en format String
+	*/
+	public void addLanguage(String name){}
 
-	public void manageVideo(){}
+	public Video manageVideo(){
+		Connection c = null;
+		Statement stmt = null;
+		Video result;
+		try {
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
+			c.setAutoCommit(false);
+			System.out.println("Opened database successfully");
 
-	public void manageAudio(){}
+			stmt = c.createStatement();
+			ResultSet rs = stmt.executeQuery( "SELECT * FROM Video ORDER BY random() LIMIT 1;" );
+			result = new Video(rs.getInt("id"),rs.getString("name"),rs.getString("filePath"),rs.getString("format"),rs.getInt("idLanguage"));
+			rs.close();
+			stmt.close();
+			c.close();
+			return(result);
+		} catch ( Exception e ) {
+			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+			System.exit(0);
+		}
+		System.out.println("Operation done successfully");
+		return(null);
+	}
 
-	public void manageQuestion(){}
+	public Audio manageAudio(){
+		Connection c = null;
+		Statement stmt = null;
+		Audio result;
+		try {
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
+			c.setAutoCommit(false);
+			System.out.println("Opened database successfully");
+
+			stmt = c.createStatement();
+			ResultSet rs = stmt.executeQuery( "SELECT * FROM Audio ORDER BY random() LIMIT 1;" );
+			result = new Audio(rs.getInt("id"),rs.getString("name"),rs.getString("filePath"),rs.getString("format"),rs.getInt("idLanguage"));
+			rs.close();
+			stmt.close();
+			c.close();
+			return(result);
+		} catch ( Exception e ) {
+			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+			System.exit(0);
+		}
+		System.out.println("Operation done successfully");
+		return(null);
+	}
+/*
+	public Question manageQuestion(){
+		Connection c = null;
+		Statement stmt = null;
+		Question result;
+		try {
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
+			c.setAutoCommit(false);
+			System.out.println("Opened database successfully");
+
+			stmt = c.createStatement();
+			ResultSet rs = stmt.executeQuery( "SELECT * FROM Question ORDER BY random() LIMIT 1;" );
+			result = new Question(rs.getInt("id"),rs.getString("name"),rs.getString("filePath"),rs.getString("format"),rs.getInt("idLanguage"));
+			rs.close();
+			stmt.close();
+			c.close();
+			return(result);
+		} catch ( Exception e ) {
+			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+			System.exit(0);
+		}
+		System.out.println("Operation done successfully");
+		return(null);
+	}
+	*/
 }

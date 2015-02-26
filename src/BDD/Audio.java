@@ -14,22 +14,22 @@ public class Audio {
 	private String name;
 	private String filePath;
 	private String format;
-	private Language language;
+	private int idLanguage;
 
 
 	public Audio(){
 		this.name=new String();
 		this.filePath=new String();
 		this.format=new String();
-		this.language=new Language();
+		this.idLanguage=0;
 	}
 
-	public Audio(int id, String name, String file_path, String format, Language language){
+	public Audio(int id, String name, String file_path, String format, int idLanguage){
 		this.id=id;
 		this.name=new String(name);
 		this.filePath=new String(filePath);
 		this.format=new String(format);
-		this.language=new Language(language);
+		this.idLanguage=idLanguage;
 	}
 
 	/**
@@ -57,10 +57,10 @@ public class Audio {
 	public String getFormat(){return this.format;}
 
 	/**
-	* Getter de language
-	* @return L'attribut language
+	* Getter de idLanguage
+	* @return L'attribut idLanguage
 	*/
-	public Language getLanguage(){return this.language;}
+	public int getIdLanguage(){return this.idLanguage;}
 
 
 	/**
@@ -88,8 +88,8 @@ public class Audio {
 	public void setFormat(String format){this.format=format;}
 
 	/**
-	* Setter de language
-	* @return L'attribut language
+	* Setter de idLanguage
+	* @return L'attribut idLanguage
 	*/
-	public void setLanguage(Language language){this.language=language;}
+	public void setIdLanguage(int idLanguage){this.idLanguage=idLanguage;}
 }

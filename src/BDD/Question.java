@@ -12,8 +12,8 @@ public class Question {
 
 	private int id;
 	private String content;
-	private Video video;
-	private Audio audio;
+	private int idVideo;
+	private int idAudio;
 
 	public Question(){
 		this.content=new String();
