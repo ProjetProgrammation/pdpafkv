@@ -52,7 +52,7 @@ public class VideoGUI extends Parent {
         FlowPane fond_video = new FlowPane();
         fond_video.setVgap(8);
         fond_video.setHgap(4);
-        fond_video.setPrefWrapLength(300);
+        //fond_video.setPrefWrapLength(300);
         fond_video.setPadding(new Insets(15, 12, 15, 12));
         fond_video.setStyle("-fx-background-color: #336699; -fx-border-color: #000000;");
 
