@@ -5,13 +5,13 @@
  */
 package GUI;
 
+import BDD.Language;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
@@ -24,7 +24,7 @@ public class QuestionGUI extends Parent {
     
     Text texte_entier = new Text();
     
-    public QuestionGUI(){
+    public QuestionGUI(Language langSel){
         this.launchQuest();
     }
     

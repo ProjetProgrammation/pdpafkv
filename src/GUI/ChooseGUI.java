@@ -6,6 +6,7 @@
 
 package GUI;
 
+import BDD.Language;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -23,13 +24,12 @@ public class ChooseGUI {
 
     private Stage stage;
     
-    
-    public ChooseGUI(Stage primaryStage) {
+    public ChooseGUI(Stage primaryStage, Language langSel) {
         this.stage=primaryStage;
-        this.launchChooseGUI();
+        this.launchChooseGUI(langSel);
     }
 
-    private void launchChooseGUI() {
+    private void launchChooseGUI(final Language langSel) {
         
         //Création layout avec boutons
         GridPane root = new GridPane();
@@ -40,7 +40,7 @@ public class ChooseGUI {
         learnOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                TestGUI tGUI = new TestGUI(stage,5);
+                TestGUI tGUI = new TestGUI(stage,5,langSel);
             }
         });
         
@@ -48,7 +48,7 @@ public class ChooseGUI {
         testOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                TestGUI tGUI = new TestGUI(stage,20);
+                TestGUI tGUI = new TestGUI(stage,20,langSel);
             }
         });
         

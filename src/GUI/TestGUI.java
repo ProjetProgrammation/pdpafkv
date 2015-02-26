@@ -1,20 +1,13 @@
 package GUI;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import BDD.Language;
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -27,18 +20,18 @@ public class TestGUI extends Parent{
     private int nbQuestion;
     private final Stage stage;
     
-    public TestGUI(Stage primaryStage, int nbQuest){
+    public TestGUI(Stage primaryStage, int nbQuest, Language langSel){
         
         this.stage=primaryStage;
         this.nbQuestion=nbQuest;
-        this.launchTestGUI();
+        this.launchTestGUI(langSel);
 
     }
-    private void launchTestGUI(){
+    private void launchTestGUI(Language langSel){
             
-        QuestionGUI question = new QuestionGUI();
-        SonGUI son = new SonGUI();
-        VideoGUI video = new VideoGUI();
+        QuestionGUI question = new QuestionGUI(langSel);
+        SonGUI son = new SonGUI(langSel);
+        VideoGUI video = new VideoGUI(langSel);
         /*final Slider slider = new Slider();
         slider.setMin(0);
         slider.setMax(50);*/

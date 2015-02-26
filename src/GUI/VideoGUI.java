@@ -1,23 +1,13 @@
 package GUI;
 
-import javafx.scene.Parent;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.event.EventHandler;
+import BDD.Language;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.effect.Reflection;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
-import javafx.scene.shape.Rectangle;
 
 /**
  *
@@ -32,7 +22,7 @@ public class VideoGUI extends Parent {
     private RadioButton b5;
     private RadioButton b6; 
     
-    public VideoGUI() {
+    public VideoGUI(Language langSel) {
         this.launchVideoGUI();
     }
     

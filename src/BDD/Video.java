@@ -2,7 +2,7 @@
  * Cette classe permet de créer des langues
  */
 
-//package BDD;
+package BDD;
 
 /**
  *

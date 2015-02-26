@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import BDD.Language;
 import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,14 +14,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 /**
  *
@@ -30,22 +27,16 @@ public class SonGUI extends Parent {
     
     final URL resource = getClass().getResource("mario.mp3");
     final Media media = new Media(resource.toString());
-    final MediaPlayer mediaPlayer = new MediaPlayer(media);      
+    final MediaPlayer mediaPlayer = new MediaPlayer(media); 
     
-    public SonGUI(){
+    
+    public SonGUI(Language langSel){
         this.launchSonGUI();
     }
 
     private void launchSonGUI(){
         
-        //Zone pour le son
-        /*Rectangle fond_son = new Rectangle();
-        fond_son.setWidth(300);
-        fond_son.setHeight(200);
-        fond_son.setArcWidth(50);
-        fond_son.setArcHeight(50);
-        fond_son.setFill(Color.WHITE);
-        fond_son.setStroke(Color.BLACK);*/
+        
         
         FlowPane fond_son = new FlowPane();
         fond_son.setVgap(8);
@@ -101,9 +92,8 @@ public class SonGUI extends Parent {
         
         fond_son.getChildren().add(zoneSon);
         this.getChildren().add(fond_son);
-        //this.getChildren().add(zoneSon);
    }
-         public void appuyer(){
+    public void appuyer(){
             mediaPlayer.play();
     } 
 }

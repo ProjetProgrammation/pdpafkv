@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import BDD.DataBase;
+import BDD.Language;
 import Result.Extraction;
 import Result.User;
 import javafx.event.ActionEvent;
@@ -25,14 +27,16 @@ import javafx.stage.Stage;
  */
 public class UserGUI {
 
-    private Stage stage;
+    private final Stage stage;
     
     public UserGUI(Stage primaryStage) {
         this.stage=primaryStage;
         this.launchUserGUI();
+        this.createDataBase();
     }
     
     private void launchUserGUI() {
+        
         //Création des labels
         Label lLN = new Label("Last Name");
         Label lFN = new Label("First Name");
@@ -49,26 +53,26 @@ public class UserGUI {
         //Date format
         birthday.setPromptText("Par exemple : 12/07/1998");
         
-        
         //Groupe de Radio Buttons
         final ToggleGroup choose = new ToggleGroup();
-
+        
         //Création + personnalisation des radio buttons
         final RadioButton french = new RadioButton();
         french.setText("French");
-        french.setId("French");
+        french.setId("Fr");
+        french.setUserData(new Language("French"));
         french.setToggleGroup(choose);
         final RadioButton japanese = new RadioButton();
         japanese.setText("Japanese");
-        japanese.setId("Japanese");
+        japanese.setId("Jap");
         japanese.setToggleGroup(choose);
         final RadioButton english = new RadioButton();
         english.setText("English");
-        english.setId("English");
+        english.setId("Eng");
         english.setToggleGroup(choose);
         final RadioButton portuguese = new RadioButton();
         portuguese.setText("Portuguese");
-        portuguese.setId("Portuguese");
+        portuguese.setId("Por");
         portuguese.setToggleGroup(choose);
         
         
@@ -80,12 +84,10 @@ public class UserGUI {
         access.setOnAction(new EventHandler<ActionEvent>() {    
             @Override
             public void handle(ActionEvent event) {
-                
                 /*if (lastName.equals("") && firstName.equals("") && motherTongue.equals("") && birthday.equals("") && yearStudying.equals("") && choose.getSelectedToggle().isSelected()==false){
                     //We'll se, mettre une croix à coté de celui pas ou mal rempli
                 }
-                else{
-                    
+                else{            
                     //Récupération données dans les champs
                     String ln = lastName.getText();
                     String fn = firstName.getText();
@@ -95,20 +97,18 @@ public class UserGUI {
 
                     // Création de l'utilisateur
                     //User us = new User(ln,fn,bd,mt,ys);
-                    
+
                     // Affichage du bouton sélectionné.
-                    //System.out.println(choose.selectedToggleProperty().toString());
+                    // System.out.println(choose.selectedToggleProperty().get().getUserData());
+                    Language languageSelect = (Language)choose.selectedToggleProperty().get().getUserData();
+                    System.out.println(languageSelect.getName());
+
 
                     //Affichage pour voir si ajout OK
-                    //System.out.println(us.toString());
-                    Extraction medias = new Extraction("..\\pdpafkv\\src\\Result\\Résultats.txt");
-                    medias.extraire();
-                    
-                    ChooseGUI cGUI = new ChooseGUI(stage);
-                    
-                   
-                    /*stage.setScene(scene);
-                    stage.show();*/
+                    //Extraction medias = new Extraction("..\\pdpafkv\\src\\Result\\Résultats.txt");
+                    //medias.extraire();
+
+                    ChooseGUI cGUI = new ChooseGUI(stage, languageSelect);
                 //}
             }
         });
@@ -145,13 +145,17 @@ public class UserGUI {
         
         
         //Création de la scène avec ajour du layout
-        //Scene scene = new Scene(root, 300, 250);
         Scene scene = new Scene(root,650,350);
         this.stage.setScene(scene);
         this.stage.setResizable(true);
         
         this.stage.hide();
         this.stage.show();
+    }
+    
+    private void createDataBase(){
+        DataBase db = new DataBase();
+        //db.createTables();
     }
     
 }

@@ -2,8 +2,9 @@
  * Cette classe sert à créer la base de données et intéragir avec cette dernière.
  */
 
-//package BDD;
+package BDD;
 import java.sql.*;
+
 
 /**
  *
@@ -19,7 +20,7 @@ public class DataBase {
 	/**
 	* Etabli une connection avec la base de données dataBase.db
 	*/
-	public void connexion(){
+	private void connexion(){
 	    Connection c = null;
 	    try {
 	      Class.forName("org.sqlite.JDBC");

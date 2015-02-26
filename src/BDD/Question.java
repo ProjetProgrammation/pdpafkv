@@ -2,7 +2,7 @@
  * Cette classe permet de créer des questions
  */
 
-//package BDD;
+package BDD;
 
 /**
  *
