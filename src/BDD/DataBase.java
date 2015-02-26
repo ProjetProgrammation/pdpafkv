@@ -210,18 +210,20 @@ public class DataBase {
 	*/
 	public void addLanguage(String name){}
 
-	public Video manageVideo(){
+	public Video manageVideo(Language language){
 		Connection c = null;
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		Video result;
+		int idLanguage = new language.getId();
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
 			c.setAutoCommit(false);
 			System.out.println("Opened database successfully");
 
-			stmt = c.createStatement();
-			ResultSet rs = stmt.executeQuery( "SELECT * FROM Video ORDER BY random() LIMIT 1;" );
+			stmt = c.prepareStatement("SELECT * FROM Video WHERE language=? ORDER BY random() LIMIT 1;");
+			stmt.setInt(1,idLanguage);
+			ResultSet rs = stmt.executeQuery();
 			result = new Video(rs.getInt("id"),rs.getString("name"),rs.getString("filePath"),rs.getString("format"),rs.getInt("idLanguage"));
 			rs.close();
 			stmt.close();
@@ -235,18 +237,19 @@ public class DataBase {
 		return(null);
 	}
 
-	public Audio manageAudio(){
+	public Audio manageAudio(Language language){
 		Connection c = null;
-		Statement stmt = null;
+		PraparedStatement stmt = null;
 		Audio result;
+		int idLanguage = new language.getId();
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
 			c.setAutoCommit(false);
 			System.out.println("Opened database successfully");
 
-			stmt = c.createStatement();
-			ResultSet rs = stmt.executeQuery( "SELECT * FROM Audio ORDER BY random() LIMIT 1;" );
+			stmt = c.prepareStatement("SELECT * FROM Video WHERE language=? ORDER BY random() LIMIT 1;");
+			ResultSet rs = stmt.executeQuery();
 			result = new Audio(rs.getInt("id"),rs.getString("name"),rs.getString("filePath"),rs.getString("format"),rs.getInt("idLanguage"));
 			rs.close();
 			stmt.close();
