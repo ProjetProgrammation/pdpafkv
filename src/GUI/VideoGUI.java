@@ -3,13 +3,25 @@ package GUI;
 import BDD.DataBase;
 import BDD.Language;
 import Controller.SelectMedia;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 /**
  *
@@ -18,6 +30,7 @@ import javafx.scene.layout.GridPane;
 public class VideoGUI extends Parent {
     
     private final SelectMedia controlSM;
+            
     
     public VideoGUI(Language langSel, DataBase db) {
         this.launchVideoGUI();
@@ -25,8 +38,7 @@ public class VideoGUI extends Parent {
     }
     
     private void launchVideoGUI(){
-        
-        
+
         FlowPane fond_video = new FlowPane();
         fond_video.setVgap(8);
         fond_video.setHgap(4);
@@ -38,14 +50,11 @@ public class VideoGUI extends Parent {
         //création des boutons
         ToggleGroup groupVideo = new ToggleGroup();
         GridPane zoneVideo = new GridPane();
-
-        
-        
         //on ajoute les boutons au layout
         zoneVideo.autosize();
         zoneVideo.setHgap(20);
         zoneVideo.setAlignment(Pos.CENTER);
-                
+        
         fond_video.getChildren().add(zoneVideo);
         this.getChildren().add(fond_video);
         //this.getChildren().add(zoneVideo);
