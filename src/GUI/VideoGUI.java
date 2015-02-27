@@ -42,8 +42,6 @@ public class VideoGUI extends Parent {
         
         
         
-        
-        
         //on ajoute les boutons au layout
         zoneVideo.autosize();
         zoneVideo.setHgap(20);
