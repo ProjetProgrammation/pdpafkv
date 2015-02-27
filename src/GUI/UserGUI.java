@@ -98,18 +98,18 @@ public class UserGUI {
                     //Récupération données dans les champs
                    String ln = lastName.getText();
                     if (erreurs.ErrorsMessages(ln) != null){
-                       javax.swing.JOptionPane.showMessageDialog(null,"Le nom est incorrect");
+                        System.out.println("Le nom est incorrect");
                        faute ++;
                     };
                     String fn = firstName.getText();
                     if (erreurs.ErrorsMessages(fn) != null){
-                       javax.swing.JOptionPane.showMessageDialog(null,"Le prénom est incorrect");
+                        System.out.println("Le prénom est incorrect");
                        faute ++;
                     };
                     
                     String mt = motherTongue.getText();
                     if (erreurs.ErrorsMessages(mt) != null){
-                       javax.swing.JOptionPane.showMessageDialog(null,"La langue est incorrect");
+                        System.out.println("La langue est incorrect");
                        faute ++;
                     };
                     
@@ -118,19 +118,19 @@ public class UserGUI {
                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy" );
                         dateFormat.parse(bd);
                     } catch (ParseException ex) {
-                        javax.swing.JOptionPane.showMessageDialog(null,"Le birthday est incorrect");
+                         System.out.println("Le birthday est incorrect");
                         faute ++;
                     }
                     
                     try{
                         Integer ys = Integer.parseInt(yearStudying.getText());
                          if (erreurs.ErrorsMessages(ys) != null){
-                           javax.swing.JOptionPane.showMessageDialog(null,"Le study est incorrect");
+                            System.out.println("Le study est incorrect");
                            faute ++;
                         };
                     }
                     catch (Exception e){
-                       javax.swing.JOptionPane.showMessageDialog(null,"Le study est incorrect");
+                        System.out.println("Le study est incorrect");
                        faute ++;
                     }
                     // Création de l'utilisateur
