@@ -40,7 +40,7 @@ public class QuestionGUI extends Parent {
         fond_question.setHgap(4);
         fond_question.setPrefWrapLength(300);
         fond_question.setPadding(new Insets(15, 12, 15, 12));
-        fond_question.setStyle("-fx-background-color: #99CCFF; -fx-border-color: #000000;");
+        fond_question.setStyle("-fx-background-color: #FFE082; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
         fond_question.setAlignment(Pos.CENTER);
 
         

@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -41,9 +42,11 @@ public class TestGUI extends Parent{
    
         //Zone pour les boutons
         Image imageMix = new Image(getClass().getResourceAsStream("mixer8.png"));
-        Image imageValid = new Image(getClass().getResourceAsStream("confirmation.png"));
-        Button mix = new Button("Mix");
-        Button validate = new Button("Validate");
+        ImageView imageValid = new ImageView(new Image(getClass().getResourceAsStream("confirmation.png")));
+        Button mix = new Button("Mix", new ImageView(imageMix));
+        Button validate = new Button("Validate", imageValid);
+        mix.setStyle("-fx-font: 22 arial; -fx-base: #FFE082; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;");
+        validate.setStyle("-fx-font: 22 arial; -fx-base: #FFE082; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;");
         
         //slider
         
@@ -70,10 +73,10 @@ public class TestGUI extends Parent{
         root.setHgap(20);
         root.setVgap(20);
         root.prefWidth(100.0);
+        
         root.setPadding(new Insets(20, 20, 20, 20));
         ColumnConstraints col1 = new ColumnConstraints();
-        col1.setPercentWidth(33);
-        
+        col1.setPercentWidth(33);        
         ColumnConstraints col2 = new ColumnConstraints(50);
         col2.setPercentWidth(10);
         ColumnConstraints col3 = new ColumnConstraints();
@@ -97,7 +100,7 @@ public class TestGUI extends Parent{
         root.add(son,2,1,1,3);
         //root.add(hb,0,4);
         root.add(mixValid,2,4);
-        root.setStyle("-fx-background-color: palegreen; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;-fx-border-color: #000000;");
+        root.setStyle("-fx-background-color: #FF8F00 ; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;-fx-border-color: #000000;");
         
         GridPane.setHalignment(question, HPos.CENTER);
         GridPane.setHalignment(son, HPos.CENTER);   

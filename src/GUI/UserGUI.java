@@ -18,12 +18,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -36,6 +42,7 @@ public class UserGUI {
 
     private final Stage stage;
     private int faute = 0;
+    
     public UserGUI(Stage primaryStage) {
         this.stage=primaryStage;
         this.launchUserGUI(this.createDataBase());
@@ -84,8 +91,9 @@ public class UserGUI {
         
         
         //Bouton d'accès à la suite du programme
-        Button access = new Button();
-        access.setText("Accéder");
+        Image login = new Image(getClass().getResourceAsStream("login12.png"));
+        Button access = new Button("Accéder", new ImageView(login));
+        access.setStyle("-fx-font: 22 arial; -fx-base: #FFE082; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;-fx-border-color: #000000;");
         
         //Action du bouton
         access.setOnAction(new EventHandler<ActionEvent>() {    
@@ -156,11 +164,10 @@ public class UserGUI {
         GridPane user = new GridPane();
         VBox language = new VBox();
         
-         language.setStyle("-fx-background-color: palegreen; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;");
         //Affectation Layout root
         root.add(user,0,1);
-        root.add(language,1,0);
-        root.add(access,1,1);
+        root.add(language,1,1);
+        root.add(access,1,2);
         
         
         //Affectation Layout language
@@ -182,13 +189,19 @@ public class UserGUI {
         user.add(motherTongue,2,4);
         user.add(yearStudying,2,5);
         
-        
+        //GUI
+        user.setStyle("-fx-background-color: #FFE082; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
+        language.setStyle("-fx-background-color: #FFE082; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
+        root.setStyle("-fx-background-color: #FF8F00 ; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;-fx-border-color: #000000;");
+        root.setHgap(20);
+        root.setVgap(20);
+        root.setAlignment(Pos.CENTER);
         //Création de la scène avec ajour du layout
-        Scene scene = new Scene(root,650,350);
+        Scene scene = new Scene(root,600, 400);
         
         this.stage.setScene(scene);
-        this.stage.setResizable(true);
-        this.stage.centerOnScreen();
+        /*this.stage.setResizable(true);
+        this.stage.centerOnScreen();*/
         this.stage.hide();
         this.stage.show();
     }
