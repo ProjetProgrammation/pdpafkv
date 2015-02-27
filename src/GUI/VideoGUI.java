@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 
@@ -38,7 +39,9 @@ public class VideoGUI extends Parent {
         //création des boutons
         ToggleGroup groupVideo = new ToggleGroup();
         GridPane zoneVideo = new GridPane();
-
+        
+        
+        
         
         
         //on ajoute les boutons au layout
