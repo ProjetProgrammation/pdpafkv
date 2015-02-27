@@ -31,7 +31,6 @@ public class SelectMedia {
         
         do{
             audio = db.manageAudio(this.langSel);
-            
         }while(this.listAudio.contains(audio)==false);
         
         if (this.listAudio.contains(audio)==false)

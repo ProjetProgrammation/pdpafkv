@@ -32,12 +32,8 @@ import javafx.scene.media.MediaPlayer;
  * @author Jeremy
  */
 public class SonGUI extends Parent {
-    
-    /*private final URL mario = getClass().getResource("mario.mp3");
-    private final URL zelda = getClass().getResource("zelda.mp3");
-    private final URL ff7 = getClass().getResource("ff7.mp3"); */
-    
-    private SelectMedia controlSM;
+       
+    private final SelectMedia controlSM;
     
     public SonGUI(Language langSel, DataBase db){
         this.launchSonGUI();

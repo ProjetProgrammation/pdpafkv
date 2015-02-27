@@ -1,6 +1,8 @@
 package GUI;
 
+import BDD.DataBase;
 import BDD.Language;
+import Controller.SelectMedia;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -15,8 +17,11 @@ import javafx.scene.layout.GridPane;
  */
 public class VideoGUI extends Parent {
     
-    public VideoGUI(Language langSel) {
+    private final SelectMedia controlSM;
+    
+    public VideoGUI(Language langSel, DataBase db) {
         this.launchVideoGUI();
+        this.controlSM = new SelectMedia(db, langSel);
     }
     
     private void launchVideoGUI(){
@@ -31,10 +36,10 @@ public class VideoGUI extends Parent {
         fond_video.setStyle("-fx-background-color: #336699; -fx-border-color: #000000;");
         
         //création des boutons
-        ToggleGroup groupe = new ToggleGroup();
-        
+        ToggleGroup groupVideo = new ToggleGroup();
         GridPane zoneVideo = new GridPane();
 
+        
         
         //on ajoute les boutons au layout
         zoneVideo.autosize();

@@ -34,9 +34,9 @@ public class TestGUI extends Parent{
     }
     private void launchTestGUI(Language langSel, DataBase db){
             
-        QuestionGUI question = new QuestionGUI(langSel);
+        QuestionGUI question = new QuestionGUI(langSel,db);
         SonGUI son = new SonGUI(langSel,db);
-        VideoGUI video = new VideoGUI(langSel);
+        VideoGUI video = new VideoGUI(langSel,db);
         
    
         //Zone pour les boutons
