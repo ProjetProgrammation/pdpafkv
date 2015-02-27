@@ -35,7 +35,7 @@ import javafx.stage.Stage;
 public class UserGUI {
 
     private final Stage stage;
-    
+    private int faute = 0;
     public UserGUI(Stage primaryStage) {
         this.stage=primaryStage;
         this.launchUserGUI(this.createDataBase());
@@ -44,6 +44,7 @@ public class UserGUI {
     private void launchUserGUI(final DataBase db) {
         
         final Errors erreurs = new Errors();
+        
         //Création des labels
         Label lLN = new Label("Last Name");
         Label lFN = new Label("First Name");
@@ -98,33 +99,39 @@ public class UserGUI {
                    String ln = lastName.getText();
                     if (erreurs.ErrorsMessages(ln) != null){
                        javax.swing.JOptionPane.showMessageDialog(null,"Le nom est incorrect");
+                       faute ++;
                     };
                     String fn = firstName.getText();
                     if (erreurs.ErrorsMessages(fn) != null){
                        javax.swing.JOptionPane.showMessageDialog(null,"Le prénom est incorrect");
+                       faute ++;
                     };
                     
                     String mt = motherTongue.getText();
                     if (erreurs.ErrorsMessages(mt) != null){
                        javax.swing.JOptionPane.showMessageDialog(null,"La langue est incorrect");
+                       faute ++;
                     };
                     
                     String bd = birthday.getText();
                     try{
-                        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy" );
+                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy" );
                         dateFormat.parse(bd);
                     } catch (ParseException ex) {
                         javax.swing.JOptionPane.showMessageDialog(null,"Le birthday est incorrect");
+                        faute ++;
                     }
                     
                     try{
                         Integer ys = Integer.parseInt(yearStudying.getText());
-                         if (ys == null  && erreurs.ErrorsMessages(ys) != null){
-                           javax.swing.JOptionPane.showMessageDialog(null,"L'age est incorrect");
+                         if (erreurs.ErrorsMessages(ys) != null){
+                           javax.swing.JOptionPane.showMessageDialog(null,"Le study est incorrect");
+                           faute ++;
                         };
                     }
                     catch (Exception e){
-                       javax.swing.JOptionPane.showMessageDialog(null,"L'age est incorrect");
+                       javax.swing.JOptionPane.showMessageDialog(null,"Le study est incorrect");
+                       faute ++;
                     }
                     // Création de l'utilisateur
                     //User us = new User(ln,fn,bd,mt,ys);
@@ -136,8 +143,10 @@ public class UserGUI {
                     //Affichage pour voir si ajout OK
                     //Extraction medias = new Extraction("..\\pdpafkv\\src\\Result\\Résultats.txt");
                     //medias.extraire();
-
-                    ChooseGUI cGUI = new ChooseGUI(stage, languageSelect, db);
+                    if (faute == 0){
+                        ChooseGUI cGUI = new ChooseGUI(stage, languageSelect, db);
+                    }
+                    
                 //}
             }
         });
