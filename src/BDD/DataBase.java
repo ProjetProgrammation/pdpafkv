@@ -214,7 +214,7 @@ public class DataBase {
 		Connection c = null;
 		PreparedStatement stmt = null;
 		Video result;
-		int idLanguage = new language.getId();
+		int idLanguage = language.getId();
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
@@ -239,9 +239,9 @@ public class DataBase {
 
 	public Audio manageAudio(Language language){
 		Connection c = null;
-		PraparedStatement stmt = null;
+		PreparedStatement stmt = null;
 		Audio result;
-		int idLanguage = new language.getId();
+		int idLanguage = language.getId();
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");

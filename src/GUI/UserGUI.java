@@ -31,11 +31,10 @@ public class UserGUI {
     
     public UserGUI(Stage primaryStage) {
         this.stage=primaryStage;
-        this.launchUserGUI();
-        this.createDataBase();
+        this.launchUserGUI(this.createDataBase());
     }
     
-    private void launchUserGUI() {
+    private void launchUserGUI(final DataBase db) {
         
         //Création des labels
         Label lLN = new Label("Last Name");
@@ -67,11 +66,11 @@ public class UserGUI {
         japanese.setToggleGroup(choose);
         final RadioButton english = new RadioButton();
         english.setText("English");
-        english.setUserData("english");
+        english.setUserData(new Language("english"));
         english.setToggleGroup(choose);
         final RadioButton portuguese = new RadioButton();
         portuguese.setText("Portuguese");
-        portuguese.setUserData("portugese");
+        portuguese.setUserData(new Language("portugese"));
         portuguese.setToggleGroup(choose);
         
         
@@ -105,7 +104,7 @@ public class UserGUI {
                     //Extraction medias = new Extraction("..\\pdpafkv\\src\\Result\\Résultats.txt");
                     //medias.extraire();
 
-                    ChooseGUI cGUI = new ChooseGUI(stage, languageSelect);
+                    ChooseGUI cGUI = new ChooseGUI(stage, languageSelect, db);
                 //}
             }
         });
@@ -148,14 +147,12 @@ public class UserGUI {
         this.stage.setScene(scene);
         this.stage.setResizable(true);
         this.stage.centerOnScreen();
-        this.stage.setHeight(100.0);
         this.stage.hide();
         this.stage.show();
     }
     
-    private void createDataBase(){
-        DataBase db = new DataBase();
-        //db.createTables();
+    private DataBase createDataBase(){
+        return new DataBase();
     }
     
 }
