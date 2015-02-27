@@ -48,7 +48,8 @@ public class UserGUI {
     private int fauteD = 0;
     private int fauteE = 0;
 
-    
+    Language languageSelect;
+            
     public UserGUI(Stage primaryStage) {
         this.stage=primaryStage;
         this.launchUserGUI(this.createDataBase());
@@ -144,13 +145,13 @@ public class UserGUI {
                     }
                     
                     String bd = birthday.getText();
-                    try{
-                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy" );
-                        dateFormat.parse(bd);
+                    
+                    if (erreurs.errorDate(bd) == null){
                         if(fauteD != 0){
                            fauteD --; 
-                       }
-                    } catch (ParseException ex) {
+                        }
+                    }
+                    else {
                          System.out.println("Le birthday est incorrect");
                         fauteD ++;
                     }
@@ -175,13 +176,18 @@ public class UserGUI {
                     //User us = new User(ln,fn,bd,mt,ys);
 
                     // Affichage du bouton sélectionné.
-                    Language languageSelect = (Language)choose.selectedToggleProperty().get().getUserData();
-
+                   
+                    if (choose.getSelectedToggle() == null){
+                        System.out.println("selectionner une langue");
+                    }
+                    else{
+                         languageSelect = (Language)choose.selectedToggleProperty().get().getUserData();
+                    }
 
                     //Affichage pour voir si ajout OK
                     //Extraction medias = new Extraction("..\\pdpafkv\\src\\Result\\Résultats.txt");
                     //medias.extraire();
-                    if (fauteA == 0 && fauteB == 0 && fauteC == 0 && fauteD == 0 && fauteE == 0){
+                    if (fauteA == 0 && fauteB == 0 && fauteC == 0 && fauteD == 0 && fauteE == 0 && languageSelect != null){
                         ChooseGUI cGUI = new ChooseGUI(stage, languageSelect, db);
                         erreurs.ErrorsOs();
                     }
