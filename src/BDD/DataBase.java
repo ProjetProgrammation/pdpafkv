@@ -2,6 +2,18 @@
  * Cette classe sert à créer la base de données et intéragir avec cette dernière.
  */
 
+/***********************************************
+
+
+ATTENTION : LA NOMENCLATURE N'EST PAS LA MÊME EN BDD ET EN Java !
+BDD : file_path
+Java : filePath
+
+
+***********************************************/
+
+
+
 package BDD;
 import java.sql.*;
 
@@ -48,18 +60,19 @@ public class DataBase {
 					"id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
 					"content VARCHAR(255) NOT NULL,"+
 					"id_video INTEGER NOT NULL,"+
-					"id_audio INTEGER NOT NULL);"+
+					"id_audio INTEGER NOT NULL,"+
+					"id_language INTEGER NOT NULL);"+
 				"CREATE TABLE Video ("+
 					"id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
 					"name VARCHAR(50) NOT NULL,"+
 					"file_path VARCHAR(255) NOT NULL,"+
-					"language VARCHAR(25) NOT NULL,"+
+					"id_language INTEGER NOT NULL,"+
 					"format VARCHAR(25));"+
 				"CREATE TABLE Audio ("+
 					"id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
 					"name VARCHAR(50) NOT NULL,"+
 					"file_path VARCHAR(255) NOT NULL,"+
-					"language VARCHAR(25) NOT NULL,"+
+					"id_language INTEGER NOT NULL,"+
 					"format VARCHAR(25));"+
 				"CREATE TABLE Language ("+
 					"id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
@@ -81,7 +94,7 @@ public class DataBase {
 	* @param language La langue de la vidéo
 	* @param format Le format de la vidéo
 	*/
-	public void addVideo(String name, String filePath, String format, Language language){
+	public void addVideo(String name, String filePath, String format, String nameLanguage){
 		Connection c = null;
 	    PreparedStatement stmtLang = null;
 	    PreparedStatement stmtAdd = null;
@@ -94,19 +107,17 @@ public class DataBase {
 
 	    	//Recherche de l'id de la langue de la vidéo
 
-	    	stmtLang = c.prepareStatement("SELECT name FROM Language WHERE Language.name=?;");
-	    	stmtLang.setString(1,language.getName());
+	    	stmtLang = c.prepareStatement("SELECT id FROM Language WHERE Language.name=?;");
+	    	stmtLang.setString(1,nameLanguage);	//Ajout des paramètres (variables) "?" de la ligne d'avant.
 	    	ResultSet rs = stmtLang.executeQuery();
-			while ( rs.next() ) {
-				idLang = rs.getInt("id");
-			}
 			idLang = rs.getInt("id");
 			rs.close();
 			stmtLang.close();
 
 			//Ajout de la vidéo
 
-	    	stmtAdd = c.prepareStatement("INSERT INTO Video(name,filePath,language,format) VALUES (?,?,?,?);");
+	    	stmtAdd = c.prepareStatement("INSERT INTO Video(name,file_path,id_language,format) VALUES (?,?,?,?);");
+	    	//Paramétrage des variables de requête
 	    	stmtAdd.setString(1,name);
 	    	stmtAdd.setString(2,filePath);
 	    	stmtAdd.setInt(3,idLang);
@@ -131,7 +142,7 @@ public class DataBase {
 	*	@param format Le format du fichier
 	*	@param laguage La langue du fichier
 	*/
-	public void addAudio(String name, String filePath, String format, Language language){
+	public void addAudio(String name, String filePath, String format, String nameLanguage){
 		Connection c = null;
 	    PreparedStatement stmtLang = null;
 	    PreparedStatement stmtAdd = null;
@@ -144,19 +155,17 @@ public class DataBase {
 
 	    	//Recherche de l'id de la langue de l'audio
 
-	    	stmtLang = c.prepareStatement("SELECT name FROM Language WHERE Language.name=?;");
-	    	stmtLang.setString(1,language.getName());
+	    	stmtLang = c.prepareStatement("SELECT id FROM Language WHERE Language.name=?;");
+	    	stmtLang.setString(1,nameLanguage);	//Ajout des paramètres (variables) "?" de la ligne d'avant.
 	    	ResultSet rs = stmtLang.executeQuery();
-			while ( rs.next() ) {
-				idLang = rs.getInt("id");
-			}
 			idLang = rs.getInt("id");
 			rs.close();
 			stmtLang.close();
 
 			//Ajout de l'audio
 
-	    	stmtAdd = c.prepareStatement("INSERT INTO Audio(name,filePath,language,format) VALUES (?,?,?,?);");
+	    	stmtAdd = c.prepareStatement("INSERT INTO Audio(name,file_path,id_language,format) VALUES (?,?,?,?);");
+	    	//Paramètrage des variables de requête
 	    	stmtAdd.setString(1,name);
 	    	stmtAdd.setString(2,filePath);
 	    	stmtAdd.setInt(3,idLang);
@@ -179,7 +188,7 @@ public class DataBase {
 	*	@param video La vidéo correspondante à la réponse attendue
 	*	@param audio L'audio correspondant à la réponse attendue
 	*/
-	public void addQuestion(String content, Video video, Audio audio){
+	public void addQuestion(String content, Video video, Audio audio, Language language){
 		Connection c = null;
 		PreparedStatement stmt = null;
 		try {
@@ -188,10 +197,11 @@ public class DataBase {
 			c.setAutoCommit(false);	//Mise en place de la transaction manuelle
 			System.out.println("Opened database successfully");
 
-			stmt = c.prepareStatement("INSERT INTO Question (content,id_video,id_audio) VALUES (?,?,?);");
+			stmt = c.prepareStatement("INSERT INTO Question (content,id_video,id_audio,id_language) VALUES (?,?,?,?);");
 			stmt.setString(1, content);
 			stmt.setInt(2, video.getId());
 			stmt.setInt(3, audio.getId());
+			stmt.setInt(4, language.getId());
 			stmt.executeQuery();
 
 			stmt.close();
@@ -208,13 +218,15 @@ public class DataBase {
 	*	Ajout d'un langage dans la base de données dataBase.db
 	*	@param name La langue en format String
 	*/
-	public void addLanguage(String name){}
+	public void addLanguage(String name){
+
+	}
 
 	public Video manageVideo(Language language){
 		Connection c = null;
 		PreparedStatement stmt = null;
 		Video result;
-		int idLanguage = new language.getId();
+		int idLanguage = language.getId();
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
@@ -224,7 +236,7 @@ public class DataBase {
 			stmt = c.prepareStatement("SELECT * FROM Video WHERE language=? ORDER BY random() LIMIT 1;");
 			stmt.setInt(1,idLanguage);
 			ResultSet rs = stmt.executeQuery();
-			result = new Video(rs.getInt("id"),rs.getString("name"),rs.getString("filePath"),rs.getString("format"),rs.getInt("idLanguage"));
+			result = new Video(rs.getInt("id"),rs.getString("name"),rs.getString("file_path"),rs.getString("format"),rs.getInt("id_language"));
 			rs.close();
 			stmt.close();
 			c.close();
@@ -239,9 +251,9 @@ public class DataBase {
 
 	public Audio manageAudio(Language language){
 		Connection c = null;
-		PraparedStatement stmt = null;
+		PreparedStatement stmt = null;
 		Audio result;
-		int idLanguage = new language.getId();
+		int idLanguage = language.getId();
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
@@ -250,7 +262,7 @@ public class DataBase {
 
 			stmt = c.prepareStatement("SELECT * FROM Video WHERE language=? ORDER BY random() LIMIT 1;");
 			ResultSet rs = stmt.executeQuery();
-			result = new Audio(rs.getInt("id"),rs.getString("name"),rs.getString("filePath"),rs.getString("format"),rs.getInt("idLanguage"));
+			result = new Audio(rs.getInt("id"),rs.getString("name"),rs.getString("file_path"),rs.getString("format"),rs.getInt("id_language"));
 			rs.close();
 			stmt.close();
 			c.close();
@@ -262,7 +274,7 @@ public class DataBase {
 		System.out.println("Operation done successfully");
 		return(null);
 	}
-/*
+
 	public Question manageQuestion(){
 		Connection c = null;
 		Statement stmt = null;
@@ -275,7 +287,7 @@ public class DataBase {
 
 			stmt = c.createStatement();
 			ResultSet rs = stmt.executeQuery( "SELECT * FROM Question ORDER BY random() LIMIT 1;" );
-			result = new Question(rs.getInt("id"),rs.getString("name"),rs.getString("filePath"),rs.getString("format"),rs.getInt("idLanguage"));
+			result = new Question(rs.getInt("id"),rs.getString("content"),rs.getInt("id_video"),rs.getInt("id_audio"),rs.getInt("id_language"));
 			rs.close();
 			stmt.close();
 			c.close();
@@ -287,5 +299,4 @@ public class DataBase {
 		System.out.println("Operation done successfully");
 		return(null);
 	}
-	*/
 }

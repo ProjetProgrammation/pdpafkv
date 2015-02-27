@@ -14,13 +14,18 @@ public class Question {
 	private String content;
 	private int idVideo;
 	private int idAudio;
+	private int idLanguage;
 
 	public Question(){
 		this.content=new String();
 	}
 
-	public Question(String content){
+	public Question(int id, String content, int idVideo, int idAudio, int idLanguage){
+		this.id=id;
 		this.content=content;
+		this.idVideo=idVideo;
+		this.idAudio=idAudio;
+		this.idLanguage=idLanguage;
 	}
 	
 	/**
@@ -36,8 +41,26 @@ public class Question {
 	public String getContent(){return this.content;}
 
 	/**
+	* Getter de idVideo
+	* @return L'attribut idVideo
+	*/
+	public int getIdVideo(){return this.idVideo;}
+
+	/**
+	* Getter de idAudio
+	* @return L'attribut idAudio
+	*/
+	public int getIdAudio(){return this.idAudio;}
+
+	/**
+	* Getter de idLanguage
+	* @return L'attribut idLanguage
+	*/
+	public int getIdLanguage(){return this.idLanguage;}
+
+	/**
 	* Setter de id
-	* @param id L'id de la vidéo
+	* @param id L'id de la question
 	*/
 	public void setId(int id){this.id=id;}
 
@@ -46,4 +69,23 @@ public class Question {
 	* @param content Le contenu de la question.
 	*/
 	public void setContent(String content){this.content=content;}
+
+	/**
+	* Setter de idVideo
+	* @param id L'idVideo de la question
+	*/
+	public void setIdVideo(int idVideo){this.idVideo=idVideo;}
+
+	/**
+	* Setter de idAudio
+	* @param id L'idAudio de la question
+	*/
+	public void setIdAudio(int idAudio){this.idAudio=idAudio;}
+
+	/**
+	* Setter de idLanguage
+	* @param id L'idLanguage de la question
+	*/
+	public void setIdLanguage(int idLanguage){this.idLanguage=idLanguage;}
+
 }
