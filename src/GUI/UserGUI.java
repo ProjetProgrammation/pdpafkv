@@ -41,7 +41,13 @@ import javafx.stage.Stage;
 public class UserGUI {
 
     private final Stage stage;
-    private int faute = 0;
+
+    private int fauteA = 0;
+    private int fauteB = 0;
+    private int fauteC = 0;
+    private int fauteD = 0;
+    private int fauteE = 0;
+
     
     public UserGUI(Stage primaryStage) {
         this.stage=primaryStage;
@@ -107,39 +113,63 @@ public class UserGUI {
                    String ln = lastName.getText();
                     if (erreurs.ErrorsMessages(ln) != null){
                         System.out.println("Le nom est incorrect");
-                       faute ++;
-                    };
+                       fauteA ++;
+                    }
+                    else{
+                       if(fauteA != 0){
+                           fauteA --; 
+                       }
+                    }
+                    
                     String fn = firstName.getText();
                     if (erreurs.ErrorsMessages(fn) != null){
                         System.out.println("Le prénom est incorrect");
-                       faute ++;
-                    };
+                       fauteB ++;
+                    }
+                    else{
+                       if(fauteB != 0){
+                           fauteB --; 
+                       } 
+                    }
                     
                     String mt = motherTongue.getText();
                     if (erreurs.ErrorsMessages(mt) != null){
                         System.out.println("La langue est incorrect");
-                       faute ++;
-                    };
+                       fauteC ++;
+                    }
+                    else{
+                      if(fauteC != 0){
+                           fauteC --; 
+                       }
+                    }
                     
                     String bd = birthday.getText();
                     try{
                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy" );
                         dateFormat.parse(bd);
+                        if(fauteD != 0){
+                           fauteD --; 
+                       }
                     } catch (ParseException ex) {
                          System.out.println("Le birthday est incorrect");
-                        faute ++;
+                        fauteD ++;
                     }
                     
                     try{
                         Integer ys = Integer.parseInt(yearStudying.getText());
                          if (erreurs.ErrorsMessages(ys) != null){
                             System.out.println("Le study est incorrect");
-                           faute ++;
-                        };
+                           fauteE ++;
+                         }
+                         else{
+                            if(fauteE != 0){
+                           fauteE --; 
+                       }
+                         }
                     }
                     catch (Exception e){
                         System.out.println("Le study est incorrect");
-                       faute ++;
+                       fauteE ++;
                     }
                     // Création de l'utilisateur
                     //User us = new User(ln,fn,bd,mt,ys);
@@ -151,7 +181,7 @@ public class UserGUI {
                     //Affichage pour voir si ajout OK
                     //Extraction medias = new Extraction("..\\pdpafkv\\src\\Result\\Résultats.txt");
                     //medias.extraire();
-                    if (faute == 0){
+                    if (fauteA == 0 && fauteB == 0 && fauteC == 0 && fauteD == 0 && fauteE == 0){
                         ChooseGUI cGUI = new ChooseGUI(stage, languageSelect, db);
                     }
                     
