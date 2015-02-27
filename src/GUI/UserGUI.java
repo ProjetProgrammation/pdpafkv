@@ -183,6 +183,7 @@ public class UserGUI {
                     //medias.extraire();
                     if (fauteA == 0 && fauteB == 0 && fauteC == 0 && fauteD == 0 && fauteE == 0){
                         ChooseGUI cGUI = new ChooseGUI(stage, languageSelect, db);
+                        erreurs.ErrorsOs();
                     }
                     
                 //}

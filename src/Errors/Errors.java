@@ -40,4 +40,28 @@ public class Errors extends Exception {
          }
         return mess;
     }
+    
+    public void ErrorsOs(){
+        String name = System.getProperty ( "os.name" );
+        String version = System.getProperty ( "os.version" );
+        String java = System.getProperty("java.home");
+        
+        
+         if (name.contains("Windows") || name.contains("MAC") || name.contains("linux")){}
+         else{
+                 System.out.println("Votre système d'exploitation n'est pas pris en charge");
+         }
+         
+         
+         
+         Pattern p = Pattern .compile("jdk1.8.0_31");
+         Matcher m = p.matcher(java);
+         if (m.find()){
+             System.out.println("a jour");;
+         }
+         else{
+             System.out.println("Il faut que vous metiez votre java à jour");
+         }
+   }
+    
 }
