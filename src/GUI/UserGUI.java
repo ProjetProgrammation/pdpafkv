@@ -7,8 +7,15 @@ package GUI;
 
 import BDD.DataBase;
 import BDD.Language;
+import Errors.Errors;
 import Result.Extraction;
 import Result.User;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -28,13 +35,15 @@ import javafx.stage.Stage;
 public class UserGUI {
 
     private final Stage stage;
-    
+    private int faute = 0;
     public UserGUI(Stage primaryStage) {
         this.stage=primaryStage;
         this.launchUserGUI(this.createDataBase());
     }
     
     private void launchUserGUI(final DataBase db) {
+        
+        final Errors erreurs = new Errors();
         
         //Création des labels
         Label lLN = new Label("Last Name");
@@ -85,14 +94,45 @@ public class UserGUI {
                 /*if (lastName.equals("") && firstName.equals("") && motherTongue.equals("") && birthday.equals("") && yearStudying.equals("") && choose.getSelectedToggle().isSelected()==false){
                     //We'll se, mettre une croix à coté de celui pas ou mal rempli
                 }
-                else{            
+                else{ */           
                     //Récupération données dans les champs
-                    String ln = lastName.getText();
+                   String ln = lastName.getText();
+                    if (erreurs.ErrorsMessages(ln) != null){
+                       javax.swing.JOptionPane.showMessageDialog(null,"Le nom est incorrect");
+                       faute ++;
+                    };
                     String fn = firstName.getText();
+                    if (erreurs.ErrorsMessages(fn) != null){
+                       javax.swing.JOptionPane.showMessageDialog(null,"Le prénom est incorrect");
+                       faute ++;
+                    };
+                    
                     String mt = motherTongue.getText();
+                    if (erreurs.ErrorsMessages(mt) != null){
+                       javax.swing.JOptionPane.showMessageDialog(null,"La langue est incorrect");
+                       faute ++;
+                    };
+                    
                     String bd = birthday.getText();
-                    int ys = Integer.parseInt(yearStudying.getText());*/
-
+                    try{
+                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy" );
+                        dateFormat.parse(bd);
+                    } catch (ParseException ex) {
+                        javax.swing.JOptionPane.showMessageDialog(null,"Le birthday est incorrect");
+                        faute ++;
+                    }
+                    
+                    try{
+                        Integer ys = Integer.parseInt(yearStudying.getText());
+                         if (erreurs.ErrorsMessages(ys) != null){
+                           javax.swing.JOptionPane.showMessageDialog(null,"Le study est incorrect");
+                           faute ++;
+                        };
+                    }
+                    catch (Exception e){
+                       javax.swing.JOptionPane.showMessageDialog(null,"Le study est incorrect");
+                       faute ++;
+                    }
                     // Création de l'utilisateur
                     //User us = new User(ln,fn,bd,mt,ys);
 
@@ -103,8 +143,10 @@ public class UserGUI {
                     //Affichage pour voir si ajout OK
                     //Extraction medias = new Extraction("..\\pdpafkv\\src\\Result\\Résultats.txt");
                     //medias.extraire();
-
-                    ChooseGUI cGUI = new ChooseGUI(stage, languageSelect, db);
+                    if (faute == 0){
+                        ChooseGUI cGUI = new ChooseGUI(stage, languageSelect, db);
+                    }
+                    
                 //}
             }
         });

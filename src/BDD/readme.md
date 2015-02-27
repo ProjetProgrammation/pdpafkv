@@ -1,3 +1,7 @@
+ATTENTION : LA NOMENCLATURE N'EST PAS LA MÊME EN BDD ET EN Java !
+	BDD : file_path
+	Java : filePath
+
 Si utilisation en ligne de commande alors :
 
 Impossible d’ajouter sqlite-jdbc-VERSION.jar au CLASSPATH (en ligne de commande sans IDE).
@@ -10,4 +14,10 @@ Impossible d’ajouter sqlite-jdbc-VERSION.jar au CLASSPATH (en ligne de command
 
 Avec le fichier sqlite-jdbc-3.8.7.jar dans le répertoire courant.
 
-Penser à mettre en place les requêtes pour lister les videos/audios et faire des recherches dans ces listes.
+*Penser à mettre en place les requêtes pour lister les videos/audios et faire des recherches dans ces listes.
+
+Pour le rapport
+===============
+Spécificité du code :
+	- Mise en place de transactions
+	- Requêtes paramétrées
