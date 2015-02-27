@@ -30,8 +30,7 @@ public class SelectMedia {
         this.listAudio = new ArrayList<>();
         
         do{
-            audio = db.manageAudio(/*this.langSel.getName()*/);
-            
+            audio = db.manageAudio(this.langSel);
         }while(this.listAudio.contains(audio)==false);
         
         if (this.listAudio.contains(audio)==false)
@@ -45,7 +44,7 @@ public class SelectMedia {
         this.listVideo = new ArrayList<>();
         
         do{
-            video = this.db.manageVideo(/*this.langSel.getName()*/);
+            video = this.db.manageVideo(this.langSel);
             
         }while(this.listVideo.contains(video)==false);
         

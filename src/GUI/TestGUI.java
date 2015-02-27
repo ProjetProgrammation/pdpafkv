@@ -1,5 +1,6 @@
 package GUI;
 
+import BDD.DataBase;
 import BDD.Language;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -24,18 +25,18 @@ public class TestGUI extends Parent{
     private int nbQuestion;
     private final Stage stage;
     
-    public TestGUI(Stage primaryStage, int nbQuest, Language langSel){
+    public TestGUI(Stage primaryStage, int nbQuest, Language langSel, DataBase db){
         
         this.stage=primaryStage;
         this.nbQuestion=nbQuest;
-        this.launchTestGUI(langSel);
+        this.launchTestGUI(langSel,db);
 
     }
-    private void launchTestGUI(Language langSel){
+    private void launchTestGUI(Language langSel, DataBase db){
             
-        QuestionGUI question = new QuestionGUI(langSel);
-        SonGUI son = new SonGUI(langSel);
-        VideoGUI video = new VideoGUI(langSel);
+        QuestionGUI question = new QuestionGUI(langSel,db);
+        SonGUI son = new SonGUI(langSel,db);
+        VideoGUI video = new VideoGUI(langSel,db);
         
    
         //Zone pour les boutons
