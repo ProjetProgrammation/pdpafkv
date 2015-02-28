@@ -3,6 +3,8 @@ package GUI;
 import BDD.DataBase;
 import BDD.Language;
 import Controller.SelectMedia;
+import com.sun.jna.Native;
+import com.sun.jna.NativeLibrary;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,6 +24,12 @@ import javafx.scene.media.MediaView;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import javafx.scene.canvas.Canvas;
+import uk.co.caprica.vlcj.binding.LibVlc;
+import uk.co.caprica.vlcj.runtime.RuntimeUtil;
+
+
+
 
 /**
  *
@@ -50,10 +58,20 @@ public class VideoGUI extends Parent {
         //création des boutons
         ToggleGroup groupVideo = new ToggleGroup();
         GridPane zoneVideo = new GridPane();
+        
+        Canvas canvas = new Canvas();
+        
+        /*NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "E:\\Programme\\VLC");
+        Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);*/
+
+        
+        
         //on ajoute les boutons au layout
         zoneVideo.autosize();
         zoneVideo.setHgap(20);
         zoneVideo.setAlignment(Pos.CENTER);
+        
+        
         
         fond_video.getChildren().add(zoneVideo);
         this.getChildren().add(fond_video);
