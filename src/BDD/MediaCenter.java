@@ -8,7 +8,7 @@ package BDD;
 
 /**
  *
- * @author Thibaut
+ * @author akervadec
  */
 public class MediaCenter {
     

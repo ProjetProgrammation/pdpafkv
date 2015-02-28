@@ -219,7 +219,26 @@ public class DataBase {
 	*	@param name La langue en format String
 	*/
 	public void addLanguage(String name){
+		Connection c = null;
+		PreparedStatement stmt = null;
+		try {
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
+			c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+			System.out.println("Opened database successfully");
 
+			stmt = c.prepareStatement("INSERT INTO Language (name) VALUES (?);");
+			stmt.setString(1, name);
+			stmt.executeQuery();
+
+			stmt.close();
+			c.commit();
+			c.close();
+		} catch ( Exception e ) {
+			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+			System.exit(0);
+		}
+		System.out.println("Records created successfully");
 	}
 
 	public Video manageVideo(Language language){

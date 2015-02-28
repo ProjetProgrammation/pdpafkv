@@ -1,4 +1,6 @@
-ATTENTION : LA NOMENCLATURE N'EST PAS LA MÊME EN BDD ET EN Java !
+ATTENTION : la nomenclature n'est pas le même en BDD et en Java !
+
+
 	BDD : file_path
 	Java : filePath
 
@@ -19,5 +21,7 @@ Avec le fichier sqlite-jdbc-3.8.7.jar dans le répertoire courant.
 Pour le rapport
 ===============
 Spécificité du code :
+
+
 	- Mise en place de transactions
 	- Requêtes paramétrées
