@@ -76,7 +76,7 @@ public class Errors extends Exception {
          
          
          
-         Pattern p = Pattern .compile("jdk1.8.0_31");
+         Pattern p = Pattern.compile("jdk1.8.0_31");
          Matcher m = p.matcher(java);
          if (m.find()){
              System.out.println("a jour");;
