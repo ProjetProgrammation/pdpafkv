@@ -98,7 +98,8 @@ public class DataBase {
 		Connection c = null;
 	    PreparedStatement stmtLang = null;
 	    PreparedStatement stmtAdd = null;
-	    int idLang;
+	    int idLang=0;
+	    String query = new String("SELECT id FROM Language WHERE Language.name=?;");
 	    try {
 	    	Class.forName("org.sqlite.JDBC");
 	    	c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
@@ -107,23 +108,26 @@ public class DataBase {
 
 	    	//Recherche de l'id de la langue de la vidéo
 
-	    	stmtLang = c.prepareStatement("SELECT id FROM Language WHERE Language.name=?;");
+	    	stmtLang = c.prepareStatement(query);
 	    	stmtLang.setString(1,nameLanguage);	//Ajout des paramètres (variables) "?" de la ligne d'avant.
 	    	ResultSet rs = stmtLang.executeQuery();
-			idLang = rs.getInt("id");
-			rs.close();
-			stmtLang.close();
+	    	while(rs.next()){
+				idLang = rs.getInt("id");
+			}
 
 			//Ajout de la vidéo
 
-	    	stmtAdd = c.prepareStatement("INSERT INTO Video(name,file_path,id_language,format) VALUES (?,?,?,?);");
+			query = "INSERT INTO Video(name,file_path,id_language,format) VALUES (?,?,?,?);";
+	    	stmtAdd = c.prepareStatement(query);
 	    	//Paramétrage des variables de requête
 	    	stmtAdd.setString(1,name);
 	    	stmtAdd.setString(2,filePath);
 	    	stmtAdd.setInt(3,idLang);
 	    	stmtAdd.setString(4,format);
-	    	stmtAdd.executeQuery();
+	    	stmtAdd.executeUpdate();
 
+			rs.close();
+			stmtLang.close();
 	    	stmtAdd.close();
 	    	c.commit();
 	    	c.close();
@@ -131,7 +135,7 @@ public class DataBase {
 	      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 	      System.exit(0);
 	    }
-	    System.out.println("Records created successfully");
+		System.out.println("The video "+ name +"."+ format +" successfuly added to the DB");
 	}
 
 
@@ -146,32 +150,36 @@ public class DataBase {
 		Connection c = null;
 	    PreparedStatement stmtLang = null;
 	    PreparedStatement stmtAdd = null;
-	    int idLang;
+	    int idLang=0;
+	    String query = new String("SELECT id FROM Language WHERE Language.name=?;");
 	    try {
 	    	Class.forName("org.sqlite.JDBC");
 	    	c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
 	    	c.setAutoCommit(false);	//Mise en place de la transaction manuelle
 	    	System.out.println("Opened database successfully");
 
-	    	//Recherche de l'id de la langue de l'audio
+	    	//Recherche de l'id de la langue de la vidéo
 
-	    	stmtLang = c.prepareStatement("SELECT id FROM Language WHERE Language.name=?;");
+	    	stmtLang = c.prepareStatement(query);
 	    	stmtLang.setString(1,nameLanguage);	//Ajout des paramètres (variables) "?" de la ligne d'avant.
 	    	ResultSet rs = stmtLang.executeQuery();
-			idLang = rs.getInt("id");
-			rs.close();
-			stmtLang.close();
+	    	while(rs.next()){
+				idLang = rs.getInt("id");
+			}
 
-			//Ajout de l'audio
+			//Ajout de la vidéo
 
-	    	stmtAdd = c.prepareStatement("INSERT INTO Audio(name,file_path,id_language,format) VALUES (?,?,?,?);");
-	    	//Paramètrage des variables de requête
+			query = "INSERT INTO Audio(name,file_path,id_language,format) VALUES (?,?,?,?);";
+	    	stmtAdd = c.prepareStatement(query);
+	    	//Paramétrage des variables de requête
 	    	stmtAdd.setString(1,name);
 	    	stmtAdd.setString(2,filePath);
 	    	stmtAdd.setInt(3,idLang);
 	    	stmtAdd.setString(4,format);
-	    	stmtAdd.executeQuery();
+	    	stmtAdd.executeUpdate();
 
+			rs.close();
+			stmtLang.close();
 	    	stmtAdd.close();
 	    	c.commit();
 	    	c.close();
@@ -179,7 +187,7 @@ public class DataBase {
 	      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 	      System.exit(0);
 	    }
-	    System.out.println("Records created successfully");
+		System.out.println("The audio "+ name +"."+ format +" successfuly added to the DB");
 	}
 
 	/**
@@ -191,13 +199,14 @@ public class DataBase {
 	public void addQuestion(String content, Video video, Audio audio, Language language){
 		Connection c = null;
 		PreparedStatement stmt = null;
+		String query = new String("INSERT INTO Question (content,id_video,id_audio,id_language) VALUES (?,?,?,?);");
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
 			c.setAutoCommit(false);	//Mise en place de la transaction manuelle
 			System.out.println("Opened database successfully");
 
-			stmt = c.prepareStatement("INSERT INTO Question (content,id_video,id_audio,id_language) VALUES (?,?,?,?);");
+			stmt = c.prepareStatement(query);
 			stmt.setString(1, content);
 			stmt.setInt(2, video.getId());
 			stmt.setInt(3, audio.getId());
@@ -244,18 +253,21 @@ public class DataBase {
 	public Video manageVideo(Language language){
 		Connection c = null;
 		PreparedStatement stmt = null;
-		Video result;
+		Video result = new Video();
 		int idLanguage = language.getId();
+		String query = new String("SELECT * FROM Video WHERE id_language=? ORDER BY random() LIMIT 1;");
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
 			c.setAutoCommit(false);
 			System.out.println("Opened database successfully");
 
-			stmt = c.prepareStatement("SELECT * FROM Video WHERE language=? ORDER BY random() LIMIT 1;");
+			stmt = c.prepareStatement(query);
 			stmt.setInt(1,idLanguage);
 			ResultSet rs = stmt.executeQuery();
-			result = new Video(rs.getInt("id"),rs.getString("name"),rs.getString("file_path"),rs.getString("format"),rs.getInt("id_language"));
+			while(rs.next()){
+				result = new Video(rs.getInt("id"),rs.getString("name"),rs.getString("file_path"),rs.getString("format"),rs.getInt("id_language"));
+			}
 			rs.close();
 			stmt.close();
 			c.close();
@@ -264,24 +276,33 @@ public class DataBase {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);
 		}
-		System.out.println("Operation done successfully");
+		System.out.println("Error");
 		return(null);
 	}
 
 	public Audio manageAudio(Language language){
 		Connection c = null;
 		PreparedStatement stmt = null;
-		Audio result;
+		Audio result = new Audio();
 		int idLanguage = language.getId();
+		String query = new String("SELECT * FROM Audio WHERE id_language=? ORDER BY random() LIMIT 1;");
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
 			c.setAutoCommit(false);
 			System.out.println("Opened database successfully");
 
-			stmt = c.prepareStatement("SELECT * FROM Video WHERE language=? ORDER BY random() LIMIT 1;");
+			stmt = c.prepareStatement(query);
+			stmt.setInt(1,idLanguage);
 			ResultSet rs = stmt.executeQuery();
-			result = new Audio(rs.getInt("id"),rs.getString("name"),rs.getString("file_path"),rs.getString("format"),rs.getInt("id_language"));
+			while(rs.next()){
+				result = new Audio(
+					rs.getInt("id"),
+					rs.getString("name"),
+					rs.getString("file_path"),
+					rs.getString("format"),
+					rs.getInt("id_language"));
+			}
 			rs.close();
 			stmt.close();
 			c.close();
@@ -290,7 +311,7 @@ public class DataBase {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);
 		}
-		System.out.println("Operation done successfully");
+		System.out.println("Error");
 		return(null);
 	}
 

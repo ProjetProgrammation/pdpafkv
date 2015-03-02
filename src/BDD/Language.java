@@ -21,6 +21,11 @@ public class Language {
 		this.name=name;
 	}
 
+	public Language(int id, String name){
+		this.id=id;
+		this.name=new String(name);
+	}
+
 	public Language(Language language){
 		this.name=language.getName();
 	}
@@ -48,4 +53,10 @@ public class Language {
 	* @param name Le nom de la langue
 	*/
 	public void setName(String name){this.name=name;}
+
+	public String toString(){
+		return ("Details about the language :"
+			+ "\n\tid : " + this.id
+			+ "\n\tname : " + this.name);
+	}
 }

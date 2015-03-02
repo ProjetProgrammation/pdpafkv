@@ -91,4 +91,13 @@ public class Video {
 	* @return L'attribut idLanguage
 	*/
 	public void setIdLanguage(int idLanguage){this.idLanguage=idLanguage;}
+
+	public String toString(){
+		return("Details about the video :"
+			+ "\n\tid : " + this.id
+			+ "\n\tname : " + this.name
+			+ "\n\tformat : " + this.format
+			+ "\n\tfile path : " + this.filePath
+			+ "\n\tid language : " + this.idLanguage);
+	}
 }

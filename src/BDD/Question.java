@@ -88,4 +88,11 @@ public class Question {
 	*/
 	public void setIdLanguage(int idLanguage){this.idLanguage=idLanguage;}
 
+	public String toString(){
+		return("Details about the question :"
+			+"\n\tid : " + this.id
+			+"\n\tquestion : " + this.content
+			+"\n\tid video : " + this.idVideo
+			+"\n\tid audio : " + this.idAudio);
+	}
 }

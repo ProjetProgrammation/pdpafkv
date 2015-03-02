@@ -16,7 +16,6 @@ public class Audio {
 	private String format;
 	private int idLanguage;
 
-
 	public Audio(){
 		this.name=new String();
 		this.filePath=new String();
@@ -24,7 +23,7 @@ public class Audio {
 		this.idLanguage=0;
 	}
 
-	public Audio(int id, String name, String file_path, String format, int idLanguage){
+	public Audio(int id, String name, String filePath, String format, int idLanguage){
 		this.id=id;
 		this.name=new String(name);
 		this.filePath=new String(filePath);
@@ -92,4 +91,13 @@ public class Audio {
 	* @return L'attribut idLanguage
 	*/
 	public void setIdLanguage(int idLanguage){this.idLanguage=idLanguage;}
+
+	public String toString(){
+		return("Details about the audio :"
+			+ "\n\tid : " + this.id
+			+ "\n\tname : " + this.name
+			+ "\n\tformat : " + this.format
+			+ "\n\tfile path : " + this.filePath
+			+ "\n\tid language : " + this.idLanguage);
+	}
 }
