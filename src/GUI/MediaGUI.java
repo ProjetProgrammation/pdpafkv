@@ -14,7 +14,7 @@ import javafx.scene.Parent;
 public class MediaGUI extends Parent {
     
     /*
-            Media media;
+        Media media;
         MediaPlayer mediaplayer;
         MediaView mediaview;
     
