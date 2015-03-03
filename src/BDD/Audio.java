@@ -31,6 +31,14 @@ public class Audio {
 		this.idLanguage=idLanguage;
 	}
 
+	public Audio(Audio audio){
+		this.id=audio.getId();
+		this.name=new String(audio.getName());
+		this.filePath=new String(audio.getFilePath());
+		this.format=new String(audio.getFormat());
+		this.idLanguage=audio.getIdLanguage();
+	}
+
 	/**
 	* Getter de id
 	* @return L'attribut id

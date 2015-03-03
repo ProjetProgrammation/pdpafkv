@@ -31,6 +31,14 @@ public class Video {
 		this.idLanguage=idLanguage;
 	}
 
+	public Video(Video video){
+		this.id=video.getId();
+		this.name=new String(video.getName());
+		this.filePath=new String(video.getFilePath());
+		this.format=new String(video.getFormat());
+		this.idLanguage=video.getIdLanguage();
+	}
+
 	/**
 	* Getter de id
 	* @return L'attribut id

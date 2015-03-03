@@ -13,3 +13,10 @@ Sur Ubuntu (et autres distributions compatibles, il faut installer cette solutio
 	sudo add-apt-repository ppa:webupd8team/java
 	sudo apt-get update
 	sudo apt-get install oracle-java8-installer
+
+
+Notes de réunion :
+
+
+*Ce qu'il se passe >> dans un fichier texte
+*Video : share memory (3D / Syphon) >> buffer de rendu

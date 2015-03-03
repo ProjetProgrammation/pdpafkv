@@ -22,10 +22,18 @@ public class Question {
 
 	public Question(int id, String content, int idVideo, int idAudio, int idLanguage){
 		this.id=id;
-		this.content=content;
+		this.content=new String(content);
 		this.idVideo=idVideo;
 		this.idAudio=idAudio;
 		this.idLanguage=idLanguage;
+	}
+
+	public Question(Question question){
+		this.id = question.getId();
+		this.content = new String (question.getContent());
+		this.idVideo = question.getIdVideo();
+		this.idAudio = question.getIdAudio();
+		this.idLanguage = question.getIdLanguage();
 	}
 	
 	/**
