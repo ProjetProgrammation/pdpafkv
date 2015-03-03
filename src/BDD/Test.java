@@ -2,7 +2,7 @@
  * Cette classe sert à tester la classe DataBase
  */
 
-//package BDD;
+package BDD;
 import java.sql.*;
 
 /**
