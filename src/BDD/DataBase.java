@@ -384,9 +384,9 @@ public class DataBase {
 	*	Recherche d'un langage dans la base de données avec son nom.
 	*	La langue DOIT exister.
 	*
-	*	@param Language
-	*				La langue de la question souhaitée
-	*	@return Une instance de la question choisie au hasard dans la base de données
+	*	@param name
+	*				Le nom de la langue recherchée
+	*	@return Une instance de la langue recherchée dans la base de données
 	*/
 	public Language searchLanguageByName(String name){
 		Connection c = null;
@@ -414,6 +414,92 @@ public class DataBase {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 		}
 		System.out.println("[searchLanguageByName]Error");
+		return(null);
+	}
+
+	/**
+	*	Recherche d'une vidéo dans la base de données avec son nom et son extension.
+	*	La vidéo DOIT exister.
+	*
+	*	@param name
+	*				Le nom de la vidéo recherchée
+	*	@param format
+	*				Le format de la vidéo recherchée
+	*	@return Une instance de la vidéo recherchée dans la base de données
+	*/
+	public Video searchVideoByNameFormat(String name, String format){
+		Connection c = null;
+		PreparedStatement stmt = null;
+	    Video video = new Video();
+		String query = new String("SELECT * FROM Video WHERE Video.name=? AND Video.format=?;");
+		try {
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
+			c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+			System.out.println("[searchVideoByNameFormat]Opened database successfully");
+
+			stmt = c.prepareStatement(query);
+	    	stmt.setString(1,name);	//Ajout des paramètres (variables) "?" de la ligne d'avant.
+	    	stmt.setString(2,format);
+	    	ResultSet rs = stmt.executeQuery();
+	    	while(rs.next()){
+				video.setId(rs.getInt("id"));
+				video.setName(rs.getString("name"));
+				video.setFormat(rs.getString("format"));
+				video.setFilePath(rs.getString("file_path"));
+				video.setIdLanguage(rs.getInt("id_language"));
+			}
+			rs.close();
+			stmt.close();
+			c.close();
+			return(video);
+		} catch ( Exception e ) {
+			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+		}
+		System.out.println("[searchVideoByNameFormat]Error");
+		return(null);
+	}
+
+	/**
+	*	Recherche d'un audio dans la base de données avec son nom et son extension.
+	*	L'audio DOIT exister.
+	*
+	*	@param name
+	*				Le nom de l'audio recherché
+	*	@param format
+	*				Le format de l'audio recherché
+	*	@return Une instance de l'audio recherché dans la base de données
+	*/
+	public Audio searchAudioByNameFormat(String name, String format){
+		Connection c = null;
+		PreparedStatement stmt = null;
+	    Audio audio = new Audio();
+		String query = new String("SELECT * FROM Audio WHERE Audio.name=? AND Audio.format=?;");
+		try {
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
+			c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+			System.out.println("[searchAudioByNameFormat]Opened database successfully");
+
+			stmt = c.prepareStatement(query);
+	    	stmt.setString(1,name);	//Ajout des paramètres (variables) "?" de la ligne d'avant.
+	    	stmt.setString(2,format);
+	    	ResultSet rs = stmt.executeQuery();
+	    	while(rs.next()){
+				audio.setId(rs.getInt("id"));
+				audio.setName(rs.getString("name"));
+				audio.setFormat(rs.getString("format"));
+				audio.setFilePath(rs.getString("file_path"));
+				audio.setIdLanguage(rs.getInt("id_language"));
+			}
+			rs.close();
+			stmt.close();
+			c.close();
+			return(audio);
+		} catch ( Exception e ) {
+			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+		}
+		System.out.println("[searchAudioByNameFormat]Error");
 		return(null);
 	}
 }

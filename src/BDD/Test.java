@@ -24,7 +24,15 @@ public class Test {
 		Language tempLanguage = new Language(1, "French");
 		Video tempVideo = new Video(db.manageVideo(tempLanguage));
 		Audio tempAudio = new Audio(db.manageAudio(tempLanguage));
-		System.out.println(db.searchLanguageByName("French"));
+		//System.out.println(db.searchLanguageByName("French"));
+		System.out.println("Audio recherché :");
+		System.out.println(tempAudio);
+		System.out.println("Audio trouvé :");
+		System.out.println(db.searchAudioByNameFormat(tempAudio.getName(), tempAudio.getFormat()) + "\n");
+		System.out.println("Vidéo recherchée :");
+		System.out.println(tempVideo);
+		System.out.println("Vidéo trouvée :");
+		System.out.println(db.searchVideoByNameFormat(tempVideo.getName(), tempVideo.getFormat()));
 		//String tempQuestion1 = new String("C'est ici le ramonage de cheminée ?");
 		//String tempQuestion2 = new String("On dit merci qui ?");
 		//System.out.println(db.manageVideo(tempLanguage));
