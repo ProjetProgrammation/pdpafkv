@@ -63,7 +63,7 @@ public class SonGUI extends Parent {
             //Sélection d'un audio
             //Audio audioTmp = this.controlSM.SelectAudio();
             //Création RadioButton avec son texte
-            RadioButton tmpRB = new RadioButton("Sound "+i);
+            RadioButton tmpRB = new RadioButton("Sound n°"+(i+1));
             //Ajout de l'objet audio dans tmpRB
             //tmpRB.setUserData(audioTmp);
             tmpRB.setUserData(null);

@@ -58,7 +58,7 @@ public class SelectMedia {
         Question question = null;
         this.listAudio = new ArrayList<>();
         
-        //question = this.db.manageQuestion(this.langSel.getName());
+        //question = this.db.manageQuestion(this.langSel);
         
         return question;
     }
