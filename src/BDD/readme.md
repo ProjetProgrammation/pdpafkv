@@ -16,8 +16,8 @@
 <p>
 <strong>ATTENTION</strong> : la nomenclature n'est pas le même en BDD et en Java !<br/>
 </p>
-	<pre><code>BDD : file_path
-	Java : filePath</code></pre>
+	BDD : file_path
+	Java : filePath
 <p>
 Si utilisation en ligne de commande alors impossible d’ajouter sqlite-jdbc-VERSION.jar au CLASSPATH (en ligne de commande sans IDE).<br/>
 </p>
