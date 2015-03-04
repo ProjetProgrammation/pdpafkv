@@ -5,7 +5,7 @@
 
 <ul>
 	<li>JavaDoc</li>
-	<li>Méthodes pour faire des recherches de média/langue/question</li>
+	<li>Méthodes pour faire des recherches de média/<strike>langue</strike>/question</li>
 	<li>Gestion d'erreur : ajout de média dans une langue inexistante</li>
 	<li>Gestion d'erreur : ajout de média sans langue</li>
 	<li>Gestion d'erreur : rendre impossible la création de doublons</li>
