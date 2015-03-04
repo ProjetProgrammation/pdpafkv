@@ -262,6 +262,11 @@ public class DataBase {
 		System.out.println("[addLanguage]The language " + name + " successfuly added.");
 	}
 
+	/**
+	*	Sélection au hasard d'une vidéo dans la base de données en fonction d'une langue voulue
+	*	@param Language La langue de la vidéo souhaitée
+	*	@return Une instance de la vidéo choisie au hasard dans la base de données
+	*/
 	public Video manageVideo(Language language){
 		Connection c = null;
 		PreparedStatement stmt = null;
@@ -297,6 +302,11 @@ public class DataBase {
 		return(null);
 	}
 
+	/**
+	*	Sélection au hasard d'un audio dans la base de données en fonction d'une langue voulue
+	*	@param Language La langue de l'audio souhaité
+	*	@return Une instance de l'audio choisi au hasard dans la base de données
+	*/
 	public Audio manageAudio(Language language){
 		Connection c = null;
 		PreparedStatement stmt = null;
@@ -332,6 +342,11 @@ public class DataBase {
 		return(null);
 	}
 
+	/**
+	*	Sélection au hasard d'une question dans la base de données en fonction d'une langue voulue
+	*	@param Language La langue de la question souhaitée
+	*	@return Une instance de la question choisie au hasard dans la base de données
+	*/
 	public Question manageQuestion(Language language){
 		Connection c = null;
 		PreparedStatement stmt = null;
@@ -362,6 +377,43 @@ public class DataBase {
 			System.exit(0);
 		}
 		System.out.println("[manageQuestion]Error");
+		return(null);
+	}
+
+	/**
+	*	Recherche d'un langage dans la base de données avec son nom.
+	*	La langue DOIT exister.
+	*
+	*	@param Language
+	*				La langue de la question souhaitée
+	*	@return Une instance de la question choisie au hasard dans la base de données
+	*/
+	public Language searchLanguageByName(String name){
+		Connection c = null;
+		PreparedStatement stmt = null;
+	    Language language = new Language();
+		String query = new String("SELECT * FROM Language WHERE Language.name=?;");
+		try {
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
+			c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+			System.out.println("[searchLanguageByName]Opened database successfully");
+
+			stmt = c.prepareStatement(query);
+	    	stmt.setString(1,name);	//Ajout des paramètres (variables) "?" de la ligne d'avant.
+	    	ResultSet rs = stmt.executeQuery();
+	    	while(rs.next()){
+				language.setId(rs.getInt("id"));
+				language.setName(rs.getString("name"));
+			}
+			rs.close();
+			stmt.close();
+			c.close();
+			return(language);
+		} catch ( Exception e ) {
+			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+		}
+		System.out.println("[searchLanguageByName]Error");
 		return(null);
 	}
 }
