@@ -4,6 +4,7 @@
 <H2>A faire</H2>
 
 <ul>
+	<li>JavaDoc</li>
 	<li>Méthodes pour faire des recherches de média/langue/question</li>
 	<li>Gestion d'erreur : ajout de média dans une langue inexistante</li>
 	<li>Gestion d'erreur : ajout de média sans langue</li>
@@ -15,16 +16,14 @@
 <p>
 <strong>ATTENTION</strong> : la nomenclature n'est pas le même en BDD et en Java !<br/>
 </p>
-<pre><code>
-BDD : file_path
-Java : filePath
-</code></pre>
+	<pre><code>BDD : file_path
+	Java : filePath</code></pre>
 <p>
 Si utilisation en ligne de commande alors impossible d’ajouter sqlite-jdbc-VERSION.jar au CLASSPATH (en ligne de commande sans IDE).<br/>
 </p>
 <ul>
 	<li>Solution provisoire au problème de CLASSPATH sur Ubuntu/Linux :<br/>
-	<code>java -classpath ".:sqlite-jdbc-3.8.7.jar" Main</code><li> 
+	<code>java -classpath ".:sqlite-jdbc-3.8.7.jar" Main</code></li> 
 
 	<li>Solution provisoire au problème de CLASSPATH sur Windows :<br/>
 	<code>java -classpath ".;sqlite-jdbc-3.7.2.jar" Main</code></li>
