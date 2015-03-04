@@ -16,6 +16,9 @@ public class Video {
 	private String format;
 	private int idLanguage;
 
+	/**
+	* Constructeur Audio.
+	*/
 	public Video(){
 		this.name=new String();
 		this.filePath=new String();
@@ -23,6 +26,20 @@ public class Video {
 		this.idLanguage=0;
 	}
 
+	/**
+	* Constructeur Video.
+	* 
+	* @param id
+	*            L'id de la "video".
+	* @param name
+	*            Le nom de la "video".
+	* @param filePath
+	*            Le chemin d'accès à la "video".
+	* @param format
+	*            Le format de la "video".
+	* @param idLanguage
+	*            L'id du langage de la "video".
+	*/
 	public Video(int id, String name, String filePath, String format, int idLanguage){
 		this.id=id;
 		this.name=new String(name);
@@ -31,6 +48,12 @@ public class Video {
 		this.idLanguage=idLanguage;
 	}
 
+	/**
+	* Constructeur Audio.
+	* 
+	* @param audio
+	*            L'audio de l'"audio" (clonage d'un audio).
+	*/
 	public Video(Video video){
 		this.id=video.getId();
 		this.name=new String(video.getName());

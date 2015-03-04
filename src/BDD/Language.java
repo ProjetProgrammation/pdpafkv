@@ -13,19 +13,42 @@ public class Language {
 	private int id;
 	private String name;
 
+	/**
+	* Constructeur Language.
+	*/
 	public Language(){
 		this.name=new String();
 	}
 
+	/**
+	* Constructeur Language.
+	* 
+	* @param name
+	*            Le nom du "langage".
+	*/
 	public Language(String name){
 		this.name=name;
 	}
 
+	/**
+	* Constructeur Language.
+	* 
+	* @param id
+	*            L'id' du "langage".
+	* @param name
+	*            Le nom du "langage".
+	*/
 	public Language(int id, String name){
 		this.id=id;
 		this.name=new String(name);
 	}
 
+	/**
+	* Constructeur Language.
+	* 
+	* @param language
+	*            Le langage du "langage" (clonage d'un autre langage).
+	*/
 	public Language(Language language){
 		this.name=language.getName();
 	}

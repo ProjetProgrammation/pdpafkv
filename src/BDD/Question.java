@@ -16,10 +16,27 @@ public class Question {
 	private int idAudio;
 	private int idLanguage;
 
+	/**
+	* Constructeur Question.
+	*/
 	public Question(){
 		this.content=new String();
 	}
 
+	/**
+	* Constructeur Question.
+	* 
+	* @param id
+	*            L'id de la "question".
+	* @param content
+	*            Le contenu de la "question".
+	* @param iVideo
+	*            L'id de la vidéo de la "question".
+	* @param idAudio
+	*            L'id de l'audio de la "question".
+	* @param idLanguage
+	*            L'id du langage de la "question".
+	*/
 	public Question(int id, String content, int idVideo, int idAudio, int idLanguage){
 		this.id=id;
 		this.content=new String(content);
@@ -28,6 +45,12 @@ public class Question {
 		this.idLanguage=idLanguage;
 	}
 
+	/**
+	* Constructeur Question.
+	* 
+	* @param question
+	*            La question de la "question" (clonage d'une question).
+	*/
 	public Question(Question question){
 		this.id = question.getId();
 		this.content = new String (question.getContent());

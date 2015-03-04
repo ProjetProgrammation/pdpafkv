@@ -16,6 +16,9 @@ public class Audio {
 	private String format;
 	private int idLanguage;
 
+	/**
+	* Constructeur Audio.
+	*/
 	public Audio(){
 		this.name=new String();
 		this.filePath=new String();
@@ -23,6 +26,20 @@ public class Audio {
 		this.idLanguage=0;
 	}
 
+	/**
+	* Constructeur Audio.
+	* 
+	* @param id
+	*            L'id de l'"audio".
+	* @param name
+	*            Le nom de l'"audio".
+	* @param filePath
+	*            Le chemin d'accès à l'"audio".
+	* @param format
+	*            Le format de l'"audio".
+	* @param idLanguage
+	*            L'id du langage de l'"audio".
+	*/
 	public Audio(int id, String name, String filePath, String format, int idLanguage){
 		this.id=id;
 		this.name=new String(name);
@@ -31,6 +48,12 @@ public class Audio {
 		this.idLanguage=idLanguage;
 	}
 
+	/**
+	* Constructeur Audio.
+	* 
+	* @param audio
+	*            L'audio de l'"audio" (clonage d'un audio).
+	*/
 	public Audio(Audio audio){
 		this.id=audio.getId();
 		this.name=new String(audio.getName());
