@@ -8,13 +8,11 @@ L'application est une interface graphique permettant de réaliser des tests sur 
 </p>
 <p>
 L'application nécessite l'installation de Java 8 (JDK et JRE).<br>
-Sur Ubuntu (et autres distributions compatibles, il faut installer cette solution avec un PPA externe :
+Sur Ubuntu (et autres distributions compatibles, il faut installer cette solution avec un PPA externe :<br>
+<code>sudo add-apt-repository ppa:webupd8team/java</code><br>
+<code>sudo apt-get update</code><br>
+<code>sudo apt-get install oracle-java8-installer</code><br>
 </p>
-
-
-sudo add-apt-repository ppa:webupd8team/java
-sudo apt-get update
-sudo apt-get install oracle-java8-installer
 
 <p>
 Notes de réunion :<br>
