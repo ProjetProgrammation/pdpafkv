@@ -1,8 +1,9 @@
 { 
    "Extraction": { 
-              "verdugoguillaume": {
+              "french french": {
                     Question:selQuestion.getContent() 
                       { "Emotion": "OuainOuains" }
+                    Audio choisi:'Sound n°1' 
                       { "Trouvé": "non" }
                    ]
             }

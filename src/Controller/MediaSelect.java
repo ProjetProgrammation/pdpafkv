@@ -27,9 +27,9 @@ public class MediaSelect {
         this.langue = langue;
     }
     
-    public void MediaSelect(String nom, String prénom, Text question){
+    public void MediaSelect(String nom, String prénom, Text question, String audio){
         extraction.DébutExtraction(nom, prénom);
-        extraction.ExtractionRéponse(question);
+        extraction.ExtractionRéponse(question, audio);
         extraction.finExtraction();
     }
 }

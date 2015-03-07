@@ -48,13 +48,14 @@ public class Extraction {
         }
     }
     
-    public void ExtractionRéponse(Text question){
+    public void ExtractionRéponse(Text question, String audio){
         
         int i =1;
         try{
              
              fichier.write("                    Question:" +  question.getText() +  " \n");
              fichier.write("                      { \"Emotion\": \"" + Emotions[i] + "\" }\n");
+             fichier.write("                      { \"Audio choisi\":" +  audio +  " \n");
              fichier.write("                      { \"Trouvé\": \"" + trouvé[i] + "\" }\n");
              fichier.write("                   ]\n");
              

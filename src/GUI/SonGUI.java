@@ -9,16 +9,17 @@ import BDD.Audio;
 import BDD.DataBase;
 import BDD.Language;
 import Controller.SelectMedia;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
@@ -34,7 +35,8 @@ import javafx.scene.media.MediaPlayer;
 public class SonGUI extends Parent {
        
     private final SelectMedia controlSM;
-    
+     private ToggleGroup groupAudio = new ToggleGroup();
+     
     public SonGUI(Language langSel, DataBase db){
         this.launchSonGUI();
         this.controlSM = new SelectMedia(db,langSel);
@@ -57,7 +59,7 @@ public class SonGUI extends Parent {
         playSound.setDisable(true);
                 
         GridPane zoneSon = new GridPane();
-        final ToggleGroup groupAudio = new ToggleGroup();
+       
         ArrayList<RadioButton> listRB = new ArrayList<>();
         for (int i=0; i<10; i++){
             //Sélection d'un audio
@@ -72,10 +74,11 @@ public class SonGUI extends Parent {
             //Personnalisation de tmpRB
             tmpRB.setFocusTraversable(false);
             //Ajout tmpRB dans le GridPane
-            if (i<5)
+            if (i<5){
                 zoneSon.add(tmpRB, i, 0);
+            }
             else
-                zoneSon.add(tmpRB, i-5, 1);
+                zoneSon.add(tmpRB, i-5, 2);
             listRB.add(tmpRB);
         }
                 
@@ -113,4 +116,16 @@ public class SonGUI extends Parent {
         final MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
     } 
+    
+    public String audio(){
+        String audio  ="";
+        Pattern p = Pattern .compile("\'.*\'");
+        Matcher m = p.matcher(groupAudio.getSelectedToggle().toString());
+        while (m.find()){
+             audio = m.group();
+        }
+        
+        return audio;
+    
+    }
 }

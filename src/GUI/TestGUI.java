@@ -43,7 +43,7 @@ public class TestGUI extends Parent{
     private void launchTestGUI(Language langSel, DataBase db){
             
         final QuestionGUI question = new QuestionGUI(langSel,db);
-        SonGUI son = new SonGUI(langSel,db);
+        final SonGUI son = new SonGUI(langSel,db);
         VideoGUI video = new VideoGUI(langSel,db);
         
    
@@ -61,8 +61,10 @@ public class TestGUI extends Parent{
         validate.setOnAction(new EventHandler<ActionEvent>() {    
             @Override
             public void handle(ActionEvent event) {
+                String audio = son.audio();
                 
-                media.MediaSelect(user.nom(), user.prénom(), question.getText());
+                media.MediaSelect(user.nom(), user.prénom(), question.getText(),audio);
+                
                 System.out.println("mediaselect effectué");
             }
         });
