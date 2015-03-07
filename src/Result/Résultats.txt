@@ -1,13 +1,9 @@
 { 
    "Extraction": { 
-              "Jacquie": {
-                    Question1: [ 
+              "verdugoguillaume": {
+                    Question:selQuestion.getContent() 
                       { "Emotion": "OuainOuains" }
                       { "Trouvé": "non" }
-                   ]
-                    Question2: [ 
-                      { "Emotion": "rire" }
-                      { "Trouvé": "oui" }
                    ]
             }
     }

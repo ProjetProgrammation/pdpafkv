@@ -47,8 +47,13 @@ public class UserGUI {
     private int fauteC = 0;
     private int fauteD = 0;
     private int fauteE = 0;
-
-    Language languageSelect;
+    private TextField lastName = new TextField();
+    private TextField firstName = new TextField();
+    private TextField birthday = new TextField();        
+    private TextField motherTongue = new TextField();
+    private TextField yearStudying = new TextField();
+    private Language languageSelect;
+    private final UserGUI user = this;
             
     public UserGUI(Stage primaryStage) {
         this.stage=primaryStage;
@@ -66,12 +71,7 @@ public class UserGUI {
         Label lMT = new Label("Mother Tongue");
         Label lYS = new Label("Years Studying");
         
-        //Création des différent TextField à remplir par l'utilisateur
-        final TextField lastName = new TextField();
-        final TextField firstName = new TextField();
-        final TextField birthday = new TextField();        
-        final TextField motherTongue = new TextField();
-        final TextField yearStudying = new TextField();
+        
         //Date format
         birthday.setPromptText("Par exemple : 12/07/1998");
         
@@ -188,7 +188,7 @@ public class UserGUI {
                     //Extraction medias = new Extraction("..\\pdpafkv\\src\\Result\\Résultats.txt");
                     //medias.extraire();
                     if (fauteA == 0 && fauteB == 0 && fauteC == 0 && fauteD == 0 && fauteE == 0 && languageSelect != null){
-                        ChooseGUI cGUI = new ChooseGUI(stage, languageSelect, db);
+                        ChooseGUI cGUI = new ChooseGUI(stage, languageSelect, db, user);
                         erreurs.ErrorsOs();
                     }
                     
@@ -245,6 +245,14 @@ public class UserGUI {
     
     private DataBase createDataBase(){
         return new DataBase();
+    }
+    
+    public String nom(){
+        return firstName.getText();
+    }
+    
+    public String prénom(){
+        return lastName.getText();
     }
     
 }

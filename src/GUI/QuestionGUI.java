@@ -26,6 +26,7 @@ import javafx.scene.text.Text;
 public class QuestionGUI extends Parent {
 
     private final SelectMedia controlSM;
+    private Text texte_entier = new Text();
     
     public QuestionGUI(Language langSel, DataBase db){
         this.launchQuest();
@@ -46,7 +47,7 @@ public class QuestionGUI extends Parent {
         
         //Question
         //Question selQuestion = this.controlSM.SelectQuestion();
-        Text texte_entier = new Text();
+        
         texte_entier.setText("selQuestion.getContent()");
         texte_entier.setFont(new Font(30));
         texte_entier.setFill(Color.GREY);
@@ -60,5 +61,9 @@ public class QuestionGUI extends Parent {
         
         fond_question.getChildren().add(texte_entier);//ajout du texte a la zone
         this.getChildren().add(fond_question);
+    }
+    
+    public  Text getText(){
+        return texte_entier;
     }
 }

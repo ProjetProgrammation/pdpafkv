@@ -6,11 +6,13 @@
 
 package Result;
 
+import GUI.QuestionGUI;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javafx.scene.text.Text;
 
 /**
  *
@@ -18,31 +20,53 @@ import java.util.regex.Pattern;
  */
 public class Extraction {
     
-    String chemin;
+    private String chemin;
+    private String Emotions[] = {"chaine1", "OuainOuains", "rire" , "joies"};
+    private String trouvé[] = {"non", "non", "oui" , "non"};
+    private int nombre = 2;
+    private  FileWriter fichier;
     
     public Extraction(String chemin){
         this.chemin = chemin;
+        try{
+            fichier  = new FileWriter(chemin);
+        }
+        catch(Exception e){
+            System.out.println("erreur");
+        }
     }
     
-    public void extraire(){
-        String nomUtilisateur = "Jacquie";
-        String Emotions[] = {"chaine1", "OuainOuains", "rire" , "joies"};
-        String trouvé[] = {"non", "non", "oui" , "non"};
-        int nombre = 2;
-       
+    public void DébutExtraction(String nomUtilisateur, String prénomUtilisateur){
         try{
-             FileWriter fichier = new FileWriter(chemin);
+            
              fichier.write("{ \n");
              fichier.write("   \"Extraction\": { \n");
-             fichier.write("              \""+nomUtilisateur + "\": {\n");
-            
-             for (int i = 1; i <= nombre ; i++){
-             fichier.write("                    Question"+i+ ": [ \n");
+             fichier.write("              \""+nomUtilisateur +" " + prénomUtilisateur + "\": {\n");
+        }
+        catch(Exception e){
+               System.out.println("Erreur de chargement de fichier");
+        }
+    }
+    
+    public void ExtractionRéponse(Text question){
+        
+        int i =1;
+        try{
+             
+             fichier.write("                    Question:" +  question.getText() +  " \n");
              fichier.write("                      { \"Emotion\": \"" + Emotions[i] + "\" }\n");
              fichier.write("                      { \"Trouvé\": \"" + trouvé[i] + "\" }\n");
              fichier.write("                   ]\n");
-             }
              
+         }
+        catch(Exception e){
+            System.out.println("erreur");
+        }
+    }
+    
+    public void finExtraction(){
+        
+        try{
              fichier.write("            }\n");
              fichier.write("    }\n");
              fichier.write("}\n");
@@ -51,5 +75,7 @@ public class Extraction {
         catch(Exception e){
                System.out.println("Erreur de chargement de fichier");
         }
+        
     }
 }
+

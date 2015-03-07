@@ -24,10 +24,12 @@ import javafx.stage.Stage;
 public class ChooseGUI {
 
     private Stage stage;
+    private UserGUI user;
     
-    public ChooseGUI(Stage primaryStage, Language langSel, DataBase db) {
+    public ChooseGUI(Stage primaryStage, Language langSel, DataBase db, UserGUI user) {
         this.stage=primaryStage;
         this.launchChooseGUI(langSel,db);
+        this.user = user;
     }
 
     private void launchChooseGUI(final Language langSel,final DataBase db) {
@@ -41,7 +43,8 @@ public class ChooseGUI {
         learnOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                TestGUI tGUI = new TestGUI(stage,5,langSel,db);
+                TestGUI tGUI = new TestGUI(stage,5,langSel,db, user);
+                System.out.println(" le nom du mec est " + user.nom());
             }
         });
         
@@ -49,7 +52,7 @@ public class ChooseGUI {
         testOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                TestGUI tGUI = new TestGUI(stage,20,langSel,db);
+                TestGUI tGUI = new TestGUI(stage,20,langSel,db, user);
             }
         });
         

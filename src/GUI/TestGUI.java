@@ -2,6 +2,9 @@ package GUI;
 
 import BDD.DataBase;
 import BDD.Language;
+import Controller.MediaSelect;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -25,17 +28,21 @@ public class TestGUI extends Parent{
     private int nombre = 1;
     private int nbQuestion;
     private final Stage stage;
-    
-    public TestGUI(Stage primaryStage, int nbQuest, Language langSel, DataBase db){
+    private MediaSelect media;
+    private UserGUI user;
+            
+    public TestGUI(Stage primaryStage, int nbQuest, Language langSel, DataBase db,  UserGUI user){
         
         this.stage=primaryStage;
         this.nbQuestion=nbQuest;
         this.launchTestGUI(langSel,db);
+        media = new MediaSelect(db,langSel);
+        this.user = user;
 
     }
     private void launchTestGUI(Language langSel, DataBase db){
             
-        QuestionGUI question = new QuestionGUI(langSel,db);
+        final QuestionGUI question = new QuestionGUI(langSel,db);
         SonGUI son = new SonGUI(langSel,db);
         VideoGUI video = new VideoGUI(langSel,db);
         
@@ -49,6 +56,18 @@ public class TestGUI extends Parent{
         validate.setStyle("-fx-font: 22 arial; -fx-base: #FFE082; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;");
         
         //slider
+        
+        
+        validate.setOnAction(new EventHandler<ActionEvent>() {    
+            @Override
+            public void handle(ActionEvent event) {
+                
+                media.MediaSelect(user.nom(), user.prénom(), question.getText());
+                System.out.println("mediaselect effectué");
+            }
+        });
+        
+        
         
         final ProgressBar pb = new ProgressBar(0);
         /*final ProgressIndicator pi = new ProgressIndicator(0);
