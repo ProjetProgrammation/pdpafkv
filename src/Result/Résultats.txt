@@ -1,6 +1,6 @@
 { 
    "Extraction": { 
-              "fr rf": {
+              "fr fr": {
                     Question:selQuestion.getContent() 
                       { "Emotion": "OuainOuains" }
                       { "Audio choisi":'Sound n°2' 
