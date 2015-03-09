@@ -64,7 +64,9 @@ public class TestGUI extends Parent{
                 String audio = son.audio();
                 
                 media.MediaSelect(user.nom(), user.prénom(), question.getText(),audio);
-                
+                VLC vlc = new VLC();
+                vlc.load();
+                vlc.run("..\\pdpafkv\\Video\\2013_3_19_S29_fr_L1_ADMI_B_ok.mp4");
                 System.out.println("mediaselect effectué");
             }
         });
