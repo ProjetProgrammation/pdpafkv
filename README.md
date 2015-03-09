@@ -24,6 +24,7 @@ Sur Ubuntu (et autres distributions compatibles, il faut installer cette solutio
 <H2>Notes de réunion</H2>
 
 <ul>
-<li>Ce qu'il se passe >> dans un fichier texte</li>
-<li>Video : share memory (3D / Syphon) >> buffer de rendu</li>
+<li><strong>Prochain rendez-vous : 16.02 à 11h</strong></li>
+<li>Ce qu'il se passe >> dans un fichier texte (pour repérer d'éventuelles erreurs lors de l'exécution)</li>
+<li>Vidéo : Avoir fini pour le 16.02 (prochain rendez-vous avec J.Frey)</li>
 </ul>
