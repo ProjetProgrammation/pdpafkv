@@ -3,10 +3,10 @@ package GUI;
 import BDD.DataBase;
 import BDD.Language;
 import Controller.SelectMedia;
-import com.sun.jna.Native;
-import com.sun.jna.NativeLibrary;
+//import com.sun.jna.Native;
+//import com.sun.jna.NativeLibrary;
 import java.awt.Canvas;
-import javafx.embed.swing.SwingNode;
+//import javafx.embed.swing.SwingNode;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -19,7 +19,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
-import uk.co.caprica.vlcj.player.embedded.videosurface.CanvasVideoSurface;
+//import uk.co.caprica.vlcj.player.embedded.videosurface.CanvasVideoSurface;
 
 
 
