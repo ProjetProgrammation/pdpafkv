@@ -58,25 +58,25 @@ public class DataBase {
 	      stmt = c.createStatement();
 	      String sql = "CREATE TABLE Question ("+
 					"id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
-					"content VARCHAR(255) NOT NULL,"+
+					"content VARCHAR(255) UNIQUE NOT NULL,"+
 					"id_video INTEGER NOT NULL,"+
 					"id_audio INTEGER NOT NULL,"+
 					"id_language INTEGER NOT NULL);"+
 				"CREATE TABLE Video ("+
 					"id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
-					"name VARCHAR(50) NOT NULL,"+
+					"name VARCHAR(50) UNIQUE NOT NULL,"+
 					"file_path VARCHAR(255) NOT NULL,"+
 					"id_language INTEGER NOT NULL,"+
 					"format VARCHAR(25));"+
 				"CREATE TABLE Audio ("+
 					"id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
-					"name VARCHAR(50) NOT NULL,"+
+					"name VARCHAR(50) UNIQUE NOT NULL,"+
 					"file_path VARCHAR(255) NOT NULL,"+
 					"id_language INTEGER NOT NULL,"+
 					"format VARCHAR(25));"+
 				"CREATE TABLE Language ("+
 					"id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
-					"name VARCHAR(25));";
+					"name VARCHAR(25) UNIQUE);";
 	      stmt.executeUpdate(sql);
 	      stmt.close();
 	      c.close();
