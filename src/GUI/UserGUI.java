@@ -302,6 +302,8 @@ public class UserGUI {
        //Création de la scène avec ajour du layout
         Scene scene = new Scene(global,600, 400);
         
+        root.setAlignment(Pos.CENTER);
+        
         this.stage.setScene(scene);
         //this.stage.setResizable(true);
         this.stage.centerOnScreen();

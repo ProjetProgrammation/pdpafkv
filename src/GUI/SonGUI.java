@@ -51,7 +51,7 @@ public class SonGUI extends Parent {
         fond_son.autosize();
         //fond_son.setPrefWrapLength(300);
         //fond_son.setPadding(new Insets(30, 24, 30, 24));
-        fond_son.setStyle("-fx-background-color: #FFE082; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
+        fond_son.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
         fond_son.setAlignment(Pos.CENTER);
 
         //Création Button Play
