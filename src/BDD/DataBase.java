@@ -16,6 +16,7 @@ Java : filePath
 
 package BDD;
 import java.sql.*;
+import java.util.ArrayList;
 
 
 /**
@@ -471,35 +472,152 @@ public class DataBase {
 	*	@return Une instance de l'audio recherché dans la base de données
 	*/
 	public Audio searchAudioByNameFormat(String name, String format){
-		Connection c = null;
-		PreparedStatement stmt = null;
+            Connection c = null;
+            PreparedStatement stmt = null;
 	    Audio audio = new Audio();
-		String query = new String("SELECT * FROM Audio WHERE Audio.name=? AND Audio.format=?;");
-		try {
-			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-			c.setAutoCommit(false);	//Mise en place de la transaction manuelle
-			System.out.println("[searchAudioByNameFormat]Opened database successfully");
+            String query = new String("SELECT * FROM Audio WHERE Audio.name=? AND Audio.format=?;");
+            try {
+		Class.forName("org.sqlite.JDBC");
+                c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
+                c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+                System.out.println("[searchAudioByNameFormat]Opened database successfully");
 
-			stmt = c.prepareStatement(query);
+                stmt = c.prepareStatement(query);
 	    	stmt.setString(1,name);	//Ajout des paramètres (variables) "?" de la ligne d'avant.
 	    	stmt.setString(2,format);
 	    	ResultSet rs = stmt.executeQuery();
 	    	while(rs.next()){
-				audio.setId(rs.getInt("id"));
-				audio.setName(rs.getString("name"));
-				audio.setFormat(rs.getString("format"));
-				audio.setFilePath(rs.getString("file_path"));
-				audio.setIdLanguage(rs.getInt("id_language"));
-			}
-			rs.close();
-			stmt.close();
-			c.close();
-			return(audio);
-		} catch ( Exception e ) {
-			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-		}
-		System.out.println("[searchAudioByNameFormat]Error");
-		return(null);
+                    audio.setId(rs.getInt("id"));
+                    audio.setName(rs.getString("name"));
+                    audio.setFormat(rs.getString("format"));
+                    audio.setFilePath(rs.getString("file_path"));
+                    audio.setIdLanguage(rs.getInt("id_language"));
+                }
+                rs.close();
+                stmt.close();
+                c.close();
+                return(audio);
+            } catch ( Exception e ) {
+                    System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            }
+            System.out.println("[searchAudioByNameFormat]Error");
+            return(null);
 	}
+        
+        /**
+         * Cette méthode retourne l'ensemble des questions contenues dans la base de données.
+         * @return La liste de toutes les question dans un ArrayList\<Question\>
+         */
+        public ArrayList<Question> getAllQuestions(){
+            Connection c = null;
+            PreparedStatement stmt = null;
+            ArrayList<Question> result;
+            result = new ArrayList<>();
+            Question tempQuestion = new Question();
+            String query = new String("SELECT * FROM Question;");
+            try {
+		Class.forName("org.sqlite.JDBC");
+                c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
+                c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+                System.out.println("[getAllQuestions]Opened database successfully");
+
+                stmt = c.prepareStatement(query);
+	    	ResultSet rs = stmt.executeQuery();
+	    	while(rs.next()){
+                    tempQuestion.setId(rs.getInt("id"));
+                    tempQuestion.setContent(rs.getString("content"));
+                    tempQuestion.setIdVideo(rs.getInt("id_video"));
+                    tempQuestion.setIdAudio(rs.getInt("id_audio"));
+                    tempQuestion.setIdLanguage(rs.getInt("id_language"));
+                    //Transfert de la tempQuestion dans la ArrayList
+                    result.add(tempQuestion);
+                }
+                rs.close();
+                stmt.close();
+                c.close();
+                return(result);
+            } catch ( Exception e ) {
+                    System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            }
+            System.out.println("[getAllQuestions]Error");
+            return(null);
+        }
+        
+        /**
+         * Cette méthode retourne l'ensemble des vidéos contenues dans la base de données.
+         * @return La liste de toutes les vidéos dans un ArrayList\<Video\>
+         */
+        public ArrayList<Video> getAllVideos(){
+            Connection c = null;
+            PreparedStatement stmt = null;
+            ArrayList<Video> result;
+            result = new ArrayList<>();
+            Video tempVideo = new Video();
+            String query = new String("SELECT * FROM Video;");
+            try {
+		Class.forName("org.sqlite.JDBC");
+                c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
+                c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+                System.out.println("[getAllVideo]Opened database successfully");
+
+                stmt = c.prepareStatement(query);
+	    	ResultSet rs = stmt.executeQuery();
+	    	while(rs.next()){
+                    tempVideo.setId(rs.getInt("id"));
+                    tempVideo.setName(rs.getString("name"));
+                    tempVideo.setFilePath(rs.getString("file_path"));
+                    tempVideo.setIdLanguage(rs.getInt("id_language"));
+                    tempVideo.setFormat(rs.getString("format"));
+                    //Transfert de la tempQuestion dans la ArrayList
+                    result.add(tempVideo);
+                }
+                rs.close();
+                stmt.close();
+                c.close();
+                return(result);
+            } catch ( Exception e ) {
+                    System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            }
+            System.out.println("[getAllQuestions]Error");
+            return(null);
+        }
+        
+        /**
+         * Cette méthode retourne l'ensemble des audios contenus dans la base de données.
+         * @return La liste de toutes les audios dans un ArrayList\<Audio\>
+         */
+        public ArrayList<Audio> getAllAudios(){
+            Connection c = null;
+            PreparedStatement stmt = null;
+            ArrayList<Audio> result;
+            result = new ArrayList<>();
+            Audio tempAudio = new Audio();
+            String query = new String("SELECT * FROM Audio;");
+            try {
+		Class.forName("org.sqlite.JDBC");
+                c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
+                c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+                System.out.println("[getAllAudio]Opened database successfully");
+
+                stmt = c.prepareStatement(query);
+	    	ResultSet rs = stmt.executeQuery();
+	    	while(rs.next()){
+                    tempAudio.setId(rs.getInt("id"));
+                    tempAudio.setName(rs.getString("name"));
+                    tempAudio.setFilePath(rs.getString("file_path"));
+                    tempAudio.setIdLanguage(rs.getInt("id_language"));
+                    tempAudio.setFormat(rs.getString("format"));
+                    //Transfert de la tempQuestion dans la ArrayList
+                    result.add(tempAudio);
+                }
+                rs.close();
+                stmt.close();
+                c.close();
+                return(result);
+            } catch ( Exception e ) {
+                    System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            }
+            System.out.println("[getAllQuestions]Error");
+            return(null);
+        }
 }
