@@ -34,7 +34,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
+//import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -303,11 +303,12 @@ public class UserGUI {
         Scene scene = new Scene(global,600, 400);
         
         this.stage.setScene(scene);
-        /*this.stage.setResizable(true);
-        this.stage.centerOnScreen();*/
+        //this.stage.setResizable(true);
+        this.stage.centerOnScreen();
         this.stage.setTitle("projet prosodie");
         this.stage.hide();
         this.stage.show();
+        this.stage.setFullScreen(true);
     }
     
     private DataBase createDataBase(){
