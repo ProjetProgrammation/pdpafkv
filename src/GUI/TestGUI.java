@@ -3,6 +3,7 @@ package GUI;
 import BDD.DataBase;
 import BDD.Language;
 import Controller.MediaSelect;
+import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -19,6 +20,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
 
@@ -57,22 +61,7 @@ public class TestGUI extends Parent{
         
         //slider
         
-        
-        /*validate.setOnAction(new EventHandler<ActionEvent>() {    
-            @Override
-            public void handle(ActionEvent event) {
-                String audio = son.audio();
-                
-                media.MediaSelect(user.nom(), user.prénom(), question.getText(),audio);
-                VLC vlc = new VLC();
-                vlc.load();
-                vlc.run("E:\\Document\\Mes Documents\\Divers\\EDD.MOV");
-                System.out.println("mediaselect effectué");
-            }
-        });*/
-        
-        
-        
+               
         final ProgressBar pb = new ProgressBar(0);
         /*final ProgressIndicator pi = new ProgressIndicator(0);
  
@@ -123,6 +112,7 @@ public class TestGUI extends Parent{
         root.add(son,2,1,1,3);
         //root.add(hb,0,4);
         root.add(mixValid,2,4);
+        
         root.setStyle("-fx-background-color: #FF8F00 ; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;-fx-border-color: #000000;");
         
         GridPane.setHalignment(question, HPos.CENTER);
