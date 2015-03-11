@@ -51,7 +51,7 @@ public class VideoGUI extends Parent {
         fond_video.autosize();        
         //fond_video.setPrefWrapLength(300);
         //fond_video.setPadding(new Insets(15, 12, 15, 12));
-        fond_video.setStyle("-fx-background-color: #FFE082; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
+        fond_video.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
         
         //création des boutons
         Group group = new Group();

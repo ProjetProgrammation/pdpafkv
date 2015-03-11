@@ -61,12 +61,17 @@ public class ChooseGUI {
         root.add(testOption, 1, 1);
         root.setAlignment(Pos.CENTER);
         
-        root.setStyle("-fx-background-color: #FF8F00 ; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;-fx-border-color: #000000;");
-        //Create scene and add to stage
+        
+        root.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%,lightgrey, white) ; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2");
+        learnOption.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
+        testOption.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
+        
+//Create scene and add to stage
         Scene scene = new Scene(root,600, 400);
         this.stage.setScene(scene);
         this.stage.setResizable(true);
-        
+        this.stage.setFullScreen(true);
+                
         this.stage.hide();
         this.stage.show();
     }

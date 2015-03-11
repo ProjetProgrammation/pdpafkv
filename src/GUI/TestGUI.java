@@ -56,8 +56,6 @@ public class TestGUI extends Parent{
         ImageView imageValid = new ImageView(new Image(getClass().getResourceAsStream("confirmation.png")));
         Button mix = new Button("Mix", new ImageView(imageMix));
         Button validate = new Button("Validate", imageValid);
-        mix.setStyle("-fx-font: 22 arial; -fx-base: #FFE082; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;");
-        validate.setStyle("-fx-font: 22 arial; -fx-base: #FFE082; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;");
         
         //slider
         
@@ -113,7 +111,11 @@ public class TestGUI extends Parent{
         //root.add(hb,0,4);
         root.add(mixValid,2,4);
         
-        root.setStyle("-fx-background-color: #FF8F00 ; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;-fx-border-color: #000000;");
+
+        //Style GUI
+        root.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%,lightgrey, white) ; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2");
+        mix.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
+        validate.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
         
         GridPane.setHalignment(question, HPos.CENTER);
         GridPane.setHalignment(son, HPos.CENTER);   
