@@ -568,7 +568,7 @@ public class DataBase {
                     tempVideo.setFilePath(rs.getString("file_path"));
                     tempVideo.setIdLanguage(rs.getInt("id_language"));
                     tempVideo.setFormat(rs.getString("format"));
-                    //Transfert de la tempQuestion dans la ArrayList
+                    //Transfert de la tempVideo dans la ArrayList
                     result.add(tempVideo);
                 }
                 rs.close();
@@ -578,7 +578,7 @@ public class DataBase {
             } catch ( Exception e ) {
                     System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             }
-            System.out.println("[getAllQuestions]Error");
+            System.out.println("[getAllVideos]Error");
             return(null);
         }
         
@@ -607,7 +607,7 @@ public class DataBase {
                     tempAudio.setFilePath(rs.getString("file_path"));
                     tempAudio.setIdLanguage(rs.getInt("id_language"));
                     tempAudio.setFormat(rs.getString("format"));
-                    //Transfert de la tempQuestion dans la ArrayList
+                    //Transfert de la tempAudio dans la ArrayList
                     result.add(tempAudio);
                 }
                 rs.close();
@@ -617,7 +617,43 @@ public class DataBase {
             } catch ( Exception e ) {
                     System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             }
-            System.out.println("[getAllQuestions]Error");
+            System.out.println("[getAllAudios]Error");
+            return(null);
+        }
+        
+        /**
+         * Cette méthode retourne l'ensemble des langages contenus dans la base de données.
+         * @return La liste de toutes les langages dans un ArrayList\<Language\>
+         */
+        public ArrayList<Language> getAllLanguages(){
+            Connection c = null;
+            PreparedStatement stmt = null;
+            ArrayList<Language> result;
+            result = new ArrayList<>();
+            Language tempLanguage = new Language();
+            String query = new String("SELECT * FROM Language;");
+            try {
+		Class.forName("org.sqlite.JDBC");
+                c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
+                c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+                System.out.println("[getAllLanguages]Opened database successfully");
+
+                stmt = c.prepareStatement(query);
+	    	ResultSet rs = stmt.executeQuery();
+	    	while(rs.next()){
+                    tempLanguage.setId(rs.getInt("id"));
+                    tempLanguage.setName(rs.getString("name"));
+                    //Transfert de la tempLanguage dans la ArrayList
+                    result.add(tempLanguage);
+                }
+                rs.close();
+                stmt.close();
+                c.close();
+                return(result);
+            } catch ( Exception e ) {
+                    System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            }
+            System.out.println("[getAllLanguages]Error");
             return(null);
         }
 }
