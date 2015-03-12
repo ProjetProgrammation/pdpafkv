@@ -85,7 +85,6 @@ public class UserGUI {
     private void launchUserGUI(final DataBase db) {
         
         final Errors erreurs = new Errors();
-        
         //Création des labels
         Label lLN = new Label("Last Name");
         Label lFN = new Label("First Name");
@@ -313,7 +312,8 @@ public class UserGUI {
         this.stage.centerOnScreen();
         this.stage.setTitle("projet prosodie");
         this.stage.hide();
-        this.stage.show();
+        this.stage.show();  
+        this.stage.setFullScreenExitHint("");
         this.stage.setFullScreen(true);
     }
     

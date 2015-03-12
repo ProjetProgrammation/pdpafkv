@@ -126,7 +126,9 @@ public class TestGUI extends Parent{
         //Scene scene = new Scene(root,1400,800);
         Scene scene = new Scene(root);
         this.stage.setScene(scene);
-        
+          
+        this.stage.setFullScreenExitHint("");
+        this.stage.setFullScreen(true);
         this.stage.hide();
         this.stage.show();
         

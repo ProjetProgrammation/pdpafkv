@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import static javafx.geometry.Pos.CENTER;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -128,7 +129,7 @@ public class ChooseGUI {
 
         this.stage.setResizable(true);
         this.stage.setFullScreen(true);
-                
+        this.stage.setFullScreenExitHint("");         
         this.stage.hide();
         this.stage.show();
     }
