@@ -93,8 +93,10 @@ public class UserGUI {
         Label lMT = new Label("Mother Tongue");
         Label lYS = new Label("Years Studying");
         
+        //Police de caractère
         Font font = new Font("Arial",14);
         
+        //Définition style de police des labels
         lLN.setStyle("-fx-font-weight: bold;");
         lLN.setFont(new Font("Serif", 14));
         lFN.setStyle("-fx-font-weight: bold;");
@@ -111,7 +113,6 @@ public class UserGUI {
         
         //Groupe de Radio Buttons
         final ToggleGroup choose = new ToggleGroup();
-              
         //Création + personnalisation des radio buttons
         final RadioButton french = new RadioButton();
         french.setText("French");
@@ -132,8 +133,7 @@ public class UserGUI {
         
         
         //Bouton d'accès à la suite du programme
-       
-        Button access = new Button("Accés");
+        Button access = new Button("Acces");
         access.setPrefSize(100, 40);
         access.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
         
@@ -237,13 +237,7 @@ public class UserGUI {
         VBox language = new VBox();
         BorderPane global= new BorderPane();
        
-        //Affectation Layout root
-        
-        root.add(user,0,2);
-        root.add(language,1,2);
-        root.add(access,1,3);
-        
-        
+    
         //Affectation Layout language
         language.getChildren().add(english);
         language.getChildren().add(french);
@@ -263,37 +257,46 @@ public class UserGUI {
         user.add(motherTongue,2,4);
         user.add(yearStudying,2,5);
         
-        //GUI
-        //user.setStyle("-fx-background-color: #FFE082; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
-       // language.setStyle("-fx-background-color: #FFE082; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
+        //GUI background
         global.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%,lightgrey, white) ; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2");
+        root.setAlignment(Pos.CENTER);
         root.setHgap(20);
         root.setVgap(20);
-          
+        
+        //Texte Partie Haute interface
         Text title = new Text("Test prosodique");
         title.setFont(Font.font("Arial", FontWeight.BOLD, 38));
         title.setStyle("-fx-alignment: center;");
         title.setFill(Paint.valueOf("#22427C"));
         
+        //Texte partie gauche gridPane
         Text titleInformations = new Text("User's Information");
         titleInformations.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         titleInformations.setStyle("-fx-alignment: center;");
         titleInformations.setFill(Paint.valueOf("#22427C"));
         
+        //Texte partie droite gridPane
         Text titleLangue = new Text("User's language");
         titleLangue.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         titleLangue.setStyle("-fx-alignment: center;");
         titleLangue.setFill(Paint.valueOf("#22427C"));
         
-        root.add(titleInformations,0,1);
+        //Contraintes
         root.setHalignment(titleInformations,HPos.CENTER);
         root.setMargin(titleInformations,new Insets(0,0,20,0));
-        
-        root.add(titleLangue,1,1);
         root.setHalignment(titleLangue,HPos.CENTER);
+        
         root.setMargin(titleLangue,new Insets(0,0,20,50));
         root.setMargin(language,new Insets(0,0,0,100));
         
+        //Affectation Layout root
+        root.add(user,0,2);
+        root.add(language,1,2);
+        root.add(access,1,3);
+        root.add(titleInformations,0,1);
+        root.add(titleLangue,1,1);
+        
+        //définition des éléments du layout principal
         global.setTop(title);
         global.setAlignment(title,CENTER);
         global.setMargin(title, new Insets(20,0,20,0));
@@ -301,13 +304,12 @@ public class UserGUI {
         global.setCenter(root);
         global.setAlignment(root,CENTER);
         global.setMargin(root, new Insets(0,0,0,20));
-       //Création de la scène avec ajour du layout
+        
+        //Création de la scène avec ajour du layout
         Scene scene = new Scene(global,600, 400);
         
-        root.setAlignment(Pos.CENTER);
         
         this.stage.setScene(scene);
-        //this.stage.setResizable(true);
         this.stage.centerOnScreen();
         this.stage.setTitle("projet prosodie");
         this.stage.hide();
