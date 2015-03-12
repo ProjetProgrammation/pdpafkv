@@ -54,7 +54,7 @@ import javafx.stage.Stage;
 public class UserGUI {
 
     private final Stage stage;
-
+    
     private int fauteA = 0;
     private int fauteB = 0;
     private int fauteC = 0;
@@ -70,7 +70,9 @@ public class UserGUI {
             
     public UserGUI(Stage primaryStage) {
         this.stage=primaryStage;
+        
         this.launchUserGUI(this.createDataBase());
+        
         
         lastName.setPrefWidth(200);
         lastName.setPrefHeight(30);

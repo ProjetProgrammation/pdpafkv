@@ -25,9 +25,11 @@ public class ChooseGUI {
 
     private Stage stage;
     private UserGUI user;
+    private Scene scene;
     
     public ChooseGUI(Stage primaryStage, Language langSel, DataBase db, UserGUI user) {
         this.stage=primaryStage;
+        this.scene=this.stage.getScene();
         this.launchChooseGUI(langSel,db);
         this.user = user;
     }
@@ -67,8 +69,9 @@ public class ChooseGUI {
         testOption.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
         
 //Create scene and add to stage
-        Scene scene = new Scene(root,600, 400);
-        this.stage.setScene(scene);
+        //Scene scene = new Scene(root,600, 400);
+        //this.stage.setScene(scene);
+        this.scene.setRoot(root);
         this.stage.setResizable(true);
         this.stage.setFullScreen(true);
                 

@@ -83,7 +83,7 @@ public class VideoGUI extends Parent {
         this.getChildren().add(fond_video);
         
         
-        mediaplayer.play();
+        //mediaplayer.play();
         
     }
 }
