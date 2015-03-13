@@ -146,7 +146,7 @@ public class UserGUI {
                 }
                 else{ */           
                     //Récupération données dans les champs
-                   String ln = lastName.getText();
+                /*   String ln = lastName.getText();
                     if (erreurs.ErrorsMessages(ln) != null){
                         System.out.println("Le nom est incorrect");
                        fauteA ++;
@@ -223,11 +223,11 @@ public class UserGUI {
                     //Extraction medias = new Extraction("..\\pdpafkv\\src\\Result\\Résultats.txt");
                     //medias.extraire();
                     if (fauteA == 0 && fauteB == 0 && fauteC == 0 && fauteD == 0 && fauteE == 0 && languageSelect != null){
-                        ChooseGUI cGUI = new ChooseGUI(stage, languageSelect, db, user);
+                       */ ChooseGUI cGUI = new ChooseGUI(stage, languageSelect, db, user);/*
                         erreurs.ErrorsOs();
                     }
                     
-                //}
+                //}*/
             }
         });
 

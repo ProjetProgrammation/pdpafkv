@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
 
 import BDD.Audio;
 import BDD.DataBase;
 import BDD.Language;
 import Controller.SelectMedia;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,7 +17,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
@@ -35,15 +32,21 @@ import javafx.scene.media.MediaPlayer;
 public class SonGUI extends Parent {
        
     private final SelectMedia controlSM;
-     private ToggleGroup groupAudio = new ToggleGroup();
-     
+    private ToggleGroup groupAudio = new ToggleGroup();
+    private Language langue;
+    DataBase db ;
     public SonGUI(Language langSel, DataBase db){
-        this.launchSonGUI();
+       
         this.controlSM = new SelectMedia(db,langSel);
+        langue = langSel;
+        this.db = db;
+         this.launchSonGUI();
+        
     }
 
     private void launchSonGUI(){
         
+        SelectMedia select = new SelectMedia(db, langue);
         //Création + personnalisation FlowPane
         FlowPane fond_son = new FlowPane();
         fond_son.setVgap(8);
@@ -61,14 +64,16 @@ public class SonGUI extends Parent {
         GridPane zoneSon = new GridPane();
        
         ArrayList<RadioButton> listRB = new ArrayList<>();
-        for (int i=0; i<10; i++){
+        for (int i=0; i<2; i++){
             //Sélection d'un audio
             //Audio audioTmp = this.controlSM.SelectAudio();
             //Création RadioButton avec son texte
             RadioButton tmpRB = new RadioButton("Sound n°"+(i+1));
             //Ajout de l'objet audio dans tmpRB
             //tmpRB.setUserData(audioTmp);
-            tmpRB.setUserData(null);
+            
+            tmpRB.setUserData(select.SelectAudio().getFilePath());
+           // tmpRB.setUserData(null);
             //Ajout du tmpRB dans le groupe Toggle
             tmpRB.setToggleGroup(groupAudio);
             //Personnalisation de tmpRB
@@ -86,6 +91,7 @@ public class SonGUI extends Parent {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                 if (groupAudio.getSelectedToggle()!=null){
+                    System.out.println(groupAudio.getSelectedToggle().getUserData());
                     playSound.setDisable(false);
                 }
             }
@@ -95,7 +101,9 @@ public class SonGUI extends Parent {
         playSound.setOnAction(new EventHandler<ActionEvent>() {    
             @Override
             public void handle(ActionEvent event) {
+                   //System.out.println(groupAudio.getSelectedToggle().getUserData());
                     playAction((Audio)groupAudio.getSelectedToggle().getUserData());
+                    
             }
         });
         

@@ -7,6 +7,7 @@ package Controller;
 
 import BDD.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -23,25 +24,36 @@ public class SelectMedia {
     public SelectMedia(DataBase db, Language langSel) {
         this.db = db;
         this.langSel = langSel;
+        SelectAudioListe();
     }
       
-    public Audio SelectAudio(){
+    public void SelectAudioListe(){
         Audio audio = null;
         this.listAudio = new ArrayList<>();
         
-        do{
+         do{
             audio = db.manageAudio(this.langSel);
-        }while(this.listAudio.contains(audio)==false);
-        
-        if (this.listAudio.contains(audio)==false)
-            this.listAudio.add(audio);
-        
-        return audio;
+
+            if (listAudio.contains(audio) == false){
+                this.listAudio.add(audio);
+            }
+         }while(listAudio.size() != 2);
+    }
+    
+    public Audio SelectAudio(){
+        Audio audio = null;
+         
+        Random r = new Random();
+        int random = r.nextInt(listAudio.size());
+        audio = listAudio.get(random);
+        listAudio.remove(audio);
+        return audio ;
     }
     
     public Video SelectVideo(){
         Video video = null;
         this.listVideo = new ArrayList<>();
+        
         
         do{
             video = this.db.manageVideo(this.langSel);
@@ -65,3 +77,5 @@ public class SelectMedia {
     
     
 }
+
+
