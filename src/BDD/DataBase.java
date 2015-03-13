@@ -474,7 +474,7 @@ public class DataBase {
 	public Audio searchAudioByNameFormat(String name, String format){
             Connection c = null;
             PreparedStatement stmt = null;
-	    Audio audio = new Audio();
+			Audio audio = new Audio();
             String query = new String("SELECT * FROM Audio WHERE Audio.name=? AND Audio.format=?;");
             try {
 		Class.forName("org.sqlite.JDBC");
@@ -522,8 +522,9 @@ public class DataBase {
                 System.out.println("[getAllQuestions]Opened database successfully");
 
                 stmt = c.prepareStatement(query);
-	    	ResultSet rs = stmt.executeQuery();
-	    	while(rs.next()){
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next()){
+					tempQuestion = new Question();
                     tempQuestion.setId(rs.getInt("id"));
                     tempQuestion.setContent(rs.getString("content"));
                     tempQuestion.setIdVideo(rs.getInt("id_video"));
@@ -561,8 +562,9 @@ public class DataBase {
                 System.out.println("[getAllVideo]Opened database successfully");
 
                 stmt = c.prepareStatement(query);
-	    	ResultSet rs = stmt.executeQuery();
-	    	while(rs.next()){
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next()){
+					tempVideo = new Video();
                     tempVideo.setId(rs.getInt("id"));
                     tempVideo.setName(rs.getString("name"));
                     tempVideo.setFilePath(rs.getString("file_path"));
@@ -600,8 +602,9 @@ public class DataBase {
                 System.out.println("[getAllAudio]Opened database successfully");
 
                 stmt = c.prepareStatement(query);
-	    	ResultSet rs = stmt.executeQuery();
-	    	while(rs.next()){
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next()){
+					tempAudio = new Audio();
                     tempAudio.setId(rs.getInt("id"));
                     tempAudio.setName(rs.getString("name"));
                     tempAudio.setFilePath(rs.getString("file_path"));
@@ -639,8 +642,9 @@ public class DataBase {
                 System.out.println("[getAllLanguages]Opened database successfully");
 
                 stmt = c.prepareStatement(query);
-	    	ResultSet rs = stmt.executeQuery();
-	    	while(rs.next()){
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next()){
+					tempLanguage = new Language();
                     tempLanguage.setId(rs.getInt("id"));
                     tempLanguage.setName(rs.getString("name"));
                     //Transfert de la tempLanguage dans la ArrayList
@@ -649,6 +653,7 @@ public class DataBase {
                 rs.close();
                 stmt.close();
                 c.close();
+				System.out.println(result);
                 return(result);
             } catch ( Exception e ) {
                     System.err.println( e.getClass().getName() + ": " + e.getMessage() );
