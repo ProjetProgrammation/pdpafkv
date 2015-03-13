@@ -120,7 +120,6 @@ public class UserGUI {
         
         ArrayList<Language> ListL = db.getAllLanguages();        
         for (Language l : ListL){
-            System.out.println(l.toString());
             //Création RadioButton avec son texte
             RadioButton tmpRB = new RadioButton(l.getName());
             //Ajout de l'objet audio dans tmpRB
@@ -131,16 +130,6 @@ public class UserGUI {
             tmpRB.setFocusTraversable(false);
             //Ajout tmpRB dans VBox
             language.getChildren().add(tmpRB);
-        }
-        
-        
-        ArrayList<Audio> ListA = db.getAllAudios();
-        for (Audio a : ListA){
-            System.out.println(a.toString());
-        }
-        ArrayList<Video> ListS = db.getAllVideos();
-        for (Video v : ListS){
-            System.out.println(v.toString());
         }
         
         //Bouton d'accès à la suite du programme

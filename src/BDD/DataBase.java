@@ -653,7 +653,6 @@ public class DataBase {
                 rs.close();
                 stmt.close();
                 c.close();
-				System.out.println(result);
                 return(result);
             } catch ( Exception e ) {
                     System.err.println( e.getClass().getName() + ": " + e.getMessage() );

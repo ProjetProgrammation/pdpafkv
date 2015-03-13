@@ -20,9 +20,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
 
@@ -85,13 +82,13 @@ public class TestGUI extends Parent{
         root.prefWidth(100.0);
         
         root.setPadding(new Insets(20, 20, 20, 20));
-        ColumnConstraints col1 = new ColumnConstraints();
+        /*ColumnConstraints col1 = new ColumnConstraints();
         col1.setPercentWidth(33);        
         ColumnConstraints col2 = new ColumnConstraints(50);
         col2.setPercentWidth(10);
         ColumnConstraints col3 = new ColumnConstraints();
         col3.setPercentWidth(45);
-        root.getColumnConstraints().addAll(col1,col2,col3);
+        root.getColumnConstraints().addAll(col1,col2,col3);*/
         root.setGridLinesVisible(false);
         root.setAlignment(Pos.CENTER);
         
@@ -103,6 +100,24 @@ public class TestGUI extends Parent{
         mixValid.add(mix,0,0);
         mixValid.add(validate,1,0);       
         mixValid.setGridLinesVisible(false);
+        
+        //Action bouton Validate
+        validate.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            }
+        });
+        
+        //Action bouton Mix
+        mix.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                    MediaPlayer.load("..\\ProjectProg\\Video\\2013_3_19_S29_fr_L1_ADMI_B_ok.mp4");
+            }
+        });
+        
+        
         
         //ajout des element au gridpane
         root.add(question,0,0,3,1);
