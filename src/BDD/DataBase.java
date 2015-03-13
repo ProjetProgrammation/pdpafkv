@@ -57,25 +57,25 @@ public class DataBase {
 			System.out.println("[CreateTables]Opened database successfully");
 
 			stmt = c.createStatement();
-			String sql = "CREATE TABLE Question ("+
+			String sql = "CREATE TABLE IF NOT EXISTS Question ("+
 					"id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
 					"content VARCHAR(255) UNIQUE NOT NULL,"+
 					"id_video INTEGER NOT NULL,"+
 					"id_audio INTEGER NOT NULL,"+
 					"id_language INTEGER NOT NULL);"+
-				"CREATE TABLE Video ("+
+				"CREATE TABLE IF NOT EXISTS Video ("+
 					"id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
 					"name VARCHAR(50) UNIQUE NOT NULL,"+
 					"file_path VARCHAR(255) NOT NULL,"+
 					"id_language INTEGER NOT NULL,"+
 					"format VARCHAR(25));"+
-				"CREATE TABLE Audio ("+
+				"CREATE TABLE IF NOT EXISTS Audio ("+
 					"id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
 					"name VARCHAR(50) UNIQUE NOT NULL,"+
 					"file_path VARCHAR(255) NOT NULL,"+
 					"id_language INTEGER NOT NULL,"+
 					"format VARCHAR(25));"+
-				"CREATE TABLE Language ("+
+				"CREATE TABLE IF NOT EXISTS Language ("+
 					"id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
 					"name VARCHAR(25) UNIQUE);";
 			stmt.executeUpdate(sql);
