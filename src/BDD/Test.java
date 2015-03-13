@@ -14,10 +14,7 @@ public class Test {
 
 	public static void main(String[] args) {
 		DataBase db = new DataBase();
-		//*********************
-		// A commenter après la première utilisation de cette classe.
 		db.createTables();
-		//*********************
 		db.addLanguage("French");
 		db.addLanguage("English");
 		db.addAudio("Joy","../../Media/Audios/Joy.mp3","mp3","French");
