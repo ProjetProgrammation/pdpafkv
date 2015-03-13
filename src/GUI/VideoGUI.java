@@ -57,22 +57,6 @@ public class VideoGUI extends Parent {
         Group group = new Group();
         GridPane zoneVideo = new GridPane();
         
-        /*File f = new File(System.getProperty("user.dir"),"Video/2013_3_19_S29_fr_L1_ADMI_B_ok.mp4");  
-        System.out.println(f.toURI().toString());
-        
-        media = new Media(f.toURI().toString());
-        mediaplayer=new MediaPlayer(media);
-        
-        mediaplayer.setAutoPlay(true);
-        
-        
-        mediaview = new MediaView(mediaplayer);
-        mediaview.setFitHeight(500);
-        mediaview.setFitWidth(500);*/
-
-        
-        
-        
         //
         zoneVideo.autosize();
         zoneVideo.setHgap(20);
@@ -80,10 +64,6 @@ public class VideoGUI extends Parent {
         //zoneVideo.add(mediaview, 0, 0);
         
         fond_video.getChildren().add(zoneVideo);
-        this.getChildren().add(fond_video);
-        
-        
-        //mediaplayer.play();
-        
+        this.getChildren().add(fond_video);        
     }
 }

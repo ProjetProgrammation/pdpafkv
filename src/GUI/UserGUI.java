@@ -133,6 +133,7 @@ public class UserGUI {
             language.getChildren().add(tmpRB);
         }
         
+        
         ArrayList<Audio> ListA = db.getAllAudios();
         for (Audio a : ListA){
             System.out.println(a.toString());
