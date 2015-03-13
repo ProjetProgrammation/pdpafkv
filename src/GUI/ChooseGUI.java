@@ -19,6 +19,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -27,7 +28,7 @@ import javafx.stage.Stage;
 
 public class ChooseGUI {
 
-    private Stage stage;
+    Stage stage;
     private UserGUI user;
 
     BorderPane global= new BorderPane();
@@ -37,7 +38,7 @@ public class ChooseGUI {
     
     public ChooseGUI(Stage primaryStage, Language langSel, DataBase db, UserGUI user) {
         this.stage=primaryStage;
-        this.scene=this.stage.getScene();
+        this.scene=primaryStage.getScene();
         this.launchChooseGUI(langSel,db);
         this.user = user;
     }
@@ -129,7 +130,7 @@ public class ChooseGUI {
 
         this.stage.setResizable(true);
         this.stage.setFullScreen(true);
-        this.stage.setFullScreenExitHint("");         
+        this.stage.setFullScreenExitHint("");       
         this.stage.hide();
         this.stage.show();
     }
