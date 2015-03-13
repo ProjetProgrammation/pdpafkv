@@ -5,8 +5,10 @@
  */
 package GUI;
 
+import BDD.Audio;
 import BDD.DataBase;
 import BDD.Language;
+import BDD.Video;
 import Errors.Errors;
 import Result.Extraction;
 import Result.User;
@@ -15,6 +17,7 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -112,24 +115,32 @@ public class UserGUI {
         
         //Groupe de Radio Buttons
         final ToggleGroup choose = new ToggleGroup();
-        //Création + personnalisation des radio buttons
-        final RadioButton french = new RadioButton();
-        french.setText("French");
-        french.setUserData(new Language("french"));
-        french.setToggleGroup(choose);
-        final RadioButton japanese = new RadioButton();
-        japanese.setText("Japanese");
-        japanese.setUserData(new Language("japanese"));
-        japanese.setToggleGroup(choose);
-        final RadioButton english = new RadioButton();
-        english.setText("English");
-        english.setUserData(new Language("english"));
-        english.setToggleGroup(choose);
-        final RadioButton portuguese = new RadioButton();
-        portuguese.setText("Portuguese");
-        portuguese.setUserData(new Language("portugese"));
-        portuguese.setToggleGroup(choose);
+        //Création layout du language
+        VBox language = new VBox();
         
+        ArrayList<Language> ListL = db.getAllLanguages();        
+        for (Language l : ListL){
+            System.out.println(l.toString());
+            //Création RadioButton avec son texte
+            RadioButton tmpRB = new RadioButton(l.getName());
+            //Ajout de l'objet audio dans tmpRB
+            tmpRB.setUserData(l);
+            //Ajout du tmpRB dans le groupe Toggle
+            tmpRB.setToggleGroup(choose);
+            //Personnalisation de tmpRB
+            tmpRB.setFocusTraversable(false);
+            //Ajout tmpRB dans VBox
+            language.getChildren().add(tmpRB);
+        }
+        
+        ArrayList<Audio> ListA = db.getAllAudios();
+        for (Audio a : ListA){
+            System.out.println(a.toString());
+        }
+        ArrayList<Video> ListS = db.getAllVideos();
+        for (Video v : ListS){
+            System.out.println(v.toString());
+        }
         
         //Bouton d'accès à la suite du programme
         Button access = new Button("Acces");
@@ -233,15 +244,7 @@ public class UserGUI {
         //Création layout
         GridPane root = new GridPane();
         GridPane user = new GridPane();
-        VBox language = new VBox();
         BorderPane global= new BorderPane();
-       
-    
-        //Affectation Layout language
-        language.getChildren().add(english);
-        language.getChildren().add(french);
-        language.getChildren().add(japanese);
-        language.getChildren().add(portuguese);
         
         
         //Affection Layout user
