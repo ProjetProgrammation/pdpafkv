@@ -360,7 +360,7 @@ public class DataBase {
 		Connection c = null;
 		PreparedStatement stmt = null;
 		Audio result = new Audio();
-		//int idLanguage = language.getId();
+		int idLanguage = language.getId();
 		String query = new String("SELECT * FROM Audio WHERE id_language=1 ORDER BY random() LIMIT 1;");
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -369,7 +369,7 @@ public class DataBase {
 			System.out.println("[manageAudio]Opened database successfully");
 
 			stmt = c.prepareStatement(query);
-			//stmt.setInt(1,idLanguage);
+			stmt.setInt(1,idLanguage);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 				result = new Audio(
