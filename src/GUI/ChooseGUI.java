@@ -54,7 +54,8 @@ public class ChooseGUI {
         learnOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                TestGUI tGUI = new TestGUI(stage,5,langSel,db, user);
+                Language langS = new Language(1, "French");
+                TestGUI tGUI = new TestGUI(stage,5,langS,db, user);
                 System.out.println(" le nom du mec est " + user.nom());
             }
         });
