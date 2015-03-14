@@ -17,8 +17,8 @@ public class TestDB {
 		db.createTables();
 		db.addLanguage("French");
 		db.addLanguage("English");
-		db.addAudio("seth","Audio\\seth.mp3","mp3","French");
-                db.addAudio("Ska-P-Canabis","Audio\\Ska-P-Canabis.mp3", "mp3","French");
+		db.addAudio("seth","Audio\\seth.mp3","mp3","English");
+                db.addAudio("Ska-P-Canabis","Audio\\Ska-P-Canabis.mp3", "mp3","English");
                 db.addAudio("cosmo","Audio\\cosmo.mp3","mp3","French");
                 db.addAudio("wasted","Audio\\wasted.mp3","mp3","French");
                 db.addAudio("mark","Audio\\mark.mp3","mp3","French");
@@ -27,6 +27,9 @@ public class TestDB {
 		Language tempLanguage = new Language(1, "French");
 		Video tempVideo = new Video(db.manageVideo(tempLanguage));
 		Audio tempAudio = new Audio(db.manageAudio(tempLanguage));
+                Language tempLanguage1 = new Language(2, "English");
+                Video tempVideo1 = new Video(db.manageVideo(tempLanguage1));
+		Audio tempAudio1 = new Audio(db.manageAudio(tempLanguage1));
 		//System.out.println(db.searchLanguageByName("French"));
 		//System.out.println("Audio recherché :");
 		//System.out.println(tempAudio);
@@ -39,7 +42,7 @@ public class TestDB {
 		//String tempQuestion1 = new String("C'est ici le ramonage de cheminée ?");
 		//String tempQuestion2 = new String("On dit merci qui ?");
                 db.addQuestion("heureux?", tempVideo, tempAudio, "French");
-                db.addQuestion("colère?", tempVideo, tempAudio, "English");
+                db.addQuestion("colère?", tempVideo1, tempAudio1, "English");
 		//System.out.println(db.manageVideo(tempLanguage));
 		//System.out.println(db.manageAudio(tempLanguage));
 		//System.out.println(db.manageQuestion(tempLanguage));

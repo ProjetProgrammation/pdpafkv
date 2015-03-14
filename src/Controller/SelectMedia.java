@@ -29,24 +29,24 @@ public class SelectMedia {
     public void SelectAudioListe(){
         Audio audio = null;
         this.listAudio = new ArrayList<>();
-        
+                
          do{
-             boolean check = false;
+            boolean check = false;
             audio = db.manageAudio(this.langSel);
-            for (int i = 0; i < listAudio.size();i++){
-                if (audio.getName().equals(listAudio.get(i).getName())) {
+            for (Audio a: listAudio){
+                if (audio.getFilePath().equals(a.getFilePath())) {
                   check = true;  
                 }    
             }
             if (check == false){
                 listAudio.add(audio);
             }
-         }while(listAudio.size() != db.Count(langSel.getId()));
+         }while(listAudio.size()<=db.Count(this.langSel.getId()));
     }
     
     public Audio SelectAudio(){
         Audio audio = null;
-         
+        this.SelectAudioListe();
         Random r = new Random();
         int random = r.nextInt(listAudio.size());
         audio = listAudio.get(random);
@@ -77,8 +77,6 @@ public class SelectMedia {
         
         return question;
     }
-    
-    
 }
 
 
