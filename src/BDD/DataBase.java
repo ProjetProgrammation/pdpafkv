@@ -361,7 +361,7 @@ public class DataBase {
 		PreparedStatement stmt = null;
 		Audio result = new Audio();
 		int idLanguage = language.getId();
-		String query = new String("SELECT * FROM Audio WHERE id_language=1 ORDER BY random() LIMIT 1;");
+		String query = new String("SELECT * FROM Audio WHERE id_language=? ORDER BY random() LIMIT 1;");
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
