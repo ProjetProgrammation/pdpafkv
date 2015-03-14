@@ -15,13 +15,13 @@ import javafx.scene.text.Text;
  *
  * @author guillaume21
  */
-public class MediaSelect {
+public class MediaSelected {
     
     DataBase bdd;
     Language langue;
     Extraction extraction = new Extraction("..\\pdpafkv\\src\\Result\\Résultats.txt");
     
-    public MediaSelect(DataBase bdd, Language langue){
+    public MediaSelected(DataBase bdd, Language langue){
         
         this.bdd = bdd;
         this.langue = langue;
