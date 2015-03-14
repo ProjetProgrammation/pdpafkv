@@ -751,8 +751,9 @@ public class DataBase {
             System.out.println("[getAllLanguages]Error");
             return(null);
         }
+
         
-         public int Count(int idLangue){
+         public int CountAudio(int idLangue){
             int valeur = 0;
             
             Connection c = null;
@@ -783,4 +784,36 @@ public class DataBase {
                     
             return valeur;
         }
+         
+         public int CountQuestion(int langue){
+            int valeur = 0;
+            
+            Connection c = null;
+            PreparedStatement stmt = null;
+            ArrayList<Language> result;
+            result = new ArrayList<>();
+            Language tempLanguage = new Language();
+            String query = new String("SELECT COUNT(*) AS rowcount FROM Question where id_language = " + langue + ";");
+            try {
+                Class.forName("org.sqlite.JDBC");
+        	c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
+                c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+                System.out.println("[getAllLanguages]Opened database successfully");
+
+                stmt = c.prepareStatement(query);
+                ResultSet rs = stmt.executeQuery();
+                while(rs.next()){
+                valeur = rs.getInt("rowcount");
+                }
+                rs.close();
+                stmt.close();
+                c.close();
+            }
+            catch(Exception e){
+                    System.out.println("erreurs");
+            }
+                    
+            return valeur;
+        }
+
     }
