@@ -4,6 +4,7 @@ import BDD.Audio;
 import BDD.DataBase;
 import BDD.Language;
 import Controller.SelectMedia;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -91,7 +92,8 @@ public class SonGUI extends Parent {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                 if (groupAudio.getSelectedToggle()!=null){
-                    System.out.println(groupAudio.getSelectedToggle().getUserData());
+                    Audio audio = (Audio) groupAudio.getSelectedToggle().getUserData();
+                    System.out.println(audio.getFilePath());
                     playSound.setDisable(false);
                 }
             }
@@ -119,8 +121,11 @@ public class SonGUI extends Parent {
         fond_son.getChildren().add(playSound);
         this.getChildren().add(fond_son);
    }
+    
     protected void playAction(Audio audio){
-        final Media media = new Media(audio.getFilePath());
+        File f = new File(System.getProperty("user.dir"),audio.getFilePath()); 
+        
+        final Media media = new Media(f.toURI().toString());
         final MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
     } 
@@ -131,9 +136,7 @@ public class SonGUI extends Parent {
         Matcher m = p.matcher(groupAudio.getSelectedToggle().toString());
         while (m.find()){
              audio = m.group();
-        }
-        
+        }   
         return audio;
-    
     }
 }
