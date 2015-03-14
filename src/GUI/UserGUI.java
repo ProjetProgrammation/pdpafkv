@@ -135,6 +135,8 @@ public class UserGUI {
             language.getChildren().add(tmpRB);
         }
         
+        
+        
         //Bouton d'accès à la suite du programme
         Button access = new Button("Acces");
         access.setPrefSize(100, 40);
@@ -229,8 +231,7 @@ public class UserGUI {
                     if (fauteA == 0 && fauteB == 0 && fauteC == 0 && fauteD == 0 && fauteE == 0 && languageSelect != null){
                        */ 
                        languageSelect = (Language)choose.getSelectedToggle().getUserData();
-                       System.out.println(languageSelect.toString());
-                        ChooseGUI cGUI = new ChooseGUI(stage, languageSelect, db, user);
+                       new ChooseGUI(stage, languageSelect, db, user);
                         /*
                         erreurs.ErrorsOs();
                     }
