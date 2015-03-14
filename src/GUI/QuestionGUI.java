@@ -29,11 +29,11 @@ public class QuestionGUI extends Parent {
     private Text texte_entier = new Text();
     
     public QuestionGUI(Language langSel, DataBase db){
-        this.launchQuest();
+        this.launchQuest(db,langSel);
         this.controlSM = new SelectMedia(db,langSel);
     }
     
-    private void launchQuest(){
+    private void launchQuest(DataBase db, Language langue){
         
         
         FlowPane fond_question = new FlowPane();
@@ -47,8 +47,7 @@ public class QuestionGUI extends Parent {
         
         //Question
         //Question selQuestion = this.controlSM.SelectQuestion();
-        
-        texte_entier.setText("selQuestion.getContent()");
+        texte_entier.setText(db.manageQuestion(langue).getContent());
         texte_entier.setFont(new Font(30));
         texte_entier.setFill(Color.GREY);
         

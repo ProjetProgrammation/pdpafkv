@@ -19,8 +19,8 @@ public class Test {
 		db.addLanguage("English");
 		db.addAudio("seth","Audio\\seth.mp3","mp3","French");
                 db.addAudio("Ska-P-Canabis","Audio\\Ska-P-Canabis.mp3", "mp3","French");
-                db.addAudio("cosmo","Audio\\cosmo.mp3","mp3","English");
-                db.addAudio("wasted","Audio\\wasted.mp3","mp3","English");
+                db.addAudio("cosmo","Audio\\cosmo.mp3","mp3","French");
+                db.addAudio("wasted","Audio\\wasted.mp3","mp3","French");
                 db.addAudio("mark","Audio\\mark.mp3","mp3","French");
 		db.addVideo("2013_3_19_S29_fr_L1_ADMI_B_ok","Video\\2013_3_19_S29_fr_L1_ADMI_B_ok.mp4","mp4","French");
 		db.addVideo("YouTube-Compilation-des-repliques-de-Kadoc","Video\\YouTube-Compilation-des-repliques-de-Kadoc.flv","flv","English");
