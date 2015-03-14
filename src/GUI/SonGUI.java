@@ -64,7 +64,7 @@ public class SonGUI extends Parent {
         GridPane zoneSon = new GridPane();
        
         ArrayList<RadioButton> listRB = new ArrayList<>();
-        for (int i=0; i<2; i++){
+        for (int i=0; i<3; i++){
             //Sélection d'un audio
             //Audio audioTmp = this.controlSM.SelectAudio();
             //Création RadioButton avec son texte
@@ -72,7 +72,7 @@ public class SonGUI extends Parent {
             //Ajout de l'objet audio dans tmpRB
             //tmpRB.setUserData(audioTmp);
             
-            tmpRB.setUserData(select.SelectAudio().getFilePath());
+            tmpRB.setUserData(select.SelectAudio());
            // tmpRB.setUserData(null);
             //Ajout du tmpRB dans le groupe Toggle
             tmpRB.setToggleGroup(groupAudio);

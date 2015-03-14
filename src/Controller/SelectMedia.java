@@ -32,12 +32,17 @@ public class SelectMedia {
         this.listAudio = new ArrayList<>();
         
          do{
+             boolean check = false;
             audio = db.manageAudio(this.langSel);
-
-            if (listAudio.contains(audio) == false){
-                this.listAudio.add(audio);
+            for (int i = 0; i < listAudio.size();i++){
+                if (audio.getName().equals(listAudio.get(i).getName())) {
+                  check = true;  
+                }    
             }
-         }while(listAudio.size() != 2);
+            if (check == false){
+                listAudio.add(audio);
+            }
+         }while(listAudio.size() != 3);
     }
     
     public Audio SelectAudio(){
