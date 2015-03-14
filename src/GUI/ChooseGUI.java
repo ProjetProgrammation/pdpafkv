@@ -54,7 +54,8 @@ public class ChooseGUI {
         learnOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                TestGUI tGUI = new TestGUI(stage,5,langSel,db, user);
+                Language langS = new Language(1, "French");
+                TestGUI tGUI = new TestGUI(stage,5,langS,db, user);
                 System.out.println(" le nom du mec est " + user.nom());
             }
         });
@@ -112,31 +113,22 @@ public class ChooseGUI {
         
         
         //Create scene and add to stage
-        Scene scene = new Scene(global,600, 400);
-
-        //background éléments
-        global.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%,lightgrey, white) ; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2");
-        learnOption.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
-        testOption.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
+        Scene scene = new Scene(global);        
+        scene.getStylesheets().add("stylesheet.css");
         
+        //background éléments
+        global.setId("global");
+        //global.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%,lightgrey, white) ; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2");
+        //learnOption.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
+        //testOption.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
 
 
         //définition de la scène
         this.stage.setScene(scene);
 
-        //Create scene and add to stage
-        //Scene scene = new Scene(root,600, 400);
-        //this.stage.setScene(scene);
-
         this.stage.setResizable(true);
-        this.stage.setFullScreen(true);
+        //this.stage.setFullScreen(true);
         this.stage.setFullScreenExitHint("");       
-    }
-   
-    
-    
-    
-    
-    
+    }  
     
 }

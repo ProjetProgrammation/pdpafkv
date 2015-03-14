@@ -65,7 +65,7 @@ public class SonGUI extends Parent {
         GridPane zoneSon = new GridPane();
        
         ArrayList<RadioButton> listRB = new ArrayList<>();
-        for (int i=0; i<3; i++){
+        for (int i=0; i<db.Count(langue.getId()); i++){
             //Sélection d'un audio
             //Audio audioTmp = this.controlSM.SelectAudio();
             //Création RadioButton avec son texte

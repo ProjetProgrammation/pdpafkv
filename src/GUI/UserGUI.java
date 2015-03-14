@@ -306,12 +306,12 @@ public class UserGUI {
         global.setMargin(root, new Insets(0,0,0,20));
         
         //Création de la scène avec ajour du layout
-        Scene scene = new Scene(global,600, 400);
+        Scene scene = new Scene(global);
         
         
         this.stage.setScene(scene);
         this.stage.centerOnScreen();
-        this.stage.setTitle("projet prosodie");        
+        this.stage.setTitle("projet prosodie");
         this.stage.show();  
         this.stage.setFullScreenExitHint("");
         //this.stage.setFullScreen(true);
