@@ -139,97 +139,7 @@ public class UserGUI {
         Button access = new Button("Acces");
         access.setPrefSize(100, 40);
         access.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
-        
-          // ************************************ Debut du test
-        //Création layout avec boutons
-        GridPane root1 = new GridPane();
-        Button learnOption = new Button("Acces");
-        Button testOption = new Button("Acces");
-        
-        //Action button learnOption
-        learnOption.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent t) {
-                Language langSel = null;
-                TestGUI tGUI = new TestGUI(stage,5,langSel,db, user);
-                System.out.println(" le nom du mec est " + user.nom());
-            }
-        });
-        
-        //Action button learnOption
-        testOption.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent t) {
-                Language langSel = null;
-                TestGUI tGUI = new TestGUI(stage,20,langSel,db, user);
-            }
-        });
-        
-        //background fenêtre
-        
-        //Texte partie haute de l'interface
-        Text title1 = new Text("Test prosodique");
-        title1.setFont(Font.font("Arial", FontWeight.BOLD, 38));
-        title1.setStyle("-fx-alignment: center;");
-        title1.setFill(Paint.valueOf("#22427C"));
-        
-        //Texte partie gauche
-        Text titleInformations1 = new Text("Entrainement");
-        titleInformations1.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        titleInformations1.setStyle("-fx-alignment: center;");
-        titleInformations1.setFill(Paint.valueOf("#22427C"));
-        
-        //Texte partie droite
-        Text titleTest1 = new Text("Test");
-        titleTest1.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        titleTest1.setStyle("-fx-alignment: center;");
-        titleTest1.setFill(Paint.valueOf("#22427C"));
-        
-        //définition de la taille des boutons
-        testOption.setPrefSize(150, 50);
-        learnOption.setPrefSize(150, 50);
-        
-        //contraintes
-        root1.setMargin(titleInformations1, new Insets(0,0,0,10));
-        root1.setMargin(titleTest1,new Insets(0,0,0,100));
-        root1.setMargin(testOption,new Insets(0,0,0,50));
-     
-        //Add buttons to layout
-        root1.add(titleInformations1,0,1);
-        root1.add(titleTest1,1,1);
-        root1.add(learnOption, 0, 2);
-        root1.add(testOption, 1, 2);
-        root1.setAlignment(Pos.CENTER);
-        //root.setGridLinesVisible(true);
-        BorderPane global1= new BorderPane();
-        //ajout des éléments dans le layout principal
-        global1.setCenter(root1);
-        global1.setTop(title1);
-        global1.setAlignment(title1,CENTER);
-        global1.setMargin(title1, new Insets(20,0,20,0));
-        
-        
-        //Create scene and add to stage
-        final Scene scene1 = new Scene(global1,600, 400);
-
-        //background éléments
-        global1.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%,lightgrey, white) ; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2");
-        learnOption.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
-        testOption.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
-        
-        Label label1 = new Label("Welcome to the first scene!");
-        Button button1 = new Button("Go to scene 2");
-        button1.setOnAction(new EventHandler<ActionEvent>() {    
-            @Override
-            public void handle(ActionEvent event) {
-                 stage.setScene(scene1);
-                         }
-                    });
-        
-        
-       //*******************************Fin du test 
-        
-        
+       
         //Action du bouton
         access.setOnAction(new EventHandler<ActionEvent>() {    
             @Override
@@ -381,7 +291,6 @@ public class UserGUI {
         root.add(user,0,2);
         root.add(language,1,2);
         root.add(access,1,3);
-        root.add(button1,1,4);
         root.add(titleInformations,0,1);
         root.add(titleLangue,1,1);
         
@@ -395,13 +304,12 @@ public class UserGUI {
         global.setMargin(root, new Insets(0,0,0,20));
         
         //Création de la scène avec ajour du layout
-        Scene scene = new Scene(global,600, 400);
+        Scene scene = new Scene(global);
         
         
         this.stage.setScene(scene);
         this.stage.centerOnScreen();
-        this.stage.setTitle("projet prosodie");        
-        this.stage.hide();
+        this.stage.setTitle("projet prosodie");
         this.stage.show();  
         this.stage.setFullScreenExitHint("");
         //this.stage.setFullScreen(true);

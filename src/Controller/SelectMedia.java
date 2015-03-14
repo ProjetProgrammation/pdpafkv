@@ -42,7 +42,7 @@ public class SelectMedia {
             if (check == false){
                 listAudio.add(audio);
             }
-         }while(listAudio.size() != 3);
+         }while(listAudio.size() != db.Count(langSel.getId()));
     }
     
     public Audio SelectAudio(){

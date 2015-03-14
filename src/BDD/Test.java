@@ -19,6 +19,9 @@ public class Test {
 		db.addLanguage("English");
 		db.addAudio("Joy","../../Media/Audios/Joy.mp3","mp3","French");
 		db.addAudio("seth","file:/C:/Users/guillaume/Desktop/pdpafkv/Audio/seth.mp3","mp3","French");
+                db.addAudio("cosmo","file:/C:/Users/guillaume21/Desktop/pdpafkv/Audio/cosmo.mp3","mp3","French");
+                db.addAudio("wasted","file:/C:/Users/guillaume21/Desktop/pdpafkv/Audio/wasted.mp3","mp3","French");
+                db.addAudio("mark","file:/C:/Users/guillaume21/Desktop/pdpafkv/Audio/mark.mp3","mp3","French");
 		db.addAudio("Exitation","../../Media/Audios/Exitation.mp3","mp3","French");
 		db.addVideo("SM","../../Media/Videos/SM.mp4","mp4","French");
 		db.addVideo("Threesome","../../Media/Videos/Threesome.mp4","mp4","French");
