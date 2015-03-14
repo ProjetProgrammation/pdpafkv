@@ -65,7 +65,7 @@ public class SonGUI extends Parent {
         GridPane zoneSon = new GridPane();
        
         ArrayList<RadioButton> listRB = new ArrayList<>();
-        for (int i=0; i<db.Count(langue.getId()); i++){
+        for (int i=0; i<db.CountAudio(langue.getId()); i++){
             //Sélection d'un audio
             //Audio audioTmp = this.controlSM.SelectAudio();
             //Création RadioButton avec son texte
@@ -93,6 +93,7 @@ public class SonGUI extends Parent {
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                 if (groupAudio.getSelectedToggle()!=null){
                     playSound.setDisable(false);
+                    System.out.println(groupAudio.getSelectedToggle().getUserData());
                 }
             }
         });

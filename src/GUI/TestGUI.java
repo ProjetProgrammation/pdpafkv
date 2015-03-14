@@ -3,6 +3,7 @@ package GUI;
 import BDD.DataBase;
 import BDD.Language;
 import Controller.MediaSelect;
+import Controller.SelectMedia;
 import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -31,14 +32,19 @@ public class TestGUI extends Parent{
     private final Stage stage;
     private MediaSelect media;
     private UserGUI user;
-            
-    public TestGUI(Stage primaryStage, int nbQuest, Language langSel, DataBase db,  UserGUI user){
+    private SelectMedia sm;    
+    private Language langue;
+    private DataBase dbe;
+    public TestGUI(Stage primaryStage, int nbQuest, Language langSel,DataBase db,  UserGUI user){
         
         this.stage=primaryStage;
         this.nbQuestion=nbQuest;
         this.media = new MediaSelect(db,langSel);
         this.user = user;
+        sm = new SelectMedia(db, langSel);
         this.launchTestGUI(langSel,db);
+        langue = langSel;
+        dbe = db;
 
     }
     private void launchTestGUI(Language langSel, DataBase db){
@@ -107,7 +113,9 @@ public class TestGUI extends Parent{
         validate.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
+                if(sm.getListeQuestion().size() != 0){
+                    TestGUI g = new TestGUI(stage, nbQuestion, langue, dbe, user);
+                }
             }
         });
         

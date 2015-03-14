@@ -17,6 +17,7 @@ public class SelectMedia {
     
     private ArrayList<Audio> listAudio;
     private ArrayList<Video> listVideo;
+    private ArrayList<Question> listQuestion;
     private Question quest;
     private DataBase db;
     private Language langSel;
@@ -25,6 +26,7 @@ public class SelectMedia {
         this.db = db;
         this.langSel = langSel;
         SelectAudioListe();
+        SelectQuestionListe();
     }
       
     public void SelectAudioListe(){
@@ -43,7 +45,7 @@ public class SelectMedia {
             if (check == false){
                 listAudio.add(audio);
             }
-         }while(listAudio.size() != db.Count(langSel.getId()));
+         }while(listAudio.size() != db.CountAudio(langSel.getId()));
     }
     
     public Audio SelectAudio(){
@@ -72,13 +74,39 @@ public class SelectMedia {
         return video;
     }
         
-    public Question SelectQuestion(){
+   public void SelectQuestionListe(){
         Question question = null;
-        this.listAudio = new ArrayList<>();
+        listQuestion = new ArrayList<>();
         
-        //question = this.db.manageQuestion(this.langSel);
-        
-        return question;
+         do{
+            boolean check = false;
+            question = db.manageQuestion(this.langSel);
+            for (int i = 0; i < listQuestion.size();i++){
+                if (question.getContent().equals(listQuestion.get(i).getContent())) {
+                  check = true;  
+                }    
+            }
+            if (check == false){
+                listQuestion.add(question);
+            }
+         }while(listQuestion.size() != db.CountQuestion(langSel.getId()));
+         
+         System.out.println(listQuestion.size());
+    }
+
+
+    public Question SelectQuestion(){
+            Question question = null;
+
+           Random r = new Random();
+           int random = r.nextInt(listQuestion.size());
+           question = listQuestion.get(random);
+           listAudio.remove(question);
+           return question ;
+       }
+    
+    public ArrayList<Question> getListeQuestion(){
+        return listQuestion;
     }
     
     
