@@ -144,7 +144,7 @@ public class TestGUI extends Parent{
           
         this.stage.setFullScreenExitHint("");
         this.stage.setFullScreen(true);
-        this.stage.hide();
+        //this.stage.hide();
         this.stage.show();
         
     } 
