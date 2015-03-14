@@ -22,8 +22,8 @@ public class Test {
                 db.addAudio("cosmo","Audio\\cosmo.mp3","mp3","French");
                 db.addAudio("wasted","Audio\\wasted.mp3","mp3","French");
                 db.addAudio("mark","Audio\\mark.mp3","mp3","French");
-		db.addVideo("SM","../../Media/Videos/SM.mp4","mp4","French");
-		db.addVideo("Threesome","../../Media/Videos/Threesome.mp4","mp4","French");
+		db.addVideo("2013_3_19_S29_fr_L1_ADMI_B_ok","Video\\2013_3_19_S29_fr_L1_ADMI_B_ok.mp4","mp4","French");
+		db.addVideo("YouTube-Compilation-des-repliques-de-Kadoc","Video\\YouTube-Compilation-des-repliques-de-Kadoc.flv","flv","English");
 		Language tempLanguage = new Language(1, "French");
 		Video tempVideo = new Video(db.manageVideo(tempLanguage));
 		Audio tempAudio = new Audio(db.manageAudio(tempLanguage));
@@ -40,8 +40,6 @@ public class Test {
 		String tempQuestion2 = new String("On dit merci qui ?");
 		//System.out.println(db.manageVideo(tempLanguage));
 		//System.out.println(db.manageAudio(tempLanguage));
-		db.addQuestion(tempQuestion1, tempVideo, tempAudio, tempLanguage.getName());
-		db.addQuestion(tempQuestion2, tempVideo, tempAudio, tempLanguage.getName());
 		//System.out.println(db.manageQuestion(tempLanguage));
 		System.out.println(db.getAllLanguages());
 		System.out.println(db.getAllAudios());

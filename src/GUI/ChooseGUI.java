@@ -39,8 +39,9 @@ public class ChooseGUI {
     public ChooseGUI(Stage primaryStage, Language langSel, DataBase db, UserGUI user) {
         this.stage=primaryStage;
         this.scene=primaryStage.getScene();
-        this.launchChooseGUI(langSel,db);
         this.user = user;
+        this.launchChooseGUI(langSel,db);
+
     }
 
     private void launchChooseGUI(final Language langSel,final DataBase db) {

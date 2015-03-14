@@ -36,13 +36,15 @@ public class TestGUI extends Parent{
         
         this.stage=primaryStage;
         this.nbQuestion=nbQuest;
-        this.launchTestGUI(langSel,db);
-        media = new MediaSelect(db,langSel);
+        this.media = new MediaSelect(db,langSel);
         this.user = user;
+        this.launchTestGUI(langSel,db);
 
     }
     private void launchTestGUI(Language langSel, DataBase db){
             
+        System.out.println(langSel.toString());
+
         final QuestionGUI question = new QuestionGUI(langSel,db);
         final SonGUI son = new SonGUI(langSel,db);
         VideoGUI video = new VideoGUI(langSel,db);

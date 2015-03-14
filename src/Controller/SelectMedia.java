@@ -34,6 +34,7 @@ public class SelectMedia {
          do{
              boolean check = false;
             audio = db.manageAudio(this.langSel);
+            System.out.println(audio.toString());
             for (int i = 0; i < listAudio.size();i++){
                 if (audio.getName().equals(listAudio.get(i).getName())) {
                   check = true;  

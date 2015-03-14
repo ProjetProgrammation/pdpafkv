@@ -92,8 +92,6 @@ public class SonGUI extends Parent {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                 if (groupAudio.getSelectedToggle()!=null){
-                    Audio audio = (Audio) groupAudio.getSelectedToggle().getUserData();
-                    System.out.println(audio.getFilePath());
                     playSound.setDisable(false);
                 }
             }
