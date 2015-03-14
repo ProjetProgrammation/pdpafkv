@@ -139,7 +139,8 @@ public class UserGUI {
         Button access = new Button("Acces");
         access.setPrefSize(100, 40);
         access.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
-       
+              
+        
         //Action du bouton
         access.setOnAction(new EventHandler<ActionEvent>() {    
             @Override
@@ -227,7 +228,8 @@ public class UserGUI {
                     //medias.extraire();
                     if (fauteA == 0 && fauteB == 0 && fauteC == 0 && fauteD == 0 && fauteE == 0 && languageSelect != null){
                        */ 
-              
+                       languageSelect = (Language)choose.getSelectedToggle().getUserData();
+                       System.out.println(languageSelect.toString());
                         ChooseGUI cGUI = new ChooseGUI(stage, languageSelect, db, user);
                         /*
                         erreurs.ErrorsOs();
@@ -323,7 +325,7 @@ public class UserGUI {
         return firstName.getText();
     }
     
-    public String prénom(){
+    public String prenom(){
         return lastName.getText();
     }
     
