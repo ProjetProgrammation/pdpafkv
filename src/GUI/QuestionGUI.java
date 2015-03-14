@@ -29,8 +29,8 @@ public class QuestionGUI extends Parent {
     private Text texte_entier = new Text();
     
     public QuestionGUI(Language langSel, DataBase db){
-        this.launchQuest(db,langSel);
         this.controlSM = new SelectMedia(db,langSel);
+        this.launchQuest(db,langSel);
     }
     
     private void launchQuest(DataBase db, Language langue){
@@ -44,7 +44,7 @@ public class QuestionGUI extends Parent {
         fond_question.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
         fond_question.setAlignment(Pos.CENTER);
 
-        
+
         //Question
         Question selQuestion = this.controlSM.SelectQuestion();
         texte_entier.setText(selQuestion.getContent());

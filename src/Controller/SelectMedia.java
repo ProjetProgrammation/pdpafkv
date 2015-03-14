@@ -71,11 +71,9 @@ public class SelectMedia {
     }
         
     public Question SelectQuestion(){
-        Question question = new Question();
-        //this.listAudio = new ArrayList<>();
+        Question question;
         
         question = this.db.manageQuestion(this.langSel);
-        System.out.println(question.toString());
         
         return question;
     }

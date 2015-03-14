@@ -234,6 +234,7 @@ public class DataBase {
 	*	@param content La question (son contenu)
 	*	@param video La vidéo correspondante à la réponse attendue
 	*	@param audio L'audio correspondant à la réponse attendue
+        *       @param nameLanguage La langue de la question
 	*/
 	public void addQuestion(String content, Video video, Audio audio, String nameLanguage){
 		Connection c = null;
@@ -399,7 +400,7 @@ public class DataBase {
 	public Question manageQuestion(Language language){
 		Connection c = null;
 		PreparedStatement stmt = null;
-		Question result = new Question();
+		Question result=new Question();
 		int idLanguage = language.getId();
 		String query = new String("SELECT * FROM Question WHERE id_language=? ORDER BY random() LIMIT 1;");
 		try {
@@ -407,16 +408,17 @@ public class DataBase {
 			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
 			c.setAutoCommit(false);
 			System.out.println("[manageQuestion]Opened database successfully");
-
 			stmt = c.prepareStatement(query);
 			stmt.setInt(1,idLanguage);
 			ResultSet rs = stmt.executeQuery();
-			result = new Question(
-				rs.getInt("id"),
-				rs.getString("content"),
-				rs.getInt("id_video"),
-				rs.getInt("id_audio"),
-				rs.getInt("id_language"));
+			while(rs.next()){
+                            result = new Question(
+                                    rs.getInt("id"),
+                                    rs.getString("content"),
+                                    rs.getInt("id_video"),
+                                    rs.getInt("id_audio"),
+                                    rs.getInt("id_language"));
+                        }
 			rs.close();
 			stmt.close();
 			c.close();
@@ -776,7 +778,7 @@ public class DataBase {
                 c.close();
             }
             catch(Exception e){
-                    System.out.println("erreurs");
+                    System.out.println("[Count]erreur");
             }
                     
             return valeur;

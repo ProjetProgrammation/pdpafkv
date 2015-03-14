@@ -25,7 +25,9 @@ public class Test {
 		db.addVideo("2013_3_19_S29_fr_L1_ADMI_B_ok","Video\\2013_3_19_S29_fr_L1_ADMI_B_ok.mp4","mp4","French");
 		db.addVideo("YouTube-Compilation-des-repliques-de-Kadoc","Video\\YouTube-Compilation-des-repliques-de-Kadoc.flv","flv","English");
 		Language tempLanguage = new Language(1, "French");
+                System.out.println(tempLanguage.toString());
 		Video tempVideo = new Video(db.manageVideo(tempLanguage));
+                System.out.println(tempVideo.toString());
 		Audio tempAudio = new Audio(db.manageAudio(tempLanguage));
 		//System.out.println(db.searchLanguageByName("French"));
 		//System.out.println("Audio recherché :");
