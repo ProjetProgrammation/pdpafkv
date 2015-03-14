@@ -88,9 +88,9 @@ public class DataBase {
 		System.out.println("[CreateTables]Tables created successfully");
 	}
 
-	/**
-	* Exécute les requêtes SQL permettant de créer les triggers pour la gestion de l'unicité des tuples dans la base de données dataBase.db
-	*/
+//	/**
+//	* Exécute les requêtes SQL permettant de créer les triggers pour la gestion de l'unicité des tuples dans la base de données dataBase.db
+//	*/
 /*	public void createTriggers(){
 		Connection c = null;
 		Statement stmt = null;
@@ -240,37 +240,42 @@ public class DataBase {
 		PreparedStatement stmtLang = null;
 		PreparedStatement stmtAdd = null;
 		int idLang=0;
-		String query = new String("SELECT id FROM Language WHERE Language.name=?;");
-		try {
-			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-			c.setAutoCommit(false);	//Mise en place de la transaction manuelle
-			System.out.println("[addQuestion]Opened database successfully");
+		if(this.searchQuestionByContentIds(content, video.getId(), audio.getId()).getId() != 0){
+			System.out.println("[addQuestion]This Question already exists.");
+		}
+		else{
+			String query = new String("SELECT id FROM Language WHERE Language.name=?;");
+			try {
+				Class.forName("org.sqlite.JDBC");
+				c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
+				c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+				System.out.println("[addQuestion]Opened database successfully");
 
-			stmtLang = c.prepareStatement(query);
-	    	stmtLang.setString(1,nameLanguage);	//Ajout des paramètres (variables) "?" de la ligne d'avant.
-	    	ResultSet rs = stmtLang.executeQuery();
-	    	while(rs.next()){
-	    		idLang = rs.getInt("id");
-	    	}
+				stmtLang = c.prepareStatement(query);
+		    	stmtLang.setString(1,nameLanguage);	//Ajout des paramètres (variables) "?" de la ligne d'avant.
+		    	ResultSet rs = stmtLang.executeQuery();
+		    	while(rs.next()){
+		    		idLang = rs.getInt("id");
+		    	}
 
-	    	query = "INSERT INTO Question (content,id_video,id_audio,id_language) VALUES (?,?,?,?);";
-	    	stmtAdd = c.prepareStatement(query);
-	    	stmtAdd.setString(1, content);
-	    	stmtAdd.setInt(2, video.getId());
-	    	stmtAdd.setInt(3, audio.getId());
-	    	stmtAdd.setInt(4, idLang);
-	    	stmtAdd.executeUpdate();
+		    	query = "INSERT INTO Question (content,id_video,id_audio,id_language) VALUES (?,?,?,?);";
+		    	stmtAdd = c.prepareStatement(query);
+		    	stmtAdd.setString(1, content);
+		    	stmtAdd.setInt(2, video.getId());
+		    	stmtAdd.setInt(3, audio.getId());
+		    	stmtAdd.setInt(4, idLang);
+		    	stmtAdd.executeUpdate();
 
-	    	stmtLang.close();
-	    	stmtAdd.close();
-	    	c.commit();
-	    	c.close();
-	    } catch ( Exception e ) {
-	    	System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-	    	System.exit(0);
-	    }
-	    System.out.println("[addQuestion]The question \"" + content + "\" successfuly added.");
+		    	stmtLang.close();
+		    	stmtAdd.close();
+		    	c.commit();
+		    	c.close();
+		    } catch ( Exception e ) {
+		    	System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+		    	System.exit(0);
+		    }
+		    System.out.println("[addQuestion]The question \"" + content + "\" successfuly added.");
+		}
 	}
 
 	/**
@@ -430,7 +435,7 @@ public class DataBase {
 	*
 	*	@param name
 	*				Le nom de la langue recherchée
-	*	@return Une instance de la langue recherchée dans la base de données
+	*	@return Une instance de la langue recherchée dans la base de données, si non trouvé, retourne l'instance avec un id = 0.
 	*/
 	public Language searchLanguageByName(String name){
 		Connection c = null;
@@ -462,8 +467,7 @@ public class DataBase {
 	}
 
 	/**
-	*	Recherche d'une vidéo dans la base de données avec son nom et son extension.
-	*	La vidéo DOIT exister.
+	*	Recherche d'une vidéo dans la base de données avec son nom et son extension, si non trouvé, retourne l'instance avec un id = 0.
 	*
 	*	@param name
 	*				Le nom de la vidéo recherchée
@@ -506,13 +510,12 @@ public class DataBase {
 
 	/**
 	*	Recherche d'un audio dans la base de données avec son nom et son extension.
-	*	L'audio DOIT exister.
 	*
 	*	@param name
 	*				Le nom de l'audio recherché
 	*	@param format
 	*				Le format de l'audio recherché
-	*	@return Une instance de l'audio recherché dans la base de données
+	*	@return Une instance de l'audio recherché dans la base de données, si non trouvé, retourne l'instance avec un id = 0.
 	*/
 	public Audio searchAudioByNameFormat(String name, String format){
 		Connection c = null;
@@ -549,46 +552,46 @@ public class DataBase {
 
 	/**
 	*	Recherche d'une question dans la base de données avec son content, l'id de sa vidéo, l'id de son audio et l'id de sa langue.
-	*	La question DOIT exister.
 	*
 	*	@param name
-	*				Le nom de la vidéo recherchée
+	*				Le nom de la question recherchée
 	*	@param format
-	*				Le format de la vidéo recherchée
-	*	@return Une instance de la vidéo recherchée dans la base de données
+	*				Le format de la question recherchée
+	*	@return Une instance de la question recherchée dans la base de données, si non trouvé, retourne l'instance avec un id = 0.
 	*/
-	/*public Video searchVideoByNameFormat(String name, String format){
+	public Question searchQuestionByContentIds(String content, int idVideo, int idAudio){
 		Connection c = null;
 		PreparedStatement stmt = null;
-		Video video = new Video();
-		String query = new String("SELECT * FROM Video WHERE Video.name=? AND Video.format=?;");
+		Question question = new Question();
+		String query = new String("SELECT * FROM Question WHERE Question.content=? AND Question.id_video=? AND id_audio=?;");
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
 			c.setAutoCommit(false);	//Mise en place de la transaction manuelle
-			System.out.println("[searchVideoByNameFormat]Opened database successfully");
+			System.out.println("[searchQuestionByContentIds]Opened database successfully");
 
 			stmt = c.prepareStatement(query);
-	    	stmt.setString(1,name);	//Ajout des paramètres (variables) "?" de la ligne d'avant.
-	    	stmt.setString(2,format);
+	    	stmt.setString(1,content);	//Ajout des paramètres (variables) "?" de la ligne d'avant.
+	    	stmt.setInt(2,idVideo);
+	    	stmt.setInt(3,idAudio);
 	    	ResultSet rs = stmt.executeQuery();
 	    	while(rs.next()){
-	    		video.setId(rs.getInt("id"));
-	    		video.setName(rs.getString("name"));
-	    		video.setFormat(rs.getString("format"));
-	    		video.setFilePath(rs.getString("file_path"));
-	    		video.setIdLanguage(rs.getInt("id_language"));
+	    		question.setId(rs.getInt("id"));
+	    		question.setContent(rs.getString("content"));
+	    		question.setIdVideo(rs.getInt("id_video"));
+	    		question.setIdAudio(rs.getInt("id_audio"));
+	    		question.setIdLanguage(rs.getInt("id_language"));
 	    	}
 	    	rs.close();
 	    	stmt.close();
 	    	c.close();
-	    	return(video);
+	    	return(question);
 	    } catch ( Exception e ) {
 	    	System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 	    }
-	    System.out.println("[searchVideoByNameFormat]Error");
+	    System.out.println("[searchQuestionByContentIds]Error");
 	    return(null);
-	}*/
+	}
 
         /**
          * Cette méthode retourne l'ensemble des questions contenues dans la base de données.
