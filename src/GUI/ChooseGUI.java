@@ -131,6 +131,8 @@ public class ChooseGUI {
         this.stage.setResizable(true);
         this.stage.setFullScreen(true);
         this.stage.setFullScreenExitHint("");       
+        //this.stage.hide();
+        this.stage.show();
     }
    
     
