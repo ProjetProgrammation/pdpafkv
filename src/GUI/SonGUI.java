@@ -35,7 +35,7 @@ public class SonGUI extends Parent {
     private final SelectMedia controlSM;
     private ToggleGroup groupAudio = new ToggleGroup();
     private Language langue;
-    DataBase db ;
+    private DataBase db ;
     public SonGUI(Language langSel, DataBase db){
        
         this.controlSM = new SelectMedia(db,langSel);
@@ -47,7 +47,6 @@ public class SonGUI extends Parent {
 
     private void launchSonGUI(){
         
-        SelectMedia select = new SelectMedia(db, langue);
         //Création + personnalisation FlowPane
         FlowPane fond_son = new FlowPane();
         fond_son.setVgap(8);
@@ -67,14 +66,11 @@ public class SonGUI extends Parent {
         ArrayList<RadioButton> listRB = new ArrayList<>();
         for (int i=0; i<db.Count(langue.getId()); i++){
             //Sélection d'un audio
-            //Audio audioTmp = this.controlSM.SelectAudio();
+            Audio audioTmp = this.controlSM.SelectAudio();
             //Création RadioButton avec son texte
             RadioButton tmpRB = new RadioButton("Sound n°"+(i+1));
             //Ajout de l'objet audio dans tmpRB
-            //tmpRB.setUserData(audioTmp);
-            
-            tmpRB.setUserData(select.SelectAudio());
-           // tmpRB.setUserData(null);
+            tmpRB.setUserData(audioTmp);
             //Ajout du tmpRB dans le groupe Toggle
             tmpRB.setToggleGroup(groupAudio);
             //Personnalisation de tmpRB

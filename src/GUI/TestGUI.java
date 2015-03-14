@@ -47,8 +47,6 @@ public class TestGUI extends Parent{
     }
     private void launchTestGUI(Language langSel, final DataBase db){
             
-        System.out.println(langSel.toString());
-
         final QuestionGUI question = new QuestionGUI(langSel,db);
         final SonGUI son = new SonGUI(langSel,db);
         VideoGUI video = new VideoGUI(langSel,db);

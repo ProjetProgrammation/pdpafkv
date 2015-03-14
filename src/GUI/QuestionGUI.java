@@ -46,8 +46,8 @@ public class QuestionGUI extends Parent {
 
         
         //Question
-        //Question selQuestion = this.controlSM.SelectQuestion();
-        texte_entier.setText(db.manageQuestion(langue).getContent());
+        Question selQuestion = this.controlSM.SelectQuestion();
+        texte_entier.setText(selQuestion.getContent());
         texte_entier.setFont(new Font(30));
         texte_entier.setFill(Color.GREY);
         

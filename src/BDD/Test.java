@@ -38,6 +38,8 @@ public class Test {
 		//System.out.println(db.searchVideoByNameFormat(tempVideo.getName(), tempVideo.getFormat()));
 		String tempQuestion1 = new String("C'est ici le ramonage de cheminée ?");
 		String tempQuestion2 = new String("On dit merci qui ?");
+                db.addQuestion(tempQuestion2, tempVideo, tempAudio, "French");
+                db.addQuestion(tempQuestion1, tempVideo, tempAudio, "English");
 		//System.out.println(db.manageVideo(tempLanguage));
 		//System.out.println(db.manageAudio(tempLanguage));
 		//System.out.println(db.manageQuestion(tempLanguage));

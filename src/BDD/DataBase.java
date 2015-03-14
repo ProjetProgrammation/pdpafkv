@@ -750,7 +750,7 @@ public class DataBase {
             return(null);
         }
         
-         public int Count(int langue){
+         public int Count(int idLangue){
             int valeur = 0;
             
             Connection c = null;
@@ -758,7 +758,7 @@ public class DataBase {
             ArrayList<Language> result;
             result = new ArrayList<>();
             Language tempLanguage = new Language();
-            String query = new String("SELECT COUNT(*) AS rowcount FROM Audio where id_language = " + langue + ";");
+            String query = new String("SELECT COUNT(*) AS rowcount FROM Audio where id_language = ? ;");
             try {
                 Class.forName("org.sqlite.JDBC");
         	c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
@@ -766,9 +766,10 @@ public class DataBase {
                 System.out.println("[getAllLanguages]Opened database successfully");
 
                 stmt = c.prepareStatement(query);
+                stmt.setInt(1, idLangue);
                 ResultSet rs = stmt.executeQuery();
                 while(rs.next()){
-                valeur = rs.getInt("rowcount");
+                    valeur = rs.getInt("rowcount");
                 }
                 rs.close();
                 stmt.close();

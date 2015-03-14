@@ -24,7 +24,6 @@ public class SelectMedia {
     public SelectMedia(DataBase db, Language langSel) {
         this.db = db;
         this.langSel = langSel;
-        SelectAudioListe();
     }
       
     public void SelectAudioListe(){
@@ -34,7 +33,6 @@ public class SelectMedia {
          do{
              boolean check = false;
             audio = db.manageAudio(this.langSel);
-            System.out.println(audio.toString());
             for (int i = 0; i < listAudio.size();i++){
                 if (audio.getName().equals(listAudio.get(i).getName())) {
                   check = true;  
@@ -73,10 +71,11 @@ public class SelectMedia {
     }
         
     public Question SelectQuestion(){
-        Question question = null;
-        this.listAudio = new ArrayList<>();
+        Question question = new Question();
+        //this.listAudio = new ArrayList<>();
         
-        //question = this.db.manageQuestion(this.langSel);
+        question = this.db.manageQuestion(this.langSel);
+        System.out.println(question.toString());
         
         return question;
     }
