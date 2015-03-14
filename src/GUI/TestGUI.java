@@ -31,17 +31,21 @@ public class TestGUI extends Parent{
     private final Stage stage;
     private MediaSelect media;
     private UserGUI user;
+    private Language language;
+    private DataBase db;
             
-    public TestGUI(Stage primaryStage, int nbQuest, Language langSel, DataBase db,  UserGUI user){
+    public TestGUI(Stage primaryStage, int nbQuest, Language langSel, DataBase daba,  UserGUI user){
         
         this.stage=primaryStage;
         this.nbQuestion=nbQuest;
         this.media = new MediaSelect(db,langSel);
         this.user = user;
+        this.db=daba;
+        this.language=langSel;
         this.launchTestGUI(langSel,db);
 
     }
-    private void launchTestGUI(Language langSel, DataBase db){
+    private void launchTestGUI(Language langSel, final DataBase db){
             
         System.out.println(langSel.toString());
 
@@ -107,7 +111,7 @@ public class TestGUI extends Parent{
         validate.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
+                new TestGUI(stage, nbQuestion+1, language, db, user);
             }
         });
         
