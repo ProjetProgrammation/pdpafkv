@@ -25,6 +25,9 @@ public class Answers {
     public Answers(User userSel, Language langSel) {
         this.user = userSel;
         this.language=langSel;
+        this.questList=new ArrayList<>();
+        this.videoList=new ArrayList<>();
+        this.audioList=new ArrayList<>();
     }
     
     //Function to add objects in different List

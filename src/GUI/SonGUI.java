@@ -1,8 +1,6 @@
 package GUI;
 
 import BDD.Audio;
-import BDD.DataBase;
-import BDD.Language;
 import Controller.SelectMedia;
 import java.io.File;
 import java.util.ArrayList;
@@ -30,7 +28,7 @@ import javafx.scene.media.MediaPlayer;
 public class SonGUI extends Parent {
        
     private final SelectMedia selMedia;
-    private ToggleGroup groupAudio = new ToggleGroup();
+    private Audio audioSelected;
 
     public SonGUI(SelectMedia selectMedia){     
         this.selMedia = selectMedia;
@@ -54,7 +52,7 @@ public class SonGUI extends Parent {
         playSound.setDisable(true);
                 
         GridPane zoneSon = new GridPane();
-       
+        final ToggleGroup groupAudio = new ToggleGroup();
         ArrayList<RadioButton> listRB = new ArrayList<>();
         for (int i=0; i<10; i++){
             //Sélection d'un audio
@@ -81,7 +79,7 @@ public class SonGUI extends Parent {
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                 if (groupAudio.getSelectedToggle()!=null){
                     playSound.setDisable(false);
-                   // System.out.println(groupAudio.getSelectedToggle().getUserData());
+                    audioSelected = (Audio)groupAudio.getSelectedToggle().getUserData();
                 }
             }
         });
@@ -90,9 +88,7 @@ public class SonGUI extends Parent {
         playSound.setOnAction(new EventHandler<ActionEvent>() {    
             @Override
             public void handle(ActionEvent event) {
-                   //System.out.println(groupAudio.getSelectedToggle().getUserData());
-                    playAction((Audio)groupAudio.getSelectedToggle().getUserData());
-                    
+                    playAction((Audio)groupAudio.getSelectedToggle().getUserData());                   
             }
         });
         
@@ -116,8 +112,12 @@ public class SonGUI extends Parent {
         mediaPlayer.play();
     } 
     
+    public Audio getAudioSelected(){
+        return audioSelected;
+    }
+    
     //Fonction pour l'extraction
-    public String audio(){
+    /*public String audio(){
         String audio  ="";
         Pattern p = Pattern .compile("\'.*\'");
         Matcher m = p.matcher(groupAudio.getSelectedToggle().toString());
@@ -125,5 +125,5 @@ public class SonGUI extends Parent {
              audio = m.group();
         }   
         return audio;
-    }
+    }*/
 }

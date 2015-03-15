@@ -74,7 +74,7 @@ public class TestGUI extends Parent{
             
         final QuestionGUI question = new QuestionGUI(this.selMedia);
         final SonGUI son = new SonGUI(this.selMedia);
-        VideoGUI video = new VideoGUI(this.selMedia);
+        final VideoGUI video = new VideoGUI(this.selMedia);
         
    
         //Zone pour les boutons
@@ -120,8 +120,11 @@ public class TestGUI extends Parent{
             @Override
             public void handle(ActionEvent event) {
                 numEnCours ++;
-                if((numEnCours<=nbQuestion)&&(nbQuestion==20))
+                if((numEnCours<=nbQuestion)&&(nbQuestion==20)){
+                    mediaSel.addResultQuestion(question.getQuestionSelected());
+                    mediaSel.addResultAudio(son.getAudioSelected());
                     new TestGUI(stage,nbQuestion,numEnCours,selMedia,mediaSel);
+                }
                 else if((numEnCours<=nbQuestion)&&(nbQuestion==5))
                     new TestGUI(stage,nbQuestion,numEnCours,selMedia);
                 else

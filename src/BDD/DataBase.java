@@ -797,6 +797,36 @@ public class DataBase {
                 stmt.setInt(1, idLanguage);
                 ResultSet rs = stmt.executeQuery();
                 while(rs.next()){
+                valeur = rs.getInt("rowcount");
+                }
+                rs.close();
+                stmt.close();
+                c.close();
+            }
+            catch(Exception e){
+                    System.out.println("erreurs");
+            }
+                    
+            return valeur;
+        }
+        
+        public int CountVideo(int idLanguage){
+            int valeur = 0;
+            
+            Connection c = null;
+            PreparedStatement stmt = null;
+            ArrayList<Language> result;
+            result = new ArrayList<>();
+            Language tempLanguage = new Language();
+            String query = new String("SELECT COUNT(*) AS rowcount FROM Video where id_language = ? ;");
+            try {
+                Class.forName("org.sqlite.JDBC");
+        	c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
+                c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+                stmt = c.prepareStatement(query);
+                stmt.setInt(1, idLanguage);
+                ResultSet rs = stmt.executeQuery();
+                while(rs.next()){
                     result = rs.getInt("rowcount");
                 }
                 rs.close();
@@ -810,4 +840,4 @@ public class DataBase {
             return result;
         }
 
-    }
+}
