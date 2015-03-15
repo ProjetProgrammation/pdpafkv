@@ -752,8 +752,12 @@ public class DataBase {
             return(null);
         }
 
-        
-         public int CountAudio(int idLanguage){
+        /**
+         * Compte le nombre de tuples dans la langue idLanguage dans la table Audio de la BDD
+         * @param idLanguage
+         * @return Le nombre de tuples dans la langue idLanguage recherché
+         */
+        public int CountAudio(int idLanguage){
             int result = 0;
             
             Connection c = null;
@@ -780,8 +784,13 @@ public class DataBase {
             }
             return result;
         }
-         
-         public int CountQuestion(int idLanguage){
+        
+        /**
+         * Compte le nombre de tuples dans la langue idLanguage dans la table Question de la BDD
+         * @param idLanguage
+         * @return Le nombre de tuples dans la langue idLanguage recherché
+         */
+        public int CountQuestion(int idLanguage){
             int result = 0;
             
             Connection c = null;
@@ -797,7 +806,7 @@ public class DataBase {
                 stmt.setInt(1, idLanguage);
                 ResultSet rs = stmt.executeQuery();
                 while(rs.next()){
-                valeur = rs.getInt("rowcount");
+                result = rs.getInt("rowcount");
                 }
                 rs.close();
                 stmt.close();
@@ -807,17 +816,19 @@ public class DataBase {
                     System.out.println("erreurs");
             }
                     
-            return valeur;
+            return result;
         }
         
+        /**
+         * Compte le nombre de tuples dans la langue idLanguage dans la table Video de la BDD
+         * @param idLanguage
+         * @return Le nombre de tuples dans la langue idLanguage recherché
+         */
         public int CountVideo(int idLanguage){
-            int valeur = 0;
+            int result = 0;
             
             Connection c = null;
             PreparedStatement stmt = null;
-            ArrayList<Language> result;
-            result = new ArrayList<>();
-            Language tempLanguage = new Language();
             String query = new String("SELECT COUNT(*) AS rowcount FROM Video where id_language = ? ;");
             try {
                 Class.forName("org.sqlite.JDBC");
