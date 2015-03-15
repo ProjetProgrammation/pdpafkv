@@ -367,7 +367,7 @@ public class DataBase {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
 			c.setAutoCommit(false);
-			System.out.println("[manageAudio]Opened database successfully");
+			//System.out.println("[manageAudio]Opened database successfully");
 
 			stmt = c.prepareStatement(query);
 			stmt.setInt(1,idLanguage);
@@ -407,7 +407,7 @@ public class DataBase {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
 			c.setAutoCommit(false);
-			System.out.println("[manageQuestion]Opened database successfully");
+			//System.out.println("[manageQuestion]Opened database successfully");
 			stmt = c.prepareStatement(query);
 			stmt.setInt(1,idLanguage);
 			ResultSet rs = stmt.executeQuery();
@@ -766,7 +766,7 @@ public class DataBase {
                 Class.forName("org.sqlite.JDBC");
         	c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
                 c.setAutoCommit(false);	//Mise en place de la transaction manuelle
-                System.out.println("[getAllLanguages]Opened database successfully");
+              //  System.out.println("[getAllLanguages]Opened database successfully");
 
                 stmt = c.prepareStatement(query);
                 stmt.setInt(1, idLangue);
@@ -798,7 +798,7 @@ public class DataBase {
                 Class.forName("org.sqlite.JDBC");
         	c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
                 c.setAutoCommit(false);	//Mise en place de la transaction manuelle
-                System.out.println("[getAllLanguages]Opened database successfully");
+               // System.out.println("[getAllLanguages]Opened database successfully");
 
                 stmt = c.prepareStatement(query);
                 ResultSet rs = stmt.executeQuery();

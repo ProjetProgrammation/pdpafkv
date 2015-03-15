@@ -25,9 +25,10 @@ public class TestDB {
 		db.addVideo("2013_3_19_S29_fr_L1_ADMI_B_ok","Video\\2013_3_19_S29_fr_L1_ADMI_B_ok.mp4","mp4","French");
 		db.addVideo("YouTube-Compilation-des-repliques-de-Kadoc","Video\\YouTube-Compilation-des-repliques-de-Kadoc.flv","flv","English");
 		Language tempLanguage = new Language(1, "French");
+                Language tempLanguage1 = new Language(2, "English");
 		Video tempVideo = new Video(db.manageVideo(tempLanguage));
 		Audio tempAudio = new Audio(db.manageAudio(tempLanguage));
-                Language tempLanguage1 = new Language(2, "English");
+              
                 Video tempVideo1 = new Video(db.manageVideo(tempLanguage1));
 		Audio tempAudio1 = new Audio(db.manageAudio(tempLanguage1));
 		//System.out.println(db.searchLanguageByName("French"));
@@ -43,6 +44,10 @@ public class TestDB {
 		//String tempQuestion2 = new String("On dit merci qui ?");
                 db.addQuestion("heureux?", tempVideo, tempAudio, "French");
                 db.addQuestion("colère?", tempVideo1, tempAudio1, "English");
+                db.addQuestion("bien?", tempVideo, tempAudio, "French");
+                db.addQuestion("pas bien?", tempVideo1, tempAudio1, "English");
+                db.addQuestion("izi?", tempVideo, tempAudio, "French");
+                db.addQuestion("pas izi?", tempVideo1, tempAudio1, "English");
 		//System.out.println(db.manageVideo(tempLanguage));
 		//System.out.println(db.manageAudio(tempLanguage));
 		//System.out.println(db.manageQuestion(tempLanguage));

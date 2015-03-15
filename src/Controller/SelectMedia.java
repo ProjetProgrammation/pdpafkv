@@ -25,24 +25,38 @@ public class SelectMedia {
     public SelectMedia(DataBase db, Language langSel) {
         this.db = db;
         this.langSel = langSel;
+        SelectAudioListe();
     }
       
     public void SelectAudioListe(){
         Audio audio = null;
-        this.listAudio = new ArrayList<>();
-                
-         do{
+        this.listAudio = new ArrayList<>();    
+        /* do{
             boolean check = false;
             audio = db.manageAudio(this.langSel);
             for (Audio a: listAudio){
                 if (audio.getFilePath().equals(a.getFilePath())) {
                   check = true;  
                 }    
+            }   
+            if (check == false){
+                listAudio.add(audio);
+            }
+            }while(listAudio.size()<=db.CountAudio(this.langSel.getId()));*/
+        
+            do{
+             boolean check = false;
+            audio = db.manageAudio(this.langSel);
+            //System.out.println(audio.toString());
+            for (int i = 0; i < listAudio.size();i++){
+                if (audio.getFilePath().equals(listAudio.get(i).getFilePath())) {
+                  check = true;  
+                }    
             }
             if (check == false){
                 listAudio.add(audio);
             }
-         }while(listAudio.size()<=db.CountAudio(this.langSel.getId()));
+         }while(listAudio.size() != db.CountAudio(langSel.getId()));
     }
     
     public Audio SelectAudio(){
@@ -72,7 +86,7 @@ public class SelectMedia {
     }
         
 
-   public void SelectQuestionList(){
+   public ArrayList<Question> SelectQuestionList(){
         Question question = null;
         listQuestion = new ArrayList<>();
 
@@ -89,23 +103,20 @@ public class SelectMedia {
             }
          }while(listQuestion.size() != db.CountQuestion(langSel.getId()));
          
-         System.out.println(listQuestion.size());
+         return listQuestion;
     }
 
 
-    public Question SelectQuestion(){
+    public Question SelectQuestion(ArrayList<Question> listQuestion){
             Question question = null;
 
            Random r = new Random();
            int random = r.nextInt(listQuestion.size());
            question = listQuestion.get(random);
-           this.listAudio.remove(question);
+           listQuestion.remove(question);
            return question ;
        }
-    
-    public ArrayList<Question> getListeQuestion(){
-        return listQuestion;
-    }
+
 }
 
 

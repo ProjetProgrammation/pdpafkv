@@ -9,6 +9,7 @@ import BDD.DataBase;
 import BDD.Language;
 import BDD.Question;
 import Controller.SelectMedia;
+import java.util.ArrayList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -25,15 +26,14 @@ import javafx.scene.text.Text;
  */
 public class QuestionGUI extends Parent {
 
-    private final SelectMedia controlSM;
     private Text texte_entier = new Text();
-    
-    public QuestionGUI(Language langSel, DataBase db){
-        this.controlSM = new SelectMedia(db,langSel);
-        this.launchQuest(db,langSel);
+    private SelectMedia select;
+    public QuestionGUI(Language langSel, DataBase db, ArrayList<Question> questions){
+        select = new SelectMedia(db, langSel);
+        this.launchQuest(db,langSel, questions);
     }
     
-    private void launchQuest(DataBase db, Language langue){
+    private void launchQuest(DataBase db, Language langue,ArrayList<Question> questions){
         
         
         FlowPane fond_question = new FlowPane();
@@ -46,7 +46,13 @@ public class QuestionGUI extends Parent {
 
 
         //Question
-        texte_entier.setText(controlSM.SelectQuestion().getContent());
+        if (questions.size() == 0){
+           texte_entier.setText("rien"); 
+        }
+        else{
+             texte_entier.setText(select.SelectQuestion(questions).getContent());  
+        }
+        
         texte_entier.setFont(new Font(30));
         texte_entier.setFill(Color.GREY);
         

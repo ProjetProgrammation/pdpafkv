@@ -2,9 +2,11 @@ package GUI;
 
 import BDD.DataBase;
 import BDD.Language;
+import BDD.Question;
 import Controller.MediaSelected;
 import Controller.SelectMedia;
 import java.io.File;
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -34,23 +36,28 @@ public class TestGUI extends Parent{
     private UserGUI user;
     private Language language;
     private DataBase db;
+    private ArrayList<Question> questions;
             
-    public TestGUI(Stage primaryStage, int nbQuest, Language langSel, DataBase daba,  UserGUI user){
+    public TestGUI(Stage primaryStage, int nbQuest, Language langSel, DataBase daba,  UserGUI user, ArrayList<Question> quest){
         
         this.stage=primaryStage;
         this.nbQuestion=nbQuest;
-        this.media = new MediaSelected(db,langSel);
-        this.user = user;
         this.db=daba;
         this.language=langSel;
-        this.launchTestGUI(langSel,db);
+        this.media = new MediaSelected(db,language);
+        this.user = user;
+        questions = quest;
+        this.launchTestGUI();
     }
     
-    private void launchTestGUI(Language langSel, final DataBase db){
+    private void launchTestGUI(){
             
-        final QuestionGUI question = new QuestionGUI(langSel,db);
-        final SonGUI son = new SonGUI(langSel,db);
-        VideoGUI video = new VideoGUI(langSel,db);
+        for( Question a : questions){
+            System.out.println("le contenu est " + a.getContent());
+        }
+        final QuestionGUI question = new QuestionGUI(language,db,questions);
+        final SonGUI son = new SonGUI(language,db);
+        VideoGUI video = new VideoGUI(language,db);
         
    
         //Zone pour les boutons
@@ -110,9 +117,7 @@ public class TestGUI extends Parent{
         validate.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                /*if(.getListeQuestion().size() != 0){
-                    TestGUI g = new TestGUI(stage, nbQuestion, langue, dbe, user);
-                }*/
+                    TestGUI g = new TestGUI(stage, nbQuestion, language,db , user,questions);
             }
         });
         

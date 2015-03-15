@@ -3,8 +3,11 @@ package GUI;
 
 import BDD.DataBase;
 import BDD.Language;
+import BDD.Question;
+import Controller.SelectMedia;
 import GUI.TestGUI;
 import GUI.UserGUI;
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -32,16 +35,17 @@ public class ChooseGUI {
     private UserGUI user;
 
     BorderPane global= new BorderPane();
-
+    private SelectMedia select;
     private Scene scene;
 
     
     public ChooseGUI(Stage primaryStage, Language langSel, DataBase db, UserGUI user) {
         this.stage=primaryStage;
         this.scene=primaryStage.getScene();
+        select = new SelectMedia(db,langSel);
         this.user = user;
         this.launchChooseGUI(langSel,db);
-
+        
     }
 
     private void launchChooseGUI(final Language langSel,final DataBase db) {
@@ -55,7 +59,8 @@ public class ChooseGUI {
         learnOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                new TestGUI(stage,5,langSel,db, user);
+                ArrayList<Question>questions = select.SelectQuestionList();
+                new TestGUI(stage,5,langSel,db, user,questions);
             }
         });
         
@@ -63,7 +68,8 @@ public class ChooseGUI {
         testOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                new TestGUI(stage,20,langSel,db, user);
+                 ArrayList<Question>questions = select.SelectQuestionList();
+                new TestGUI(stage,20,langSel,db, user,questions);
             }
         });
         
