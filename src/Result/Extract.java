@@ -6,25 +6,20 @@
 
 package Result;
 
-import GUI.QuestionGUI;
-import java.io.BufferedReader;
-import java.io.FileReader;
+import BDD.*;
 import java.io.FileWriter;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javafx.scene.text.Text;
 
 /**
  *
  * @author Thibaut
  */
-public class Extraction {
+public class Extract {
     
     private String chemin;
     private int nombre = 2;
     private  FileWriter fichier;
     
-    public Extraction(String chemin){
+    public Extract(String chemin){
         this.chemin = chemin;
         try{
             fichier  = new FileWriter(chemin);
@@ -34,26 +29,24 @@ public class Extraction {
         }
     }
     
-    public void DébutExtraction(String nomUtilisateur, String prénomUtilisateur){
+    public void startOfExtract(User user){
         try{
             
              fichier.write("{ \n");
-             fichier.write("   \"Utilisateur\": { \n");
-             fichier.write("              \""+nomUtilisateur +" " + prénomUtilisateur + "\": {\n");
+             fichier.write("   \"User\": { \n");
+             fichier.write("              \""+ user.getUserExtract() +"\": {\n");
         }
         catch(Exception e){
                System.out.println("Erreur de chargement de fichier");
         }
     }
     
-    public void ExtractionRéponse(Text question, String audio){
+    public void ExtractQuestion(Question question){
         
         int i =1;
         try{
              
-             fichier.write("                    Question:" +  question.getText() +  " \n");
-             fichier.write("                      { \"Audio choisi\":" +  audio +  " \n");
-             fichier.write("                   ]\n");
+             fichier.write("                    Question:" +  question.getContent() +  " \n");
              
          }
         catch(Exception e){

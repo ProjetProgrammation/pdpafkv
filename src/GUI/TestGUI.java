@@ -3,14 +3,9 @@ package GUI;
 
 import BDD.DataBase;
 import BDD.Language;
-import BDD.Question;
 import Result.User;
 import Controller.MediaSelected;
 import Controller.SelectMedia;
-import java.io.File;
-import java.util.ArrayList;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -24,11 +19,7 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 
@@ -123,11 +114,13 @@ public class TestGUI extends Parent{
                 if((numEnCours<=nbQuestion)&&(nbQuestion==20)){
                     mediaSel.addResultQuestion(question.getQuestionSelected());
                     mediaSel.addResultAudio(son.getAudioSelected());
+                    mediaSel.addResultVideo(video.getVideoSelected());
                     new TestGUI(stage,nbQuestion,numEnCours,selMedia,mediaSel);
                 }
                 else if((numEnCours<=nbQuestion)&&(nbQuestion==5))
                     new TestGUI(stage,nbQuestion,numEnCours,selMedia);
                 else
+                    
                     System.exit(0);
             }
         });

@@ -44,6 +44,11 @@ public class User {
         return "User{" + "id=" + id + ", lastName=" + lastName + ", firstName=" + firstName + ", birthday=" + birthday + ", motherTongue=" + motherTongue + ", yearStudying=" + yearStudying + '}';
     }
     
+    public String getNameToFile(){
+        return (this.id+"_"+this.lastName+"_"+this.firstName+"_"+this.birthday);
+    }
     
-       
+    public String getUserExtract() {
+        return "lastName=" + lastName + ", firstName=" + firstName + ", birthday=" + birthday + ", motherTongue=" + motherTongue + ", yearStudying=" + yearStudying;
+    }
 }
