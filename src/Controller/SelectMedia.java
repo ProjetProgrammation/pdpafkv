@@ -51,7 +51,7 @@ public class SelectMedia {
         do{
             boolean check = false;
             video = this.db.manageVideo(this.langSel);
-            for (int i = 0; i < this.listAudio.size();i++){
+            for (int i = 0; i < this.listVideo.size();i++){
                 if (video.getFilePath().equals(this.listVideo.get(i).getFilePath())) {
                   check = true;  
                 }    

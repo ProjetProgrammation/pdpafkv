@@ -88,7 +88,7 @@ public class SonGUI extends Parent {
         playSound.setOnAction(new EventHandler<ActionEvent>() {    
             @Override
             public void handle(ActionEvent event) {
-                    playAction((Audio)groupAudio.getSelectedToggle().getUserData());                   
+                    playAction(audioSelected);                   
             }
         });
         
@@ -104,9 +104,8 @@ public class SonGUI extends Parent {
         this.getChildren().add(fond_son);
    }
     // Fonction pour jouer le fichier Audio
-    protected void playAction(Audio audio){
-        File f = new File(System.getProperty("user.dir"),audio.getFilePath()); 
-        
+    private void playAction(Audio audio){
+        File f = new File(System.getProperty("user.dir"),audio.getFilePath());         
         final Media media = new Media(f.toURI().toString());
         final MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();

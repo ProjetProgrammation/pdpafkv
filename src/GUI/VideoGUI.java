@@ -1,25 +1,24 @@
 package GUI;
 
-import BDD.DataBase;
-import BDD.Language;
+import BDD.Video;
 import Controller.SelectMedia;
-//import com.sun.jna.Native;
-//import com.sun.jna.NativeLibrary;
-import java.awt.Canvas;
 import java.io.File;
+import java.util.ArrayList;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 //import javafx.embed.swing.SwingNode;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
-import javafx.stage.Stage;
 
 
 
@@ -30,10 +29,7 @@ import javafx.stage.Stage;
 public class VideoGUI extends Parent {
     
     private final SelectMedia selMedia;
-        
-    double width = 426;
-    double height = 240;
-
+    private Video videoSelected;
     
     public VideoGUI(SelectMedia selectMedia) {
         this.selMedia=selectMedia;
@@ -42,25 +38,81 @@ public class VideoGUI extends Parent {
     
     private void launchVideoGUI(){
 
+        //Création + personnalisation FlowPane
         FlowPane fond_video = new FlowPane();
         fond_video.setVgap(8);
         fond_video.setHgap(4);
-        fond_video.autosize();        
-        //fond_video.setPrefWrapLength(300);
-        //fond_video.setPadding(new Insets(15, 12, 15, 12));
+        fond_video.autosize();
+        //fond_son.setPrefWrapLength(300);
+        //fond_son.setPadding(new Insets(30, 24, 30, 24));
         fond_video.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
-        
-        //création des boutons
-        Group group = new Group();
+        fond_video.setAlignment(Pos.CENTER);
+
+        //Création Button Play
+        final Button playVideo = new Button("Play Video");
+        playVideo.setDisable(true);
+                
         GridPane zoneVideo = new GridPane();
+        final ToggleGroup groupVideo = new ToggleGroup();
+        ArrayList<RadioButton> listRB = new ArrayList<>();
+        for (int i=0; i<10; i++){
+            //Sélection d'un audio
+            Video videoTmp = this.selMedia.SelectVideo();
+            //Création RadioButton avec son texte
+            RadioButton tmpRB = new RadioButton("Sound n°"+(i+1));
+            //Ajout de l'objet audio dans tmpRB
+            tmpRB.setUserData(videoTmp);
+            //Ajout du tmpRB dans le groupe Toggle
+            tmpRB.setToggleGroup(groupVideo);
+            //Personnalisation de tmpRB
+            tmpRB.setFocusTraversable(false);
+            //Ajout tmpRB dans le GridPane
+            if (i<5){
+                zoneVideo.add(tmpRB, i, 0);
+            }
+            else
+                zoneVideo.add(tmpRB, i-5, 2);
+            listRB.add(tmpRB);
+        }
+                
+        groupVideo.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                if (groupVideo.getSelectedToggle()!=null){
+                    playVideo.setDisable(false);
+                    videoSelected = (Video)groupVideo.getSelectedToggle().getUserData();
+                }
+            }
+        });
         
-        //
+        //Action du bouton
+        playVideo.setOnAction(new EventHandler<ActionEvent>() {    
+            @Override
+            public void handle(ActionEvent event) {
+                    playAction(videoSelected);                   
+            }
+        });
+        
+        //Personnalisation du GridPane
         zoneVideo.autosize();
         zoneVideo.setHgap(20);
+        zoneVideo.setVgap(20);
         zoneVideo.setAlignment(Pos.CENTER);
-        //zoneVideo.add(mediaview, 0, 0);
         
+        //Ajout à FlowPane
         fond_video.getChildren().add(zoneVideo);
-        this.getChildren().add(fond_video);        
+        fond_video.getChildren().add(playVideo);
+        this.getChildren().add(fond_video);
     }
+    
+    private void playAction(Video video){
+        File f = new File(System.getProperty("user.dir"),video.getFilePath());
+        MediaPlayer.load(f.getAbsolutePath());
+    }
+
+    public Video getVideoSelected() {
+        return videoSelected;
+    }
+    
+    
 }
