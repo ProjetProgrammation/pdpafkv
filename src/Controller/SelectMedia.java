@@ -26,6 +26,7 @@ public class SelectMedia {
         this.langSel = langSel;
         this.SelectAudioList();
         this.SelectQuestionList();
+        this.SelectVideoList();
     }
       
     private void SelectAudioList(){
@@ -41,38 +42,25 @@ public class SelectMedia {
             }
             if (check == false){
                 this.listAudio.add(audio);
-            }
-            
+            }           
         }while(this.listAudio.size() != this.db.CountAudio(this.langSel.getId()));
-    }
-    
-    //Permet de choisir un fichier audio dans la liste précédemment créé
-    public Audio SelectAudio(){
-        Audio audio = null;
-        Random r = new Random();
-        int random = r.nextInt(this.listAudio.size());
-        audio = this.listAudio.get(random);
-        //this.listAudio.remove(audio);
-        return audio ;
-    }
-    
-    
-    public Video SelectVideo(){
+    } 
+    private void SelectVideoList(){
         Video video = null;
-        this.listVideo = new ArrayList<>();
-        
-      
+        this.listVideo = new ArrayList<>();           
         do{
+            boolean check = false;
             video = this.db.manageVideo(this.langSel);
-            
-        }while(this.listVideo.contains(video)==false);
-        
-        if (this.listVideo.contains(video)==false)
-            this.listVideo.add(video);
-        
-        return video;
-    }
-        
+            for (int i = 0; i < this.listAudio.size();i++){
+                if (video.getFilePath().equals(this.listVideo.get(i).getFilePath())) {
+                  check = true;  
+                }    
+            }
+            if (check == false){
+                this.listVideo.add(video);
+            }       
+        }while(this.listVideo.size() != this.db.CountVideo(this.langSel.getId()));
+    }        
     private void SelectQuestionList(){
         Question question = null;
         this.listQuestion = new ArrayList<>();
@@ -91,6 +79,23 @@ public class SelectMedia {
          
     }
 
+    //Permet de choisir un fichier audio dans la liste précédemment créé
+    public Audio SelectAudio(){
+        Audio audio = null;
+        Random r = new Random();
+        int random = r.nextInt(this.listAudio.size());
+        audio = this.listAudio.get(random);
+        //this.listAudio.remove(audio);
+        return audio ;
+    }
+    public Video SelectVideo(){
+        Video video = null;
+        Random r = new Random();
+        int random = r.nextInt(this.listVideo.size());
+        video = this.listVideo.get(random);
+        //this.listVideo.remove(video);
+        return video;
+    }    
     public Question SelectQuestion(){
         Question question = null;
         Random r = new Random();

@@ -24,7 +24,7 @@ import javafx.scene.text.Text;
  * @author Jeremy
  */
 public class QuestionGUI extends Parent {
-    private Text texte_entier = new Text();
+    private Question questionSelected;
     private SelectMedia selMedia;
     
     public QuestionGUI(SelectMedia select){
@@ -41,7 +41,9 @@ public class QuestionGUI extends Parent {
         fond_question.setPadding(new Insets(15, 12, 15, 12));
         fond_question.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
         fond_question.setAlignment(Pos.CENTER);
-
+        
+        Text texte_entier = new Text();
+        
         //Question
         /*if (questions.size() == 0){
            texte_entier.setText("rien");    
@@ -52,8 +54,8 @@ public class QuestionGUI extends Parent {
         else{
              texte_entier.setText(select.SelectQuestion(questions).getContent());  
         }*/
-        
-        texte_entier.setText(this.selMedia.SelectQuestion().getContent());
+        this.questionSelected = this.selMedia.SelectQuestion();        
+        texte_entier.setText(this.questionSelected.getContent());
         
         // CSS de la fenêtre
         texte_entier.setFont(new Font(30));
@@ -70,7 +72,7 @@ public class QuestionGUI extends Parent {
     }
     
     //Fonction qui retourne le texte ( Utile ? )
-    public  Text getText(){
-        return texte_entier;
+    public  Question getQuestionSelected(){
+        return questionSelected;
     }
 }
