@@ -21,8 +21,6 @@ import javafx.scene.text.Text;
 public class Extraction {
     
     private String chemin;
-    private String Emotions[] = {"chaine1", "OuainOuains", "rire" , "joies"};
-    private String trouvé[] = {"non", "non", "oui" , "non"};
     private int nombre = 2;
     private  FileWriter fichier;
     
@@ -40,7 +38,7 @@ public class Extraction {
         try{
             
              fichier.write("{ \n");
-             fichier.write("   \"Extraction\": { \n");
+             fichier.write("   \"Utilisateur\": { \n");
              fichier.write("              \""+nomUtilisateur +" " + prénomUtilisateur + "\": {\n");
         }
         catch(Exception e){
@@ -54,9 +52,7 @@ public class Extraction {
         try{
              
              fichier.write("                    Question:" +  question.getText() +  " \n");
-             fichier.write("                      { \"Emotion\": \"" + Emotions[i] + "\" }\n");
              fichier.write("                      { \"Audio choisi\":" +  audio +  " \n");
-             fichier.write("                      { \"Trouvé\": \"" + trouvé[i] + "\" }\n");
              fichier.write("                   ]\n");
              
          }

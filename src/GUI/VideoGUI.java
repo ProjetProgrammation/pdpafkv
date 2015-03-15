@@ -29,18 +29,15 @@ import javafx.stage.Stage;
  */
 public class VideoGUI extends Parent {
     
-    private final SelectMedia controlSM;
+    private final SelectMedia selMedia;
         
     double width = 426;
     double height = 240;
 
-    Media media;
-    MediaPlayer mediaplayer;
-    MediaView mediaview;
     
-    public VideoGUI(Language langSel, DataBase db) {
+    public VideoGUI(SelectMedia selectMedia) {
+        this.selMedia=selectMedia;
         this.launchVideoGUI();
-        this.controlSM = new SelectMedia(db, langSel);
     }
     
     private void launchVideoGUI(){

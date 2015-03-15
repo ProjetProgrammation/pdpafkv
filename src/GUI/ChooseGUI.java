@@ -7,6 +7,7 @@ import BDD.Question;
 import Controller.SelectMedia;
 import GUI.TestGUI;
 import GUI.UserGUI;
+import Result.User;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -31,19 +32,16 @@ import javafx.stage.Stage;
 
 public class ChooseGUI {
 
-    Stage stage;
-    private UserGUI user;
-
-    BorderPane global= new BorderPane();
-    private SelectMedia select;
+    private Stage stage;
+    private User userSel;
+    private BorderPane global= new BorderPane();
     private Scene scene;
 
     
-    public ChooseGUI(Stage primaryStage, Language langSel, DataBase db, UserGUI user) {
+    public ChooseGUI(Stage primaryStage, Language langSel, DataBase db, User user) {
         this.stage=primaryStage;
         this.scene=primaryStage.getScene();
-        select = new SelectMedia(db,langSel);
-        this.user = user;
+        this.userSel = user;
         this.launchChooseGUI(langSel,db);
         
     }
@@ -59,8 +57,7 @@ public class ChooseGUI {
         learnOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                ArrayList<Question>questions = select.SelectQuestionList();
-                new TestGUI(stage,5,langSel,db, user,questions);
+                new TestGUI(stage,5,langSel,db,userSel);
             }
         });
         
@@ -68,8 +65,7 @@ public class ChooseGUI {
         testOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                 ArrayList<Question>questions = select.SelectQuestionList();
-                new TestGUI(stage,20,langSel,db, user,questions);
+                new TestGUI(stage,20,langSel,db,userSel);
             }
         });
         

@@ -5,10 +5,9 @@
  */
 package Controller;
 
-import BDD.DataBase;
-import BDD.Language;
-import GUI.QuestionGUI;
-import Result.Extraction;
+import BDD.*;
+import Result.*;
+
 import javafx.scene.text.Text;
 
 /**
@@ -17,14 +16,21 @@ import javafx.scene.text.Text;
  */
 public class MediaSelected {
     
-    DataBase bdd;
-    Language langue;
+    Answers answers;
     Extraction extraction = new Extraction("..\\pdpafkv\\src\\Result\\Résultats.txt");
     
-    public MediaSelected(DataBase bdd, Language langue){
-        
-        this.bdd = bdd;
-        this.langue = langue;
+    public MediaSelected(User userSel,Language langSel){
+        this.answers = new Answers(userSel, langSel);
+    }
+    
+    public void addResultVideo(Video videoSelected){
+        this.answers.addVideo(videoSelected);
+    }   
+    public void addResultAudio (Audio audioSelected){
+        this.answers.addAudio(audioSelected);
+    }
+    public void addResultQuestion (Question questionSelected){
+        this.answers.addQuestion(questionSelected);
     }
     
     public void MediaSelect(String nom, String prénom, Text question, String audio){

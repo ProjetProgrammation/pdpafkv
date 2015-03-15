@@ -27,13 +27,14 @@ import javafx.scene.text.Text;
 public class QuestionGUI extends Parent {
 
     private Text texte_entier = new Text();
-    private SelectMedia select;
-    public QuestionGUI(Language langSel, DataBase db, ArrayList<Question> questions){
-        select = new SelectMedia(db, langSel);
-        this.launchQuest(db,langSel, questions);
+    private SelectMedia selMedia;
+    
+    public QuestionGUI(SelectMedia select){
+        this.selMedia = select;
+        this.launchQuest();
     }
     
-    private void launchQuest(DataBase db, Language langue,ArrayList<Question> questions){
+    private void launchQuest(){
         
         
         FlowPane fond_question = new FlowPane();
@@ -46,12 +47,14 @@ public class QuestionGUI extends Parent {
 
 
         //Question
-        if (questions.size() == 0){
+        /*if (questions.size() == 0){
            texte_entier.setText("rien"); 
         }
         else{
              texte_entier.setText(select.SelectQuestion(questions).getContent());  
-        }
+        }*/
+        
+        texte_entier.setText(this.selMedia.SelectQuestion().getContent());
         
         texte_entier.setFont(new Font(30));
         texte_entier.setFill(Color.GREY);

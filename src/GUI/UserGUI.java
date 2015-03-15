@@ -5,21 +5,13 @@
  */
 package GUI;
 
-import BDD.Audio;
-import BDD.DataBase;
-import BDD.Language;
-import BDD.Video;
+import BDD.*;
+
 import Errors.Errors;
-import Result.Extraction;
 import Result.User;
-import com.sun.prism.paint.Color;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -71,7 +63,6 @@ public class UserGUI {
     private TextField motherTongue = new TextField();
     private TextField yearStudying = new TextField();
     private Language languageSelect;
-    private final UserGUI user = this;
             
     public UserGUI(Stage primaryStage) {
         
@@ -215,7 +206,6 @@ public class UserGUI {
                     }
                     // Création de l'utilisateur
                     //User us = new User(ln,fn,bd,mt,ys);
-
                     // Affichage du bouton sélectionné.
                    
                     if (choose.getSelectedToggle() == null){
@@ -230,8 +220,10 @@ public class UserGUI {
                     //medias.extraire();
                     if (fauteA == 0 && fauteB == 0 && fauteC == 0 && fauteD == 0 && fauteE == 0 && languageSelect != null){
                        */ 
+                        User user = new User("Thibaut","Fabre","26/02/1991","French",1);
                        languageSelect = (Language)choose.getSelectedToggle().getUserData();
-                       new ChooseGUI(stage, languageSelect, db, user);
+                       new ChooseGUI(stage,languageSelect,db,user);
+                       
                         /*
                         erreurs.ErrorsOs();
                     }

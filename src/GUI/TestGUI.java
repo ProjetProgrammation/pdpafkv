@@ -1,12 +1,16 @@
 package GUI;
 
+
 import BDD.DataBase;
 import BDD.Language;
 import BDD.Question;
+import Result.User;
 import Controller.MediaSelected;
 import Controller.SelectMedia;
 import java.io.File;
 import java.util.ArrayList;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -16,6 +20,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
@@ -29,35 +35,46 @@ import javafx.stage.Stage;
 public class TestGUI extends Parent{
         
     
-    private int nombre = 1;
+    private int numEnCours = 1;
     private int nbQuestion;
     private final Stage stage;
-    private MediaSelected media;
-    private UserGUI user;
+    private MediaSelected mediaSel;
+    private SelectMedia selMedia;
     private Language language;
     private DataBase db;
-    private ArrayList<Question> questions;
             
-    public TestGUI(Stage primaryStage, int nbQuest, Language langSel, DataBase daba,  UserGUI user, ArrayList<Question> quest){
-        
+    public TestGUI(Stage primaryStage,int nbQuest,Language langSel,DataBase daba,User user){
         this.stage=primaryStage;
         this.nbQuestion=nbQuest;
         this.db=daba;
         this.language=langSel;
-        this.media = new MediaSelected(db,language);
-        this.user = user;
-        questions = quest;
+        this.mediaSel = new MediaSelected(user, this.language);
+        this.selMedia = new SelectMedia(this.db, this.language);
         this.launchTestGUI();
     }
     
+    public TestGUI(Stage primaryStage,int nbQuest,int numCourant,SelectMedia selectMedia){
+        this.stage=primaryStage;
+        this.nbQuestion=nbQuest;
+        this.numEnCours=numCourant;
+        this.selMedia=selectMedia;
+        this.launchTestGUI();
+    }
+    
+    public TestGUI(Stage primaryStage,int nbQuest,int numCourant,SelectMedia selectMedia,MediaSelected mediaSelected){
+        this.stage=primaryStage;
+        this.nbQuestion=nbQuest;
+        this.numEnCours=numCourant;
+        this.selMedia=selectMedia;
+        this.mediaSel=mediaSelected;
+        this.launchTestGUI();
+    }
+        
     private void launchTestGUI(){
             
-        for( Question a : questions){
-            System.out.println("le contenu est " + a.getContent());
-        }
-        final QuestionGUI question = new QuestionGUI(language,db,questions);
-        final SonGUI son = new SonGUI(language,db);
-        VideoGUI video = new VideoGUI(language,db);
+        final QuestionGUI question = new QuestionGUI(this.selMedia);
+        final SonGUI son = new SonGUI(this.selMedia);
+        VideoGUI video = new VideoGUI(this.selMedia);
         
    
         //Zone pour les boutons
@@ -69,21 +86,13 @@ public class TestGUI extends Parent{
         //slider
         
                
-        final ProgressBar pb = new ProgressBar(0);
-        /*final ProgressIndicator pi = new ProgressIndicator(0);
- 
-        slider.valueProperty().addListener(new ChangeListener<Number>() {
-            public void changed(ObservableValue<? extends Number> ov,
-                Number old_val, Number new_val) {
-                pb.setProgress(new_val.doubleValue()/50);
-                pi.setProgress(new_val.doubleValue()/50);
-            }
-        });*/
+        /*final ProgressBar pb = new ProgressBar();
+        pb.setProgress((this.numEnCours/this.nbQuestion)F);
         
         HBox hb = new HBox();
         hb.setSpacing(5);
         hb.setAlignment(Pos.CENTER);
-        hb.getChildren().addAll(pb);
+        hb.getChildren().add(pb);*/
         
        // BorderPane mainborder = new BorderPane();        
         GridPane root = new GridPane();
@@ -94,13 +103,6 @@ public class TestGUI extends Parent{
         root.prefWidth(100.0);
         
         root.setPadding(new Insets(20, 20, 20, 20));
-        /*ColumnConstraints col1 = new ColumnConstraints();
-        col1.setPercentWidth(33);        
-        ColumnConstraints col2 = new ColumnConstraints(50);
-        col2.setPercentWidth(10);
-        ColumnConstraints col3 = new ColumnConstraints();
-        col3.setPercentWidth(45);
-        root.getColumnConstraints().addAll(col1,col2,col3);*/
         root.setGridLinesVisible(false);
         root.setAlignment(Pos.CENTER);
         
@@ -117,7 +119,13 @@ public class TestGUI extends Parent{
         validate.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                    TestGUI g = new TestGUI(stage, nbQuestion, language,db , user,questions);
+                numEnCours ++;
+                if((numEnCours<=nbQuestion)&&(nbQuestion==20))
+                    new TestGUI(stage,nbQuestion,numEnCours,selMedia,mediaSel);
+                else if((numEnCours<=nbQuestion)&&(nbQuestion==5))
+                    new TestGUI(stage,nbQuestion,numEnCours,selMedia);
+                else
+                    System.exit(0);
             }
         });
         

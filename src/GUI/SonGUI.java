@@ -32,17 +32,12 @@ import javafx.scene.media.MediaPlayer;
  */
 public class SonGUI extends Parent {
        
-    private final SelectMedia controlSM;
+    private final SelectMedia selMedia;
     private ToggleGroup groupAudio = new ToggleGroup();
-    private Language langue;
-    private DataBase db ;
-    public SonGUI(Language langSel, DataBase db){
-       
-        this.controlSM = new SelectMedia(db,langSel);
-        langue = langSel;
-        this.db = db;
-         this.launchSonGUI();
-        
+
+    public SonGUI(SelectMedia selectMedia){     
+        this.selMedia = selectMedia;
+        this.launchSonGUI();       
     }
 
     private void launchSonGUI(){
@@ -64,9 +59,9 @@ public class SonGUI extends Parent {
         GridPane zoneSon = new GridPane();
        
         ArrayList<RadioButton> listRB = new ArrayList<>();
-        for (int i=0; i<db.CountAudio(langue.getId()); i++){
+        for (int i=0; i<10; i++){
             //Sélection d'un audio
-            Audio audioTmp = this.controlSM.SelectAudio();
+            Audio audioTmp = this.selMedia.SelectAudio();
             //Création RadioButton avec son texte
             RadioButton tmpRB = new RadioButton("Sound n°"+(i+1));
             //Ajout de l'objet audio dans tmpRB
