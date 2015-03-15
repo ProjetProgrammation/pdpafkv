@@ -367,7 +367,7 @@ public class DataBase {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
 			c.setAutoCommit(false);
-			//System.out.println("[manageAudio]Opened database successfully");
+			System.out.println("[manageAudio]Opened database successfully");
 
 			stmt = c.prepareStatement(query);
 			stmt.setInt(1,idLanguage);
@@ -407,7 +407,7 @@ public class DataBase {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
 			c.setAutoCommit(false);
-			//System.out.println("[manageQuestion]Opened database successfully");
+			System.out.println("[manageQuestion]Opened database successfully");
 			stmt = c.prepareStatement(query);
 			stmt.setInt(1,idLanguage);
 			ResultSet rs = stmt.executeQuery();
@@ -754,48 +754,45 @@ public class DataBase {
 
         
          public int CountAudio(int idLanguage){
-            int valeur = 0;
+            int result = 0;
             
             Connection c = null;
             PreparedStatement stmt = null;
-            ArrayList<Language> result;
-            result = new ArrayList<>();
-            Language tempLanguage = new Language();
             String query = new String("SELECT COUNT(*) AS rowcount FROM Audio where id_language = ? ;");
             try {
                 Class.forName("org.sqlite.JDBC");
         	c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
                 c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+                System.out.println("[countAudio]Opened database successfully");
+
                 stmt = c.prepareStatement(query);
                 stmt.setInt(1, idLanguage);
                 ResultSet rs = stmt.executeQuery();
                 while(rs.next()){
-                    valeur = rs.getInt("rowcount");
+                    result = rs.getInt("rowcount");
                 }
                 rs.close();
                 stmt.close();
                 c.close();
             }
             catch(Exception e){
-                    System.out.println("[Count]erreur");
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             }
-                    
-            return valeur;
+            return result;
         }
          
-        public int CountQuestion(int idLanguage){
-            int valeur = 0;
+         public int CountQuestion(int idLanguage){
+            int result = 0;
             
             Connection c = null;
             PreparedStatement stmt = null;
-            ArrayList<Language> result;
-            result = new ArrayList<>();
-            Language tempLanguage = new Language();
-            String query = new String("SELECT COUNT(*) AS rowcount FROM Question where id_language = ? ;");
+            String query = new String("SELECT COUNT(*) AS rowcount FROM Question where id_language=?;");
             try {
                 Class.forName("org.sqlite.JDBC");
         	c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
                 c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+                System.out.println("[CountQuestion]Opened database successfully");
+
                 stmt = c.prepareStatement(query);
                 stmt.setInt(1, idLanguage);
                 ResultSet rs = stmt.executeQuery();
@@ -830,17 +827,17 @@ public class DataBase {
                 stmt.setInt(1, idLanguage);
                 ResultSet rs = stmt.executeQuery();
                 while(rs.next()){
-                valeur = rs.getInt("rowcount");
+                    result = rs.getInt("rowcount");
                 }
                 rs.close();
                 stmt.close();
                 c.close();
             }
             catch(Exception e){
-                    System.out.println("erreurs");
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             }
                     
-            return valeur;
+            return result;
         }
 
 }
