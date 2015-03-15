@@ -4,52 +4,29 @@
  * and open the template in the editor.
  */
 package GUI;
-
-import BDD.Audio;
 import BDD.DataBase;
 import BDD.Language;
-import BDD.Video;
 import Errors.Errors;
-import Result.Extraction;
-import Result.User;
-import com.sun.prism.paint.Color;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import static javafx.geometry.Pos.CENTER;
-import javafx.geometry.VPos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import static javafx.scene.control.ContentDisplay.TOP;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-//import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -318,14 +295,16 @@ public class UserGUI {
         //this.stage.setFullScreen(true);
     }
     
+    //création DataBase
     private DataBase createDataBase(){
         return new DataBase();
     }
     
+    //récupération nom
     public String nom(){
         return firstName.getText();
     }
-    
+    //récupération prénom
     public String prenom(){
         return lastName.getText();
     }

@@ -19,31 +19,19 @@ public class SelectMedia {
     private ArrayList<Video> listVideo;
     private ArrayList<Question> listQuestion;
     private Question quest;
-    private DataBase db;
-    private Language langSel;
+    private final DataBase db;
+    private final Language langSel;
 
     public SelectMedia(DataBase db, Language langSel) {
         this.db = db;
         this.langSel = langSel;
         SelectAudioListe();
     }
-      
+    
+    //Permet d'obtenir l'ensemble des fichiers Audios
     public void SelectAudioListe(){
         Audio audio = null;
         this.listAudio = new ArrayList<>();    
-        /* do{
-            boolean check = false;
-            audio = db.manageAudio(this.langSel);
-            for (Audio a: listAudio){
-                if (audio.getFilePath().equals(a.getFilePath())) {
-                  check = true;  
-                }    
-            }   
-            if (check == false){
-                listAudio.add(audio);
-            }
-            }while(listAudio.size()<=db.CountAudio(this.langSel.getId()));*/
-        
             do{
              boolean check = false;
             audio = db.manageAudio(this.langSel);
@@ -59,6 +47,7 @@ public class SelectMedia {
          }while(listAudio.size() != db.CountAudio(langSel.getId()));
     }
     
+    //Permet de choisir un fichier audio dans la liste précédemment créé
     public Audio SelectAudio(){
         Audio audio = null;
         this.SelectAudioListe();
@@ -68,6 +57,7 @@ public class SelectMedia {
         listAudio.remove(audio);
         return audio ;
     }
+    
     
     public Video SelectVideo(){
         Video video = null;
@@ -85,7 +75,7 @@ public class SelectMedia {
         return video;
     }
         
-
+   // Retourne la liste des Questions
    public ArrayList<Question> SelectQuestionList(){
         Question question = null;
         listQuestion = new ArrayList<>();
@@ -106,7 +96,7 @@ public class SelectMedia {
          return listQuestion;
     }
 
-
+   //Fonction permettant de selectionner une question parmi la liste précédemment créé
     public Question SelectQuestion(ArrayList<Question> listQuestion){
             Question question = null;
 

@@ -5,15 +5,12 @@ import BDD.DataBase;
 import BDD.Language;
 import BDD.Question;
 import Controller.SelectMedia;
-import GUI.TestGUI;
-import GUI.UserGUI;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import static javafx.geometry.Pos.CENTER;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -22,7 +19,6 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -33,17 +29,17 @@ public class ChooseGUI {
 
     Stage stage;
     private UserGUI user;
-
     BorderPane global= new BorderPane();
     private SelectMedia select;
     private Scene scene;
-
+    private ArrayList<Question>questions;
     
     public ChooseGUI(Stage primaryStage, Language langSel, DataBase db, UserGUI user) {
         this.stage=primaryStage;
         this.scene=primaryStage.getScene();
         select = new SelectMedia(db,langSel);
         this.user = user;
+        questions = select.SelectQuestionList();
         this.launchChooseGUI(langSel,db);
         
     }
@@ -59,7 +55,6 @@ public class ChooseGUI {
         learnOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                ArrayList<Question>questions = select.SelectQuestionList();
                 new TestGUI(stage,5,langSel,db, user,questions);
             }
         });
@@ -68,7 +63,7 @@ public class ChooseGUI {
         testOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                 ArrayList<Question>questions = select.SelectQuestionList();
+               
                 new TestGUI(stage,20,langSel,db, user,questions);
             }
         });
@@ -123,10 +118,6 @@ public class ChooseGUI {
         
         //background éléments
         global.setId("global");
-        //global.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%,lightgrey, white) ; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2");
-        //learnOption.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
-        //testOption.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
-
 
         //définition de la scène
         this.stage.setScene(scene);
