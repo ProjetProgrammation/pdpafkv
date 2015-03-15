@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-//import javafx.embed.swing.SwingNode;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -19,7 +17,8 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-
+import org.apache.commons.io.FilenameUtils;
+import static org.apache.commons.io.FilenameUtils.separatorsToSystem;
 
 
 /**
@@ -107,12 +106,13 @@ public class VideoGUI extends Parent {
     
     private void playAction(Video video){
         File f = new File(System.getProperty("user.dir"),video.getFilePath());
-        MediaPlayer.load(f.getAbsolutePath());
+        System.out.println(f.getAbsolutePath());
+        String p = separatorsToSystem(f.getAbsolutePath());
+        System.out.println(p);
+        MediaPlayer.load(p);
     }
-
+    
     public Video getVideoSelected() {
         return videoSelected;
-    }
-    
-    
+    }   
 }
