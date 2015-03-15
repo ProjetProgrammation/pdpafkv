@@ -1,6 +1,4 @@
 package GUI;
-
-
 import BDD.DataBase;
 import BDD.Language;
 import BDD.Question;
@@ -45,7 +43,7 @@ public class ChooseGUI {
 
     private void launchChooseGUI(final Language langSel,final DataBase db) {
         
-        //Création layout avec boutons
+        //Layout design and buttons
         GridPane root = new GridPane();
         Button learnOption = new Button("Acces");
         Button testOption = new Button("Acces");
@@ -66,31 +64,31 @@ public class ChooseGUI {
             }
         });
         
-        //background fenêtre
+        //background window
         
-        //Texte partie haute de l'interface
-        Text title = new Text("Test prosodique");
-        title.setFont(Font.font("Arial", FontWeight.BOLD, 38));
-        title.setStyle("-fx-alignment: center;");
-        title.setFill(Paint.valueOf("#22427C"));
+        //Text on top in primaryStage
+        Text titleTop = new Text("Test prosodique");
+        titleTop.setFont(Font.font("Arial", FontWeight.BOLD, 38));
+        titleTop.setStyle("-fx-alignment: center;");
+        titleTop.setFill(Paint.valueOf("#22427C"));
         
-        //Texte partie gauche
+        //Text left part gridPane
         Text titleInformations = new Text("Entrainement");
         titleInformations.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         titleInformations.setStyle("-fx-alignment: center;");
         titleInformations.setFill(Paint.valueOf("#22427C"));
         
-        //Texte partie droite
+        //Text right part gridPane
         Text titleTest = new Text("Test");
         titleTest.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         titleTest.setStyle("-fx-alignment: center;");
         titleTest.setFill(Paint.valueOf("#22427C"));
         
-        //définition de la taille des boutons
+        //size of buttons
         testOption.setPrefSize(150, 50);
         learnOption.setPrefSize(150, 50);
         
-        //contraintes
+        //constraints
         root.setMargin(titleInformations, new Insets(0,0,0,10));
         root.setMargin(titleTest,new Insets(0,0,0,100));
         root.setMargin(testOption,new Insets(0,0,0,50));
@@ -103,23 +101,22 @@ public class ChooseGUI {
         root.setAlignment(Pos.CENTER);
         //root.setGridLinesVisible(true);
         
-        //ajout des éléments dans le layout principal
+        //add items in main layout
         global.setCenter(root);
-        global.setTop(title);
-        global.setAlignment(title,CENTER);
-        global.setMargin(title, new Insets(20,0,20,0));
+        global.setTop(titleTop);
+        global.setAlignment(titleTop,CENTER);
+        global.setMargin(titleTop, new Insets(20,0,20,0));
         
         
         //Create scene and add to stage
         Scene scene = new Scene(global);        
         scene.getStylesheets().add("stylesheet.css");
         
-        //background éléments
+        //background elements
         global.setId("global");
 
-        //définition de la scène
+        //scene design
         this.stage.setScene(scene);
-
         this.stage.setResizable(true);
         //this.stage.setFullScreen(true);
         this.stage.setFullScreenExitHint("");       
