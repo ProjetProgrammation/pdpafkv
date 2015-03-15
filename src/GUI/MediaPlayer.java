@@ -22,19 +22,16 @@ public class MediaPlayer {
     static private JFrame frame = new JFrame();
     static private EmbeddedMediaPlayerComponent emp;
     
-    public static void load(String pathV){
-        
+    public static void load(String pathV){        
         NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "E:\\Programme\\VLC");
         Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
-        MediaPlayerFactory mediaplayer = new MediaPlayerFactory();
         emp = new EmbeddedMediaPlayerComponent();
-
         frame.setContentPane(emp);
-        frame.setSize(600, 600);
+        frame.setBounds(800, 500, 350, 200);
+        frame.setUndecorated(true);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-     
+        frame.setVisible(true);     
         run(pathV);
     }
     
