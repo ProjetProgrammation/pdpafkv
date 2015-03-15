@@ -106,10 +106,8 @@ public class SonGUI extends Parent {
    }
     // Fonction pour jouer le fichier Audio
     private void playAction(Audio audio){
-        File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem(audio.getFilePath()));         
-        final Media media = new Media(f.toURI().toString());
-        final MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();
+        File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem(audio.getFilePath()));
+        AudioPlayer.load(f.getAbsolutePath());
     } 
     
     public Audio getAudioSelected(){
