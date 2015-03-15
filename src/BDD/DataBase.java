@@ -797,7 +797,7 @@ public class DataBase {
                 stmt.setInt(1, idLanguage);
                 ResultSet rs = stmt.executeQuery();
                 while(rs.next()){
-                valeur = rs.getInt("rowcount");
+                    result = rs.getInt("rowcount");
                 }
                 rs.close();
                 stmt.close();
@@ -807,17 +807,14 @@ public class DataBase {
                     System.out.println("erreurs");
             }
                     
-            return valeur;
+            return result;
         }
         
         public int CountVideo(int idLanguage){
-            int valeur = 0;
+            int result = 0;
             
             Connection c = null;
             PreparedStatement stmt = null;
-            ArrayList<Language> result;
-            result = new ArrayList<>();
-            Language tempLanguage = new Language();
             String query = new String("SELECT COUNT(*) AS rowcount FROM Video where id_language = ? ;");
             try {
                 Class.forName("org.sqlite.JDBC");
