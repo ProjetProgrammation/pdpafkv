@@ -41,11 +41,11 @@ public class UserGUI {
 
     private final Stage stage;
     
-    private int fauteA = 0;
-    private int fauteB = 0;
-    private int fauteC = 0;
-    private int fauteD = 0;
-    private int fauteE = 0;
+    private int firstMistake = 0;
+    private int secondMistake = 0;
+    private int thirdMistake = 0;
+    private int fourthMistake = 0;
+    private int fifthMistake = 0;
     private TextField lastName = new TextField();
     private TextField firstName = new TextField();
     private TextField birthday = new TextField();        
@@ -59,7 +59,7 @@ public class UserGUI {
         
         this.launchUserGUI(this.createDataBase());
         
-        
+        //TextField Design
         lastName.setPrefWidth(200);
         lastName.setPrefHeight(30);
         firstName.setPrefHeight(30);
@@ -71,17 +71,17 @@ public class UserGUI {
     private void launchUserGUI(final DataBase db) {
         
         final Errors erreurs = new Errors();
-        //Création des labels
+        //label's design
         Label lLN = new Label("Last Name");
         Label lFN = new Label("First Name");
         Label lB = new Label("Birthday");
         Label lMT = new Label("Mother Tongue");
         Label lYS = new Label("Years Studying");
         
-        //Police de caractère
+        //character font
         Font font = new Font("Arial",14);
         
-        //Définition style de police des labels
+        //character font design
         lLN.setStyle("-fx-font-weight: bold;");
         lLN.setFont(new Font("Serif", 14));
         lFN.setStyle("-fx-font-weight: bold;");
@@ -96,34 +96,35 @@ public class UserGUI {
         //Date format
         birthday.setPromptText("Par exemple : 12/07/1998");
         
-        //Groupe de Radio Buttons
+        //Radio Buttons group
         final ToggleGroup choose = new ToggleGroup();
-        //Création layout du language
+       
+        //Language layout
         VBox language = new VBox();
         
-        ArrayList<Language> ListL = db.getAllLanguages();        
-        for (Language l : ListL){
-            //Création RadioButton avec son texte
+        ArrayList<Language> listL = db.getAllLanguages();        
+        for (Language l : listL){
+            //the text of the radiobutton
             RadioButton tmpRB = new RadioButton(l.getName());
-            //Ajout de l'objet audio dans tmpRB
+            //add audio object in tmpRB
             tmpRB.setUserData(l);
-            //Ajout du tmpRB dans le groupe Toggle
+            //add tmpRB in toggle group
             tmpRB.setToggleGroup(choose);
-            //Personnalisation de tmpRB
+            //customization of tmpRB
             tmpRB.setFocusTraversable(false);
-            //Ajout tmpRB dans VBox
+            //add tmpRB in VBox
             language.getChildren().add(tmpRB);
         }
         
         
         
-        //Bouton d'accès à la suite du programme
+        //Access button to go on next interface
         Button access = new Button("Acces");
         access.setPrefSize(100, 40);
         access.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
               
         
-        //Action du bouton
+        //Action button
         access.setOnAction(new EventHandler<ActionEvent>() {    
             @Override
             public void handle(ActionEvent event) {
@@ -221,13 +222,13 @@ public class UserGUI {
             }
         });
 
-        //Création layout
+        //Layout design
         GridPane root = new GridPane();
         GridPane user = new GridPane();
         BorderPane global= new BorderPane();
         
         
-        //Affection Layout user
+        //Layout user assignement
         user.add(lLN,1,1);
         user.add(lFN,1,2);
         user.add(lB,1,3);
@@ -245,52 +246,48 @@ public class UserGUI {
         root.setHgap(20);
         root.setVgap(20);
         
-        //Texte Partie Haute interface
+        //Text on top in primaryStage
         Text title = new Text("Test prosodique");
         title.setFont(Font.font("Arial", FontWeight.BOLD, 38));
         title.setStyle("-fx-alignment: center;");
         title.setFill(Paint.valueOf("#22427C"));
         
-        //Texte partie gauche gridPane
+        //Text left part gridPane
         Text titleInformations = new Text("User's Information");
         titleInformations.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         titleInformations.setStyle("-fx-alignment: center;");
         titleInformations.setFill(Paint.valueOf("#22427C"));
         
-        //Texte partie droite gridPane
+        //Text right part gridPane
         Text titleLangue = new Text("User's language");
         titleLangue.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         titleLangue.setStyle("-fx-alignment: center;");
         titleLangue.setFill(Paint.valueOf("#22427C"));
         
-        //Contraintes
+        //Constraints
         root.setHalignment(titleInformations,HPos.CENTER);
         root.setMargin(titleInformations,new Insets(0,0,20,0));
         root.setHalignment(titleLangue,HPos.CENTER);
-        
         root.setMargin(titleLangue,new Insets(0,0,20,50));
         root.setMargin(language,new Insets(0,0,0,100));
         
-        //Affectation Layout root
+        //Layout root assignement
         root.add(user,0,2);
         root.add(language,1,2);
         root.add(access,1,3);
         root.add(titleInformations,0,1);
         root.add(titleLangue,1,1);
         
-        //définition des éléments du layout principal
+        //definition elements in the principal layout
         global.setTop(title);
         global.setAlignment(title,CENTER);
         global.setMargin(title, new Insets(20,0,20,0));
-        
         global.setCenter(root);
         global.setAlignment(root,CENTER);
         global.setMargin(root, new Insets(0,0,0,20));
         
-        //Création de la scène avec ajour du layout
+        //Scene layout and addition of global
         Scene scene = new Scene(global);
-        
-        
         this.stage.setScene(scene);
         this.stage.centerOnScreen();
         this.stage.setTitle("projet prosodie");
@@ -299,16 +296,16 @@ public class UserGUI {
         //this.stage.setFullScreen(true);
     }
     
-    //création DataBase
+    //DataBase design
     private DataBase createDataBase(){
         return new DataBase();
     }
     
-    //récupération nom
+    //name recovery
     public String nom(){
         return firstName.getText();
     }
-    //récupération prénom
+    //firstname recovery
     public String prenom(){
         return lastName.getText();
     }
