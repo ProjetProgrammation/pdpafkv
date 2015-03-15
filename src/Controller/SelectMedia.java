@@ -46,6 +46,7 @@ public class SelectMedia {
         }while(this.listAudio.size() != this.db.CountAudio(this.langSel.getId()));
     }
     
+    //Permet de choisir un fichier audio dans la liste précédemment créé
     public Audio SelectAudio(){
         Audio audio = null;
         Random r = new Random();
@@ -54,6 +55,7 @@ public class SelectMedia {
         //this.listAudio.remove(audio);
         return audio ;
     }
+    
     
     public Video SelectVideo(){
         Video video = null;
@@ -71,7 +73,6 @@ public class SelectMedia {
         return video;
     }
         
-
     private void SelectQuestionList(){
         Question question = null;
         this.listQuestion = new ArrayList<>();
@@ -89,7 +90,6 @@ public class SelectMedia {
          }while(this.listQuestion.size() != this.db.CountQuestion(this.langSel.getId()));
          
     }
-
 
     public Question SelectQuestion(){
         Question question = null;

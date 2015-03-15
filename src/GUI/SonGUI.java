@@ -5,9 +5,6 @@ import BDD.DataBase;
 import BDD.Language;
 import Controller.SelectMedia;
 import java.io.File;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -99,7 +96,6 @@ public class SonGUI extends Parent {
             }
         });
         
-        
         //Personnalisation du GridPane
         zoneSon.autosize();
         zoneSon.setHgap(20);
@@ -111,7 +107,7 @@ public class SonGUI extends Parent {
         fond_son.getChildren().add(playSound);
         this.getChildren().add(fond_son);
    }
-    
+    // Fonction pour jouer le fichier Audio
     protected void playAction(Audio audio){
         File f = new File(System.getProperty("user.dir"),audio.getFilePath()); 
         
@@ -120,6 +116,7 @@ public class SonGUI extends Parent {
         mediaPlayer.play();
     } 
     
+    //Fonction pour l'extraction
     public String audio(){
         String audio  ="";
         Pattern p = Pattern .compile("\'.*\'");
