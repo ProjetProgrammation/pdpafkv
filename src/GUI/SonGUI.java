@@ -20,6 +20,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  *
@@ -105,7 +106,7 @@ public class SonGUI extends Parent {
    }
     // Fonction pour jouer le fichier Audio
     private void playAction(Audio audio){
-        File f = new File(System.getProperty("user.dir"),audio.getFilePath());         
+        File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem(audio.getFilePath()));         
         final Media media = new Media(f.toURI().toString());
         final MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
