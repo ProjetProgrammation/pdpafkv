@@ -24,12 +24,12 @@ public class SelectMedia {
     public SelectMedia(DataBase db, Language langSel) {
         this.db = db;
         this.langSel = langSel;
-        this.SelectAudioList();
-        this.SelectQuestionList();
-        this.SelectVideoList();
+        this.selectAudioList();
+        this.selectQuestionList();
+        this.selectVideoList();
     }
       
-    private void SelectAudioList(){
+    private void selectAudioList(){
         Audio audio = null;
         this.listAudio = new ArrayList<>();           
         do{
@@ -45,7 +45,7 @@ public class SelectMedia {
             }           
         }while(this.listAudio.size() != this.db.countAudio(this.langSel.getId()));
     } 
-    private void SelectVideoList(){
+    private void selectVideoList(){
         Video video = null;
         this.listVideo = new ArrayList<>();           
         do{
@@ -61,7 +61,7 @@ public class SelectMedia {
             }       
         }while(this.listVideo.size() != this.db.countVideo(this.langSel.getId()));
     }        
-    private void SelectQuestionList(){
+    private void selectQuestionList(){
         Question question = null;
         this.listQuestion = new ArrayList<>();
          do{
@@ -80,7 +80,7 @@ public class SelectMedia {
     }
 
     //Permet de choisir un fichier audio dans la liste précédemment créé
-    public Audio SelectAudio(){
+    public Audio selectAudio(){
         Audio audio = null;
         Random r = new Random();
         int random = r.nextInt(this.listAudio.size());
@@ -88,7 +88,7 @@ public class SelectMedia {
         //this.listAudio.remove(audio);
         return audio ;
     }
-    public Video SelectVideo(){
+    public Video selectVideo(){
         Video video = null;
         Random r = new Random();
         int random = r.nextInt(this.listVideo.size());
@@ -96,7 +96,7 @@ public class SelectMedia {
         //this.listVideo.remove(video);
         return video;
     }    
-    public Question SelectQuestion(){
+    public Question selectQuestion(){
         Question question = null;
         Random r = new Random();
         int random = r.nextInt(this.listQuestion.size());

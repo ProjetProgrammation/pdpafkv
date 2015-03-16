@@ -57,7 +57,7 @@ public class SonGUI extends Parent {
         ArrayList<RadioButton> listRB = new ArrayList<>();
         for (int i=0; i<10; i++){
             //Sélection d'un audio
-            Audio audioTmp = this.selMedia.SelectAudio();
+            Audio audioTmp = this.selMedia.selectAudio();
             //Création RadioButton avec son texte
             RadioButton tmpRB = new RadioButton("Sound n°"+(i+1));
             //Ajout de l'objet audio dans tmpRB

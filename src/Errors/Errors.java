@@ -19,28 +19,28 @@ public class Errors extends Exception {
     
     public Errors(){}
     
-    public String ErrorsMessages(Object message){
+    public String errorsMessages(Object message){
         
-      String mess = null;
+        String mess = null;
       
-         if (message instanceof String){
+        if (message instanceof String){
             Pattern p = Pattern .compile("^[a-zA-Z]+$");
             Matcher m = p.matcher((String)message);
             while (m.find()){
-                  return null;
+                return null;
             }
-          mess="faux";
-         }
+        mess="faux";
+        }
          
-         else if(message instanceof Integer){
-              if ((int)message > 125){
-                 mess="faux";
+        else if(message instanceof Integer){
+            if ((int)message > 125){
+                mess="faux";
             }
             else{
-                  return null;
+                return null;
             }
          
-         }
+        }
         return mess;
     }
     
@@ -63,13 +63,13 @@ public class Errors extends Exception {
         return s;
     }
     
-    public void ErrorsOs(){
+    public void errorsOs(){
         String name = System.getProperty ( "os.name" );
         String version = System.getProperty ( "os.version" );
         String java = System.getProperty("java.home");
         
         
-         if (name.contains("Windows") || name.contains("MAC") || name.contains("linux")){}
+         if (name.contains("Windows") || name.contains("MAC") || name.contains("Linux")){}
          else{
                  System.out.println("Votre système d'exploitation n'est pas pris en charge");
          }
