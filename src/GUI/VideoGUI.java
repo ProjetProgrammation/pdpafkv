@@ -18,7 +18,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import org.apache.commons.io.FilenameUtils;
-import static org.apache.commons.io.FilenameUtils.separatorsToSystem;
 
 
 /**
@@ -106,8 +105,7 @@ public class VideoGUI extends Parent {
     
     private void playAction(Video video){
         File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem(video.getFilePath()));
-        String p = separatorsToSystem(f.getAbsolutePath());
-        MediaPlayer.load(p);
+        MediaPlayer.load(f.getAbsolutePath());
     }
     
     public Video getVideoSelected() {
