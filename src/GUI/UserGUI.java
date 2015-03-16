@@ -307,12 +307,13 @@ public class UserGUI {
         /*File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/caspian.css"));
         scene.getStylesheets().clear();
         scene.getStylesheets().add(f.toURI().toString());*/
-        
-        File f = new File("src/GUI/stylesheet.css");
+         File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/stylesheet.css"));
         scene.getStylesheets().clear();
-        scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+        scene.getStylesheets().add(f.toURI().toString());
+        
         access.setId("access");
         user.setId("user");
+        language.setId("language");
         
         
         this.stage.setScene(scene);
