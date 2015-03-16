@@ -114,6 +114,7 @@ public class UserGUI {
         for (Language l : listL){
             //the text of the radiobutton
             RadioButton tmpRB = new RadioButton(l.getName());
+            tmpRB.getStyleClass().add("Rbutton");
             //add audio object in tmpRB
             tmpRB.setUserData(l);
             //add tmpRB in toggle group
@@ -127,8 +128,8 @@ public class UserGUI {
         
         
         //Access button to go on next interface
-        Button access = new Button("Acces");
-        access.setPrefSize(100, 40);
+        Button access = new Button("Access");
+        //access.setPrefSize(100, 40);
         //access.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
               
         
@@ -254,42 +255,25 @@ public class UserGUI {
         user.add(birthday,2,3);
         user.add(motherTongue,2,4);
         user.add(yearStudying,2,5);
+        user.add(access, 2, 6);
         
         //GUI background
-        //global.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%,lightgrey, white) ; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2");
         root.setAlignment(Pos.CENTER);
         //root.setHgap(20);
         //root.setVgap(20);
         
         //Text on top in primaryStage
         Text title = new Text("The Prosodic Adventure");
-        //title.setFont(Font.font("Arial", FontWeight.BOLD, 38));
-        //title.setStyle("-fx-alignment: center;");
-        //title.setFill(Paint.valueOf("#22427C"));
         
         //Text left part gridPane
         Text titleInformations = new Text("User's Information");
-        //titleInformations.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        //titleInformations.setStyle("-fx-alignment: center;");
-        //titleInformations.setFill(Paint.valueOf("#22427C"));
         
         //Text right part gridPane
         Text titleLangue = new Text("User's language");
-        //titleLangue.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        //titleLangue.setStyle("-fx-alignment: center;");
-        //titleLangue.setFill(Paint.valueOf("#22427C"));
-        
-        //Constraints
-        //root.setHalignment(titleInformations,HPos.CENTER);
-        //root.setMargin(titleInformations,new Insets(0,0,20,0));
-        //root.setHalignment(titleLangue,HPos.CENTER);
-        //root.setMargin(titleLangue,new Insets(0,0,20,50));
-        //root.setMargin(language,new Insets(0,0,0,100));
         
         //Layout root assignement
         root.add(user,0,2);
         root.add(language,1,2);
-        root.add(access,1,3);
         root.add(titleInformations,0,1);
         root.add(titleLangue,1,1);
         
@@ -314,6 +298,11 @@ public class UserGUI {
         access.setId("access");
         user.setId("user");
         language.setId("language");
+        lLN.getStyleClass().add("my_label");
+        lFN.getStyleClass().add("my_label");
+        lB.getStyleClass().add("my_label");
+        lMT.getStyleClass().add("my_label");
+        lYS.getStyleClass().add("my_label");
         
         
         this.stage.setScene(scene);
@@ -321,11 +310,11 @@ public class UserGUI {
         this.stage.setTitle("projet prosodie");
         
         //set Stage boundaries to visible bounds of the main screen
-        /*Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
         this.stage.setX(primaryScreenBounds.getMinX());
         this.stage.setY(primaryScreenBounds.getMinY());
         this.stage.setWidth(primaryScreenBounds.getWidth());
-        this.stage.setHeight(primaryScreenBounds.getHeight());*/
+        this.stage.setHeight(primaryScreenBounds.getHeight());
         
         this.stage.show();  
         this.stage.setFullScreenExitHint("");
