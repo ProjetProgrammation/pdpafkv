@@ -47,7 +47,7 @@ public class VideoGUI extends Parent {
         fond_video.setAlignment(Pos.CENTER);
 
         //Création Button Play
-        final Button playVideo = new Button("Play Video");
+        final Button playVideo = new Button("Preview face");
         playVideo.setDisable(true);
                 
         GridPane zoneVideo = new GridPane();
@@ -57,7 +57,7 @@ public class VideoGUI extends Parent {
             //Sélection d'un audio
             Video videoTmp = this.selMedia.selectVideo();
             //Création RadioButton avec son texte
-            RadioButton tmpRB = new RadioButton("Sound n°"+(i+1));
+            RadioButton tmpRB = new RadioButton("Face "+(i+1));
             //Ajout de l'objet audio dans tmpRB
             tmpRB.setUserData(videoTmp);
             //Ajout du tmpRB dans le groupe Toggle

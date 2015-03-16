@@ -49,7 +49,7 @@ public class SonGUI extends Parent {
         fond_son.setAlignment(Pos.CENTER);
 
         //Création Button Play
-        final Button playSound = new Button("Play Sound");
+        final Button playSound = new Button("Preview voice");
         playSound.setDisable(true);
                 
         GridPane zoneSon = new GridPane();
@@ -59,7 +59,7 @@ public class SonGUI extends Parent {
             //Sélection d'un audio
             Audio audioTmp = this.selMedia.selectAudio();
             //Création RadioButton avec son texte
-            RadioButton tmpRB = new RadioButton("Sound n°"+(i+1));
+            RadioButton tmpRB = new RadioButton("Voice "+(i+1));
             //Ajout de l'objet audio dans tmpRB
             tmpRB.setUserData(audioTmp);
             //Ajout du tmpRB dans le groupe Toggle
