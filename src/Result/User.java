@@ -45,10 +45,16 @@ public class User {
     }
     
     public String getNameToFile(){
-        return (this.id+"_"+this.lastName+"_"+this.firstName+"_"+this.birthday);
+        return (this.lastName+"_"+this.firstName+"_"+this.birthday);
     }
     
     public String getUserExtract() {
-        return "lastName=" + lastName + ", firstName=" + firstName + ", birthday=" + birthday + ", motherTongue=" + motherTongue + ", yearStudying=" + yearStudying;
+        return "\"User\": [\n"
+                        + "\"Last name\": \"" + lastName + "\",\n"
+                        + "\"First name\": \"" + firstName + "\",\n"
+                        + "\"Birthday\": \"" + birthday + "\",\n"
+                        + "\"Mother tongue\": \"" + motherTongue + "\",\n"
+                        + "\"Years learning for the language selected\": \"" + yearStudying +"\"\n"
+                + "],";
     }
 }

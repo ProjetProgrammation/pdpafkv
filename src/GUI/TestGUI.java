@@ -6,6 +6,7 @@ import BDD.Language;
 import Result.User;
 import Controller.MediaSelected;
 import Controller.SelectMedia;
+import Result.Answer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -112,9 +113,7 @@ public class TestGUI extends Parent{
             public void handle(ActionEvent event) {
                 numEnCours ++;
                 if((numEnCours<=nbQuestion)&&(nbQuestion==20)){
-                    mediaSel.addResultQuestion(question.getQuestionSelected());
-                    mediaSel.addResultAudio(son.getAudioSelected());
-                    mediaSel.addResultVideo(video.getVideoSelected());
+                    mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
                     new TestGUI(stage,nbQuestion,numEnCours,selMedia,mediaSel);
                 }
                 else if((numEnCours<=nbQuestion)&&(nbQuestion==5))

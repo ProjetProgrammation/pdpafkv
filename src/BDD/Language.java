@@ -77,9 +77,14 @@ public class Language {
 	*/
 	public void setName(String name){this.name=name;}
 
+        
 	public String toString(){
 		return ("Details about the language :"
 			+ "\n\tid : " + this.id
 			+ "\n\tname : " + this.name);
 	}
+        
+        public String getLanguageExtract(){
+            return "\"Language\": \""+this.name+"\",";
+        }
 }

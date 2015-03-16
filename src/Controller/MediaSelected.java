@@ -7,6 +7,7 @@ package Controller;
 
 import BDD.*;
 import Result.*;
+import java.util.ArrayList;
 
 import javafx.scene.text.Text;
 
@@ -16,19 +17,31 @@ import javafx.scene.text.Text;
  */
 public class MediaSelected {
     
-    Answers answers;
-    
-    public MediaSelected(User userSel,Language langSel){
-        this.answers = new Answers(userSel, langSel);
+    private User userSel;
+    private Language langSel;
+    private ArrayList<Answer> answersList;
+
+    public MediaSelected(User userSel, Language langSel) {
+        this.userSel = userSel;
+        this.langSel = langSel;
+        this.answersList = new ArrayList<>();
     }
     
-    public void addResultVideo(Video videoSelected){
-        this.answers.addVideo(videoSelected);
-    }   
-    public void addResultAudio (Audio audioSelected){
-        this.answers.addAudio(audioSelected);
+    public void addAnswer(Answer answerToAdd){
+        this.answersList.add(answerToAdd);
     }
-    public void addResultQuestion (Question questionSelected){
-        this.answers.addQuestion(questionSelected);
+
+    public User getUserSel() {
+        return userSel;
     }
+
+    public Language getLangSel() {
+        return langSel;
+    }
+    
+    public ArrayList<Answer> getAnswersList() {
+        return answersList;
+    }
+
+    
 }

@@ -7,6 +7,7 @@
 package Result;
 
 import BDD.*;
+import Controller.MediaSelected;
 import java.io.FileWriter;
 
 /**
@@ -29,12 +30,12 @@ public class Extract {
         }
     }
     
-    public void startOfExtract(User user){
+    public void startOfExtract(MediaSelected medSelected){
         try{
             
              fichier.write("{ \n");
-             fichier.write("   \"User\": { \n");
-             fichier.write("              \""+ user.getUserExtract() +"\": {\n");
+             fichier.write("    \n");
+             fichier.write("              \""+ medSelected.getUserSel().getUserExtract() +"\": {\n");
         }
         catch(Exception e){
                System.out.println("Erreur de chargement de fichier");

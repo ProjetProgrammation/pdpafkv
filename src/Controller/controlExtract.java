@@ -5,24 +5,27 @@
  */
 package Controller;
 
-import Result.Answers;
+import BDD.Language;
+import Result.User;
+import Result.Answer;
 import Result.Extract;
+import java.util.ArrayList;
 
 /**
  *
  * @author Thibaut
  */
 public class controlExtract {
-    private Answers answersToExtract;
+    private MediaSelected medSelected;
     private Extract extract;
     
-    public controlExtract(Answers answers) {
-        this.answersToExtract = answers;
+    public controlExtract(MediaSelected medSel) {
+        this.medSelected=medSel;
     }
     
     public void Extract(){
-        this.extract=new Extract("..\\pdpafkv\\src\\Result\\"+this.answersToExtract.getUser().getNameToFile()+".txt");
-        
+        this.extract=new Extract("..\\pdpafkv\\src\\Result\\"+this.medSelected.getUserSel().getNameToFile()+"_"+this.medSelected.getLangSel().getName()+".json");
+        this.extract.startOfExtract(this.medSelected);
     }
     
     
