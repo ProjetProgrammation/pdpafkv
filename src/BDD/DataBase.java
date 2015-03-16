@@ -26,14 +26,15 @@ import java.util.ArrayList;
 public class DataBase {
 
 	public DataBase(){
-		this.connexion();
+            this.connexion();
+            this.createTables();
 	}
 
 
 	/**
 	* Etabli une connection avec la base de données dataBase.db
 	*/
-	public void connexion(){
+	private void connexion(){
 		Connection c = null;
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -48,7 +49,7 @@ public class DataBase {
 	/**
 	* Exécute les requêtes SQL permettant de créer les tables dans la base de données dataBase.db
 	*/
-	public void createTables(){
+	private void createTables(){
 		Connection c = null;
 		Statement stmt = null;
 		try {
