@@ -14,7 +14,6 @@ public class TestDB {
 
 	public static void main(String[] args) {
 		DataBase db = new DataBase();
-		db.createTables();
 		db.addLanguage("French");
 		db.addLanguage("English");
 		db.addAudio("seth","Audio\\seth.mp3","mp3","English");

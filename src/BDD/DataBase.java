@@ -26,14 +26,15 @@ import java.util.ArrayList;
 public class DataBase {
 
 	public DataBase(){
-		this.connexion();
+            this.connexion();
+            this.createTables();
 	}
 
 
 	/**
 	* Etabli une connection avec la base de données dataBase.db
 	*/
-	public void connexion(){
+	private void connexion(){
 		Connection c = null;
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -48,7 +49,7 @@ public class DataBase {
 	/**
 	* Exécute les requêtes SQL permettant de créer les tables dans la base de données dataBase.db
 	*/
-	public void createTables(){
+	private void createTables(){
 		Connection c = null;
 		Statement stmt = null;
 		try {
@@ -88,34 +89,6 @@ public class DataBase {
 		System.out.println("[CreateTables]Tables created successfully");
 	}
 
-//	/**
-//	* Exécute les requêtes SQL permettant de créer les triggers pour la gestion de l'unicité des tuples dans la base de données dataBase.db
-//	*/
-/*	public void createTriggers(){
-		Connection c = null;
-		Statement stmt = null;
-		try {
-			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-			System.out.println("[CreateTriggers]Opened database successfully");
-
-			stmt = c.createStatement();
-			String sql = "
-				CREATE TRIGGER unicityLanguageTrigger IF NOT EXISTS
-				BEFORE INSERT OR UPDATE ON Language
-				FOR EACH ROW
-				BEGIN
-					;";
-			stmt.executeUpdate(sql);
-			stmt.close();
-			c.close();
-		} catch ( Exception e ) {
-			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-			System.exit(0);
-		}
-		System.out.println("[CreateTables]Tables created successfully");
-	}*/
-
 	/**
 	* Ajoute une vidéo dans la base de données dataBase.db puis créé un objet correspondant
 	* @param name Le nom de la vidéo à ajouter
@@ -148,7 +121,7 @@ public class DataBase {
 		    		idLang = rs.getInt("id");
 		    	}
 
-				//Ajout de la vidéo
+                        //Ajout de la vidéo
 
 		    	query = "INSERT INTO Video(name,file_path,id_language,format) VALUES (?,?,?,?);";
 		    	stmtAdd = c.prepareStatement(query);
@@ -241,7 +214,7 @@ public class DataBase {
 		PreparedStatement stmtLang = null;
 		PreparedStatement stmtAdd = null;
 		int idLang=0;
-		if(this.searchQuestionByContentIds(content, video.getId(), audio.getId()).getId() != 0){
+		if(this.searchQuestionByContent(content).getId() != 0){
 			System.out.println("[addQuestion]This Question already exists.");
 		}
 		else{
@@ -561,22 +534,20 @@ public class DataBase {
 	*				Le format de la question recherchée
 	*	@return Une instance de la question recherchée dans la base de données, si non trouvé, retourne l'instance avec un id = 0.
 	*/
-	public Question searchQuestionByContentIds(String content, int idVideo, int idAudio){
+	public Question searchQuestionByContent(String content){
 		Connection c = null;
 		PreparedStatement stmt = null;
 		Question question = new Question();
-		String query = new String("SELECT * FROM Question WHERE Question.content=? AND Question.id_video=? AND id_audio=?;");
+		String query = new String("SELECT * FROM Question WHERE Question.content=?;");
 		try {
-			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-			c.setAutoCommit(false);	//Mise en place de la transaction manuelle
-			System.out.println("[searchQuestionByContentIds]Opened database successfully");
+                    Class.forName("org.sqlite.JDBC");
+                    c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
+                    c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+                    System.out.println("[searchQuestionByContent]Opened database successfully");
 
-			stmt = c.prepareStatement(query);
-	    	stmt.setString(1,content);	//Ajout des paramètres (variables) "?" de la ligne d'avant.
-	    	stmt.setInt(2,idVideo);
-	    	stmt.setInt(3,idAudio);
-	    	ResultSet rs = stmt.executeQuery();
+                    stmt = c.prepareStatement(query);
+                    stmt.setString(1,content);
+                    ResultSet rs = stmt.executeQuery();
 	    	while(rs.next()){
 	    		question.setId(rs.getInt("id"));
 	    		question.setContent(rs.getString("content"));
@@ -591,7 +562,7 @@ public class DataBase {
 	    } catch ( Exception e ) {
 	    	System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 	    }
-	    System.out.println("[searchQuestionByContentIds]Error");
+	    System.out.println("[searchQuestionByContent]Error");
 	    return(null);
 	}
 
@@ -757,7 +728,7 @@ public class DataBase {
          * @param idLanguage
          * @return Le nombre de tuples dans la langue idLanguage recherché
          */
-        public int CountAudio(int idLanguage){
+        public int countAudio(int idLanguage){
             int result = 0;
             
             Connection c = null;
@@ -790,7 +761,7 @@ public class DataBase {
          * @param idLanguage
          * @return Le nombre de tuples dans la langue idLanguage recherché
          */
-        public int CountQuestion(int idLanguage){
+        public int countQuestion(int idLanguage){
             int result = 0;
             
             Connection c = null;
@@ -824,7 +795,7 @@ public class DataBase {
          * @param idLanguage
          * @return Le nombre de tuples dans la langue idLanguage recherché
          */
-        public int CountVideo(int idLanguage){
+        public int countVideo(int idLanguage){
             int result = 0;
             
             Connection c = null;

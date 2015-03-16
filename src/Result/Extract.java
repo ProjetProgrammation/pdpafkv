@@ -41,7 +41,7 @@ public class Extract {
         }
     }
     
-    public void ExtractQuestion(Question question){
+    public void extractQuestion(Question question){
         
         int i =1;
         try{

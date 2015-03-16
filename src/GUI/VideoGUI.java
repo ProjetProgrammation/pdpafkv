@@ -18,7 +18,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import org.apache.commons.io.FilenameUtils;
-import static org.apache.commons.io.FilenameUtils.separatorsToSystem;
 
 
 /**
@@ -48,7 +47,7 @@ public class VideoGUI extends Parent {
         fond_video.setAlignment(Pos.CENTER);
 
         //Création Button Play
-        final Button playVideo = new Button("Play Video");
+        final Button playVideo = new Button("Preview face");
         playVideo.setDisable(true);
                 
         GridPane zoneVideo = new GridPane();
@@ -56,9 +55,9 @@ public class VideoGUI extends Parent {
         ArrayList<RadioButton> listRB = new ArrayList<>();
         for (int i=0; i<10; i++){
             //Sélection d'un audio
-            Video videoTmp = this.selMedia.SelectVideo();
+            Video videoTmp = this.selMedia.selectVideo();
             //Création RadioButton avec son texte
-            RadioButton tmpRB = new RadioButton("Sound n°"+(i+1));
+            RadioButton tmpRB = new RadioButton("Face "+(i+1));
             //Ajout de l'objet audio dans tmpRB
             tmpRB.setUserData(videoTmp);
             //Ajout du tmpRB dans le groupe Toggle
@@ -106,8 +105,7 @@ public class VideoGUI extends Parent {
     
     private void playAction(Video video){
         File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem(video.getFilePath()));
-        String p = separatorsToSystem(f.getAbsolutePath());
-        MediaPlayer.load(p);
+        MediaPlayer.load(f.getAbsolutePath());
     }
     
     public Video getVideoSelected() {

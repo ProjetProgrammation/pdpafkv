@@ -54,7 +54,7 @@ public class QuestionGUI extends Parent {
         else{
              texte_entier.setText(select.SelectQuestion(questions).getContent());  
         }*/
-        this.questionSelected = this.selMedia.SelectQuestion();        
+        this.questionSelected = this.selMedia.selectQuestion();        
         texte_entier.setText(this.questionSelected.getContent());
         
         // CSS de la fenêtre
