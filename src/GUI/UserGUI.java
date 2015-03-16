@@ -10,8 +10,12 @@ import BDD.*;
 import Errors.Errors;
 import Result.User;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -216,6 +220,13 @@ public class UserGUI {
                        */ 
                         User user = new User("Thibaut","Fabre","26/02/1991","French",1);
                        languageSelect = (Language)choose.getSelectedToggle().getUserData();
+                    try {
+                        
+                        File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("Result\\"+user.getNameToFile()+"_"+languageSelect.getName()+".json"));
+                        System.out.println(f.getAbsolutePath());
+                    } catch (Exception e) {
+                        System.out.println("Problème création." + e.getMessage());
+                    }
                        new ChooseGUI(stage,languageSelect,db,user);
                        
                         /*
@@ -300,11 +311,11 @@ public class UserGUI {
         this.stage.setTitle("projet prosodie");
         
         //set Stage boundaries to visible bounds of the main screen
-        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+        /*Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
         this.stage.setX(primaryScreenBounds.getMinX());
         this.stage.setY(primaryScreenBounds.getMinY());
         this.stage.setWidth(primaryScreenBounds.getWidth());
-        this.stage.setHeight(primaryScreenBounds.getHeight());
+        this.stage.setHeight(primaryScreenBounds.getHeight());*/
         
         this.stage.show();  
         this.stage.setFullScreenExitHint("");

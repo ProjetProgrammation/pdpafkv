@@ -24,8 +24,7 @@ public class controlExtract {
     }
     
     public void Extract(){
-        this.extract=new Extract("..\\pdpafkv\\src\\Result\\"+this.medSelected.getUserSel().getNameToFile()+"_"+this.medSelected.getLangSel().getName()+".json");
-        this.extract.startOfExtract(this.medSelected);
+        Extract.Extract(medSelected);
     }
     
     

@@ -26,14 +26,19 @@ public class Answer {
         this.videoSel=videoSelected;
     }
 
-    @Override
-    public String toString() {
-        return "\"Answer\": [\n"
-                        + "\"Question asked\": \"" + this.questSel.getContent() + "\",\n"
-                        + "\"Video selected\": \"" + this.videoSel.getName() + "\",\n"
-                        + "\"Audio selected\": \"" + this.audioSel.getName() + "\"\n"
-                + "],";
+    public Question getQuestSel() {
+        return questSel;
     }
+
+    public Video getVideoSel() {
+        return videoSel;
+    }
+
+    public Audio getAudioSel() {
+        return audioSel;
+    }
+
+    
     
     
 }

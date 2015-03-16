@@ -7,6 +7,7 @@ import Result.User;
 import Controller.MediaSelected;
 import Controller.SelectMedia;
 import Result.Answer;
+import Result.Extract;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -26,7 +27,7 @@ import javafx.stage.Stage;
 
 public class TestGUI extends Parent{
         
-    
+    private User userSel;
     private int numEnCours = 1;
     private int nbQuestion;
     private final Stage stage;
@@ -45,11 +46,12 @@ public class TestGUI extends Parent{
         this.launchTestGUI();
     }
     
-    public TestGUI(Stage primaryStage,int nbQuest,int numCourant,SelectMedia selectMedia){
+    public TestGUI(Stage primaryStage,int nbQuest,int numCourant,SelectMedia selectMedia,User user){
         this.stage=primaryStage;
         this.nbQuestion=nbQuest;
         this.numEnCours=numCourant;
         this.selMedia=selectMedia;
+        this.userSel=user;
         this.launchTestGUI();
     }
     
@@ -74,6 +76,8 @@ public class TestGUI extends Parent{
         ImageView imageValid = new ImageView(new Image(getClass().getResourceAsStream("confirmation.png")));
         Button mix = new Button("Mix", new ImageView(imageMix));
         Button validate = new Button("Validate", imageValid);
+        mix.setDisable(true);
+        validate.setDisable(true);
         
         //slider
         
@@ -107,19 +111,29 @@ public class TestGUI extends Parent{
         mixValid.add(validate,1,0);       
         mixValid.setGridLinesVisible(false);
         
+        if ((this.selMedia.selectAudio()!=null)&&(this.selMedia.selectVideo()!=null)){
+            mix.setDisable(false);
+            validate.setDisable(false);
+        };
+        
         //Action bouton Validate
         validate.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 numEnCours ++;
-                if((numEnCours<=nbQuestion)&&(nbQuestion==20)){
+                if((numEnCours<=nbQuestion)&&(nbQuestion==2)){
                     mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
                     new TestGUI(stage,nbQuestion,numEnCours,selMedia,mediaSel);
                 }
                 else if((numEnCours<=nbQuestion)&&(nbQuestion==5))
-                    new TestGUI(stage,nbQuestion,numEnCours,selMedia);
-                else
-                    
+                    new TestGUI(stage,nbQuestion,numEnCours,selMedia,userSel);
+                else if ((numEnCours==nbQuestion)&&(nbQuestion==2)){
+                    Extract.Extract(mediaSel);
+                    System.exit(0);
+                }
+                else if ((numEnCours==nbQuestion)&&(nbQuestion==5))
+                    new ChooseGUI(stage,language,db,userSel);
+                else    
                     System.exit(0);
             }
         });

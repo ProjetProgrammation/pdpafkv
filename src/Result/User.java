@@ -45,16 +45,28 @@ public class User {
     }
     
     public String getNameToFile(){
-        return (this.lastName+"_"+this.firstName+"_"+this.birthday);
+        return (this.lastName+"_"+this.firstName);
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public String getMotherTongue() {
+        return motherTongue;
+    }
+
+    public int getYearStudying() {
+        return yearStudying;
     }
     
-    public String getUserExtract() {
-        return "\"User\": [\n"
-                        + "\"Last name\": \"" + lastName + "\",\n"
-                        + "\"First name\": \"" + firstName + "\",\n"
-                        + "\"Birthday\": \"" + birthday + "\",\n"
-                        + "\"Mother tongue\": \"" + motherTongue + "\",\n"
-                        + "\"Years learning for the language selected\": \"" + yearStudying +"\"\n"
-                + "],";
-    }
+    
 }

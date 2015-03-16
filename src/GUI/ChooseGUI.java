@@ -3,7 +3,6 @@ import BDD.DataBase;
 import BDD.Language;
 import BDD.Question;
 import Controller.SelectMedia;
-import GUI.TestGUI;
 import Result.User;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
@@ -30,12 +29,9 @@ public class ChooseGUI {
     private Stage stage;
     private User userSel;
     private BorderPane global= new BorderPane();
-    private Scene scene;
-    private ArrayList<Question>questions;
     
     public ChooseGUI(Stage primaryStage, Language langSel, DataBase db, User user) {
         this.stage=primaryStage;
-        this.scene=primaryStage.getScene();
         this.userSel = user;
         this.launchChooseGUI(langSel,db);
         
@@ -60,7 +56,7 @@ public class ChooseGUI {
         testOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                new TestGUI(stage,20,langSel,db,userSel);
+                new TestGUI(stage,2,langSel,db,userSel);
             }
         });
         
