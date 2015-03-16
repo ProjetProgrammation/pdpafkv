@@ -303,9 +303,18 @@ public class UserGUI {
         
         //Scene layout and addition of global
         Scene scene = new Scene(global);
-        File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/caspian.css"));
+        
+        /*File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/caspian.css"));
         scene.getStylesheets().clear();
-        scene.getStylesheets().add(f.toURI().toString());
+        scene.getStylesheets().add(f.toURI().toString());*/
+        
+        File f = new File("src/GUI/stylesheet.css");
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+        access.setId("access");
+        user.setId("user");
+        
+        
         this.stage.setScene(scene);
         this.stage.centerOnScreen();
         this.stage.setTitle("projet prosodie");

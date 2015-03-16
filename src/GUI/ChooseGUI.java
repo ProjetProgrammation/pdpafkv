@@ -4,6 +4,7 @@ import BDD.Language;
 import BDD.Question;
 import Controller.SelectMedia;
 import Result.User;
+import java.io.File;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -106,7 +107,8 @@ public class ChooseGUI {
         
         //Create scene and add to stage
         Scene scene = new Scene(global);        
-        scene.getStylesheets().add("stylesheet.css");
+
+        
         
         //background elements
         global.setId("global");
