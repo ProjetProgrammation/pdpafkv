@@ -9,6 +9,7 @@ import BDD.*;
 
 import Errors.Errors;
 import Result.User;
+import java.io.File;
 
 import java.util.ArrayList;
 
@@ -32,6 +33,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  *
@@ -82,19 +84,19 @@ public class UserGUI {
         Font font = new Font("Arial",14);
         
         //character font design
-        lLN.setStyle("-fx-font-weight: bold;");
-        lLN.setFont(new Font("Serif", 14));
-        lFN.setStyle("-fx-font-weight: bold;");
-        lFN.setFont(new Font("Serif", 14));
-        lB.setStyle("-fx-font-weight: bold;");
-        lB.setFont(new Font("Serif", 14));
-        lMT.setStyle("-fx-font-weight: bold;");
-        lMT.setFont(new Font("Serif", 14));
-        lYS.setStyle("-fx-font-weight: bold;");
-        lYS.setFont(new Font("Serif", 14));
+        //lLN.setStyle("-fx-font-weight: bold;");
+        //lLN.setFont(new Font("Serif", 14));
+        //lFN.setStyle("-fx-font-weight: bold;");
+        //lFN.setFont(new Font("Serif", 14));
+        //lB.setStyle("-fx-font-weight: bold;");
+        //lB.setFont(new Font("Serif", 14));
+        //lMT.setStyle("-fx-font-weight: bold;");
+        //lMT.setFont(new Font("Serif", 14));
+        //lYS.setStyle("-fx-font-weight: bold;");
+        //lYS.setFont(new Font("Serif", 14));
         
         //Date format
-        birthday.setPromptText("Par exemple : 12/07/1998");
+        birthday.setPromptText("Example : 12/07/1998");
         
         //Radio Buttons group
         final ToggleGroup choose = new ToggleGroup();
@@ -121,7 +123,7 @@ public class UserGUI {
         //Access button to go on next interface
         Button access = new Button("Acces");
         access.setPrefSize(100, 40);
-        access.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
+        //access.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
               
         
         //Action button
@@ -248,21 +250,21 @@ public class UserGUI {
         
         //Text on top in primaryStage
         Text title = new Text("Test prosodique");
-        title.setFont(Font.font("Arial", FontWeight.BOLD, 38));
-        title.setStyle("-fx-alignment: center;");
-        title.setFill(Paint.valueOf("#22427C"));
+        //title.setFont(Font.font("Arial", FontWeight.BOLD, 38));
+        //title.setStyle("-fx-alignment: center;");
+        //title.setFill(Paint.valueOf("#22427C"));
         
         //Text left part gridPane
         Text titleInformations = new Text("User's Information");
-        titleInformations.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        titleInformations.setStyle("-fx-alignment: center;");
-        titleInformations.setFill(Paint.valueOf("#22427C"));
+        //titleInformations.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+        //titleInformations.setStyle("-fx-alignment: center;");
+        //titleInformations.setFill(Paint.valueOf("#22427C"));
         
         //Text right part gridPane
         Text titleLangue = new Text("User's language");
-        titleLangue.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        titleLangue.setStyle("-fx-alignment: center;");
-        titleLangue.setFill(Paint.valueOf("#22427C"));
+        //titleLangue.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+        //titleLangue.setStyle("-fx-alignment: center;");
+        //titleLangue.setFill(Paint.valueOf("#22427C"));
         
         //Constraints
         root.setHalignment(titleInformations,HPos.CENTER);
@@ -288,6 +290,9 @@ public class UserGUI {
         
         //Scene layout and addition of global
         Scene scene = new Scene(global);
+        File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/caspian.css"));
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add(f.toURI().toString());
         this.stage.setScene(scene);
         this.stage.centerOnScreen();
         this.stage.setTitle("projet prosodie");
