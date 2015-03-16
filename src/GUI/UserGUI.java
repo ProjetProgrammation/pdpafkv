@@ -18,6 +18,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import static javafx.geometry.Pos.CENTER;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -31,6 +32,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -291,6 +293,14 @@ public class UserGUI {
         this.stage.setScene(scene);
         this.stage.centerOnScreen();
         this.stage.setTitle("projet prosodie");
+        
+        //set Stage boundaries to visible bounds of the main screen
+        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+        this.stage.setX(primaryScreenBounds.getMinX());
+        this.stage.setY(primaryScreenBounds.getMinY());
+        this.stage.setWidth(primaryScreenBounds.getWidth());
+        this.stage.setHeight(primaryScreenBounds.getHeight());
+        
         this.stage.show();  
         this.stage.setFullScreenExitHint("");
         //this.stage.setFullScreen(true);
@@ -301,13 +311,6 @@ public class UserGUI {
         return new DataBase();
     }
     
-    //name recovery
-    public String nom(){
-        return firstName.getText();
-    }
-    //firstname recovery
-    public String prenom(){
-        return lastName.getText();
-    }
+    
     
 }
