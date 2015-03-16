@@ -757,7 +757,7 @@ public class DataBase {
          * @param idLanguage
          * @return Le nombre de tuples dans la langue idLanguage recherché
          */
-        public int CountAudio(int idLanguage){
+        public int countAudio(int idLanguage){
             int result = 0;
             
             Connection c = null;
@@ -790,7 +790,7 @@ public class DataBase {
          * @param idLanguage
          * @return Le nombre de tuples dans la langue idLanguage recherché
          */
-        public int CountQuestion(int idLanguage){
+        public int countQuestion(int idLanguage){
             int result = 0;
             
             Connection c = null;
@@ -824,7 +824,7 @@ public class DataBase {
          * @param idLanguage
          * @return Le nombre de tuples dans la langue idLanguage recherché
          */
-        public int CountVideo(int idLanguage){
+        public int countVideo(int idLanguage){
             int result = 0;
             
             Connection c = null;

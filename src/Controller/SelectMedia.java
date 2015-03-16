@@ -43,7 +43,7 @@ public class SelectMedia {
             if (check == false){
                 this.listAudio.add(audio);
             }           
-        }while(this.listAudio.size() != this.db.CountAudio(this.langSel.getId()));
+        }while(this.listAudio.size() != this.db.countAudio(this.langSel.getId()));
     } 
     private void SelectVideoList(){
         Video video = null;
@@ -59,7 +59,7 @@ public class SelectMedia {
             if (check == false){
                 this.listVideo.add(video);
             }       
-        }while(this.listVideo.size() != this.db.CountVideo(this.langSel.getId()));
+        }while(this.listVideo.size() != this.db.countVideo(this.langSel.getId()));
     }        
     private void SelectQuestionList(){
         Question question = null;
@@ -75,7 +75,7 @@ public class SelectMedia {
             if (check == false){
                 this.listQuestion.add(question);
             }
-         }while(this.listQuestion.size() != this.db.CountQuestion(this.langSel.getId()));
+         }while(this.listQuestion.size() != this.db.countQuestion(this.langSel.getId()));
          
     }
 
