@@ -119,7 +119,7 @@ public class UserGUI {
         ArrayList<Language> listL = db.getAllLanguages();        
         for (Language l : listL){
             //the text of the radiobutton
-            RadioButton tmpRB = new RadioButton(l.getName());
+            RadioButton tmpRB = new RadioButton(l.getName().toUpperCase());
             //Design
             tmpRB.getStyleClass().add("radio-button");
             //add audio object in tmpRB
@@ -314,11 +314,8 @@ public class UserGUI {
         
         //Scene layout and addition of global
         Scene scene = new Scene(global);
-        
-        /*File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/caspian.css"));
-        scene.getStylesheets().clear();
-        scene.getStylesheets().add(f.toURI().toString());*/
-         File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/DarkStyle.css"));
+
+        File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/DarkStyle.css"));
         scene.getStylesheets().clear();
         scene.getStylesheets().add(f.toURI().toString());
         

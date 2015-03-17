@@ -142,17 +142,12 @@
     -fx-background-color: derive(-fx-focus-color,30%);
 }
 
-/*.radio-button {
+.radio-button {
     -fx-font-size: 11pt;
     -fx-font-family: "HelveticaNeueLTStd-LtCn";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
-
-.radio-button .dot {
-    -fx-mark-highlight-color: red ;
-    -fx-mark-color: #00C13F ;
-}*/
 
 .radio-button .radio {
     -fx-border-width: 10px;
@@ -160,17 +155,28 @@
     -fx-background-color: white;
     -fx-border-radius: 0px;
     -fx-padding: 0px;
-    -fx-margin: 2px;
+    -fx-margin: 0px;
 }
 
 .radio-button .dot {
     -fx-background-radius: 0px;
-
+    -fx-margin-top: -2px;
     -fx-padding: 10px;
 }
 
 .radio-button:selected /*.radio*/ .dot {
     -fx-background-color: #00C13F;
-    /*-fx-mark-highlight-color: #00C13F;
-    -fx-mark-color: #00C13F;*/
+    -fx-padding-top: 0px;
+    -fx-margin-top: -2px;
+    -fx-mark-highlight-color: #00C13F;
+    -fx-mark-color: #00C13F;
+}
+
+#user, #language {
+    -fx-border-width: 1px;
+    -fx-border-color: red;
+    -fx-background-color: #3A9548;
+    -fx-margin: 100px;
+    -fx-padding: 10px;
+    -fx-size: 20%;
 }
