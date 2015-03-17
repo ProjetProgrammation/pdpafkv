@@ -22,6 +22,7 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -78,12 +79,13 @@ public class TestGUI extends Parent{
         
    
         //Zone pour les boutons
-        //Image imageMix = new Image(getClass().getResourceAsStream("mixer8.png"));
-        //ImageView imageValid = new ImageView(new Image(getClass().getResourceAsStream("confirmation.png")));
+        BorderPane paneButtons = new BorderPane();
         Button mix = new Button("Merge".toUpperCase());
         Button validate = new Button("Next".toUpperCase());
         mix.setDisable(true);
         validate.setDisable(true);
+        paneButtons.setCenter(mix);
+        paneButtons.setRight(validate);
         
         //slider
         
@@ -97,25 +99,25 @@ public class TestGUI extends Parent{
         hb.getChildren().add(pb);*/
         
        // BorderPane mainborder = new BorderPane();        
-        GridPane root = new GridPane();
+        BorderPane root = new BorderPane();
         
         //Definition des tailles des colonnes
-        root.setHgap(20);
-        root.setVgap(20);
-        root.prefWidth(100.0);
+        //root.setHgap(20);
+        //root.setVgap(20);
+        root.autosize();
         
         root.setPadding(new Insets(20, 20, 20, 20));
-        root.setGridLinesVisible(false);
-        root.setAlignment(Pos.CENTER);
+        //root.setGridLinesVisible(false);
+        //root.setAlignment(Pos.CENTER);
         
         //Creation de la zone pour les boutons mix et valide et slider
-        GridPane mixValid = new GridPane();
+        /*GridPane mixValid = new GridPane();
         mixValid.setHgap(20);
         mixValid.setVgap(20);
         mixValid.setPadding(new Insets(20, 20, 20, 20));
         mixValid.add(mix,0,0);
         mixValid.add(validate,1,0);       
-        mixValid.setGridLinesVisible(false);
+        mixValid.setGridLinesVisible(false);*/
         
         if ((this.selMedia.selectAudio()!=null)&&(this.selMedia.selectVideo()!=null)){
             mix.setDisable(false);
@@ -154,12 +156,12 @@ public class TestGUI extends Parent{
         
         
         
-        //ajout des element au gridpane
-        root.add(question,0,0,3,1);
-        root.add(video,0,1,1,3);
-        root.add(son,2,1,1,3);
-        //root.add(hb,0,4);
-        root.add(mixValid,2,4);
+        //ajout des element au BorderPane général
+        root.setTop(question);
+        root.setLeft(video);
+        root.setRight(son);
+        root.setBottom(paneButtons);
+        //root.add(hb,0,4); >> Mettre dans le paneButtons
         
 
         //Style GUI

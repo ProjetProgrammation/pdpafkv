@@ -38,12 +38,13 @@ public class VideoGUI extends Parent {
 
         //Création + personnalisation FlowPane
         FlowPane fond_video = new FlowPane();
-        fond_video.setVgap(8);
-        fond_video.setHgap(4);
+        fond_video.getStyleClass().add("box");
+        //fond_video.setVgap(8);
+        //fond_video.setHgap(4);
         fond_video.autosize();
         //fond_son.setPrefWrapLength(300);
         //fond_son.setPadding(new Insets(30, 24, 30, 24));
-        fond_video.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
+        //fond_video.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
         fond_video.setAlignment(Pos.CENTER);
 
         //Création Button Play

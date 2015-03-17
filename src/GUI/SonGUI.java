@@ -36,8 +36,9 @@ public class SonGUI extends Parent {
         
         //Création + personnalisation FlowPane
         FlowPane fond_son = new FlowPane();
-        fond_son.setVgap(8);
-        fond_son.setHgap(4);
+        fond_son.getStyleClass().add("box");
+        //fond_son.setVgap(8);
+        //fond_son.setHgap(4);
         fond_son.autosize();
         //fond_son.setPrefWrapLength(300);
         //fond_son.setPadding(new Insets(30, 24, 30, 24));

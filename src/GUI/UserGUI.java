@@ -284,9 +284,9 @@ public class UserGUI {
         scene.getStylesheets().clear();
         scene.getStylesheets().add(f.toURI().toString());
         
-        access.setId("access");
-        user.setId("user");
-        language.setId("language");
+        //access.getStyleClass().add("box");
+        user.getStyleClass().add("box");
+        language.getStyleClass().add("box");
         
         
         this.stage.setScene(scene);

@@ -183,7 +183,7 @@
     -fx-background-insets: 0;
 }
 
-#user, #language {
+.box {
     -fx-background-color: #3A9548;
     -fx-padding: 20 40 40 20;
     -fx-background-insets: 0 20 20 0;

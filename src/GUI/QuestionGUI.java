@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.layout.FlowPane;
@@ -35,14 +36,15 @@ public class QuestionGUI extends Parent {
     private void launchQuest(){
         
         FlowPane fond_question = new FlowPane();
-        fond_question.setVgap(8);
-        fond_question.setHgap(4);
-        fond_question.setPrefWrapLength(300);
-        fond_question.setPadding(new Insets(15, 12, 15, 12));
-        fond_question.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
+        //fond_question.setVgap(8);
+        //fond_question.setHgap(4);
+        fond_question.autosize();
+        //fond_question.setPadding(new Insets(15, 12, 15, 12));
+        //fond_question.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
         fond_question.setAlignment(Pos.CENTER);
         
-        Text texte_entier = new Text();
+        Label texte_entier = new Label();
+        texte_entier.getStyleClass().add("label-header");
         
         //Question
         /*if (questions.size() == 0){
@@ -55,16 +57,7 @@ public class QuestionGUI extends Parent {
              texte_entier.setText(select.SelectQuestion(questions).getContent());  
         }*/
         this.questionSelected = this.selMedia.selectQuestion();        
-        texte_entier.setText(this.questionSelected.getContent());
-        
-        // CSS de la fenêtre
-        texte_entier.setFont(new Font(30));
-        texte_entier.setFill(Color.GREY);
-        Light.Distant light = new Light.Distant();
-        light.setAzimuth(-45.0);
-        Lighting li = new Lighting();
-        li.setLight(light);
-        texte_entier.setEffect(li);
+        texte_entier.setText(this.questionSelected.getContent().toUpperCase());
         
         //ajout du texte a la zone
         fond_question.getChildren().add(texte_entier);
