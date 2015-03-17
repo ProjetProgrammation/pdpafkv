@@ -120,6 +120,8 @@ public class UserGUI {
         for (Language l : listL){
             //the text of the radiobutton
             RadioButton tmpRB = new RadioButton(l.getName());
+            //Design
+            tmpRB.getStyleClass().add("radio-button");
             //add audio object in tmpRB
             tmpRB.setUserData(l);
             //add tmpRB in toggle group
