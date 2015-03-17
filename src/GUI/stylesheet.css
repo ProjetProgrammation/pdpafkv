@@ -1,3 +1,20 @@
+.titleProsodie{
+    -fx-font-size:60px;
+    -fx-fill:#6495ED;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    
+}
+
+.global{
+    -fx-padding: 40 0 0 0;
+}
+
+.titleInformation{
+    -fx-font-size:26px;
+    -fx-fill:#6495ED;
+    -fx-margin-left:30;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
 
 .button{
   -fx-font-family: 'Montserrat', Arial, Helvetica, sans-serif;
@@ -30,29 +47,28 @@
    
 
 #user {
-    -fx-background-color:rgba(72,72,72,0.4);
+  //-fx-background-color:lightgrey;
   -fx-padding: 13 13 13 54;
-    -fx-width: 100%;
+   // -fx-width: 100%;
     -fx-float: left;
     -fx-left: 35%;
     -fx-position: absolute;
-    -fx-margin-top:30;
-    -fx-margin-left: -260;
     -fx-border-radius: 7;
+    -fx-alignment: CENTER;
 }
 
 .my_label {
-  -fx-background-color: rgba(72,72,72,0.4);
-  -fx-text-fill:white;
-  -fx-font-family: Helvetica, Arial, sans-serif;
+  //-fx-background-color: rgba(72,72,72,0.4);
+ // -fx-text-fill:white;
+ // -fx-font-family: Helvetica, Arial, sans-serif;
   -fx-font-weight:500;
   -fx-font-size: 24;
-  -fx-border-radius: 0;
-  -fx-line-height: 22px;
-  -fx-padding: 13 13 13 54;
-  -fx-margin-bottom: 10px;
-  -fx-width:100%;
-  -fx-box-sizing: border-box;
+   -fx-text-fill:#6495ED;
+ // -fx-border-radius: 0;
+  //-fx-line-height: 22px;
+  //-fx-padding: 13 13 13 54;
+  //-fx-margin-bottom: 10px;
+  //-fx-box-sizing: border-box;
 }
 
 .my_label:focus{

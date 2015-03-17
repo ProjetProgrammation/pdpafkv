@@ -31,7 +31,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -85,6 +87,11 @@ public class UserGUI {
         Label lB = new Label("Birthday");
         Label lMT = new Label("Mother Tongue");
         Label lYS = new Label("Years Studying");
+        lLN.setPrefSize(200, 20);
+        lFN.setPrefSize(200, 20);
+        lB.setPrefSize(200, 20);
+        lMT.setPrefSize(200, 20);
+        lYS.setPrefSize(200, 20);
         
         //character font
         Font font = new Font("Arial",14);
@@ -242,8 +249,8 @@ public class UserGUI {
         GridPane root = new GridPane();
         GridPane user = new GridPane();
         BorderPane global= new BorderPane();
-        
-        
+        //global.setId("global");
+       
         //Layout user assignement
         user.add(lLN,1,1);
         user.add(lFN,1,2);
@@ -264,12 +271,13 @@ public class UserGUI {
         
         //Text on top in primaryStage
         Text title = new Text("The Prosodic Adventure");
-        
+        title.getStyleClass().add("titleProsodie");
         //Text left part gridPane
         Text titleInformations = new Text("User's Information");
-        
+        titleInformations.getStyleClass().add("titleInformation");
         //Text right part gridPane
         Text titleLangue = new Text("User's language");
+        titleLangue.getStyleClass().add("titleInformation");
         
         //Layout root assignement
         root.add(user,0,2);
@@ -279,9 +287,10 @@ public class UserGUI {
         
         //definition elements in the principal layout
         global.setTop(title);
-        //global.setAlignment(title,CENTER);
+        global.setAlignment(title,CENTER);
         //global.setMargin(title, new Insets(20,0,20,0));
         global.setCenter(root);
+        global.getStyleClass().add("global");
         //global.setAlignment(root,CENTER);
         //global.setMargin(root, new Insets(0,0,0,20));
         
