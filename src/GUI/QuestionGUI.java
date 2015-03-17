@@ -39,7 +39,6 @@ public class QuestionGUI extends Parent {
         fond_question.setHgap(4);
         fond_question.setPrefWrapLength(300);
         fond_question.setPadding(new Insets(15, 12, 15, 12));
-        fond_question.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
         fond_question.setAlignment(Pos.CENTER);
         
         Text texte_entier = new Text();
@@ -69,6 +68,7 @@ public class QuestionGUI extends Parent {
         //ajout du texte a la zone
         fond_question.getChildren().add(texte_entier);
         this.getChildren().add(fond_question);
+        fond_question.getStyleClass().add("div1");
     }
     
     //Fonction qui retourne le texte ( Utile ? )
