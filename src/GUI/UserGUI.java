@@ -9,7 +9,10 @@ import BDD.*;
 
 import Errors.Errors;
 import Result.User;
+import com.google.gson.internal.bind.JsonTreeWriter;
+import com.google.gson.stream.JsonWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -41,6 +44,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import jdk.nashorn.internal.ir.debug.JSONWriter;
 import org.apache.commons.io.FilenameUtils;
 
 /**
@@ -229,9 +233,14 @@ public class UserGUI {
                         User user = new User("Thibaut","Fabre","26/02/1991","French",1);
                        languageSelect = (Language)choose.getSelectedToggle().getUserData();
                     try {
+                        File f = new File("..\\Result\\"+user.getNameToFile()+"_"+languageSelect.getName()+".json");
+                        FileOutputStream oFile = new FileOutputStream(f.getAbsoluteFile(), true);
+                        FileWriter fw = new FileWriter(f);
                         
-                        File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("Result\\"+user.getNameToFile()+"_"+languageSelect.getName()+".json"));
-                        System.out.println(f.getAbsolutePath());
+                        JsonWriter json = new JsonWriter(fw);
+                        json.beginObject();
+                        json.name("User").value(user.getFirstName());
+                        json.endObject();
                     } catch (Exception e) {
                         System.out.println("Problème création." + e.getMessage());
                     }
@@ -300,7 +309,8 @@ public class UserGUI {
         /*File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/caspian.css"));
         scene.getStylesheets().clear();
         scene.getStylesheets().add(f.toURI().toString());*/
-         File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/stylesheet.css"));
+        
+        File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/stylesheet.css"));
         scene.getStylesheets().clear();
         scene.getStylesheets().add(f.toURI().toString());
         
