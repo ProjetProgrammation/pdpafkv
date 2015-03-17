@@ -41,9 +41,6 @@ public class VideoGUI extends Parent {
         fond_video.setVgap(8);
         fond_video.setHgap(4);
         fond_video.autosize();
-        //fond_son.setPrefWrapLength(300);
-        //fond_son.setPadding(new Insets(30, 24, 30, 24));
-        fond_video.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
         fond_video.setAlignment(Pos.CENTER);
 
         //Création Button Play
@@ -101,6 +98,7 @@ public class VideoGUI extends Parent {
         fond_video.getChildren().add(zoneVideo);
         fond_video.getChildren().add(playVideo);
         this.getChildren().add(fond_video);
+        fond_video.getStyleClass().add("div1");
     }
     
     private void playAction(Video video){

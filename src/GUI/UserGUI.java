@@ -95,19 +95,7 @@ public class UserGUI {
         
         //character font
         Font font = new Font("Arial",14);
-        
-        //character font design
-        //lLN.setStyle("-fx-font-weight: bold;");
-        //lLN.setFont(new Font("Serif", 14));
-        //lFN.setStyle("-fx-font-weight: bold;");
-        //lFN.setFont(new Font("Serif", 14));
-        //lB.setStyle("-fx-font-weight: bold;");
-        //lB.setFont(new Font("Serif", 14));
-        //lMT.setStyle("-fx-font-weight: bold;");
-        //lMT.setFont(new Font("Serif", 14));
-        //lYS.setStyle("-fx-font-weight: bold;");
-        //lYS.setFont(new Font("Serif", 14));
-        
+       
         //Date format
         birthday.setPromptText("Example : 12/07/1998");
         
@@ -136,8 +124,6 @@ public class UserGUI {
         
         //Access button to go on next interface
         Button access = new Button("Access");
-        //access.setPrefSize(100, 40);
-        //access.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
               
         
         //Action button
@@ -273,10 +259,10 @@ public class UserGUI {
         Text title = new Text("The Prosodic Adventure");
         title.getStyleClass().add("titleProsodie");
         //Text left part gridPane
-        Text titleInformations = new Text("User's Information");
+        Text titleInformations = new Text("ABOUT YOU");
         titleInformations.getStyleClass().add("titleInformation");
         //Text right part gridPane
-        Text titleLangue = new Text("User's language");
+        Text titleLangue = new Text("TEST LANGUAGE");
         titleLangue.getStyleClass().add("titleInformation");
         
         //Layout root assignement
@@ -300,7 +286,7 @@ public class UserGUI {
         /*File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/caspian.css"));
         scene.getStylesheets().clear();
         scene.getStylesheets().add(f.toURI().toString());*/
-         File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/stylesheet.css"));
+        File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/stylesheet.css"));
         scene.getStylesheets().clear();
         scene.getStylesheets().add(f.toURI().toString());
         

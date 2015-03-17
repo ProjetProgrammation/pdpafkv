@@ -20,6 +20,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.apache.commons.io.FilenameUtils;
 
 
 
@@ -42,8 +43,8 @@ public class ChooseGUI {
         
         //Layout design and buttons
         GridPane root = new GridPane();
-        Button learnOption = new Button("Acces");
-        Button testOption = new Button("Acces");
+        Button learnOption = new Button("Access");
+        Button testOption = new Button("Access");
         
         //Action button learnOption
         learnOption.setOnAction(new EventHandler<ActionEvent>() {
@@ -64,23 +65,14 @@ public class ChooseGUI {
         //background window
         
         //Text on top in primaryStage
-        Text titleTop = new Text("Test prosodique");
-        titleTop.setFont(Font.font("Arial", FontWeight.BOLD, 38));
-        titleTop.setStyle("-fx-alignment: center;");
-        titleTop.setFill(Paint.valueOf("#22427C"));
-        
+        Text titleTop = new Text("Prosodic Test");
+        titleTop.getStyleClass().add("titleProsodie");
         //Text left part gridPane
-        Text titleInformations = new Text("Entrainement");
-        titleInformations.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        titleInformations.setStyle("-fx-alignment: center;");
-        titleInformations.setFill(Paint.valueOf("#22427C"));
-        
+        Text titleInformations = new Text("LEARN");
+        titleInformations.getStyleClass().add("titleInformation");
         //Text right part gridPane
-        Text titleTest = new Text("Test");
-        titleTest.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        titleTest.setStyle("-fx-alignment: center;");
-        titleTest.setFill(Paint.valueOf("#22427C"));
-        
+        Text titleTest = new Text("TEST");
+        titleTest.getStyleClass().add("titleInformation");
         //size of buttons
         testOption.setPrefSize(150, 50);
         learnOption.setPrefSize(150, 50);
@@ -108,7 +100,9 @@ public class ChooseGUI {
         //Create scene and add to stage
         Scene scene = new Scene(global);        
 
-        
+        File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/stylesheet.css"));
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add(f.toURI().toString()); 
         
         //background elements
         global.setId("global");

@@ -39,9 +39,6 @@ public class SonGUI extends Parent {
         fond_son.setVgap(8);
         fond_son.setHgap(4);
         fond_son.autosize();
-        //fond_son.setPrefWrapLength(300);
-        //fond_son.setPadding(new Insets(30, 24, 30, 24));
-        //fond_son.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
         fond_son.setAlignment(Pos.CENTER);
 
         //Création Button Play
@@ -99,6 +96,7 @@ public class SonGUI extends Parent {
         fond_son.getChildren().add(zoneSon);
         fond_son.getChildren().add(playSound);
         this.getChildren().add(fond_son);
+        fond_son.getStyleClass().add("div1");
    }
     // Fonction pour jouer le fichier Audio
     private void playAction(Audio audio){

@@ -8,6 +8,7 @@ import Controller.MediaSelected;
 import Controller.SelectMedia;
 import Result.Answer;
 import Result.Extract;
+import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -23,6 +24,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import org.apache.commons.io.FilenameUtils;
 
 
 public class TestGUI extends Parent{
@@ -72,10 +74,8 @@ public class TestGUI extends Parent{
         
    
         //Zone pour les boutons
-        Image imageMix = new Image(getClass().getResourceAsStream("mixer8.png"));
-        ImageView imageValid = new ImageView(new Image(getClass().getResourceAsStream("confirmation.png")));
-        Button mix = new Button("Mix", new ImageView(imageMix));
-        Button validate = new Button("Validate", imageValid);
+        Button mix = new Button("Mix");
+        Button validate = new Button("Validate");
         mix.setDisable(true);
         validate.setDisable(true);
         
@@ -157,22 +157,16 @@ public class TestGUI extends Parent{
         
 
         //Style GUI
-        root.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%,lightgrey, white) ; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2");
-        mix.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
-        validate.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
-        
         GridPane.setHalignment(question, HPos.CENTER);
-        GridPane.setHalignment(son, HPos.CENTER);   
-        GridPane.setHalignment(video, HPos.CENTER);
-        GridPane.setHalignment(mix, HPos.CENTER);
-        GridPane.setHalignment(validate, HPos.CENTER);
                 
         //Scene scene = new Scene(root,1400,800);
         Scene scene = new Scene(root);
-        this.stage.setScene(scene);
-          
+        File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/stylesheet.css"));
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add(f.toURI().toString());
+        
+        this.stage.setScene(scene);          
         this.stage.setFullScreenExitHint("");
-
         this.stage.show();
         
     } 
