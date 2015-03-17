@@ -252,38 +252,19 @@ public class UserGUI {
         user.add(yearStudying,2,5);
         
         //GUI background
-        //global.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%,lightgrey, white) ; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2");
         root.setAlignment(Pos.CENTER);
-        //root.setHgap(20);
-        //root.setVgap(20);
         
         //Text on top in primaryStage
         Label title = new Label("Prosodic Adventure".toUpperCase());
         title.getStyleClass().add("label-header");
-        //title.setFont(Font.font("Arial", FontWeight.BOLD, 38));
-        //title.setStyle("-fx-alignment: center;");
-        //title.setFill(Paint.valueOf("#22427C"));
         
         //Label left part gridPane
         Label titleInformations = new Label("ABOUT YOU  ");
         titleInformations.getStyleClass().add("label-header");
-        //titleInformations.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        //titleInformations.setStyle("-fx-alignment: center;");
-        //titleInformations.setFill(Paint.valueOf("#22427C"));
         
         //Label right part gridPane
         Label titleLangue = new Label("TEST LANGUAGE  ");
         titleLangue.getStyleClass().add("label-header");
-        //titleLangue.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        //titleLangue.setStyle("-fx-alignment: center;");
-        //titleLangue.setFill(Paint.valueOf("#22427C"));
-        
-        //Constraints
-        //root.setHalignment(titleInformations,HPos.CENTER);
-        //root.setMargin(titleInformations,new Insets(0,0,20,0));
-        //root.setHalignment(titleLangue,HPos.CENTER);
-        //root.setMargin(titleLangue,new Insets(0,0,20,50));
-        //root.setMargin(language,new Insets(0,0,0,100));
         
         //Layout root assignement
         root.add(user,0,2);
@@ -294,11 +275,7 @@ public class UserGUI {
         
         //definition elements in the principal layout
         global.setTop(title);
-        //global.setAlignment(title,CENTER);
-        //global.setMargin(title, new Insets(20,0,20,0));
         global.setCenter(root);
-        //global.setAlignment(root,CENTER);
-        //global.setMargin(root, new Insets(0,0,0,20));
         
         //Scene layout and addition of global
         Scene scene = new Scene(global);

@@ -8,6 +8,7 @@ import Controller.MediaSelected;
 import Controller.SelectMedia;
 import Result.Answer;
 import Result.Extract;
+import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -22,7 +23,9 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.apache.commons.io.FilenameUtils;
 
 
 public class TestGUI extends Parent{
@@ -70,12 +73,15 @@ public class TestGUI extends Parent{
         final SonGUI son = new SonGUI(this.selMedia);
         final VideoGUI video = new VideoGUI(this.selMedia);
         
+        //Loading Helvetica font
+        Font.loadFont(UserGUI.class.getResource("HelveticaNeueLTStd-LtCn.ttf").toExternalForm(), 10);
+        
    
         //Zone pour les boutons
-        Image imageMix = new Image(getClass().getResourceAsStream("mixer8.png"));
-        ImageView imageValid = new ImageView(new Image(getClass().getResourceAsStream("confirmation.png")));
-        Button mix = new Button("Mix", new ImageView(imageMix));
-        Button validate = new Button("Validate", imageValid);
+        //Image imageMix = new Image(getClass().getResourceAsStream("mixer8.png"));
+        //ImageView imageValid = new ImageView(new Image(getClass().getResourceAsStream("confirmation.png")));
+        Button mix = new Button("Merge".toUpperCase());
+        Button validate = new Button("Next".toUpperCase());
         mix.setDisable(true);
         validate.setDisable(true);
         
@@ -93,7 +99,7 @@ public class TestGUI extends Parent{
        // BorderPane mainborder = new BorderPane();        
         GridPane root = new GridPane();
         
-        //Definition des tailles des collones
+        //Definition des tailles des colonnes
         root.setHgap(20);
         root.setVgap(20);
         root.prefWidth(100.0);
@@ -102,7 +108,7 @@ public class TestGUI extends Parent{
         root.setGridLinesVisible(false);
         root.setAlignment(Pos.CENTER);
         
-        //Creation de la zone pour les bouton mix et valide et slider
+        //Creation de la zone pour les boutons mix et valide et slider
         GridPane mixValid = new GridPane();
         mixValid.setHgap(20);
         mixValid.setVgap(20);
@@ -157,9 +163,9 @@ public class TestGUI extends Parent{
         
 
         //Style GUI
-        root.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%,lightgrey, white) ; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2");
-        mix.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
-        validate.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
+        //root.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%,lightgrey, white) ; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2");
+        //mix.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
+        //validate.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
         
         GridPane.setHalignment(question, HPos.CENTER);
         GridPane.setHalignment(son, HPos.CENTER);   
@@ -168,8 +174,16 @@ public class TestGUI extends Parent{
         GridPane.setHalignment(validate, HPos.CENTER);
                 
         //Scene scene = new Scene(root,1400,800);
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root);       
+
+        //Applying styles
+        File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/DarkStyle.css"));
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add(f.toURI().toString());
+        
         this.stage.setScene(scene);
+        this.stage.centerOnScreen();
+        this.stage.setTitle("The Prosodic Adventure");
           
         this.stage.setFullScreenExitHint("");
 

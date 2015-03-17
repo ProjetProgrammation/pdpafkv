@@ -13,6 +13,7 @@ import javafx.geometry.Pos;
 import static javafx.geometry.Pos.CENTER;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
@@ -20,6 +21,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.apache.commons.io.FilenameUtils;
 
 
 
@@ -40,10 +42,13 @@ public class ChooseGUI {
 
     private void launchChooseGUI(final Language langSel,final DataBase db) {
         
+        //Loading Helvetica font
+        Font.loadFont(UserGUI.class.getResource("HelveticaNeueLTStd-LtCn.ttf").toExternalForm(), 10);
+        
         //Layout design and buttons
         GridPane root = new GridPane();
-        Button learnOption = new Button("Acces");
-        Button testOption = new Button("Acces");
+        Button learnOption = new Button("Training".toUpperCase());
+        Button testOption = new Button("Not training".toUpperCase());
         
         //Action button learnOption
         learnOption.setOnAction(new EventHandler<ActionEvent>() {
@@ -61,61 +66,49 @@ public class ChooseGUI {
             }
         });
         
-        //background window
+        //GUI background
+        root.setAlignment(Pos.CENTER);
         
         //Text on top in primaryStage
-        Text titleTop = new Text("Test prosodique");
-        titleTop.setFont(Font.font("Arial", FontWeight.BOLD, 38));
-        titleTop.setStyle("-fx-alignment: center;");
-        titleTop.setFill(Paint.valueOf("#22427C"));
+        Label titleTop = new Label("Prosodic Adventure".toUpperCase());
+        titleTop.getStyleClass().add("label-header");
+        Label titleButtons = new Label("What do you want to do?".toUpperCase());
+        titleButtons.getStyleClass().add("label-header");
         
-        //Text left part gridPane
-        Text titleInformations = new Text("Entrainement");
-        titleInformations.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        titleInformations.setStyle("-fx-alignment: center;");
-        titleInformations.setFill(Paint.valueOf("#22427C"));
-        
-        //Text right part gridPane
-        Text titleTest = new Text("Test");
-        titleTest.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        titleTest.setStyle("-fx-alignment: center;");
-        titleTest.setFill(Paint.valueOf("#22427C"));
+        //Adding LabelButtons to layout
+        root.add(titleButtons, 1, 1);
         
         //size of buttons
         testOption.setPrefSize(150, 50);
         learnOption.setPrefSize(150, 50);
         
-        //constraints
-        root.setMargin(titleInformations, new Insets(0,0,0,10));
-        root.setMargin(titleTest,new Insets(0,0,0,100));
-        root.setMargin(testOption,new Insets(0,0,0,50));
-     
         //Add buttons to layout
-        root.add(titleInformations,0,1);
-        root.add(titleTest,1,1);
-        root.add(learnOption, 0, 2);
-        root.add(testOption, 1, 2);
-        root.setAlignment(Pos.CENTER);
+        BorderPane paneButtons = new BorderPane();
+        paneButtons.setLeft(learnOption);
+        paneButtons.setRight(testOption);
+        root.add(paneButtons, 1, 2);
         //root.setGridLinesVisible(true);
         
         //add items in main layout
-        global.setCenter(root);
         global.setTop(titleTop);
-        global.setAlignment(titleTop,CENTER);
-        global.setMargin(titleTop, new Insets(20,0,20,0));
+        global.setCenter(root);
         
         
         //Create scene and add to stage
         Scene scene = new Scene(global);        
 
-        
+        File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/DarkStyle.css"));
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add(f.toURI().toString());
         
         //background elements
         global.setId("global");
 
         //scene design
         this.stage.setScene(scene);
-        this.stage.setResizable(true);
+        this.stage.centerOnScreen();
+        this.stage.setTitle("The Prosodic Adventure");
+        //this.stage.setResizable(true);
         //this.stage.setFullScreen(true);
         this.stage.setFullScreenExitHint("");       
     }  
