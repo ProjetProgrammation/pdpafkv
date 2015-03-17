@@ -81,31 +81,19 @@ public class UserGUI {
         
         final Errors erreurs = new Errors();
         //label's design
-        Label lLN = new Label("Last Name");
-        Label lFN = new Label("First Name");
-        Label lB = new Label("Birthday");
-        Label lMT = new Label("Mother Tongue");
-        Label lYS = new Label("Years Studying");
+        Label lLN = new Label("Last Name".toUpperCase());
+        Label lFN = new Label("First Name".toUpperCase());
+        Label lB = new Label("Birthday".toUpperCase());
+        Label lMT = new Label("Mother Tongue".toUpperCase());
+        Label lYS = new Label("Years Studying".toUpperCase());
         lLN.getStyleClass().add("label-bright");
         lFN.getStyleClass().add("label-bright");
         lB.getStyleClass().add("label-bright");
         lMT.getStyleClass().add("label-bright");
         lYS.getStyleClass().add("label-bright");
         
-        //character font
+        //Loading Helvetica font
         Font.loadFont(UserGUI.class.getResource("HelveticaNeueLTStd-LtCn.ttf").toExternalForm(), 10);
-        
-        //character font design
-        //lLN.setStyle("-fx-font-weight: bold;");
-        //lLN.setFont(new Font("Serif", 14));
-        //lFN.setStyle("-fx-font-weight: bold;");
-        //lFN.setFont(new Font("Serif", 14));
-        //lB.setStyle("-fx-font-weight: bold;");
-        //lB.setFont(new Font("Serif", 14));
-        //lMT.setStyle("-fx-font-weight: bold;");
-        //lMT.setFont(new Font("Serif", 14));
-        //lYS.setStyle("-fx-font-weight: bold;");
-        //lYS.setFont(new Font("Serif", 14));
         
         //Date format
         birthday.setPromptText("Example : 12/07/1998");
@@ -270,21 +258,21 @@ public class UserGUI {
         //root.setVgap(20);
         
         //Text on top in primaryStage
-        Label title = new Label("The Prosodic Adventure");
+        Label title = new Label("Prosodic Adventure".toUpperCase());
         title.getStyleClass().add("label-header");
         //title.setFont(Font.font("Arial", FontWeight.BOLD, 38));
         //title.setStyle("-fx-alignment: center;");
         //title.setFill(Paint.valueOf("#22427C"));
         
         //Label left part gridPane
-        Label titleInformations = new Label("ABOUT YOU");
+        Label titleInformations = new Label("ABOUT YOU  ");
         titleInformations.getStyleClass().add("label-header");
         //titleInformations.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         //titleInformations.setStyle("-fx-alignment: center;");
         //titleInformations.setFill(Paint.valueOf("#22427C"));
         
         //Label right part gridPane
-        Label titleLangue = new Label("TEST LANGUAGE");
+        Label titleLangue = new Label("TEST LANGUAGE  ");
         titleLangue.getStyleClass().add("label-header");
         //titleLangue.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         //titleLangue.setStyle("-fx-alignment: center;");
