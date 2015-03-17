@@ -68,12 +68,13 @@ public class UserGUI {
         this.launchUserGUI(this.createDataBase());
         
         //TextField Design
-        lastName.setPrefWidth(200);
+        /*lastName.setPrefWidth(200);
         lastName.setPrefHeight(30);
         firstName.setPrefHeight(30);
         birthday.setPrefHeight(30);
         motherTongue.setPrefHeight(30);
-        yearStudying.setPrefHeight(30);    
+        yearStudying.setPrefHeight(30);
+        */
     }
     
     private void launchUserGUI(final DataBase db) {
@@ -85,9 +86,14 @@ public class UserGUI {
         Label lB = new Label("Birthday");
         Label lMT = new Label("Mother Tongue");
         Label lYS = new Label("Years Studying");
+        lLN.getStyleClass().add("label-bright");
+        lFN.getStyleClass().add("label-bright");
+        lB.getStyleClass().add("label-bright");
+        lMT.getStyleClass().add("label-bright");
+        lYS.getStyleClass().add("label-bright");
         
         //character font
-        Font font = new Font("Arial",14);
+        Font.loadFont(UserGUI.class.getResource("HelveticaNeueLTStd-LtCn.ttf").toExternalForm(), 10);
         
         //character font design
         //lLN.setStyle("-fx-font-weight: bold;");
@@ -127,7 +133,7 @@ public class UserGUI {
         
         
         //Access button to go on next interface
-        Button access = new Button("Acces");
+        Button access = new Button("NEXT");
         access.setPrefSize(100, 40);
         //access.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
               
@@ -262,19 +268,22 @@ public class UserGUI {
         //root.setVgap(20);
         
         //Text on top in primaryStage
-        Text title = new Text("The Prosodic Adventure");
+        Label title = new Label("The Prosodic Adventure");
+        title.getStyleClass().add("label-header");
         //title.setFont(Font.font("Arial", FontWeight.BOLD, 38));
         //title.setStyle("-fx-alignment: center;");
         //title.setFill(Paint.valueOf("#22427C"));
         
-        //Text left part gridPane
-        Text titleInformations = new Text("User's Information");
+        //Label left part gridPane
+        Label titleInformations = new Label("ABOUT YOU");
+        titleInformations.getStyleClass().add("label-header");
         //titleInformations.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         //titleInformations.setStyle("-fx-alignment: center;");
         //titleInformations.setFill(Paint.valueOf("#22427C"));
         
-        //Text right part gridPane
-        Text titleLangue = new Text("User's language");
+        //Label right part gridPane
+        Label titleLangue = new Label("TEST LANGUAGE");
+        titleLangue.getStyleClass().add("label-header");
         //titleLangue.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         //titleLangue.setStyle("-fx-alignment: center;");
         //titleLangue.setFill(Paint.valueOf("#22427C"));
@@ -307,7 +316,7 @@ public class UserGUI {
         /*File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/caspian.css"));
         scene.getStylesheets().clear();
         scene.getStylesheets().add(f.toURI().toString());*/
-         File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/stylesheet.css"));
+         File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/DarkStyle.css"));
         scene.getStylesheets().clear();
         scene.getStylesheets().add(f.toURI().toString());
         
@@ -318,14 +327,15 @@ public class UserGUI {
         
         this.stage.setScene(scene);
         this.stage.centerOnScreen();
-        this.stage.setTitle("projet prosodie");
+        this.stage.setTitle("The Prosodic Adventure");
         
         //set Stage boundaries to visible bounds of the main screen
-        /*Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
         this.stage.setX(primaryScreenBounds.getMinX());
         this.stage.setY(primaryScreenBounds.getMinY());
         this.stage.setWidth(primaryScreenBounds.getWidth());
-        this.stage.setHeight(primaryScreenBounds.getHeight());*/
+        this.stage.setHeight(primaryScreenBounds.getHeight());
+        
         
         this.stage.show();  
         this.stage.setFullScreenExitHint("");
