@@ -17,6 +17,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Slider;
@@ -77,15 +78,21 @@ public class TestGUI extends Parent{
         //Loading Helvetica font
         Font.loadFont(UserGUI.class.getResource("HelveticaNeueLTStd-LtCn.ttf").toExternalForm(), 10);
         
+        //Création du titre
+        Label title = new Label();
+        title.getStyleClass().add("leabel-header");
+        
    
-        //Zone pour les boutons
-        BorderPane paneButtons = new BorderPane();
+        //Création des boutons
         Button mix = new Button("Merge".toUpperCase());
         Button validate = new Button("Next".toUpperCase());
         mix.setDisable(true);
         validate.setDisable(true);
-        paneButtons.setCenter(mix);
-        paneButtons.setRight(validate);
+        
+        //Organisation générale
+        BorderPane global = new BorderPane();
+        GridPane root = new GridPane();
+        root.setGridLinesVisible(true);
         
         //slider
         
@@ -98,15 +105,13 @@ public class TestGUI extends Parent{
         hb.setAlignment(Pos.CENTER);
         hb.getChildren().add(pb);*/
         
-       // BorderPane mainborder = new BorderPane();        
-        BorderPane root = new BorderPane();
+       // BorderPane mainborder = new BorderPane();
         
         //Definition des tailles des colonnes
         //root.setHgap(20);
         //root.setVgap(20);
-        root.autosize();
         
-        root.setPadding(new Insets(20, 20, 20, 20));
+        //root.setPadding(new Insets(20, 20, 20, 20));
         //root.setGridLinesVisible(false);
         //root.setAlignment(Pos.CENTER);
         
@@ -156,27 +161,27 @@ public class TestGUI extends Parent{
         
         
         
-        //ajout des element au BorderPane général
-        root.setTop(question);
-        root.setLeft(video);
-        root.setRight(son);
-        root.setBottom(paneButtons);
-        //root.add(hb,0,4); >> Mettre dans le paneButtons
+        //Ajout des element à root
+        root.add(question, 0, 0);
+        root.add(video, 0, 1);
+        root.add(son, 2, 1);
+        root.add(mix, 1, 2);
+        root.add(validate, 2, 2);
         
-
-        //Style GUI
-        //root.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%,lightgrey, white) ; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2");
-        //mix.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
-        //validate.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
+        //root.add(hb,0,4);
         
-        GridPane.setHalignment(question, HPos.CENTER);
-        GridPane.setHalignment(son, HPos.CENTER);   
-        GridPane.setHalignment(video, HPos.CENTER);
+        //Positionnement des éléments dans chaque cellule de root
+        /*GridPane.setHalignment(question, HPos.RIGHT);
+        GridPane.setHalignment(son, HPos.LEFT);   
+        GridPane.setHalignment(video, HPos.LEFT);
         GridPane.setHalignment(mix, HPos.CENTER);
-        GridPane.setHalignment(validate, HPos.CENTER);
+        GridPane.setHalignment(validate, HPos.RIGHT);*/
                 
-        //Scene scene = new Scene(root,1400,800);
-        Scene scene = new Scene(root);       
+        //Remplissage de global
+        global.setTop(title);
+        global.setCenter(root);
+        
+        Scene scene = new Scene(global);       
 
         //Applying styles
         File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/DarkStyle.css"));
