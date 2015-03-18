@@ -17,6 +17,7 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import org.apache.commons.io.FilenameUtils;
 
 
@@ -37,15 +38,15 @@ public class VideoGUI extends Parent {
     private void launchVideoGUI(){
 
         //Création + personnalisation FlowPane
-        FlowPane fond_video = new FlowPane();
+        GridPane fond_video = new GridPane();
         fond_video.getStyleClass().add("box");
         //fond_video.setVgap(8);
         //fond_video.setHgap(4);
-        fond_video.autosize();
+        //fond_video.autosize();
         //fond_son.setPrefWrapLength(300);
         //fond_son.setPadding(new Insets(30, 24, 30, 24));
         //fond_video.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
-        fond_video.setAlignment(Pos.CENTER);
+        //fond_video.setAlignment(Pos.CENTER);
 
         //Création Button Play
         final Button playVideo = new Button("Preview face");
@@ -59,6 +60,8 @@ public class VideoGUI extends Parent {
             Video videoTmp = this.selMedia.selectVideo();
             //Création RadioButton avec son texte
             RadioButton tmpRB = new RadioButton("Face "+(i+1));
+            //Définition de la classe de style
+            tmpRB.getStyleClass().add("radio-button");
             //Ajout de l'objet audio dans tmpRB
             tmpRB.setUserData(videoTmp);
             //Ajout du tmpRB dans le groupe Toggle
@@ -93,14 +96,15 @@ public class VideoGUI extends Parent {
         });
         
         //Personnalisation du GridPane
-        zoneVideo.autosize();
+        /*zoneVideo.autosize();
         zoneVideo.setHgap(20);
         zoneVideo.setVgap(20);
-        zoneVideo.setAlignment(Pos.CENTER);
+        zoneVideo.setAlignment(Pos.CENTER);*/
         
         //Ajout à FlowPane
-        fond_video.getChildren().add(zoneVideo);
-        fond_video.getChildren().add(playVideo);
+        fond_video.add(zoneVideo, 1, 1);
+        fond_video.add(playVideo, 1, 2);
+        fond_video.setAlignment(Pos.CENTER);
         this.getChildren().add(fond_video);
     }
     

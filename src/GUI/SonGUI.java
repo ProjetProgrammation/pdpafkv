@@ -39,10 +39,7 @@ public class SonGUI extends Parent {
         fond_son.getStyleClass().add("box");
         //fond_son.setVgap(8);
         //fond_son.setHgap(4);
-        fond_son.autosize();
-        //fond_son.setPrefWrapLength(300);
-        //fond_son.setPadding(new Insets(30, 24, 30, 24));
-        //fond_son.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
+        //fond_son.autosize();
         fond_son.setAlignment(Pos.CENTER);
 
         //Création Button Play
@@ -57,6 +54,8 @@ public class SonGUI extends Parent {
             Audio audioTmp = this.selMedia.selectAudio();
             //Création RadioButton avec son texte
             RadioButton tmpRB = new RadioButton("Voice "+(i+1));
+            //Définition de la classe de style
+            tmpRB.getStyleClass().add("radio-button");
             //Ajout de l'objet audio dans tmpRB
             tmpRB.setUserData(audioTmp);
             //Ajout du tmpRB dans le groupe Toggle
@@ -91,10 +90,10 @@ public class SonGUI extends Parent {
         });
         
         //Personnalisation du GridPane
-        zoneSon.autosize();
+        /*zoneSon.autosize();
         zoneSon.setHgap(20);
         zoneSon.setVgap(20);
-        zoneSon.setAlignment(Pos.CENTER);
+        zoneSon.setAlignment(Pos.CENTER);*/
         
         //Ajout à FlowPane
         fond_son.getChildren().add(zoneSon);

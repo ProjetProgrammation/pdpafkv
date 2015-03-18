@@ -80,7 +80,8 @@ public class UserGUI {
     private void launchUserGUI(final DataBase db) {
         
         final Errors erreurs = new Errors();
-        //label's design
+        
+        //Création des Labels pour la case user
         Label lLN = new Label("Last Name".toUpperCase());
         Label lFN = new Label("First Name".toUpperCase());
         Label lB = new Label("Birthday".toUpperCase());

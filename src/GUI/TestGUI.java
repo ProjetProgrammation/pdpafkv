@@ -162,11 +162,11 @@ public class TestGUI extends Parent{
         
         
         //Ajout des element à root
-        root.add(question, 0, 0);
-        root.add(video, 0, 1);
-        root.add(son, 2, 1);
-        root.add(mix, 1, 2);
-        root.add(validate, 2, 2);
+        root.add(question, 1, 1);
+        root.add(video, 1, 2);
+        root.add(son, 3, 2);
+        root.add(mix, 2, 3);
+        root.add(validate, 3, 3);
         
         //root.add(hb,0,4);
         
