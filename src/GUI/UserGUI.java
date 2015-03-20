@@ -42,7 +42,7 @@ import javafx.stage.Stage;
 import org.apache.commons.io.FilenameUtils;
 
 /**
- *
+ * Cette classe perme de gérer l'interface graphique récupérant les informations sur l'utilisateur
  * @author Thibaut
  */
 public class UserGUI {
@@ -62,74 +62,73 @@ public class UserGUI {
     private Language languageSelect;
             
     public UserGUI(Stage primaryStage) {
-        
         this.stage=primaryStage;
-        
         this.launchUserGUI(this.createDataBase());
-        
-        //TextField Design
-        /*lastName.setPrefWidth(200);
-        lastName.setPrefHeight(30);
-        firstName.setPrefHeight(30);
-        birthday.setPrefHeight(30);
-        motherTongue.setPrefHeight(30);
-        yearStudying.setPrefHeight(30);
-        */
     }
     
+    /**
+     * Cette méthode permet de créer l'interface graphique pour la page d'identification de l'utilisateur
+     * @param db La base de données contenant les médias
+     */
     private void launchUserGUI(final DataBase db) {
         
-        final Errors erreurs = new Errors();
+        final Errors errors = new Errors();
+        
+        //Pré-remplissage du champ Birthday
+        birthday.setPromptText("Example : 12/07/1998");
+
+        //Titre de la page
+        Label title = new Label("Prosodic Adventure".toUpperCase());
+        
+        //Titres des box
+        Label titleInformations = new Label("ABOUT YOU  ");
+        Label titleLangue = new Label("TEST LANGUAGE  ");
+       
+        //Création de la boites pour l'organisation de l'interface
+        VBox vBoxLanguage = new VBox();
+        GridPane root = new GridPane();
+        GridPane user = new GridPane();
+        BorderPane global= new BorderPane();
         
         //Création des Labels pour la case user
-        Label lLN = new Label("Last Name".toUpperCase());
-        Label lFN = new Label("First Name".toUpperCase());
-        Label lB = new Label("Birthday".toUpperCase());
-        Label lMT = new Label("Mother Tongue".toUpperCase());
-        Label lYS = new Label("Years Studying".toUpperCase());
-        lLN.getStyleClass().add("label-bright");
-        lFN.getStyleClass().add("label-bright");
-        lB.getStyleClass().add("label-bright");
-        lMT.getStyleClass().add("label-bright");
-        lYS.getStyleClass().add("label-bright");
+        Label labelLastName = new Label("Last Name".toUpperCase());
+        Label labelFirstName = new Label("First Name".toUpperCase());
+        Label labelBirthday = new Label("Birthday".toUpperCase());
+        Label labelMotherTongue = new Label("Mother Tongue".toUpperCase());
+        Label labelYearStudying = new Label("Years Studying".toUpperCase());
         
-        //Loading Helvetica font
-        Font.loadFont(UserGUI.class.getResource("HelveticaNeueLTStd-LtCn.ttf").toExternalForm(), 10);
+        //Ajout des classes de style
+        title.getStyleClass().add("label-header");
+        titleInformations.getStyleClass().add("label-header");
+        titleLangue.getStyleClass().add("label-header");
+        labelLastName.getStyleClass().add("label-bright");
+        labelFirstName.getStyleClass().add("label-bright");
+        labelBirthday.getStyleClass().add("label-bright");
+        labelMotherTongue.getStyleClass().add("label-bright");
+        labelYearStudying.getStyleClass().add("label-bright");
         
-        //Date format
-        birthday.setPromptText("Example : 12/07/1998");
-        
-        //Radio Buttons group
-        final ToggleGroup choose = new ToggleGroup();
-       
-        //Language layout
-        VBox language = new VBox();
-        
-        ArrayList<Language> listL = db.getAllLanguages();        
-        for (Language l : listL){
-            //the text of the radiobutton
-            RadioButton tmpRB = new RadioButton(l.getName().toUpperCase());
-            //Design
-            tmpRB.getStyleClass().add("radio-button");
-            //add audio object in tmpRB
-            tmpRB.setUserData(l);
-            //add tmpRB in toggle group
-            tmpRB.setToggleGroup(choose);
-            //customization of tmpRB
-            tmpRB.setFocusTraversable(false);
-            //add tmpRB in VBox
-            language.getChildren().add(tmpRB);
-        }
-        
-        
-        
-        //Access button to go on next interface
+        user.getStyleClass().add("box");
+        vBoxLanguage.getStyleClass().add("box");
+                
+        //Création du bouton NEXT
         Button access = new Button("NEXT");
         access.setPrefSize(100, 40);
-        //access.setStyle("-fx-background-color:lightgrey;-fx-font: 20 arial;-fx-border-radius: 5;-fx-border-color: grey;");
-              
         
-        //Action button
+        //Création d'un groupe de boutons radio
+        final ToggleGroup choose = new ToggleGroup();
+        
+        //Récuération des langues et création des boutons radio
+        ArrayList<Language> listL = db.getAllLanguages();        
+        for (Language l : listL){
+            RadioButton tmp = new RadioButton(l.getName().toUpperCase());
+            tmp.getStyleClass().add("radio-button");
+            tmp.setUserData(l);
+            tmp.setToggleGroup(choose);
+            tmp.setFocusTraversable(false);
+            vBoxLanguage.getChildren().add(tmp);
+        }
+        
+        //Gestion d'évenement lors de l'appui sur le bouton NEXT
         access.setOnAction(new EventHandler<ActionEvent>() {    
             @Override
             public void handle(ActionEvent event) {
@@ -139,7 +138,7 @@ public class UserGUI {
                 else{ */           
                     //Récupération données dans les champs
                 /*   String ln = lastName.getText();
-                    if (erreurs.ErrorsMessages(ln) != null){
+                    if (errors.ErrorsMessages(ln) != null){
                         System.out.println("Le nom est incorrect");
                        fauteA ++;
                     }
@@ -150,7 +149,7 @@ public class UserGUI {
                     }
                     
                     String fn = firstName.getText();
-                    if (erreurs.ErrorsMessages(fn) != null){
+                    if (errors.ErrorsMessages(fn) != null){
                         System.out.println("Le prénom est incorrect");
                        fauteB ++;
                     }
@@ -161,7 +160,7 @@ public class UserGUI {
                     }
                     
                     String mt = motherTongue.getText();
-                    if (erreurs.ErrorsMessages(mt) != null){
+                    if (errors.ErrorsMessages(mt) != null){
                         System.out.println("La langue est incorrect");
                        fauteC ++;
                     }
@@ -173,7 +172,7 @@ public class UserGUI {
                     
                     String bd = birthday.getText();
                     
-                    if (erreurs.errorDate(bd) == null){
+                    if (errors.errorDate(bd) == null){
                         if(fauteD != 0){
                            fauteD --; 
                         }
@@ -185,7 +184,7 @@ public class UserGUI {
                     
                     try{
                         Integer ys = Integer.parseInt(yearStudying.getText());
-                         if (erreurs.ErrorsMessages(ys) != null){
+                         if (errors.ErrorsMessages(ys) != null){
                             System.out.println("Le study est incorrect");
                            fauteE ++;
                          }
@@ -227,74 +226,53 @@ public class UserGUI {
                        new ChooseGUI(stage,languageSelect,db,user);
                        
                         /*
-                        erreurs.ErrorsOs();
+                        errors.ErrorsOs();
                     }
                     
                 //}*/
             }
         });
 
-        //Layout design
-        GridPane root = new GridPane();
-        GridPane user = new GridPane();
-        BorderPane global= new BorderPane();
         
-        
-        //Layout user assignement
-        user.add(lLN,1,1);
-        user.add(lFN,1,2);
-        user.add(lB,1,3);
-        user.add(lMT,1,4);
-        user.add(lYS,1,5);
+        //Remplissage des boites pour l'organisation de l'interface
+        user.add(labelLastName,1,1);
+        user.add(labelFirstName,1,2);
+        user.add(labelBirthday,1,3);
+        user.add(labelMotherTongue,1,4);
+        user.add(labelYearStudying,1,5);
         user.add(lastName,2,1);
         user.add(firstName,2,2);
         user.add(birthday,2,3);
         user.add(motherTongue,2,4);
         user.add(yearStudying,2,5);
-        
-        //GUI background
-        root.setAlignment(Pos.CENTER);
-        
-        //Text on top in primaryStage
-        Label title = new Label("Prosodic Adventure".toUpperCase());
-        title.getStyleClass().add("label-header");
-        
-        //Label left part gridPane
-        Label titleInformations = new Label("ABOUT YOU  ");
-        titleInformations.getStyleClass().add("label-header");
-        
-        //Label right part gridPane
-        Label titleLangue = new Label("TEST LANGUAGE  ");
-        titleLangue.getStyleClass().add("label-header");
-        
-        //Layout root assignement
         root.add(user,0,2);
-        root.add(language,1,2);
+        root.add(vBoxLanguage,1,2);
         root.add(access,1,3);
         root.add(titleInformations,0,1);
         root.add(titleLangue,1,1);
-        
-        //definition elements in the principal layout
         global.setTop(title);
         global.setCenter(root);
         
-        //Scene layout and addition of global
+        //Positionnement de root surla page
+        root.setAlignment(Pos.CENTER);
+        
+        //Ajout de tout le contenu dans la scene
         Scene scene = new Scene(global);
+        
+        //Chargement de la police pour le design
+        Font.loadFont(UserGUI.class.getResource("HelveticaNeueLTStd-LtCn.ttf").toExternalForm(), 10);
 
+        //Création du lien vers la feuille de style
         File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/DarkStyle.css"));
         scene.getStylesheets().clear();
-        scene.getStylesheets().add(f.toURI().toString());
+        scene.getStylesheets().add(f.toURI().toString());        
         
-        //access.getStyleClass().add("box");
-        user.getStyleClass().add("box");
-        language.getStyleClass().add("box");
-        
-        
+        //Initialisation de la fenêtre
         this.stage.setScene(scene);
         this.stage.centerOnScreen();
         this.stage.setTitle("The Prosodic Adventure");
         
-        //set Stage boundaries to visible bounds of the main screen
+        //Définition de la taille de la fenêtre
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
         this.stage.setX(primaryScreenBounds.getMinX());
         this.stage.setY(primaryScreenBounds.getMinY());
@@ -304,10 +282,9 @@ public class UserGUI {
         
         this.stage.show();  
         this.stage.setFullScreenExitHint("");
-        //this.stage.setFullScreen(true);
     }
     
-    //DataBase design
+    //Ouverture de la base de données
     private DataBase createDataBase(){
         return new DataBase();
     }
