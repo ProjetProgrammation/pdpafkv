@@ -10,19 +10,12 @@ import BDD.*;
 import Errors.Errors;
 import Result.User;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import static javafx.geometry.Pos.CENTER;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -33,10 +26,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.apache.commons.io.FilenameUtils;
@@ -210,8 +200,7 @@ public class UserGUI {
                     }
 
                     //Affichage pour voir si ajout OK
-                    //Extraction medias = new Extraction("..\\pdpafkv\\src\\Result\\Résultats.txt");
-                    //medias.extraire();
+                
                     if (fauteA == 0 && fauteB == 0 && fauteC == 0 && fauteD == 0 && fauteE == 0 && languageSelect != null){
                        */ 
                         User user = new User("Thibaut","Fabre","26/02/1991","French",1);
