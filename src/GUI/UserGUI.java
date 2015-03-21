@@ -242,7 +242,7 @@ public class UserGUI {
         global.setTop(title);
         global.setCenter(root);
         
-        //Positionnement de root surla page
+        //Positionnement de root sur la page
         root.setAlignment(Pos.CENTER);
         
         //Ajout de tout le contenu dans la scene
@@ -268,9 +268,7 @@ public class UserGUI {
         this.stage.setWidth(primaryScreenBounds.getWidth());
         this.stage.setHeight(primaryScreenBounds.getHeight());
         
-        
-        this.stage.show();  
-        this.stage.setFullScreenExitHint("");
+        this.stage.show();
     }
     
     //Ouverture de la base de données

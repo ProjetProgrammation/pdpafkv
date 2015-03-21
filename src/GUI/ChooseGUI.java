@@ -26,7 +26,10 @@ import org.apache.commons.io.FilenameUtils;
 
 
 
-
+/**
+ * Cette classe perme de gérer l'interface graphique pour le choix entre le mode test ou apprentissage.
+ * @author Thibaut
+ */
 public class ChooseGUI {
 
     private Stage stage;
@@ -40,17 +43,35 @@ public class ChooseGUI {
         
     }
 
+    /**
+     * Cette méthode permet de créer l'interface graphique pour le choix entre le mode test ou apprentissage.
+     * @param langSel La langue qui a été sélectionnée précédemment
+     * @param db La base de données qui contient les médias du test
+     */
     private void launchChooseGUI(final Language langSel,final DataBase db) {
         
-        //Loading Helvetica font
-        Font.loadFont(UserGUI.class.getResource("HelveticaNeueLTStd-LtCn.ttf").toExternalForm(), 10);
+        //Titre de la page
+        Label titleTop = new Label("Prosodic Adventure".toUpperCase());
         
-        //Layout design and buttons
-        GridPane root = new GridPane();
+        //Question-titre
+        Label titleButtons = new Label("What do you want to do?".toUpperCase());
+        
+        //Création des boutons
         Button learnOption = new Button("Training".toUpperCase());
         Button testOption = new Button("Not training".toUpperCase());
+        learnOption.setPrefSize(150, 50);
+        testOption.setPrefSize(150, 50);
         
-        //Action button learnOption
+        //Création des boites pour l'organisation de l'interface
+        GridPane root = new GridPane();
+        root.setAlignment(Pos.CENTER);
+        BorderPane paneButtons = new BorderPane();
+        
+        //Ajout des classes de style
+        titleTop.getStyleClass().add("label-header");
+        titleButtons.getStyleClass().add("label-header");
+        
+        //Définition de l'action pour le bouton learnOption
         learnOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
@@ -58,7 +79,7 @@ public class ChooseGUI {
             }
         });
         
-        //Action button learnOption
+        //Définition de l'action pour le bouton testOption
         testOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
@@ -66,51 +87,32 @@ public class ChooseGUI {
             }
         });
         
-        //GUI background
-        root.setAlignment(Pos.CENTER);
-        
-        //Text on top in primaryStage
-        Label titleTop = new Label("Prosodic Adventure".toUpperCase());
-        titleTop.getStyleClass().add("label-header");
-        Label titleButtons = new Label("What do you want to do?".toUpperCase());
-        titleButtons.getStyleClass().add("label-header");
-        
-        //Adding LabelButtons to layout
+        //Remplissage des boites pour l'organisation de l'interface
         root.add(titleButtons, 1, 1);
-        
-        //size of buttons
-        testOption.setPrefSize(150, 50);
-        learnOption.setPrefSize(150, 50);
-        
-        //Add buttons to layout
-        BorderPane paneButtons = new BorderPane();
         paneButtons.setLeft(learnOption);
         paneButtons.setRight(testOption);
         root.add(paneButtons, 1, 2);
-        //root.setGridLinesVisible(true);
-        
-        //add items in main layout
         global.setTop(titleTop);
         global.setCenter(root);
         
-        
-        //Create scene and add to stage
+        //Ajout de tout le contenu dans la scene
         Scene scene = new Scene(global);        
+        
+        //Loading Helvetica font
+        Font.loadFont(UserGUI.class.getResource("HelveticaNeueLTStd-LtCn.ttf").toExternalForm(), 10);
 
+        //Création du lien vers la feuille de style
         File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/DarkStyle.css"));
         scene.getStylesheets().clear();
         scene.getStylesheets().add(f.toURI().toString());
         
         //background elements
-        global.setId("global");
+        //global.setId("global");
 
-        //scene design
+        //Initialisation de la fenêtre
         this.stage.setScene(scene);
         this.stage.centerOnScreen();
         this.stage.setTitle("The Prosodic Adventure");
-        //this.stage.setResizable(true);
-        //this.stage.setFullScreen(true);
-        this.stage.setFullScreenExitHint("");       
     }  
     
 }
