@@ -4,21 +4,12 @@
  * and open the template in the editor.
  */
 package GUI;
-import BDD.DataBase;
-import BDD.Language;
 import BDD.Question;
 import Controller.SelectMedia;
-import java.util.ArrayList;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
-import javafx.scene.effect.Light;
-import javafx.scene.effect.Lighting;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 
 /**
  *
@@ -36,11 +27,7 @@ public class QuestionGUI extends Parent {
     private void launchQuest(){
         
         FlowPane fond_question = new FlowPane();
-        //fond_question.setVgap(8);
-        //fond_question.setHgap(4);
         fond_question.autosize();
-        //fond_question.setPadding(new Insets(15, 12, 15, 12));
-        //fond_question.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
         fond_question.setAlignment(Pos.CENTER);
         
         Label texte_entier = new Label();

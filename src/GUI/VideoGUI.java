@@ -8,7 +8,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -17,7 +16,6 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import org.apache.commons.io.FilenameUtils;
 
 
@@ -37,18 +35,12 @@ public class VideoGUI extends Parent {
     
     private void launchVideoGUI(){
 
-        //Création + personnalisation FlowPane
-        GridPane fond_video = new GridPane();
+        //Création boite
+        FlowPane fond_video = new FlowPane();
         fond_video.getStyleClass().add("box");
-        //fond_video.setVgap(8);
-        //fond_video.setHgap(4);
-        //fond_video.autosize();
-        //fond_son.setPrefWrapLength(300);
-        //fond_son.setPadding(new Insets(30, 24, 30, 24));
-        //fond_video.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2; -fx-border-color: #000000;");
-        //fond_video.setAlignment(Pos.CENTER);
+        fond_video.setAlignment(Pos.CENTER);
 
-        //Création Button Play
+        //Création du boutons de preview
         final Button playVideo = new Button("Preview face");
         playVideo.setDisable(true);
                 
@@ -56,19 +48,12 @@ public class VideoGUI extends Parent {
         final ToggleGroup groupVideo = new ToggleGroup();
         ArrayList<RadioButton> listRB = new ArrayList<>();
         for (int i=0; i<10; i++){
-            //Sélection d'un audio
             Video videoTmp = this.selMedia.selectVideo();
-            //Création RadioButton avec son texte
             RadioButton tmpRB = new RadioButton("Face "+(i+1));
-            //Définition de la classe de style
             tmpRB.getStyleClass().add("radio-button");
-            //Ajout de l'objet audio dans tmpRB
             tmpRB.setUserData(videoTmp);
-            //Ajout du tmpRB dans le groupe Toggle
             tmpRB.setToggleGroup(groupVideo);
-            //Personnalisation de tmpRB
             tmpRB.setFocusTraversable(false);
-            //Ajout tmpRB dans le GridPane
             if (i<5){
                 zoneVideo.add(tmpRB, i, 0);
             }
@@ -77,6 +62,7 @@ public class VideoGUI extends Parent {
             listRB.add(tmpRB);
         }
                 
+        //Activation du bouton de preview quand un bouton radio est sélectionné
         groupVideo.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
@@ -101,9 +87,9 @@ public class VideoGUI extends Parent {
         zoneVideo.setVgap(20);
         zoneVideo.setAlignment(Pos.CENTER);*/
         
-        //Ajout à FlowPane
-        fond_video.add(zoneVideo, 1, 1);
-        fond_video.add(playVideo, 1, 2);
+        //Remplissage des boites pour l'organisation de l'interface
+        fond_video.getChildren().add(zoneVideo);
+        fond_video.getChildren().add(playVideo);
         fond_video.setAlignment(Pos.CENTER);
         this.getChildren().add(fond_video);
     }
