@@ -39,3 +39,11 @@ Sur Ubuntu (et autres distributions compatibles, il faut installer cette solutio
 <li>JL.Rouas dit : "Je vous prépare ça pour la semaine prochaine."</li>
 <li>JL.Rouas dit : "Au revoir."</li>
 <ul>
+
+<H3>Réunion J.Frey</H3>
+
+<ul>
+<li>Rapport : prochaine séance mais parler un peu de ce que l'on a fait, des difficultés (rapidement).</li>
+<li>QCM : bon chance (langage objet, acronymes, ...).</li>
+<li>Rapport : vidéo de démo à bannir quand c'es tjuste de l'illustration, ça reste un support.</li>
+<ul>

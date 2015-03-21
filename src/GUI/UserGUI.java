@@ -12,20 +12,12 @@ import Result.User;
 import com.google.gson.internal.bind.JsonTreeWriter;
 import com.google.gson.stream.JsonWriter;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import static javafx.geometry.Pos.CENTER;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -38,17 +30,14 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import jdk.nashorn.internal.ir.debug.JSONWriter;
 import org.apache.commons.io.FilenameUtils;
 
 /**
- *
+ * Cette classe perme de gérer l'interface graphique récupérant les informations sur l'utilisateur
  * @author Thibaut
  */
 public class UserGUI {
@@ -68,69 +57,73 @@ public class UserGUI {
     private Language languageSelect;
             
     public UserGUI(Stage primaryStage) {
-        
         this.stage=primaryStage;
-        
         this.launchUserGUI(this.createDataBase());
-        
-        //TextField Design
-        lastName.setPrefWidth(200);
-        lastName.setPrefHeight(30);
-        firstName.setPrefHeight(30);
-        birthday.setPrefHeight(30);
-        motherTongue.setPrefHeight(30);
-        yearStudying.setPrefHeight(30);    
     }
     
+    /**
+     * Cette méthode permet de créer l'interface graphique pour la page d'identification de l'utilisateur
+     * @param db La base de données contenant les médias
+     */
     private void launchUserGUI(final DataBase db) {
         
-        final Errors erreurs = new Errors();
-        //label's design
-        Label lLN = new Label("Last Name");
-        Label lFN = new Label("First Name");
-        Label lB = new Label("Birthday");
-        Label lMT = new Label("Mother Tongue");
-        Label lYS = new Label("Years Studying");
-        lLN.setPrefSize(200, 20);
-        lFN.setPrefSize(200, 20);
-        lB.setPrefSize(200, 20);
-        lMT.setPrefSize(200, 20);
-        lYS.setPrefSize(200, 20);
+        final Errors errors = new Errors();
         
-        //character font
-        Font font = new Font("Arial",14);
-       
-        //Date format
+        //Pré-remplissage du champ Birthday
         birthday.setPromptText("Example : 12/07/1998");
+
+        //Titre de la page
+        Label title = new Label("Prosodic Adventure".toUpperCase());
         
-        //Radio Buttons group
-        final ToggleGroup choose = new ToggleGroup();
+        //Titres des box
+        Label titleInformations = new Label("ABOUT YOU  ");
+        Label titleLangue = new Label("TEST LANGUAGE  ");
        
-        //Language layout
-        VBox language = new VBox();
+        //Création de la boites pour l'organisation de l'interface
+        VBox vBoxLanguage = new VBox();
+        GridPane root = new GridPane();
+        GridPane user = new GridPane();
+        BorderPane global= new BorderPane();
         
+        //Création des Labels pour la case user
+        Label labelLastName = new Label("Last Name".toUpperCase());
+        Label labelFirstName = new Label("First Name".toUpperCase());
+        Label labelBirthday = new Label("Birthday".toUpperCase());
+        Label labelMotherTongue = new Label("Mother Tongue".toUpperCase());
+        Label labelYearStudying = new Label("Years Studying".toUpperCase());
+        
+        //Ajout des classes de style
+        title.getStyleClass().add("label-header");
+        titleInformations.getStyleClass().add("label-header");
+        titleLangue.getStyleClass().add("label-header");
+        labelLastName.getStyleClass().add("label-bright");
+        labelFirstName.getStyleClass().add("label-bright");
+        labelBirthday.getStyleClass().add("label-bright");
+        labelMotherTongue.getStyleClass().add("label-bright");
+        labelYearStudying.getStyleClass().add("label-bright");
+        
+        user.getStyleClass().add("box");
+        vBoxLanguage.getStyleClass().add("box");
+                
+        //Création du bouton NEXT
+        Button access = new Button("NEXT");
+        access.setPrefSize(100, 40);
+        
+        //Création d'un groupe de boutons radio
+        final ToggleGroup choose = new ToggleGroup();
+        
+        //Récuération des langues et création des boutons radio
         ArrayList<Language> listL = db.getAllLanguages();        
         for (Language l : listL){
-            //the text of the radiobutton
-            RadioButton tmpRB = new RadioButton(l.getName());
-            tmpRB.getStyleClass().add("Rbutton");
-            //add audio object in tmpRB
-            tmpRB.setUserData(l);
-            //add tmpRB in toggle group
-            tmpRB.setToggleGroup(choose);
-            //customization of tmpRB
-            tmpRB.setFocusTraversable(false);
-            //add tmpRB in VBox
-            language.getChildren().add(tmpRB);
+            RadioButton tmp = new RadioButton(l.getName().toUpperCase());
+            tmp.getStyleClass().add("radio-button");
+            tmp.setUserData(l);
+            tmp.setToggleGroup(choose);
+            tmp.setFocusTraversable(false);
+            vBoxLanguage.getChildren().add(tmp);
         }
         
-        
-        
-        //Access button to go on next interface
-        Button access = new Button("Access");
-              
-        
-        //Action button
+        //Gestion d'évenement lors de l'appui sur le bouton NEXT
         access.setOnAction(new EventHandler<ActionEvent>() {    
             @Override
             public void handle(ActionEvent event) {
@@ -140,7 +133,7 @@ public class UserGUI {
                 else{ */           
                     //Récupération données dans les champs
                 /*   String ln = lastName.getText();
-                    if (erreurs.ErrorsMessages(ln) != null){
+                    if (errors.ErrorsMessages(ln) != null){
                         System.out.println("Le nom est incorrect");
                        fauteA ++;
                     }
@@ -151,7 +144,7 @@ public class UserGUI {
                     }
                     
                     String fn = firstName.getText();
-                    if (erreurs.ErrorsMessages(fn) != null){
+                    if (errors.ErrorsMessages(fn) != null){
                         System.out.println("Le prénom est incorrect");
                        fauteB ++;
                     }
@@ -162,7 +155,7 @@ public class UserGUI {
                     }
                     
                     String mt = motherTongue.getText();
-                    if (erreurs.ErrorsMessages(mt) != null){
+                    if (errors.ErrorsMessages(mt) != null){
                         System.out.println("La langue est incorrect");
                        fauteC ++;
                     }
@@ -174,7 +167,7 @@ public class UserGUI {
                     
                     String bd = birthday.getText();
                     
-                    if (erreurs.errorDate(bd) == null){
+                    if (errors.errorDate(bd) == null){
                         if(fauteD != 0){
                            fauteD --; 
                         }
@@ -186,7 +179,7 @@ public class UserGUI {
                     
                     try{
                         Integer ys = Integer.parseInt(yearStudying.getText());
-                         if (erreurs.ErrorsMessages(ys) != null){
+                         if (errors.ErrorsMessages(ys) != null){
                             System.out.println("Le study est incorrect");
                            fauteE ++;
                          }
@@ -212,8 +205,7 @@ public class UserGUI {
                     }
 
                     //Affichage pour voir si ajout OK
-                    //Extraction medias = new Extraction("..\\pdpafkv\\src\\Result\\Résultats.txt");
-                    //medias.extraire();
+                
                     if (fauteA == 0 && fauteB == 0 && fauteC == 0 && fauteD == 0 && fauteE == 0 && languageSelect != null){
                        */ 
                         User user = new User("Thibaut","Fabre","26/02/1991","French",1);
@@ -233,99 +225,63 @@ public class UserGUI {
                        new ChooseGUI(stage,languageSelect,db,user);
                        
                         /*
-                        erreurs.ErrorsOs();
+                        errors.ErrorsOs();
                     }
                     
                 //}*/
             }
         });
 
-        //Layout design
-        GridPane root = new GridPane();
-        GridPane user = new GridPane();
-        BorderPane global= new BorderPane();
-        //global.setId("global");
-       
-        //Layout user assignement
-        user.add(lLN,1,1);
-        user.add(lFN,1,2);
-        user.add(lB,1,3);
-        user.add(lMT,1,4);
-        user.add(lYS,1,5);
+        
+        //Remplissage des boites pour l'organisation de l'interface
+        user.add(labelLastName,1,1);
+        user.add(labelFirstName,1,2);
+        user.add(labelBirthday,1,3);
+        user.add(labelMotherTongue,1,4);
+        user.add(labelYearStudying,1,5);
         user.add(lastName,2,1);
         user.add(firstName,2,2);
         user.add(birthday,2,3);
         user.add(motherTongue,2,4);
         user.add(yearStudying,2,5);
-        user.add(access, 2, 6);
-        
-        //GUI background
-        root.setAlignment(Pos.CENTER);
-        //root.setHgap(20);
-        //root.setVgap(20);
-        
-        //Text on top in primaryStage
-        Text title = new Text("The Prosodic Adventure");
-        title.getStyleClass().add("titleProsodie");
-        //Text left part gridPane
-        Text titleInformations = new Text("ABOUT YOU");
-        titleInformations.getStyleClass().add("titleInformation");
-        //Text right part gridPane
-        Text titleLangue = new Text("TEST LANGUAGE");
-        titleLangue.getStyleClass().add("titleInformation");
-        
-        //Layout root assignement
         root.add(user,0,2);
-        root.add(language,1,2);
+        root.add(vBoxLanguage,1,2);
+        root.add(access,1,3);
         root.add(titleInformations,0,1);
         root.add(titleLangue,1,1);
-        
-        //definition elements in the principal layout
         global.setTop(title);
-        global.setAlignment(title,CENTER);
-        //global.setMargin(title, new Insets(20,0,20,0));
         global.setCenter(root);
-        global.getStyleClass().add("global");
-        //global.setAlignment(root,CENTER);
-        //global.setMargin(root, new Insets(0,0,0,20));
         
-        //Scene layout and addition of global
+        //Positionnement de root sur la page
+        root.setAlignment(Pos.CENTER);
+        
+        //Ajout de tout le contenu dans la scene
         Scene scene = new Scene(global);
         
-        /*File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/caspian.css"));
-        scene.getStylesheets().clear();
-        scene.getStylesheets().add(f.toURI().toString());*/
-        File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/stylesheet.css"));
+        //Chargement de la police pour le design
+        Font.loadFont(UserGUI.class.getResource("HelveticaNeueLTStd-LtCn.ttf").toExternalForm(), 10);
+
+        //Création du lien vers la feuille de style
+        File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/DarkStyle.css"));
         scene.getStylesheets().clear();
         scene.getStylesheets().add(f.toURI().toString());
         
-        access.setId("access");
-        user.setId("user");
-        language.setId("language");
-        lLN.getStyleClass().add("my_label");
-        lFN.getStyleClass().add("my_label");
-        lB.getStyleClass().add("my_label");
-        lMT.getStyleClass().add("my_label");
-        lYS.getStyleClass().add("my_label");
-        
-        
+        //Initialisation de la fenêtre
         this.stage.setScene(scene);
         this.stage.centerOnScreen();
-        this.stage.setTitle("projet prosodie");
+        this.stage.setTitle("The Prosodic Adventure");
         
-        //set Stage boundaries to visible bounds of the main screen
+        //Définition de la taille de la fenêtre
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
         this.stage.setX(primaryScreenBounds.getMinX());
         this.stage.setY(primaryScreenBounds.getMinY());
         this.stage.setWidth(primaryScreenBounds.getWidth());
         this.stage.setHeight(primaryScreenBounds.getHeight());
         
-        this.stage.show();  
-        this.stage.setFullScreenExitHint("");
-        //this.stage.setFullScreen(true);
+        this.stage.show();
     }
     
-    //DataBase design
+    //Ouverture de la base de données
     private DataBase createDataBase(){
         return new DataBase();
     }
