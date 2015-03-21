@@ -27,14 +27,7 @@ public class QuestionGUI extends Parent {
     private void launchQuest(){
         
         FlowPane fond_question = new FlowPane();
-<<<<<<< HEAD
-        fond_question.setVgap(8);
-        fond_question.setHgap(4);
-        fond_question.setPrefWrapLength(300);
-        fond_question.setPadding(new Insets(15, 12, 15, 12));
-=======
         fond_question.autosize();
->>>>>>> DarkTheme
         fond_question.setAlignment(Pos.CENTER);
         
         Label texte_entier = new Label();
