@@ -1,25 +1,17 @@
 package GUI;
 import BDD.DataBase;
 import BDD.Language;
-import BDD.Question;
-import Controller.SelectMedia;
 import Result.User;
 import java.io.File;
-import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import static javafx.geometry.Pos.CENTER;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.apache.commons.io.FilenameUtils;
 
