@@ -80,17 +80,16 @@ public class TestGUI extends Parent{
         validate.setDisable(true);
         
         //slider
+        Slider slider = new Slider();
+        slider.setMin(0);
+        slider.setMax(100);
+        slider.setValue(40);
+        slider.setShowTickLabels(true);
+        slider.setShowTickMarks(true);
+        slider.setMajorTickUnit(50);
+        slider.setMinorTickCount(5);
+        slider.setBlockIncrement(10);
         
-               
-        /*final ProgressBar pb = new ProgressBar();
-        pb.setProgress((this.numEnCours/this.nbQuestion)F);
-        
-        HBox hb = new HBox();
-        hb.setSpacing(5);
-        hb.setAlignment(Pos.CENTER);
-        hb.getChildren().add(pb);*/
-        
-       // BorderPane mainborder = new BorderPane();        
         GridPane root = new GridPane();
         
         //Definition des tailles des collones
@@ -152,7 +151,7 @@ public class TestGUI extends Parent{
         root.add(question,0,0,3,1);
         root.add(video,0,1,1,3);
         root.add(son,2,1,1,3);
-        //root.add(hb,0,4);
+        root.add(slider,0,4);
         root.add(mixValid,2,4);
         
 
