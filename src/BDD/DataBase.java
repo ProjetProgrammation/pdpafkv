@@ -1,7 +1,3 @@
-/*
- * Cette classe sert à créer la base de données et intéragir avec cette dernière.
- */
-
 /***********************************************
 
 
@@ -20,7 +16,7 @@ import java.util.ArrayList;
 
 
 /**
- *
+ * Cette classe sert à créer la base de données et intéragir avec cette dernière.
  * @author akervadec
  */
 public class DataBase {
@@ -39,12 +35,13 @@ public class DataBase {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-		} catch ( Exception e ) {
+		} catch ( ClassNotFoundException | SQLException e ) {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);
 		}
 		System.out.println("Opened database successfully");
 	}
+        
 
 	/**
 	* Exécute les requêtes SQL permettant de créer les tables dans la base de données dataBase.db
@@ -82,67 +79,68 @@ public class DataBase {
 			stmt.executeUpdate(sql);
 			stmt.close();
 			c.close();
-		} catch ( Exception e ) {
+		} catch ( ClassNotFoundException | SQLException e ) {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);
 		}
 		System.out.println("[CreateTables]Tables created successfully");
 	}
 
+        
 	/**
 	* Ajoute une vidéo dans la base de données dataBase.db puis créé un objet correspondant
 	* @param name Le nom de la vidéo à ajouter
-	* @param file_path Le chemin sur le disque de la vidéo à ajouter
-	* @param language La langue de la vidéo
+	* @param filePath Le chemin sur le disque de la vidéo à ajouter
+	* @param nameLanguage La langue de la vidéo
 	* @param format Le format de la vidéo
 	*/
 	public void addVideo(String name, String filePath, String format, String nameLanguage){
-		Connection c = null;
-		PreparedStatement stmtLang = null;
-		PreparedStatement stmtAdd = null;
-		int idLang=0;
-		if(this.searchVideoByNameFormat(name, format).getId() != 0){
-			System.out.println("[addVideo]This video already exists.");
-		}
-		else{
-			String query = new String("SELECT id FROM Language WHERE Language.name=?;");
-			try {
-				Class.forName("org.sqlite.JDBC");
-				c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-		    	c.setAutoCommit(false);	//Mise en place de la transaction manuelle
-		    	System.out.println("[addVideo]Opened database successfully");
+            Connection c = null;
+            PreparedStatement stmtLang = null;
+            PreparedStatement stmtAdd = null;
+            int idLang=0;
+            if(this.searchVideoByNameFormat(name, format).getId() != 0){
+                    System.out.println("[addVideo]This video already exists.");
+            }
+            else{
+                    String query = new String("SELECT id FROM Language WHERE Language.name=?;");
+                    try {
+                            Class.forName("org.sqlite.JDBC");
+                            c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
+                    c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+                    System.out.println("[addVideo]Opened database successfully");
 
-		    	//Recherche de l'id de la langue de la vidéo
+                    //Recherche de l'id de la langue de la vidéo
 
-		    	stmtLang = c.prepareStatement(query);
-		    	stmtLang.setString(1,nameLanguage);	//Ajout des paramètres (variables) "?" de la ligne d'avant.
-		    	ResultSet rs = stmtLang.executeQuery();
-		    	while(rs.next()){
-		    		idLang = rs.getInt("id");
-		    	}
+                    stmtLang = c.prepareStatement(query);
+                    stmtLang.setString(1,nameLanguage);	//Ajout des paramètres (variables) "?" de la ligne d'avant.
+                    ResultSet rs = stmtLang.executeQuery();
+                    while(rs.next()){
+                            idLang = rs.getInt("id");
+                    }
 
-                        //Ajout de la vidéo
+                    //Ajout de la vidéo
 
-		    	query = "INSERT INTO Video(name,file_path,id_language,format) VALUES (?,?,?,?);";
-		    	stmtAdd = c.prepareStatement(query);
-		    	//Paramétrage des variables de requête
-		    	stmtAdd.setString(1,name);
-		    	stmtAdd.setString(2,filePath);
-		    	stmtAdd.setInt(3,idLang);
-		    	stmtAdd.setString(4,format);
-		    	stmtAdd.executeUpdate();
+                    query = "INSERT INTO Video(name,file_path,id_language,format) VALUES (?,?,?,?);";
+                    stmtAdd = c.prepareStatement(query);
+                    //Paramétrage des variables de requête
+                    stmtAdd.setString(1,name);
+                    stmtAdd.setString(2,filePath);
+                    stmtAdd.setInt(3,idLang);
+                    stmtAdd.setString(4,format);
+                    stmtAdd.executeUpdate();
 
-		    	rs.close();
-		    	stmtLang.close();
-		    	stmtAdd.close();
-		    	c.commit();
-		    	c.close();
-		    } catch ( Exception e ) {
-		    	System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-		    	System.exit(0);
-		    }
-		    System.out.println("[addVideo]The video "+ name +"."+ format +" successfuly added to the DB");
-		}
+                    rs.close();
+                    stmtLang.close();
+                    stmtAdd.close();
+                    c.commit();
+                    c.close();
+                } catch ( ClassNotFoundException | SQLException e ) {
+                    System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                    System.exit(0);
+                }
+                System.out.println("[addVideo]The video "+ name +"."+ format +" successfuly added to the DB");
+            }
 	}
 
 
@@ -151,7 +149,7 @@ public class DataBase {
 	*	@param name Le nom du fichier
 	*	@param filePath Le chemin du fichier
 	*	@param format Le format du fichier
-	*	@param laguage La langue du fichier
+	*	@param nameLanguage La langue du fichier
 	*/
 	public void addAudio(String name, String filePath, String format, String nameLanguage){
 		Connection c = null;
@@ -194,7 +192,7 @@ public class DataBase {
 		    	stmtAdd.close();
 		    	c.commit();
 		    	c.close();
-		    } catch ( Exception e ) {
+		    } catch ( ClassNotFoundException | SQLException e ) {
 		    	System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 		    	System.exit(0);
 		    }
@@ -202,6 +200,7 @@ public class DataBase {
 		}
 	}
 
+        
 	/**
 	*	Ajout d'une question dans la base de données dataBase.db, avec les objets Video et Audio connus et créés
 	*	@param content La question (son contenu)
@@ -244,13 +243,14 @@ public class DataBase {
 		    	stmtAdd.close();
 		    	c.commit();
 		    	c.close();
-		    } catch ( Exception e ) {
+		    } catch ( ClassNotFoundException | SQLException e ) {
 		    	System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 		    	System.exit(0);
 		    }
 		    System.out.println("[addQuestion]The question \"" + content + "\" successfuly added.");
 		}
 	}
+        
 
 	/**
 	*	Ajout d'un langage dans la base de données dataBase.db
@@ -277,17 +277,18 @@ public class DataBase {
 				stmt.close();
 				c.commit();
 				c.close();
-			} catch ( Exception e ) {
+			} catch ( ClassNotFoundException | SQLException e ) {
 				System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 				System.exit(0);
 			}
 			System.out.println("[addLanguage]The language " + name + " successfuly added.");
 		}
 	}
+        
 
 	/**
 	*	Sélection au hasard d'une vidéo dans la base de données en fonction d'une langue voulue
-	*	@param Language La langue de la vidéo souhaitée
+	*	@param language La langue de la vidéo souhaitée
 	*	@return Une instance de la vidéo choisie au hasard dans la base de données
 	*/
 	public Video manageVideo(Language language){
@@ -317,17 +318,18 @@ public class DataBase {
 			stmt.close();
 			c.close();
 			return(result);
-		} catch ( Exception e ) {
+		} catch ( ClassNotFoundException | SQLException e ) {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);
 		}
 		System.out.println("[manageVideo]Error");
 		return(null);
 	}
+        
 
 	/**
 	*	Sélection au hasard d'un audio dans la base de données en fonction d'une langue voulue
-	*	@param Language La langue de l'audio souhaité
+	*	@param language La langue de l'audio souhaité
 	*	@return Une instance de l'audio choisi au hasard dans la base de données
 	*/
 	public Audio manageAudio(Language language){
@@ -357,7 +359,7 @@ public class DataBase {
 			stmt.close();
 			c.close();
 			return(result);
-		} catch ( Exception e ) {
+		} catch ( ClassNotFoundException | SQLException e ) {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);
 		}
@@ -365,9 +367,10 @@ public class DataBase {
 		return(null);
 	}
 
+        
 	/**
 	*	Sélection au hasard d'une question dans la base de données en fonction d'une langue voulue
-	*	@param Language La langue de la question souhaitée
+	*	@param language La langue de la question souhaitée
 	*	@return Une instance de la question choisie au hasard dans la base de données
 	*/
 	public Question manageQuestion(Language language){
@@ -396,7 +399,7 @@ public class DataBase {
 			stmt.close();
 			c.close();
 			return(result);
-		} catch ( Exception e ) {
+		} catch ( ClassNotFoundException | SQLException e ) {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);
 		}
@@ -404,6 +407,7 @@ public class DataBase {
 		return(null);
 	}
 
+        
 	/**
 	*	Recherche d'un langage dans la base de données avec son nom.
 	*	La langue DOIT exister.
@@ -434,13 +438,14 @@ public class DataBase {
 	    	stmt.close();
 	    	c.close();
 	    	return(language);
-	    } catch ( Exception e ) {
+	    } catch ( ClassNotFoundException | SQLException e ) {
 	    	System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 	    }
 	    System.out.println("[searchLanguageByName]Error");
 	    return(null);
 	}
 
+        
 	/**
 	*	Recherche d'une vidéo dans la base de données avec son nom et son extension, si non trouvé, retourne l'instance avec un id = 0.
 	*
@@ -476,13 +481,14 @@ public class DataBase {
 	    	stmt.close();
 	    	c.close();
 	    	return(video);
-	    } catch ( Exception e ) {
+	    } catch ( ClassNotFoundException | SQLException e ) {
 	    	System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 	    }
 	    System.out.println("[searchVideoByNameFormat]Error");
 	    return(null);
 	}
 
+        
 	/**
 	*	Recherche d'un audio dans la base de données avec son nom et son extension.
 	*
@@ -518,21 +524,19 @@ public class DataBase {
 	    	stmt.close();
 	    	c.close();
 	    	return(audio);
-	    } catch ( Exception e ) {
+	    } catch ( ClassNotFoundException | SQLException e ) {
 	    	System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 	    }
 	    System.out.println("[searchAudioByNameFormat]Error");
 	    return(null);
 	}
 
+        
 	/**
-	*	Recherche d'une question dans la base de données avec son content, l'id de sa vidéo, l'id de son audio et l'id de sa langue.
+	* Recherche d'une question dans la base de données avec son content, l'id de sa vidéo, l'id de son audio om de la question recherchée
 	*
-	*	@param name
-	*				Le nom de la question recherchée
-	*	@param format
-	*				Le format de la question recherchée
-	*	@return Une instance de la question recherchée dans la base de données, si non trouvé, retourne l'instance avec un id = 0.
+        * @param content Le contenu de la question
+        * @return Une instance de la question recherchée dans la base de données, si non trouvé, retourne l'instance avec un id = 0.
 	*/
 	public Question searchQuestionByContent(String content){
 		Connection c = null;
@@ -559,13 +563,14 @@ public class DataBase {
 	    	stmt.close();
 	    	c.close();
 	    	return(question);
-	    } catch ( Exception e ) {
+	    } catch ( ClassNotFoundException | SQLException e ) {
 	    	System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 	    }
 	    System.out.println("[searchQuestionByContent]Error");
 	    return(null);
 	}
 
+        
         /**
          * Cette méthode retourne l'ensemble des questions contenues dans la base de données.
          * @return La liste de toutes les question dans un ArrayList\<Question\>
@@ -599,12 +604,13 @@ public class DataBase {
                 stmt.close();
                 c.close();
                 return(result);
-            } catch ( Exception e ) {
+            } catch ( ClassNotFoundException | SQLException e ) {
             	System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             }
             System.out.println("[getAllQuestions]Error");
             return(null);
         }
+        
         
         /**
          * Cette méthode retourne l'ensemble des vidéos contenues dans la base de données.
@@ -639,12 +645,13 @@ public class DataBase {
                 stmt.close();
                 c.close();
                 return(result);
-            } catch ( Exception e ) {
+            } catch ( ClassNotFoundException | SQLException e ) {
             	System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             }
             System.out.println("[getAllVideos]Error");
             return(null);
         }
+        
         
         /**
          * Cette méthode retourne l'ensemble des audios contenus dans la base de données.
@@ -679,12 +686,13 @@ public class DataBase {
                 stmt.close();
                 c.close();
                 return(result);
-            } catch ( Exception e ) {
+            } catch ( ClassNotFoundException | SQLException e ) {
             	System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             }
             System.out.println("[getAllAudios]Error");
             return(null);
         }
+        
         
         /**
          * Cette méthode retourne l'ensemble des langages contenus dans la base de données.
@@ -716,13 +724,14 @@ public class DataBase {
                 stmt.close();
                 c.close();
                 return(result);
-            } catch ( Exception e ) {
+            } catch ( ClassNotFoundException | SQLException e ) {
             	System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             }
             System.out.println("[getAllLanguages]Error");
             return(null);
         }
 
+        
         /**
          * Compte le nombre de tuples dans la langue idLanguage dans la table Audio de la BDD
          * @param idLanguage
@@ -750,11 +759,12 @@ public class DataBase {
                 stmt.close();
                 c.close();
             }
-            catch(Exception e){
+            catch(ClassNotFoundException | SQLException e){
                 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             }
             return result;
         }
+        
         
         /**
          * Compte le nombre de tuples dans la langue idLanguage dans la table Question de la BDD
@@ -783,12 +793,13 @@ public class DataBase {
                 stmt.close();
                 c.close();
             }
-            catch(Exception e){
+            catch(ClassNotFoundException | SQLException e){
                     System.out.println("erreurs");
             }
                     
             return result;
         }
+        
         
         /**
          * Compte le nombre de tuples dans la langue idLanguage dans la table Video de la BDD
@@ -815,11 +826,55 @@ public class DataBase {
                 stmt.close();
                 c.close();
             }
-            catch(Exception e){
+            catch(ClassNotFoundException | SQLException e){
                 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             }
                     
             return result;
+        }
+        
+        
+        /**
+         * Supprime la vidéo dont le nom est passé en commentaire
+         * @param videoName Nom de la vidéo à supprimer
+         * @param format Format de la vidéo à supprimer
+         */
+        public void rmVideo(String videoName, String format){
+            Connection c = null;
+            PreparedStatement stmtAdd = null;
+            int idLang=0;
+            Video tmp = new Video(this.searchVideoByNameFormat(videoName, format));
+            if(tmp.getId() == 0){
+                    System.out.println("[rmVideo]This video doesn't exist.");
+            }
+            else{
+                try {
+                    Class.forName("org.sqlite.JDBC");
+                    c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
+                    c.setAutoCommit(false);
+                    System.out.println("[rmVideo]Opened database successfully");
+
+                    //Suppression de la vidéo
+                    
+                    String query = "DELETE FROM Video WHERE id=? AND name=? AND file_path=? AND format=? AND id_language=?;";
+                    stmtAdd = c.prepareStatement(query);
+                    //Paramétrage des variables de requête
+                    stmtAdd.setInt(1,tmp.getId());
+                    stmtAdd.setString(2,tmp.getName());
+                    stmtAdd.setString(3,tmp.getFilePath());
+                    stmtAdd.setString(4,tmp.getFormat());
+                    stmtAdd.setInt(5,tmp.getIdLanguage());
+                    stmtAdd.executeUpdate();
+                    
+                    stmtAdd.close();
+                    c.commit();
+                    c.close();
+                } catch ( ClassNotFoundException | SQLException e ) {
+                    System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                    System.exit(0);
+                }
+                System.out.println("[rmVideo]The video "+ tmp.getName() +"."+ tmp.getFormat() +" successfuly removed from the DB");
+            }
         }
 
 }
