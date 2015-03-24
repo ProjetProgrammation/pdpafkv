@@ -22,7 +22,7 @@ public class MediaPlayer {
     static private EmbeddedMediaPlayerComponent emp;
     
     public static void load(String pathV){        
-        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "C:\\Users\\guillaume\\Desktop\\VLC");
+        //NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "C:\\Users\\guillaume\\Desktop\\VLC");
         Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
         emp = new EmbeddedMediaPlayerComponent();
         frame.setContentPane(emp);
