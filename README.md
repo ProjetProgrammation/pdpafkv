@@ -1,5 +1,16 @@
 <H1>Prosodic Adventure</H1>
 
+<H2>TODO Absolutely !</H2>
+
+<ul>
+<li>
+	Améliorer Database.java pour retirer la duplication de code :
+	<ul>
+	<li>Créer Media.java puis supprimer les méthodes inutiles dans Database.java</li>
+	<li>Faire un méthode qui se connecte à la BDD et retourne les objets de connexion & etc.</li>
+	</ul>
+</li>
+</ul>
 
 <H2>Résumé</H2>
 
