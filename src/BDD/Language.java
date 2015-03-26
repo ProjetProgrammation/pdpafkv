@@ -1,90 +1,104 @@
 /*
- * Cette classe permet de créer des langues
+ * 
  */
-
 package BDD;
 
 /**
+ *
+ * Use this class to create a new Language.
  *
  * @author akervadec
  */
 public class Language {
 
-	private int id;
-	private String name;
+    private int id;
+    private String name;
 
-	/**
-	* Constructeur Language.
-	*/
-	public Language(){
-		this.name=new String();
-	}
+    /**
+     * Constructs an empty Language object with a id = 0.
+     */
+    public Language() {
+        this.name = new String();
+    }
 
-	/**
-	* Constructeur Language.
-	* 
-	* @param name
-	*            Le nom du "langage".
-	*/
-	public Language(String name){
-		this.name=name;
-	}
+    /**
+     * Constructs a Language object wih its name in parameter.
+     *
+     * @param name Language's name
+     */
+    public Language(String name) {
+        this.name = name;
+    }
 
-	/**
-	* Constructeur Language.
-	* 
-	* @param id
-	*            L'id' du "langage".
-	* @param name
-	*            Le nom du "langage".
-	*/
-	public Language(int id, String name){
-		this.id=id;
-		this.name=new String(name);
-	}
+    /**
+     * Constructs a Language object with its name and id in parameter.
+     *
+     * @param id Language's id.
+     * @param name Language's name.
+     */
+    public Language(int id, String name) {
+        this.id = id;
+        this.name = new String(name);
+    }
 
-	/**
-	* Constructeur Language.
-	* 
-	* @param language
-	*            Le langage du "langage" (clonage d'un autre langage).
-	*/
-	public Language(Language language){
-		this.name=language.getName();
-	}
-	
-	/**
-	* Getter de id
-	* @return L'attribut id
-	*/
-	public int getId(){return this.id;}
+    /**
+     * Constructs a copy of the Language object in parameter.
+     *
+     * @param language The Language to copy into the new object.
+     */
+    public Language(Language language) {
+        this.name = language.getName();
+    }
 
-	/**
-	* Getter de name
-	* @return L'attribut name
-	*/
-	public String getName(){return this.name;}
+    /**
+     * Returns the id.
+     *
+     * @return int
+     */
+    public int getId() {
+        return this.id;
+    }
 
-	/**
-	* Setter de id
-	* @param id L'id de la vidéo
-	*/
-	public void setId(int id){this.id=id;}
+    /**
+     * Returns the name.
+     *
+     * @return String
+     */
+    public String getName() {
+        return this.name;
+    }
 
-	/**
-	* Setter de name
-	* @param name Le nom de la langue
-	*/
-	public void setName(String name){this.name=name;}
+    /**
+     * Set the id.
+     *
+     * @param id Language's id.
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
 
-        
-	public String toString(){
-		return ("Details about the language :"
-			+ "\n\tid : " + this.id
-			+ "\n\tname : " + this.name);
-	}
-        
-        public String getLanguageExtract(){
-            return "\"Language\": \""+this.name+"\",";
-        }
+    /**
+     * Set the name.
+     *
+     * @param name Language's name.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return ("Details about the language :"
+                + "\n\tid : " + this.id
+                + "\n\tname : " + this.name);
+    }
+
+    /**
+     * Returns a String with all the data necessary to the extraction.
+     *
+     * @return String
+     */
+    public String getLanguageExtract() {
+        return "\"Language\": \"" + this.name + "\",";
+    }
 }

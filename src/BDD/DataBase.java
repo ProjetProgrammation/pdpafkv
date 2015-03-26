@@ -2,8 +2,14 @@
  * *********************************************
  *
  *
- * ATTENTION : LA NOMENCLATURE N'EST PAS LA MÊME EN BDD ET EN Java ! BDD :
- * file_path Java : filePath
+ * <b>Warning: the nomenclature is not the same in the database and Java.</b>
+ * <p>
+ * The right way to name variables :
+ * <ul>
+ * <li>Database : file_path</li>
+ * <li>Java : filePath</li>
+ * </ul>
+ * </p>
  *
  *
  **********************************************
@@ -14,8 +20,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 /**
- * Cette classe sert à créer la base de données et intéragir avec cette
- * dernière.
+ * Use this class to create a database and interact with it.
  *
  * @author akervadec
  */
@@ -27,7 +32,8 @@ public class DataBase {
     }
 
     /**
-     * Etabli une connection avec la base de données dataBase.db
+     * Establishes a connection with the database dataBase.db, or create it if
+     * it doesn't exist yet.
      */
     private void connexion() {
         Connection c = null;
@@ -42,8 +48,7 @@ public class DataBase {
     }
 
     /**
-     * Exécute les requêtes SQL permettant de créer les tables dans la base de
-     * données dataBase.db
+     * Creates the tables in the database.
      */
     private void createTables() {
         Connection c = null;
@@ -86,13 +91,12 @@ public class DataBase {
     }
 
     /**
-     * Ajoute une vidéo dans la base de données dataBase.db puis créé un objet
-     * correspondant
+     * Adds a Video object (actually its metadata) in the database.
      *
-     * @param name Le nom de la vidéo à ajouter
-     * @param filePath Le chemin sur le disque de la vidéo à ajouter
-     * @param nameLanguage La langue de la vidéo
-     * @param format Le format de la vidéo
+     * @param name Video's name to add.
+     * @param filePath Video's file path to add.
+     * @param nameLanguage Video's language to add.
+     * @param format Video's format to add.
      */
     public void addVideo(String name, String filePath, String format, String nameLanguage) {
         Connection c = null;
@@ -106,22 +110,23 @@ public class DataBase {
             try {
                 Class.forName("org.sqlite.JDBC");
                 c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-                c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+                  
+                c.setAutoCommit(false);
                 System.out.println("[addVideo]Opened database successfully");
 
-                //Recherche de l'id de la langue de la vidéo
+                //Searching the language's id of the Video
                 stmtLang = c.prepareStatement(query);
-                stmtLang.setString(1, nameLanguage);	//Ajout des paramètres (variables) "?" de la ligne d'avant.
+                stmtLang.setString(1, nameLanguage);	
                 ResultSet rs = stmtLang.executeQuery();
                 while (rs.next()) {
                     idLang = rs.getInt("id");
                 }
 
-                //Ajout de la vidéo
+                //Adding the Video
                 query = "INSERT INTO Video(name,file_path,id_language,format) VALUES (?,?,?,?);";
                 stmtAdd = c.prepareStatement(query);
 
-                //Paramétrage des variables de requête
+                 
                 stmtAdd.setString(1, name);
                 stmtAdd.setString(2, filePath);
                 stmtAdd.setInt(3, idLang);
@@ -142,12 +147,12 @@ public class DataBase {
     }
 
     /**
-     * Ajout d'un fichier audio dans la base de données dataBase.db
+     * Adds a Audio object (actually its metadata) in the database.
      *
-     * @param name Le nom du fichier
-     * @param filePath Le chemin du fichier
-     * @param format Le format du fichier
-     * @param nameLanguage La langue du fichier
+     * @param name Audio's name to add.
+     * @param filePath Audio's file path to add.
+     * @param nameLanguage Audio's language to add.
+     * @param format Audio's format to add.
      */
     public void addAudio(String name, String filePath, String format, String nameLanguage) {
         Connection c = null;
@@ -161,22 +166,23 @@ public class DataBase {
             try {
                 Class.forName("org.sqlite.JDBC");
                 c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-                c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+                  
+                c.setAutoCommit(false);
                 System.out.println("[addAudio]Opened database successfully");
 
-                //Recherche de l'id de la langue de la vidéo
+                //Searching language's id of the audio
                 stmtLang = c.prepareStatement(query);
-                stmtLang.setString(1, nameLanguage);	//Ajout des paramètres (variables) "?" de la ligne d'avant.
+                stmtLang.setString(1, nameLanguage);	
                 ResultSet rs = stmtLang.executeQuery();
                 while (rs.next()) {
                     idLang = rs.getInt("id");
                 }
 
-                //Ajout de la vidéo
+                //Adding the Audio
                 query = "INSERT INTO Audio(name,file_path,id_language,format) VALUES (?,?,?,?);";
                 stmtAdd = c.prepareStatement(query);
 
-                //Paramétrage des variables de requête
+                 
                 stmtAdd.setString(1, name);
                 stmtAdd.setString(2, filePath);
                 stmtAdd.setInt(3, idLang);
@@ -197,13 +203,12 @@ public class DataBase {
     }
 
     /**
-     * Ajout d'une question dans la base de données dataBase.db, avec les objets
-     * Video et Audio connus et créés
+     * dds a Question object to the database.
      *
-     * @param content La question (son contenu)
-     * @param video La vidéo correspondante à la réponse attendue
-     * @param audio L'audio correspondant à la réponse attendue
-     * @param nameLanguage La langue de la question
+     * @param content Question's content.
+     * @param video Question's Video expected.
+     * @param audio Question's Audio expected.
+     * @param nameLanguage Question's Language.
      */
     public void addQuestion(String content, Video video, Audio audio, String nameLanguage) {
         Connection c = null;
@@ -217,11 +222,11 @@ public class DataBase {
             try {
                 Class.forName("org.sqlite.JDBC");
                 c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-                c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+                c.setAutoCommit(false);
                 System.out.println("[addQuestion]Opened database successfully");
 
                 stmtLang = c.prepareStatement(query);
-                //Ajout des paramètres (variables) "?" de la ligne d'avant.
+                
                 stmtLang.setString(1, nameLanguage);
                 ResultSet rs = stmtLang.executeQuery();
                 while (rs.next()) {
@@ -249,9 +254,9 @@ public class DataBase {
     }
 
     /**
-     * Ajout d'un langage dans la base de données dataBase.db
+     * Adds a language in tha database.
      *
-     * @param name La langue en format String
+     * @param name The language in String type.
      */
     public void addLanguage(String name) {
         Connection c = null;
@@ -263,7 +268,7 @@ public class DataBase {
             try {
                 Class.forName("org.sqlite.JDBC");
                 c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-                c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+                c.setAutoCommit(false);	
                 System.out.println("[addLanguage]Opened database successfully");
 
                 stmt = c.prepareStatement(query);
@@ -282,12 +287,11 @@ public class DataBase {
     }
 
     /**
-     * Sélection au hasard d'une vidéo dans la base de données en fonction d'une
-     * langue voulue
+     * Selects a random Video in the database, with the Language matching with
+     * the paramater.
      *
-     * @param language La langue de la vidéo souhaitée
-     * @return Une instance de la vidéo choisie au hasard dans la base de
-     * données
+     * @param language Video's Language wanted.
+     * @return Video
      */
     public Video manageVideo(Language language) {
         Connection c = null;
@@ -325,11 +329,11 @@ public class DataBase {
     }
 
     /**
-     * Sélection au hasard d'un audio dans la base de données en fonction d'une
-     * langue voulue
+     * Selects a random Audio in the database, with the Language matching with
+     * the paramater.
      *
-     * @param language La langue de l'audio souhaité
-     * @return Une instance de l'audio choisi au hasard dans la base de données
+     * @param language Audio's Language wanted.
+     * @return Audio
      */
     public Audio manageAudio(Language language) {
         Connection c = null;
@@ -367,12 +371,11 @@ public class DataBase {
     }
 
     /**
-     * Sélection au hasard d'une question dans la base de données en fonction
-     * d'une langue voulue
+     * Selects a random Question in the database, with the Language matching
+     * with the paramater.
      *
-     * @param language La langue de la question souhaitée
-     * @return Une instance de la question choisie au hasard dans la base de
-     * données
+     * @param language Question's Language wanted.
+     * @return Question
      */
     public Question manageQuestion(Language language) {
         Connection c = null;
@@ -409,12 +412,10 @@ public class DataBase {
     }
 
     /**
-     * Recherche d'un langage dans la base de données avec son nom. La langue
-     * DOIT exister.
+     * Searches a Langugae in the database by its name.
      *
-     * @param name Le nom de la langue recherchée
-     * @return Une instance de la langue recherchée dans la base de données, si
-     * non trouvé, retourne l'instance avec un id = 0.
+     * @param name Language's name to search.
+     * @return Language
      */
     public Language searchLanguageByName(String name) {
         Connection c = null;
@@ -424,11 +425,11 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-            c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+            c.setAutoCommit(false);	
             System.out.println("[searchLanguageByName]Opened database successfully");
 
             stmt = c.prepareStatement(query);
-            stmt.setString(1, name);	//Ajout des paramètres (variables) "?" de la ligne d'avant.
+            stmt.setString(1, name);	
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 language.setId(rs.getInt("id"));
@@ -446,12 +447,12 @@ public class DataBase {
     }
 
     /**
-     * Recherche d'une vidéo dans la base de données avec son nom et son
-     * extension, si non trouvé, retourne l'instance avec un id = 0.
+     * Searches a Video in the database by its name and its format, if not
+     * found, returns an object with a id = 0.
      *
-     * @param name Le nom de la vidéo recherchée
-     * @param format Le format de la vidéo recherchée
-     * @return Une instance de la vidéo recherchée dans la base de données
+     * @param name Video's name searched.
+     * @param format Video's format searched.
+     * @return Video
      */
     public Video searchVideoByNameFormat(String name, String format) {
         Connection c = null;
@@ -461,11 +462,11 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-            c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+            c.setAutoCommit(false);	
             System.out.println("[searchVideoByNameFormat]Opened database successfully");
 
             stmt = c.prepareStatement(query);
-            stmt.setString(1, name);	//Ajout des paramètres (variables) "?" de la ligne d'avant.
+            stmt.setString(1, name);	
             stmt.setString(2, format);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -487,13 +488,12 @@ public class DataBase {
     }
 
     /**
-     * Recherche d'un audio dans la base de données avec son nom et son
-     * extension.
+     * Searches a Audio in the database by its name and its format, if not
+     * found, returns an object with a id = 0.
      *
-     * @param name Le nom de l'audio recherché
-     * @param format Le format de l'audio recherché
-     * @return Une instance de l'audio recherché dans la base de données, si non
-     * trouvé, retourne l'instance avec un id = 0.
+     * @param name Audio's name searched.
+     * @param format Audio's format searched.
+     * @return Audio
      */
     public Audio searchAudioByNameFormat(String name, String format) {
         Connection c = null;
@@ -503,11 +503,11 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-            c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+            c.setAutoCommit(false);	
             System.out.println("[searchAudioByNameFormat]Opened database successfully");
 
             stmt = c.prepareStatement(query);
-            stmt.setString(1, name);	//Ajout des paramètres (variables) "?" de la ligne d'avant.
+            stmt.setString(1, name);	
             stmt.setString(2, format);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -529,12 +529,11 @@ public class DataBase {
     }
 
     /**
-     * Recherche d'une question dans la base de données avec son content, l'id
-     * de sa vidéo, l'id de son audio om de la question recherchée
+     * Searches a Question in the database by its content, if not found, returns
+     * an object with a id = 0.
      *
-     * @param content Le contenu de la question
-     * @return Une instance de la question recherchée dans la base de données,
-     * si non trouvé, retourne l'instance avec un id = 0.
+     * @param content Question's content searched.
+     * @return Question
      */
     public Question searchQuestionByContent(String content) {
         Connection c = null;
@@ -544,7 +543,8 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-            c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+              
+            c.setAutoCommit(false);
             System.out.println("[searchQuestionByContent]Opened database successfully");
 
             stmt = c.prepareStatement(query);
@@ -569,10 +569,9 @@ public class DataBase {
     }
 
     /**
-     * Cette méthode retourne l'ensemble des questions contenues dans la base de
-     * données.
+     * Returns a ArrayList of Question of all the questions in the database.
      *
-     * @return La liste de toutes les question dans un ArrayList\<Question\>
+     * @return ArrayList\<Question\>
      */
     public ArrayList<Question> getAllQuestions() {
         Connection c = null;
@@ -584,7 +583,8 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-            c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+              
+            c.setAutoCommit(false);
             System.out.println("[getAllQuestions]Opened database successfully");
 
             stmt = c.prepareStatement(query);
@@ -596,7 +596,7 @@ public class DataBase {
                 tempQuestion.setIdVideo(rs.getInt("id_video"));
                 tempQuestion.setIdAudio(rs.getInt("id_audio"));
                 tempQuestion.setIdLanguage(rs.getInt("id_language"));
-                //Transfert de la tempQuestion dans la ArrayList
+                //Transfering tempQuestion into the ArrayList
                 result.add(tempQuestion);
             }
             rs.close();
@@ -611,10 +611,9 @@ public class DataBase {
     }
 
     /**
-     * Cette méthode retourne l'ensemble des vidéos contenues dans la base de
-     * données.
+     * Returns a ArrayList of Video of all the videos in the database.
      *
-     * @return La liste de toutes les vidéos dans un ArrayList\<Video\>
+     * @return ArrayList\<Video\>
      */
     public ArrayList<Video> getAllVideos() {
         Connection c = null;
@@ -626,7 +625,8 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-            c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+              
+            c.setAutoCommit(false);
             System.out.println("[getAllVideo]Opened database successfully");
 
             stmt = c.prepareStatement(query);
@@ -638,7 +638,7 @@ public class DataBase {
                 tempVideo.setFilePath(rs.getString("file_path"));
                 tempVideo.setIdLanguage(rs.getInt("id_language"));
                 tempVideo.setFormat(rs.getString("format"));
-                //Transfert de la tempVideo dans la ArrayList
+                //Transfering tempVideo into the ArrayList
                 result.add(tempVideo);
             }
             rs.close();
@@ -653,10 +653,9 @@ public class DataBase {
     }
 
     /**
-     * Cette méthode retourne l'ensemble des audios contenus dans la base de
-     * données.
+     * Returns a ArrayList of Audio of all the audios in the database.
      *
-     * @return La liste de toutes les audios dans un ArrayList\<Audio\>
+     * @return ArrayList\<Audio\>
      */
     public ArrayList<Audio> getAllAudios() {
         Connection c = null;
@@ -668,7 +667,8 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-            c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+              
+            c.setAutoCommit(false);
             System.out.println("[getAllAudio]Opened database successfully");
 
             stmt = c.prepareStatement(query);
@@ -680,7 +680,7 @@ public class DataBase {
                 tempAudio.setFilePath(rs.getString("file_path"));
                 tempAudio.setIdLanguage(rs.getInt("id_language"));
                 tempAudio.setFormat(rs.getString("format"));
-                //Transfert de la tempAudio dans la ArrayList
+                //Transfering tempAudio into the ArrayList
                 result.add(tempAudio);
             }
             rs.close();
@@ -695,10 +695,9 @@ public class DataBase {
     }
 
     /**
-     * Cette méthode retourne l'ensemble des langages contenus dans la base de
-     * données.
+     * Returns a ArrayList of Language of all the languages in the database.
      *
-     * @return La liste de toutes les langages dans un ArrayList\<Language\>
+     * @return ArrayList\<Language\>
      */
     public ArrayList<Language> getAllLanguages() {
         Connection c = null;
@@ -710,7 +709,8 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-            c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+              
+            c.setAutoCommit(false);
             System.out.println("[getAllLanguages]Opened database successfully");
 
             stmt = c.prepareStatement(query);
@@ -719,7 +719,7 @@ public class DataBase {
                 tempLanguage = new Language();
                 tempLanguage.setId(rs.getInt("id"));
                 tempLanguage.setName(rs.getString("name"));
-                //Transfert de la tempLanguage dans la ArrayList
+                //Transfering tempLanguage into the ArrayList
                 result.add(tempLanguage);
             }
             rs.close();
@@ -734,11 +734,11 @@ public class DataBase {
     }
 
     /**
-     * Compte le nombre de tuples dans la langue idLanguage dans la table Audio
-     * de la BDD
+     * Counts the amount of languages in the database Audio table with the
+     * idLanguage matching with the parameter.
      *
-     * @param idLanguage
-     * @return Le nombre de tuples dans la langue idLanguage recherché
+     * @param idLanguage Audios idLanguage to search.
+     * @return int
      */
     public int countAudio(int idLanguage) {
         int result = 0;
@@ -749,7 +749,8 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-            c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+              
+            c.setAutoCommit(false);
             System.out.println("[countAudio]Opened database successfully");
 
             stmt = c.prepareStatement(query);
@@ -768,11 +769,11 @@ public class DataBase {
     }
 
     /**
-     * Compte le nombre de tuples dans la langue idLanguage dans la table
-     * Question de la BDD
+     * Counts the amount of languages in the database Question table with the
+     * idLanguage matching with the parameter.
      *
-     * @param idLanguage
-     * @return Le nombre de tuples dans la langue idLanguage recherché
+     * @param idLanguage Question idLanguage to search.
+     * @return int
      */
     public int countQuestion(int idLanguage) {
         int result = 0;
@@ -783,7 +784,8 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-            c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+              
+            c.setAutoCommit(false);
             System.out.println("[CountQuestion]Opened database successfully");
 
             stmt = c.prepareStatement(query);
@@ -803,11 +805,11 @@ public class DataBase {
     }
 
     /**
-     * Compte le nombre de tuples dans la langue idLanguage dans la table Video
-     * de la BDD
+     * Counts the amount of languages in the database Video table with the
+     * idLanguage matching with the parameter.
      *
-     * @param idLanguage
-     * @return Le nombre de tuples dans la langue idLanguage recherché
+     * @param idLanguage Video idLanguage to search.
+     * @return int
      */
     public int countVideo(int idLanguage) {
         int result = 0;
@@ -818,7 +820,8 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-            c.setAutoCommit(false);	//Mise en place de la transaction manuelle
+              
+            c.setAutoCommit(false);
             stmt = c.prepareStatement(query);
             stmt.setInt(1, idLanguage);
             ResultSet rs = stmt.executeQuery();
@@ -836,10 +839,10 @@ public class DataBase {
     }
 
     /**
-     * Supprime la vidéo dont le nom est passé en commentaire
+     * Removes a Video from the database knowing its name and format.
      *
-     * @param videoName Nom de la vidéo à supprimer
-     * @param format Format de la vidéo à supprimer
+     * @param videoName Video's name to remove.
+     * @param format Video's format to remove.
      */
     public void rmVideo(String videoName, String format) {
         Connection c = null;
@@ -855,10 +858,10 @@ public class DataBase {
                 c.setAutoCommit(false);
                 System.out.println("[rmVideo]Opened database successfully");
 
-                //Suppression de la vidéo
+                //Removing the Video
                 String query = "DELETE FROM Video WHERE id=?;";
                 stmtAdd = c.prepareStatement(query);
-                //Paramétrage des variables de requête
+                 
                 stmtAdd.setInt(1, tmp.getId());
                 stmtAdd.executeQuery();
 
@@ -872,12 +875,12 @@ public class DataBase {
             System.out.println("[rmVideo]The video " + tmp.getName() + "." + tmp.getFormat() + " successfuly removed from the DB");
         }
     }
-    
+
     /**
-     * Supprime l'audio dont le nom est passé en commentaire
+     * Removes a Audio from the database knowing its name and format.
      *
-     * @param audioName Nom de l'audio à supprimer
-     * @param format Format de l'audio à supprimer
+     * @param audioName Audio's name to remove.
+     * @param format Audio's format to remove.
      */
     public void rmAudio(String audioName, String format) {
         Connection c = null;
@@ -893,10 +896,10 @@ public class DataBase {
                 c.setAutoCommit(false);
                 System.out.println("[rmAudio]Opened database successfully");
 
-                //Suppression de la vidéo
+                //Removng the Audio
                 String query = "DELETE FROM Audio WHERE id=?;";
                 stmtAdd = c.prepareStatement(query);
-                //Paramétrage des variables de requête
+                 
                 stmtAdd.setInt(1, tmp.getId());
                 stmtAdd.executeQuery();
 

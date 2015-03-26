@@ -1,134 +1,55 @@
 /*
- * Cette classe permet de créer des langues
+ * 
  */
-
 package BDD;
 
 /**
  *
+ * Use this class to create a new Audio object (or instantiate a Media object).
+ *
  * @author akervadec
  */
-public class Audio {
+public class Audio extends Media {
 
-	private int id;
-	private String name;
-	private String filePath;
-	private String format;
-	private int idLanguage;
+    /**
+     * Constructs an empty Audio object with an id and idLanguage equal to zero.
+     * 
+     */
+    public Audio() {
+        this.name = new String();
+        this.filePath = new String();
+        this.format = new String();
+        this.idLanguage = 0;
+    }
 
-	/**
-	* Constructeur Audio.
-	*/
-	public Audio(){
-		this.name=new String();
-		this.filePath=new String();
-		this.format=new String();
-		this.idLanguage=0;
-	}
+    /**
+     * Constructs an Audio object with all attributes knowned.
+     *
+     * @param id Audio's id.
+     * @param name Audio's name.
+     * @param filePath Audio's file path.
+     * @param format Audio's format.
+     * @param idLanguage Audio's id of its Language.
+     */
+    public Audio(int id, String name, String filePath, String format, int idLanguage) {
+        this.id = id;
+        this.name = name;
+        this.filePath = filePath;
+        this.format = format;
+        this.idLanguage = idLanguage;
+    }
 
-	/**
-	* Constructeur Audio.
-	* 
-	* @param id
-	*            L'id de l'"audio".
-	* @param name
-	*            Le nom de l'"audio".
-	* @param filePath
-	*            Le chemin d'accès à l'"audio".
-	* @param format
-	*            Le format de l'"audio".
-	* @param idLanguage
-	*            L'id du langage de l'"audio".
-	*/
-	public Audio(int id, String name, String filePath, String format, int idLanguage){
-		this.id=id;
-		this.name=new String(name);
-		this.filePath=new String(filePath);
-		this.format=new String(format);
-		this.idLanguage=idLanguage;
-	}
+    /**
+     * Contructs a copy of the Audio in parameter.
+     *
+     * @param audio Audio's object to copy in the new object.
+     */
+    public Audio(Audio audio) {
+        this.id = audio.getId();
+        this.name = new String(audio.getName());
+        this.filePath = new String(audio.getFilePath());
+        this.format = new String(audio.getFormat());
+        this.idLanguage = audio.getIdLanguage();
+    }
 
-	/**
-	* Constructeur Audio.
-	* 
-	* @param audio
-	*            L'audio de l'"audio" (clonage d'un audio).
-	*/
-	public Audio(Audio audio){
-		this.id=audio.getId();
-		this.name=new String(audio.getName());
-		this.filePath=new String(audio.getFilePath());
-		this.format=new String(audio.getFormat());
-		this.idLanguage=audio.getIdLanguage();
-	}
-
-	/**
-	* Getter de id
-	* @return L'attribut id
-	*/
-	public int getId(){return this.id;}
-
-	/**
-	* Getter de name
-	* @return L'attribut name
-	*/
-	public String getName(){return this.name;}
-
-	/**
-	* Getter de filePath
-	* @return L'attribut filePath
-	*/
-	public String getFilePath(){return this.filePath;}
-
-	/**
-	* Getter de format
-	* @return L'attribut format
-	*/
-	public String getFormat(){return this.format;}
-
-	/**
-	* Getter de idLanguage
-	* @return L'attribut idLanguage
-	*/
-	public int getIdLanguage(){return this.idLanguage;}
-
-
-	/**
-	* Setter de id
-	* @param id L'id de l'audio
-	*/
-	public void setId(int id){this.id=id;}
-
-	/**
-	* Setter de name
-	* @param name Le nom de l'audio
-	*/
-	public void setName(String name){this.name=name;}
-
-	/**
-	* Setter de filePath
-	* @return L'attribut filePath
-	*/
-	public void setFilePath(String filePath){this.filePath=filePath;}
-
-	/**
-	* Setter de format
-	* @return L'attribut format
-	*/
-	public void setFormat(String format){this.format=format;}
-
-	/**
-	* Setter de idLanguage
-	* @return L'attribut idLanguage
-	*/
-	public void setIdLanguage(int idLanguage){this.idLanguage=idLanguage;}
-
-	public String toString(){
-		return("Details about the audio :"
-			+ "\n\tid : " + this.id
-			+ "\n\tname : " + this.name
-			+ "\n\tformat : " + this.format
-			+ "\n\tfile path : " + this.filePath
-			+ "\n\tid language : " + this.idLanguage);
-	}
 }
