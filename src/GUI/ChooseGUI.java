@@ -1,4 +1,5 @@
 package GUI;
+
 import BDD.DataBase;
 import BDD.Language;
 import Result.User;
@@ -15,96 +16,99 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.apache.commons.io.FilenameUtils;
 
-
-
-
 /**
- * Cette classe perme de gérer l'interface graphique pour le choix entre le mode test ou apprentissage.
+ * This class allow to manage the graphic interface use to determine between
+ * test mode and learning.
+ *
  * @author Thibaut
  */
 public class ChooseGUI {
 
-    private Stage stage;
-    private User userSel;
-    private BorderPane global= new BorderPane();
-    
+    private final Stage stage;
+    private final User userSel;
+    private final BorderPane globalPane = new BorderPane();
+    private TestGUI guiInterface;
+
+    /**
+     * 
+     * @param primaryStage The stage of the interface
+     * @param langSel The language choose by the user
+     * @param db The BDD which contains media
+     * @param user The user who run the application
+     */
     public ChooseGUI(Stage primaryStage, Language langSel, DataBase db, User user) {
-        this.stage=primaryStage;
+        this.stage = primaryStage;
         this.userSel = user;
-        this.launchChooseGUI(langSel,db);
-        
+        this.launchChooseGUI(langSel, db);
+
     }
 
     /**
-     * Cette méthode permet de créer l'interface graphique pour le choix entre le mode test ou apprentissage.
-     * @param langSel La langue qui a été sélectionnée précédemment
-     * @param db La base de données qui contient les médias du test
+     * this method allow to create the graphic interface use to determine
+     * between test mode and learning.
+     *
+     * @param langSel The language which is selected previously
+     * @param db The database which contains media of the test
      */
-    private void launchChooseGUI(final Language langSel,final DataBase db) {
-        
-        //Titre de la page
+    private void launchChooseGUI(final Language langSel, final DataBase db) {
+
+        //Components design
         Label titleTop = new Label("Prosodic Adventure".toUpperCase());
-        
-        //Question-titre
         Label titleButtons = new Label("What do you want to do?".toUpperCase());
-        
-        //Création des boutons
+
         Button learnOption = new Button("Training".toUpperCase());
         Button testOption = new Button("Not training".toUpperCase());
+
+        GridPane root = new GridPane();
+        BorderPane paneButtons = new BorderPane();
+
         learnOption.setPrefSize(150, 50);
         testOption.setPrefSize(150, 50);
-        
-        //Création des boites pour l'organisation de l'interface
-        GridPane root = new GridPane();
         root.setAlignment(Pos.CENTER);
-        BorderPane paneButtons = new BorderPane();
-        
-        //Ajout des classes de style
+
+        //Add style classes
         titleTop.getStyleClass().add("label-header");
         titleButtons.getStyleClass().add("label-header");
-        
-        //Définition de l'action pour le bouton learnOption
+
+        //Add event on buttons
         learnOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                new TestGUI(stage,5,langSel,db,userSel);
+                guiInterface = new TestGUI(stage, 5, langSel, db, userSel);
             }
         });
-        
-        //Définition de l'action pour le bouton testOption
+
         testOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                new TestGUI(stage,2,langSel,db,userSel);
+                guiInterface = new TestGUI(stage, 2, langSel, db, userSel);
             }
         });
-        
-        //Remplissage des boites pour l'organisation de l'interface
+
+        //Organize the interface
         root.add(titleButtons, 1, 1);
+        root.add(paneButtons, 1, 2);
+
         paneButtons.setLeft(learnOption);
         paneButtons.setRight(testOption);
-        root.add(paneButtons, 1, 2);
-        global.setTop(titleTop);
-        global.setCenter(root);
-        
-        //Ajout de tout le contenu dans la scene
-        Scene scene = new Scene(global);
-        
-        //Loading Helvetica font
-        Font.loadFont(UserGUI.class.getResource("HelveticaNeueLTStd-LtCn.ttf").toExternalForm(), 10);
 
-        //Création du lien vers la feuille de style
-        File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/DarkStyle.css"));
+        globalPane.setTop(titleTop);
+        globalPane.setCenter(root);
+
+        //Add the contents in the scene
+        Scene scene = new Scene(globalPane);
+
+        //Load the font add link design with the style page
+        Font.loadFont(UserGUI.class.getResource("HelveticaNeueLTStd-LtCn.ttf").toExternalForm(), 10);
+        File f = new File(System.getProperty("user.dir"), FilenameUtils.separatorsToSystem("src/GUI/DarkStyle.css"));
         scene.getStylesheets().clear();
         scene.getStylesheets().add(f.toURI().toString());
-        
+
         //background elements
         //global.setId("global");
-
-        //Initialisation de la fenêtre
         this.stage.setScene(scene);
         this.stage.centerOnScreen();
         this.stage.setTitle("The Prosodic Adventure");
-    }  
-    
+    }
+
 }

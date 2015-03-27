@@ -19,97 +19,101 @@ import javafx.scene.layout.GridPane;
 import org.apache.commons.io.FilenameUtils;
 
 /**
+ * Allow to create toggleGroup of audio files for interface
  *
  * @author Jeremy
  */
 public class SonGUI extends Parent {
-       
+
     private final SelectMedia selMedia;
     private Audio audioSelected;
 
-    public SonGUI(SelectMedia selectMedia){     
+    /**
+     * Allow to load the media file
+     *
+     * @param selectMedia allow to load a entity of selectMedia which allow to
+     * choose audio files after in the bdd
+     */
+    public SonGUI(SelectMedia selectMedia) {
         this.selMedia = selectMedia;
-        this.launchSonGUI();       
+        this.launchSonGUI();
     }
 
-    private void launchSonGUI(){
-        
-        //Création + personnalisation FlowPane
-        FlowPane fond_son = new FlowPane();
-        fond_son.getStyleClass().add("box");
-        fond_son.setAlignment(Pos.CENTER);
+    /**
+     * Launch the toggleGroup
+     */
+    private void launchSonGUI() {
 
-        //Création Button Play
+        //Components design
+        FlowPane flowAudio = new FlowPane();
+        flowAudio.getStyleClass().add("box");
+        flowAudio.setAlignment(Pos.CENTER);
+
         final Button playSound = new Button("Preview voice");
         playSound.setDisable(true);
-                
-        GridPane zoneSon = new GridPane();
+
+        GridPane soundArea = new GridPane();
+
         final ToggleGroup groupAudio = new ToggleGroup();
         ArrayList<RadioButton> listRB = new ArrayList<>();
-        for (int i=0; i<10; i++){
-            //Sélection d'un audio
+
+        //ToggleGroup Design
+        for (int i = 0; i < 10; i++) {
             Audio audioTmp = this.selMedia.selectAudio();
-            RadioButton tmpRB = new RadioButton("Voice "+(i+1));
+            RadioButton tmpRB = new RadioButton("Voice " + (i + 1));
             tmpRB.getStyleClass().add("radio-button");
             tmpRB.setUserData(audioTmp);
             tmpRB.setToggleGroup(groupAudio);
             tmpRB.setFocusTraversable(false);
-            if (i<5){
-                zoneSon.add(tmpRB, i, 0);
+            if (i < 5) {
+                soundArea.add(tmpRB, i, 0);
+            } else {
+                soundArea.add(tmpRB, i - 5, 2);
             }
-            else
-                zoneSon.add(tmpRB, i-5, 2);
             listRB.add(tmpRB);
         }
-                
+
+        //Events design
         groupAudio.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-                if (groupAudio.getSelectedToggle()!=null){
+                if (groupAudio.getSelectedToggle() != null) {
                     playSound.setDisable(false);
-                    audioSelected = (Audio)groupAudio.getSelectedToggle().getUserData();
+                    audioSelected = (Audio) groupAudio.getSelectedToggle().getUserData();
                 }
             }
         });
-        
-        //Action du bouton
-        playSound.setOnAction(new EventHandler<ActionEvent>() {    
+
+        playSound.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                    playAction(audioSelected);                   
+                playAction(audioSelected);
             }
         });
-        
-        //Personnalisation du GridPane
-        /*zoneSon.autosize();
-        zoneSon.setHgap(20);
-        zoneSon.setVgap(20);
-        zoneSon.setAlignment(Pos.CENTER);*/
-        
-        //Ajout à FlowPane
-        fond_son.getChildren().add(zoneSon);
-        fond_son.getChildren().add(playSound);
-        this.getChildren().add(fond_son);
-        fond_son.getStyleClass().add("div1");
-   }
-    // Fonction pour jouer le fichier Audio
-    private void playAction(Audio audio){
-        File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem(audio.getFilePath()));
+
+        //Add in flowPane
+        flowAudio.getChildren().add(soundArea);
+        flowAudio.getChildren().add(playSound);
+        this.getChildren().add(flowAudio);
+        flowAudio.getStyleClass().add("div1");
+    }
+
+    /**
+     * Play the audio file selected
+     *
+     * @param audio Audio selected
+     *
+     */
+    private void playAction(Audio audio) {
+        File f = new File(System.getProperty("user.dir"), FilenameUtils.separatorsToSystem(audio.getFilePath()));
         AudioPlayer.load(f.getAbsolutePath());
-    } 
-    
-    public Audio getAudioSelected(){
+    }
+
+    /**
+     * Return the audio file selected
+     */
+    public Audio getAudioSelected() {
         return audioSelected;
     }
-    
-    //Fonction pour l'extraction
-    /*public String audio(){
-        String audio  ="";
-        Pattern p = Pattern .compile("\'.*\'");
-        Matcher m = p.matcher(groupAudio.getSelectedToggle().toString());
-        while (m.find()){
-             audio = m.group();
-        }   
-        return audio;
-    }*/
+
 }

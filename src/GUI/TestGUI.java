@@ -1,6 +1,5 @@
 package GUI;
 
-
 import BDD.DataBase;
 import BDD.Language;
 import Result.User;
@@ -24,7 +23,11 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.apache.commons.io.FilenameUtils;
 
-
+/**
+ * Interface for the real test
+ *
+ * @author Jeremy
+ */
 public class TestGUI extends Parent{
         
     private User userSel;
@@ -35,7 +38,15 @@ public class TestGUI extends Parent{
     private SelectMedia selMedia;
     private Language language;
     private DataBase db;
-            
+    
+     /**
+     * 
+     * @param primaryStage The stage of the interface
+     * @param nbQuest numbers of questions
+     * @param langSel The language choose by the user
+     * @param daba The BDD which contains media
+     * @param user The user who run the application
+     */
     public TestGUI(Stage primaryStage,int nbQuest,Language langSel,DataBase daba,User user){
         this.stage=primaryStage;
         this.nbQuestion=nbQuest;
@@ -46,6 +57,14 @@ public class TestGUI extends Parent{
         this.launchTestGUI();
     }
     
+    /**
+     * 
+     * @param primaryStage The stage of the interface
+     * @param nbQuest The number of questions
+     * @param numCourant  Current question number
+     * @param selectMedia The current entity of selectMedia
+     * @param user The user who run the application
+     */
     public TestGUI(Stage primaryStage,int nbQuest,int numCourant,SelectMedia selectMedia,User user){
         this.stage=primaryStage;
         this.nbQuestion=nbQuest;
@@ -55,6 +74,14 @@ public class TestGUI extends Parent{
         this.launchTestGUI();
     }
     
+     /**
+     * 
+     * @param primaryStage The stage of the interface
+     * @param nbQuest The number of questions
+     * @param numCourant  Current question number
+     * @param selectMedia The current entity of selectMedia
+     * @param mediaSelected The current entity of mediaSelected
+     */
     public TestGUI(Stage primaryStage,int nbQuest,int numCourant,SelectMedia selectMedia,MediaSelected mediaSelected){
         this.stage=primaryStage;
         this.nbQuestion=nbQuest;
@@ -65,21 +92,20 @@ public class TestGUI extends Parent{
     }
         
     private void launchTestGUI(){
-            
+        
+        //Components design
         final QuestionGUI question = new QuestionGUI(this.selMedia);
         final SonGUI son = new SonGUI(this.selMedia);
         final VideoGUI video = new VideoGUI(this.selMedia);
-        
-        //Création du titre
+     
         Label title = new Label("Prosodic Adventure".toUpperCase());
 
-        //Création des boutons
         Button mix = new Button("Merge".toUpperCase());
         Button validate = new Button("Next".toUpperCase());
         mix.setDisable(true);
         validate.setDisable(true);
         
-        //Création de la boites pour l'organisation de l'interface
+        //Organize the interface
         BorderPane global = new BorderPane();
         GridPane subRoot = new GridPane();
         BorderPane root = new BorderPane();
@@ -87,7 +113,7 @@ public class TestGUI extends Parent{
         HBox videoBox = new HBox(video);
         HBox sonBox = new HBox(son);
         
-        //Ajout des classes de style
+        //Add style classe
         title.getStyleClass().add("label-header");
         
         /* TODO
@@ -105,7 +131,7 @@ public class TestGUI extends Parent{
             validate.setDisable(false);
         };
         
-        //Action bouton Validate
+       //Managing events
         validate.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -127,7 +153,6 @@ public class TestGUI extends Parent{
             }
         });
         
-        //Action bouton Mix
         mix.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -136,34 +161,30 @@ public class TestGUI extends Parent{
             }
         });
         
-        //Remplissage des boites pour l'organisation de l'interface
+       //Organize the interface
         root.setTop(questionBox);
+        root.setCenter(subRoot);
+        
         subRoot.add(videoBox, 1, 1);
         subRoot.add(sonBox, 2, 1);
         subRoot.add(mix, 2, 2, 1 ,1);
         subRoot.add(validate, 2, 2, 2, 1);
-        GridPane.setHalignment(mix, HPos.CENTER);
-        GridPane.setHalignment(validate, HPos.RIGHT);
-        //root.add(hb,0,4);
-        root.setCenter(subRoot);
-        global.setTop(title);
-        global.setCenter(root);
-        
-        //Positionnement sur la page
         subRoot.setAlignment(Pos.CENTER);
         
-        //Ajout de tout le contenu dans la scene
+        GridPane.setHalignment(mix, HPos.CENTER);
+        GridPane.setHalignment(validate, HPos.RIGHT);
+        
+        global.setTop(title);
+        global.setCenter(root);
+
         Scene scene = new Scene(global);
         
-        //Loading Helvetica font
+       //Load the font add link design with the style page
         Font.loadFont(UserGUI.class.getResource("HelveticaNeueLTStd-LtCn.ttf").toExternalForm(), 10);
-
-        //Création du lien vers la feuille de style
-        File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/DarkStyle.css"));
+         File f = new File(System.getProperty("user.dir"),FilenameUtils.separatorsToSystem("src/GUI/DarkStyle.css"));
         scene.getStylesheets().clear();
         scene.getStylesheets().add(f.toURI().toString());
         
-        //Initialisation de la fenêtre
         this.stage.setScene(scene);
         this.stage.centerOnScreen();
         this.stage.setTitle("The Prosodic Adventure");
