@@ -8,9 +8,14 @@ package Result;
 
 import BDD.*;
 import Controller.MediaSelected;
-import com.google.gson.internal.bind.JsonTreeWriter;
 import com.google.gson.stream.JsonWriter;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -20,7 +25,10 @@ public class Extract {
     
     public static void Extract(MediaSelected medSelected){
         try{
-            JsonWriter json = new JsonWriter(new FileWriter("..\\Result\\"+medSelected.getUserSel().getNameToFile()+"_"+medSelected.getLangSel().getName()+".json"));
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(sdf.format(date)+"_"+medSelected.getUserSel().getNameToFile()+"_"+medSelected.getLangSel().getName()+".json")));
+            JsonWriter json = new JsonWriter(writer);
             json.beginObject();
             extractLanguageUser(medSelected, json);
             extractAnswers(medSelected, json);

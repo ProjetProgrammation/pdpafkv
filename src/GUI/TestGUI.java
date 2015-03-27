@@ -137,16 +137,16 @@ public class TestGUI extends Parent{
             public void handle(ActionEvent event) {
                 numEnCours ++;
                 if((numEnCours<=nbQuestion)&&(nbQuestion==2)){
-                    mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
+                    mediaSel.addAnswer(new Answer(question.getQuestionSelected(),video.getVideoSelected(),son.getAudioSelected()));
                     new TestGUI(stage,nbQuestion,numEnCours,selMedia,mediaSel);
                 }
-                else if((numEnCours<=nbQuestion)&&(nbQuestion==5))
+                else if((numEnCours<=nbQuestion)&&(nbQuestion==1))
                     new TestGUI(stage,nbQuestion,numEnCours,selMedia,userSel);
                 else if ((numEnCours==nbQuestion)&&(nbQuestion==2)){
                     Extract.Extract(mediaSel);
                     System.exit(0);
                 }
-                else if ((numEnCours==nbQuestion)&&(nbQuestion==5))
+                else if ((numEnCours==nbQuestion)&&(nbQuestion==1))
                     new ChooseGUI(stage,language,db,userSel);
                 else    
                     System.exit(0);
