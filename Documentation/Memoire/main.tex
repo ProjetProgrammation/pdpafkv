@@ -30,6 +30,11 @@
 %Pour les galerie d'images
 \usepackage{subfig}
 
+\newenvironment*{thanks_perso}{%
+\renewcommand*{\abstractname}{Remerciements}
+\begin{abstract}
+}{\end{abstract}}
+
 %====================== INFORMATION ET REGLES ======================
 
 %rajouter les numérotation pour les \paragraphe et \subparagraphe
@@ -57,6 +62,15 @@ pdfstartview={FitH}}					% ajuste la page à la largueur de l'écran
 
 %page de garde
 \input{./title.tex}
+
+%page blanche
+\newpage
+~
+%ne pas numéroter cette page
+\thispagestyle{empty}
+\newpage
+
+\input{thanks.tex}
 
 %page blanche
 \newpage
