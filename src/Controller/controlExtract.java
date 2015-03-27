@@ -4,28 +4,32 @@
  * and open the template in the editor.
  */
 package Controller;
-
-import BDD.Language;
-import Result.User;
-import Result.Answer;
 import Result.Extract;
-import java.util.ArrayList;
 
 /**
+ * Extract results of user test.
  *
  * @author Thibaut
  */
 public class controlExtract {
+
     private final MediaSelected medSelected;
-    
+
+    /**
+     * Constructs a MediaSelected object.
+     *
+     * @param medSel Media selected.
+     */
     public controlExtract(MediaSelected medSel) {
-        this.medSelected=medSel;
+        this.medSelected = medSel;
     }
-    
-    public void Extract(){
+
+    /**
+     * Extraction of media selected.
+     *
+     */
+    public void Extract() {
         Extract.Extract(medSelected);
     }
-    
-    
-    
+
 }

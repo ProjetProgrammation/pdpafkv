@@ -9,39 +9,67 @@ import BDD.*;
 import Result.*;
 import java.util.ArrayList;
 
-import javafx.scene.text.Text;
-
 /**
+ * Retrieve answers of the user for questions.
  *
  * @author guillaume21
  */
 public class MediaSelected {
-    
-    private User userSel;
-    private Language langSel;
-    private ArrayList<Answer> answersList;
 
+    private final User userSel;
+    private final Language langSel;
+    private final ArrayList<Answer> answersList;
+
+    /**
+     * Constructs a MediaSelected object.
+     *
+     * @param userSel The current user.
+     * @param langSel The language choose by the user.
+     */
     public MediaSelected(User userSel, Language langSel) {
         this.userSel = userSel;
         this.langSel = langSel;
         this.answersList = new ArrayList<>();
     }
-    
-    public void addAnswer(Answer answerToAdd){
+
+    /**
+     *
+     * Add answer in the list of answers.
+     *
+     * @param answerToAdd Answer to add in the list.
+     */
+    public void addAnswer(Answer answerToAdd) {
         this.answersList.add(answerToAdd);
     }
 
+    /**
+     *
+     * Get the user.
+     *
+     * @return User
+     */
     public User getUserSel() {
         return userSel;
     }
 
+    /**
+     *
+     * Get the language.
+     *
+     * @return Language
+     */
     public Language getLangSel() {
         return langSel;
     }
-    
+
+    /**
+     *
+     * Get the arraylist of answers.
+     *
+     * @return ArrayList<Answer>
+     */
     public ArrayList<Answer> getAnswersList() {
         return answersList;
     }
 
-    
 }
