@@ -17,8 +17,7 @@ import javafx.stage.Stage;
 import org.apache.commons.io.FilenameUtils;
 
 /**
- * This class allow to manage the graphic interface use to determine between
- * test mode and learning.
+ * This class manages the user interface which determines the mode wanted by the user.
  *
  * @author Thibaut
  */
@@ -31,10 +30,12 @@ public class ChooseGUI {
 
     /**
      * 
-     * @param primaryStage The stage of the interface
-     * @param langSel The language choose by the user
-     * @param db The BDD which contains media
-     * @param user The user who run the application
+     * Contructs a new ChooseGUI.
+     * 
+     * @param primaryStage The stage of the interface.
+     * @param langSel The language choose by the user.
+     * @param db The BDD which contains media.
+     * @param user The user who run the application.
      */
     public ChooseGUI(Stage primaryStage, Language langSel, DataBase db, User user) {
         this.stage = primaryStage;
@@ -44,11 +45,10 @@ public class ChooseGUI {
     }
 
     /**
-     * this method allow to create the graphic interface use to determine
-     * between test mode and learning.
+     * Launches the user interface.
      *
-     * @param langSel The language which is selected previously
-     * @param db The database which contains media of the test
+     * @param langSel The language which is selected previously.
+     * @param db The database which contains media of the test.
      */
     private void launchChooseGUI(final Language langSel, final DataBase db) {
 
@@ -105,7 +105,6 @@ public class ChooseGUI {
         scene.getStylesheets().add(f.toURI().toString());
 
         //background elements
-        //global.setId("global");
         this.stage.setScene(scene);
         this.stage.centerOnScreen();
         this.stage.setTitle("The Prosodic Adventure");

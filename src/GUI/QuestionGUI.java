@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 
 /**
- * Allow to choose a question for the test interface
+ * !use this class to choose a question for the test interface.
  *
  * @author Jeremy
  */
@@ -23,10 +23,9 @@ public class QuestionGUI extends Parent {
     private SelectMedia selMedia;
 
     /**
-     * Allow to load the media file
+     * Loads the media file.
      *
-     * @param select allow to load a entity of selectMedia which allow to choose
-     * question after in the bdd
+     * @param select The media selected.
      */
     public QuestionGUI(SelectMedia select) {
         this.selMedia = select;
@@ -34,7 +33,7 @@ public class QuestionGUI extends Parent {
     }
 
     /**
-     * Launch the question
+     * Launches the Question interface.
      */
     private void launchQuest() {
 
@@ -65,7 +64,7 @@ public class QuestionGUI extends Parent {
         flowQuestion.getStyleClass().add("div1");
     }
 
-    //Allow to return the question
+    //Returns the question
     public Question getQuestionSelected() {
         return questionSelected;
     }

@@ -19,7 +19,7 @@ import javafx.scene.layout.GridPane;
 import org.apache.commons.io.FilenameUtils;
 
 /**
- * Allow to create toggleGroup of audio files for interface
+ * Use this class to create toggleGroup of audio files for interface.
  *
  * @author Jeremy
  */
@@ -29,7 +29,7 @@ public class SonGUI extends Parent {
     private Audio audioSelected;
 
     /**
-     * Allow to load the media file
+     * Allows to load the media file.
      *
      * @param selectMedia allow to load a entity of selectMedia which allow to
      * choose audio files after in the bdd
@@ -40,7 +40,7 @@ public class SonGUI extends Parent {
     }
 
     /**
-     * Launch the toggleGroup
+     * Launches the toggleGroup.
      */
     private void launchSonGUI() {
 
@@ -73,7 +73,7 @@ public class SonGUI extends Parent {
             listRB.add(tmpRB);
         }
 
-        //Events design
+        //Events properties
         groupAudio.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
@@ -91,7 +91,7 @@ public class SonGUI extends Parent {
             }
         });
 
-        //Add in flowPane
+        //Adding in flowPane
         flowAudio.getChildren().add(soundArea);
         flowAudio.getChildren().add(playSound);
         this.getChildren().add(flowAudio);
@@ -99,9 +99,9 @@ public class SonGUI extends Parent {
     }
 
     /**
-     * Play the audio file selected
+     * Plays the audio file selected.
      *
-     * @param audio Audio selected
+     * @param audio Audio selected.
      *
      */
     private void playAction(Audio audio) {
@@ -110,7 +110,9 @@ public class SonGUI extends Parent {
     }
 
     /**
-     * Return the audio file selected
+     * Returns the audio file selected.
+     * 
+     * @return Audio
      */
     public Audio getAudioSelected() {
         return audioSelected;

@@ -12,7 +12,7 @@ import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
 /**
- * This class allow to load and play audio files
+ * This class loads and plays audio files.
  *
  * @author Thibaut
  */
@@ -21,9 +21,9 @@ public class AudioPlayer {
     static private AudioMediaPlayerComponent ampc;
 
     /**
-     * Allow to load the audio file
+     * Loads the audio file.
      *
-     * @param pathV The path of the audio file
+     * @param pathV Audio's file path.
      */
     public static void load(String pathV) {
         NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "E:\\Programme\\VLC");
@@ -33,9 +33,9 @@ public class AudioPlayer {
     }
 
     /**
-     * Allow to play the audio file
+     * Plays the audio file.
      *
-     * @param path The path of the audio file
+     * @param path Audio's file path.
      */
     private static void run(String path) {
         ampc.getMediaPlayer().playMedia(path);
