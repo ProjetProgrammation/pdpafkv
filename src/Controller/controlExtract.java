@@ -16,8 +16,7 @@ import java.util.ArrayList;
  * @author Thibaut
  */
 public class controlExtract {
-    private MediaSelected medSelected;
-    private Extract extract;
+    private final MediaSelected medSelected;
     
     public controlExtract(MediaSelected medSel) {
         this.medSelected=medSel;
