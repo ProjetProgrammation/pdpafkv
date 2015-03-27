@@ -13,7 +13,7 @@ import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
 /**
- * This class allow to load and play media files
+ * This class loads and plays media files.
  *
  * @author Thibaut
  */
@@ -23,9 +23,9 @@ public class MediaPlayer {
     static private EmbeddedMediaPlayerComponent empComponent;
 
     /**
-     * Allow to load the media file
+     * Loads the media file.
      *
-     * @param pathV The path of the media file
+     * @param pathV Media's file path.
      */
     public static void load(String pathV) {
         Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
@@ -40,9 +40,9 @@ public class MediaPlayer {
     }
 
     /**
-     * This method allow to play the media file
+     * This method plays the media file.
      *
-     * @param path The path of the media file
+     * @param path Media's file path.
      */
     private static void run(String path) {
         empComponent.getMediaPlayer().playMedia(path);
@@ -52,7 +52,6 @@ public class MediaPlayer {
             public void finished(uk.co.caprica.vlcj.player.MediaPlayer mediaPlayer) {
                 mediaPlayer.stop();
                 frame.dispose();
-                //System.exit(0);
             }
         });
     }

@@ -19,7 +19,7 @@ import javafx.scene.layout.GridPane;
 import org.apache.commons.io.FilenameUtils;
 
 /**
- * Allow to create toggleGroup of video files for interface
+ * Use this class to create toggleGroup of video files for the user interface.
  *
  * @author Jeremy
  */
@@ -29,7 +29,7 @@ public class VideoGUI extends Parent {
     private Video videoSelected;
 
     /**
-     * Allow to load the media file
+     * Allows to load the media file.
      *
      * @param selectMedia allow to load a entity of selectMedia which allow to
      * choose video files after in the bdd
@@ -69,7 +69,7 @@ public class VideoGUI extends Parent {
             listRB.add(tmpRB);
         }
 
-        //Events design
+        //Events properties
         groupVideo.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
@@ -87,7 +87,7 @@ public class VideoGUI extends Parent {
             }
         });
 
-        //Add in flowPane
+        //Add in FlowPane
         flowVideo.getChildren().add(zoneVideo);
         flowVideo.getChildren().add(playVideo);
         flowVideo.setAlignment(Pos.CENTER);
@@ -96,7 +96,7 @@ public class VideoGUI extends Parent {
     }
 
     /**
-     * Play the video file selected
+     * Plays the video file selected.
      *
      * @param video Video selected
      *
@@ -107,7 +107,8 @@ public class VideoGUI extends Parent {
     }
 
     /**
-     * Return the video file selected
+     * Return the video file selected.
+     * @return Video
      */
     public Video getVideoSelected() {
         return videoSelected;
