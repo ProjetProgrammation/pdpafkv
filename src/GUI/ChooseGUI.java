@@ -100,7 +100,7 @@ public class ChooseGUI {
 
         //Load the font add link design with the style page
         Font.loadFont(UserGUI.class.getResource("HelveticaNeueLTStd-LtCn.ttf").toExternalForm(), 10);
-        File f = new File(System.getProperty("user.dir"), FilenameUtils.separatorsToSystem("src/GUI/DarkStyle.css"));
+        File f = new File(System.getProperty("user.dir"), FilenameUtils.separatorsToSystem("src/GUI/WindowsTheme.css"));
         scene.getStylesheets().clear();
         scene.getStylesheets().add(f.toURI().toString());
 
