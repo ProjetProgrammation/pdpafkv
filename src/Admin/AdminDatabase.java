@@ -21,6 +21,9 @@ public final class AdminDatabase {
 
     private static DataBase db;
 
+    /**
+     * Launches the main administration interface.
+     */
     public static void administrate() {
         Scanner sc = new Scanner(System.in);
         int choice = 4;
@@ -50,14 +53,23 @@ public final class AdminDatabase {
         }
     }
     
+    /**
+     * Adds medias from a text file to the database.
+     */
     private static void adminAddMedias(){
         //TODO
     }
     
+    /**
+     * Removes medias from the database.
+     */
     private static void adminRmMedias(){
         //TODO
     }
     
+    /**
+     * Shows the entire database.
+     */
     private static void adminShowMedias(){
         //TODO
     }
