@@ -87,6 +87,7 @@ public class Extract {
                 fw.write(System.getProperty("line.separator"));
                 fw.write("          Audio   " + answer.getAudioSel().getName());
                 fw.write(System.getProperty("line.separator"));
+                i++;
             }
         } catch (Exception e) {
             System.out.println("Error to extract answers information to JSON file");
