@@ -34,8 +34,10 @@ public class DataBase {
     /**
      * Establishes a connection with the database dataBase.db, or create it if
      * it doesn't exist yet.
+     * @return Connection.
      */
-    private void connexion() {
+    public Connection connexion() {
+        boolean test = false;
         Connection c = null;
         try {
             Class.forName("org.sqlite.JDBC");
@@ -43,8 +45,9 @@ public class DataBase {
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
-        }
+          }
         System.out.println("Opened database successfully");
+        return c;
     }
 
     /**
