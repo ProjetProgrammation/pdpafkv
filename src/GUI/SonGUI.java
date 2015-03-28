@@ -95,7 +95,6 @@ public class SonGUI extends Parent {
         flowAudio.getChildren().add(soundArea);
         flowAudio.getChildren().add(playSound);
         this.getChildren().add(flowAudio);
-        flowAudio.getStyleClass().add("div1");
     }
 
     /**

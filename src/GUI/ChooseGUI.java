@@ -3,18 +3,14 @@ package GUI;
 import BDD.DataBase;
 import BDD.Language;
 import Result.User;
-import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import org.apache.commons.io.FilenameUtils;
 
 /**
  * This class manages the user interface which determines the mode wanted by the user.
@@ -67,7 +63,7 @@ public class ChooseGUI {
 
         //Add style classes
         titleTop.getStyleClass().add("label-header");
-        titleButtons.getStyleClass().add("label-header");
+        titleButtons.getStyleClass().add("label-header-2");
 
         //Add event on buttons
         learnOption.setOnAction(new EventHandler<ActionEvent>() {
