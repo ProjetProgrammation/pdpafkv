@@ -2,6 +2,7 @@ package GUI;
 
 import BDD.DataBase;
 import BDD.Language;
+import Controller.ControllerDatabase;
 import Result.User;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -31,7 +32,7 @@ public class ChooseGUI {
      * @param db The BDD which contains media.
      * @param user The user who run the application.
      */
-    public ChooseGUI(Stage primaryStage, Language langSel, DataBase db, User user) {
+    public ChooseGUI(Stage primaryStage, Language langSel, ControllerDatabase db, User user) {
         this.stage = primaryStage;
         this.userSel = user;
         this.launchChooseGUI(langSel, db);
@@ -44,7 +45,7 @@ public class ChooseGUI {
      * @param langSel The language which is selected previously.
      * @param db The database which contains media of the test.
      */
-    private void launchChooseGUI(final Language langSel, final DataBase db) {
+    private void launchChooseGUI(final Language langSel, final ControllerDatabase db) {
 
         //Components design
         Label titleTop = new Label("Prosodic Adventure".toUpperCase());

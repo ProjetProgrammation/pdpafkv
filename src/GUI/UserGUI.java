@@ -6,6 +6,7 @@
 package GUI;
 
 import BDD.*;
+import Controller.ControllerDatabase;
 
 import Errors.Errors;
 import Result.User;
@@ -47,12 +48,13 @@ public class UserGUI {
     private final TextField birthday = new TextField();
     private final TextField motherTongue = new TextField();
     private final TextField yearStudying = new TextField();
+    private final ControllerDatabase db = new ControllerDatabase();
     private Language languageSelect;
     final Errors errors = new Errors();
 
     public UserGUI(Stage primaryStage) {
         this.stage = primaryStage;
-        this.launchUserGUI(this.createDataBase());
+        this.launchUserGUI(this.db);
     }
 
     /**
@@ -62,7 +64,7 @@ public class UserGUI {
      *
      * @param db The BDD which contains media
      */
-    private void launchUserGUI(final DataBase db) {
+    private void launchUserGUI(final ControllerDatabase db) {
         
         //Components design
         final ToggleGroup choose = new ToggleGroup();
@@ -99,7 +101,7 @@ public class UserGUI {
         vBoxLanguage.getStyleClass().add("box");
 
         //languages recovery and radiobuttons design
-        ArrayList<Language> listL = db.getAllLanguages();
+        ArrayList<Language> listL = db.getLanguageList();
         for (Language l : listL) {
             RadioButton tmp = new RadioButton(l.getName().toUpperCase());
             tmp.getStyleClass().add("radio-button");
@@ -232,11 +234,6 @@ public class UserGUI {
         //Add container to the scene
         this.stage.getScene().setRoot(global);
 
-    }
-
-    //Open the datebase
-    private DataBase createDataBase() {
-        return new DataBase();
     }
 
 }
