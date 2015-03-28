@@ -7,21 +7,17 @@ import Controller.MediaSelected;
 import Controller.SelectMedia;
 import Result.Answer;
 import Result.Extract;
-import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import org.apache.commons.io.FilenameUtils;
 
 /**
  * Interface for the real test
@@ -180,19 +176,8 @@ public class TestGUI extends Parent {
         global.setTop(title);
         global.setCenter(root);
 
-        Scene scene = new Scene(global);
-
-        //Load the font add link design with the style page
-        Font.loadFont(UserGUI.class.getResource("HelveticaNeueLTStd-LtCn.ttf").toExternalForm(), 10);
-        File f = new File(System.getProperty("user.dir"), FilenameUtils.separatorsToSystem("src/GUI/WindowsTheme.css"));
-        scene.getStylesheets().clear();
-        scene.getStylesheets().add(f.toURI().toString());
-
-        this.stage.setScene(scene);
-        this.stage.centerOnScreen();
-        this.stage.setTitle("The Prosodic Adventure");
-
-        this.stage.show();
+        //Add container to the scene
+        this.stage.getScene().setRoot(global);
 
     }
 }
