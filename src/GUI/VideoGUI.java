@@ -92,7 +92,6 @@ public class VideoGUI extends Parent {
         flowVideo.getChildren().add(playVideo);
         flowVideo.setAlignment(Pos.CENTER);
         this.getChildren().add(flowVideo);
-        flowVideo.getStyleClass().add("div1");
     }
 
     /**

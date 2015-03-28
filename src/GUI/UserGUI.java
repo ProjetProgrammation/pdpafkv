@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -27,10 +25,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-import org.apache.commons.io.FilenameUtils;
 
 /**
  * Cette classe perme de gérer l'interface graphique récupérant les informations
@@ -42,16 +37,16 @@ public class UserGUI {
 
     private final Stage stage;
 
-    private int lastNameMistake = 0;
-    private int firstNameMistake = 0;
-    private int birthdayMistake = 0;
-    private int motherTongueMistake = 0;
-    private int yearStudyingMistake = 0;
-    private TextField lastName = new TextField();
-    private TextField firstName = new TextField();
-    private TextField birthday = new TextField();
-    private TextField motherTongue = new TextField();
-    private TextField yearStudying = new TextField();
+    private final int lastNameMistake = 0;
+    private final int firstNameMistake = 0;
+    private final int birthdayMistake = 0;
+    private final int motherTongueMistake = 0;
+    private final int yearStudyingMistake = 0;
+    private final TextField lastName = new TextField();
+    private final TextField firstName = new TextField();
+    private final TextField birthday = new TextField();
+    private final TextField motherTongue = new TextField();
+    private final TextField yearStudying = new TextField();
     private Language languageSelect;
     final Errors errors = new Errors();
 
@@ -92,8 +87,8 @@ public class UserGUI {
 
         //Add style classes
         titleInterface.getStyleClass().add("label-header");
-        titleInformations.getStyleClass().add("label-header");
-        titleLangue.getStyleClass().add("label-header");
+        titleInformations.getStyleClass().add("label-header-2");
+        titleLangue.getStyleClass().add("label-header-2");
         labelLastName.getStyleClass().add("label-bright");
         labelFirstName.getStyleClass().add("label-bright");
         labelBirthday.getStyleClass().add("label-bright");

@@ -20,7 +20,7 @@ import javafx.scene.layout.FlowPane;
 public class QuestionGUI extends Parent {
 
     private Question questionSelected;
-    private SelectMedia selMedia;
+    private final SelectMedia selMedia;
 
     /**
      * Loads the media file.
@@ -44,7 +44,7 @@ public class QuestionGUI extends Parent {
         flowQuestion.autosize();
         flowQuestion.setAlignment(Pos.CENTER);
 
-        textQuestion.getStyleClass().add("label-header");
+        textQuestion.getStyleClass().add("label-header-2");
 
         //Question
         /*if (questions.size() == 0){
@@ -61,7 +61,6 @@ public class QuestionGUI extends Parent {
 
         flowQuestion.getChildren().add(textQuestion);
         this.getChildren().add(flowQuestion);
-        flowQuestion.getStyleClass().add("div1");
     }
 
     //Returns the question
