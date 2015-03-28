@@ -7,21 +7,17 @@ import Controller.MediaSelected;
 import Controller.SelectMedia;
 import Result.Answer;
 import Result.Extract;
-import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import org.apache.commons.io.FilenameUtils;
 
 /**
  * Interface for the real test
@@ -140,18 +136,16 @@ public class TestGUI extends Parent {
             @Override
             public void handle(ActionEvent event) {
                 currentQuestionNumber++;
-                if ((currentQuestionNumber <= nbQuestion) && (nbQuestion == 2)) {
+                if ((currentQuestionNumber <= nbQuestion) && (nbQuestion == 3)) {
                     mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
                     new TestGUI(stage, nbQuestion, currentQuestionNumber, selMedia, mediaSel);
                 } else if ((currentQuestionNumber <= nbQuestion) && (nbQuestion == 5)) {
                     new TestGUI(stage, nbQuestion, currentQuestionNumber, selMedia, userSel);
-                } else if ((currentQuestionNumber == nbQuestion) && (nbQuestion == 2)) {
+                } else if ((currentQuestionNumber != nbQuestion) && (nbQuestion == 3)) {
+                    mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
                     Extract.Extract(mediaSel);
-                    System.exit(0);
-                } else if ((currentQuestionNumber == nbQuestion) && (nbQuestion == 5)) {
+                } else if ((currentQuestionNumber != nbQuestion) && (nbQuestion == 5)) {
                     new ChooseGUI(stage, language, db, userSel);
-                } else {
-                    System.exit(0);
                 }
             }
         });

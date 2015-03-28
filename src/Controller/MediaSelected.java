@@ -33,7 +33,6 @@ public class MediaSelected {
     }
 
     /**
-     *
      * Add answer in the list of answers.
      *
      * @param answerToAdd Answer to add in the list.
@@ -43,7 +42,6 @@ public class MediaSelected {
     }
 
     /**
-     *
      * Get the user.
      *
      * @return User
@@ -53,7 +51,6 @@ public class MediaSelected {
     }
 
     /**
-     *
      * Get the language.
      *
      * @return Language
@@ -63,7 +60,6 @@ public class MediaSelected {
     }
 
     /**
-     *
      * Get the arraylist of answers.
      *
      * @return ArrayList<Answer>

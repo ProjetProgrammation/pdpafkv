@@ -80,7 +80,7 @@ public class ChooseGUI {
         testOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                new TestGUI(stage, 2, langSel, db, userSel);
+                new TestGUI(stage, 3, langSel, db, userSel);
             }
         });
 

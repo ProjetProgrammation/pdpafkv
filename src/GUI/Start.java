@@ -6,7 +6,17 @@
 
 package GUI;
 
+import com.google.gson.stream.JsonWriter;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.file.Path;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -23,7 +33,8 @@ import org.apache.commons.io.FilenameUtils;
 public class Start extends Application {
         
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
+        
         //Create of the scene and a borderpane
         Scene scene = new Scene(new BorderPane());
         //Load the font add link design with the style page
@@ -41,7 +52,8 @@ public class Start extends Application {
         primaryStage.setY(primaryScreenBounds.getMinY());
         primaryStage.setWidth(primaryScreenBounds.getWidth());
         primaryStage.setHeight(primaryScreenBounds.getHeight());
-        primaryStage.show();           
+        primaryStage.show();
+        
         //Création d'un objet UserGUI pour faire apparaitre interface
         new UserGUI(primaryStage);            
     }  

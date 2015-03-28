@@ -201,18 +201,6 @@ public class UserGUI {
                  */
                 User user = new User("Thibaut", "Fabre", "26/02/1991", "French", 1);
                 languageSelect = (Language) choose.getSelectedToggle().getUserData();
-                try {
-                    File f = new File("..\\Result\\" + user.getNameToFile() + "_" + languageSelect.getName() + ".json");
-                    FileOutputStream oFile = new FileOutputStream(f.getAbsoluteFile(), true);
-                    FileWriter fw = new FileWriter(f);
-
-                    JsonWriter json = new JsonWriter(fw);
-                    json.beginObject();
-                    json.name("User").value(user.getFirstName());
-                    json.endObject();
-                } catch (Exception e) {
-                    System.out.println("Problème création." + e.getMessage());
-                }
                 new ChooseGUI(stage, languageSelect, db, user);
 
                 /*

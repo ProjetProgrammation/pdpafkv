@@ -6,6 +6,8 @@
 package GUI;
 
 import com.sun.jna.*;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JFrame;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
@@ -28,10 +30,13 @@ public class MediaPlayer {
      * @param pathV Media's file path.
      */
     public static void load(String pathV) {
+        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "E:\\Programme\\VLC");
         Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
         empComponent = new EmbeddedMediaPlayerComponent();
         frame.setContentPane(empComponent);
-        frame.setBounds(800, 500, 350, 200);
+        frame.setSize(800, 500);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
         frame.setUndecorated(true);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
