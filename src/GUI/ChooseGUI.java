@@ -25,8 +25,6 @@ public class ChooseGUI {
 
     private final Stage stage;
     private final User userSel;
-    private final BorderPane globalPane = new BorderPane();
-    private TestGUI guiInterface;
 
     /**
      * 
@@ -61,6 +59,7 @@ public class ChooseGUI {
 
         GridPane root = new GridPane();
         BorderPane paneButtons = new BorderPane();
+        BorderPane global = new BorderPane();
 
         learnOption.setPrefSize(150, 50);
         testOption.setPrefSize(150, 50);
@@ -74,14 +73,14 @@ public class ChooseGUI {
         learnOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                guiInterface = new TestGUI(stage, 5, langSel, db, userSel);
+                new TestGUI(stage, 5, langSel, db, userSel);
             }
         });
 
         testOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                guiInterface = new TestGUI(stage, 2, langSel, db, userSel);
+                new TestGUI(stage, 2, langSel, db, userSel);
             }
         });
 
@@ -92,22 +91,11 @@ public class ChooseGUI {
         paneButtons.setLeft(learnOption);
         paneButtons.setRight(testOption);
 
-        globalPane.setTop(titleTop);
-        globalPane.setCenter(root);
+        global.setTop(titleTop);
+        global.setCenter(root);
 
-        //Add the contents in the scene
-        Scene scene = new Scene(globalPane);
-
-        //Load the font add link design with the style page
-        Font.loadFont(UserGUI.class.getResource("HelveticaNeueLTStd-LtCn.ttf").toExternalForm(), 10);
-        File f = new File(System.getProperty("user.dir"), FilenameUtils.separatorsToSystem("src/GUI/WindowsTheme.css"));
-        scene.getStylesheets().clear();
-        scene.getStylesheets().add(f.toURI().toString());
-
-        //background elements
-        this.stage.setScene(scene);
-        this.stage.centerOnScreen();
-        this.stage.setTitle("The Prosodic Adventure");
+        //Add container to the scene
+        this.stage.getScene().setRoot(global);
     }
 
 }

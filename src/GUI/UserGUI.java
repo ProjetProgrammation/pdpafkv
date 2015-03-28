@@ -246,26 +246,9 @@ public class UserGUI {
         global.setTop(titleInterface);
         global.setCenter(root);
 
-        //Add the contents in the scene
-        Scene scene = new Scene(global);
+        //Add container to the scene
+        this.stage.getScene().setRoot(global);
 
-        //Load the font add link design with the style page
-        Font.loadFont(UserGUI.class.getResource("HelveticaNeueLTStd-LtCn.ttf").toExternalForm(), 10);
-        File f = new File(System.getProperty("user.dir"), FilenameUtils.separatorsToSystem("src/GUI/WindowsTheme.css"));
-        scene.getStylesheets().clear();
-        scene.getStylesheets().add(f.toURI().toString());
-
-        this.stage.setScene(scene);
-        this.stage.centerOnScreen();
-        this.stage.setTitle("The Prosodic Adventure");
-
-        //Window design
-        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        this.stage.setX(primaryScreenBounds.getMinX());
-        this.stage.setY(primaryScreenBounds.getMinY());
-        this.stage.setWidth(primaryScreenBounds.getWidth());
-        this.stage.setHeight(primaryScreenBounds.getHeight());
-        this.stage.show();
     }
 
     //Open the datebase

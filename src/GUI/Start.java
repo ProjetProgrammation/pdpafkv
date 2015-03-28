@@ -6,8 +6,15 @@
 
 package GUI;
 
+import java.io.File;
 import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  *
@@ -17,10 +24,26 @@ public class Start extends Application {
         
     @Override
     public void start(Stage primaryStage) {
-               
+        //Create of the scene and a borderpane
+        Scene scene = new Scene(new BorderPane());
+        //Load the font add link design with the style page
+        Font.loadFont(UserGUI.class.getResource("HelveticaNeueLTStd-LtCn.ttf").toExternalForm(), 10);
+        File f = new File(System.getProperty("user.dir"), FilenameUtils.separatorsToSystem("src/GUI/WindowsTheme.css"));
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add(f.toURI().toString());
+        //Configuration of the stage
+        primaryStage.setScene(scene);
+        primaryStage.centerOnScreen();
+        primaryStage.setTitle("The Prosodic Adventure");
+        //Size of stage = size of the screen
+        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+        primaryStage.setX(primaryScreenBounds.getMinX());
+        primaryStage.setY(primaryScreenBounds.getMinY());
+        primaryStage.setWidth(primaryScreenBounds.getWidth());
+        primaryStage.setHeight(primaryScreenBounds.getHeight());
+        primaryStage.show();           
         //Création d'un objet UserGUI pour faire apparaitre interface
-        new UserGUI(primaryStage);
-               
+        new UserGUI(primaryStage);            
     }  
 
     /**
