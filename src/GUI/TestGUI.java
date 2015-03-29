@@ -1,6 +1,5 @@
 package GUI;
 
-import BDD.DataBase;
 import BDD.Language;
 import Controller.ControllerDatabase;
 import Result.User;
@@ -15,6 +14,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import static javafx.scene.input.KeyCode.F;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -119,14 +120,16 @@ public class TestGUI extends Parent {
         title.getStyleClass().add("label-header");
 
         /* TODO
-         Barre de progression  
-         final ProgressBar pb = new ProgressBar();
-         pb.setProgress((this.currentQuestionNumber/this.nbQuestion)F);
+         Barre de progression */ 
+        ProgressBar pb = new ProgressBar();
+         double progress = (double)1 / 6;
+         double i = progress * currentQuestionNumber;
+         pb.setProgress(i);
          HBox hb = new HBox();
          hb.setSpacing(5);
          hb.setAlignment(Pos.CENTER);
          hb.getChildren().add(pb);
-         */
+         
         if ((this.selMedia.selectAudio() != null) && (this.selMedia.selectVideo() != null)) {
             mix.setDisable(false);
             validate.setDisable(false);
@@ -167,6 +170,7 @@ public class TestGUI extends Parent {
         subRoot.add(sonBox, 2, 1);
         subRoot.add(mix, 2, 2, 1, 1);
         subRoot.add(validate, 2, 2, 2, 1);
+        subRoot.add(pb, 2, 2, 2, 2);
         subRoot.setAlignment(Pos.CENTER);
 
         GridPane.setHalignment(mix, HPos.CENTER);

@@ -41,12 +41,12 @@ public class SelectMedia {
      * database.
      */
     private void selectAudioList() {
-        Audio audio = null;
+        Audio audio;
         this.listAudio = new ArrayList<>();
         do {
             boolean check = false;
             audio = this.db.manageAudio(this.langSel);
-            for (int i = 0; i < this.listAudio.size(); i++) {
+            for(int i = 0; i < this.listAudio.size(); i++) {
                 if (audio.getFilePath().equals(this.listAudio.get(i).getFilePath())) {
                     check = true;
                 }
@@ -63,12 +63,13 @@ public class SelectMedia {
      * database.
      */
     private void selectVideoList() {
-        Video video = null;
+        Video video;
         this.listVideo = new ArrayList<>();
         do {
             boolean check = false;
             video = this.db.manageVideo(this.langSel);
-            for (int i = 0; i < this.listVideo.size(); i++) {
+            int i;
+            for (i=0; i < this.listVideo.size(); i++) {
                 if (video.getFilePath().equals(this.listVideo.get(i).getFilePath())) {
                     check = true;
                 }
