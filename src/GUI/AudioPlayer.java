@@ -7,6 +7,7 @@ package GUI;
 
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
+import org.apache.commons.io.FilenameUtils;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
@@ -26,7 +27,8 @@ public class AudioPlayer {
      * @param pathV Audio's file path.
      */
     public static void load(String pathV) {
-        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "E:\\Programme\\VLC");
+        String path = System.getProperty("user.dir") + FilenameUtils.separatorsToSystem("\\VLC");
+        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), path);
         Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
         ampc = new AudioMediaPlayerComponent();
         run(pathV);

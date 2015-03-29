@@ -102,7 +102,6 @@ public class VideoGUI extends Parent {
      */
     private void playAction(Video video) {
         File f = new File(System.getProperty("user.dir"), FilenameUtils.separatorsToSystem(video.getFilePath()));
-        System.out.println(f.getAbsolutePath());
         MediaPlayer.load(f.getAbsolutePath());
     }
 

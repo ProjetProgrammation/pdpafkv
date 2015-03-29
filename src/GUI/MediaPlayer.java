@@ -9,6 +9,7 @@ import com.sun.jna.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import org.apache.commons.io.FilenameUtils;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
@@ -30,7 +31,8 @@ public class MediaPlayer {
      * @param pathV Media's file path.
      */
     public static void load(String pathV) {
-        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "E:\\Programme\\VLC");
+        String path = System.getProperty("user.dir") + FilenameUtils.separatorsToSystem("\\VLC");
+        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), path);
         Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
         empComponent = new EmbeddedMediaPlayerComponent();
         frame.setContentPane(empComponent);
