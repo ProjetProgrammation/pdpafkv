@@ -199,6 +199,7 @@ public class DataBaseTest {
 
         assertTrue("Error in the add of question file", checkQuestion == true);
     }
+
     /**
      * Test of addLanguage method, of class DataBase.
      */
@@ -249,17 +250,50 @@ public class DataBaseTest {
      */
     public void testSearchVideoByNameFormat() {
         System.out.println("searchVideoByNameFormat");
-        /* String name = "2013_3_19_S29_fr_L1_ADMI_B_ok";
-         String filePath = "Video\\2013_3_19_S29_fr_L1_ADMI_B_ok.mp4";
-         String format = "mp4";
-         String nameLanguage = "French";
-        
-         int idLanguage = dataBaseTest.searchLanguageByName(nameLanguage).getId();
-        
-         Video expResult = new Video(1, name, filePath, format, idLanguage);
-         Video result = dataBaseTest.searchVideoByNameFormat(name, format);
-        
-         assertEquals("Problem with search video by name format",expResult,result);*/
+        String name = "2013_3_19_S29_fr_L1_ADMI_B_ok";
+        String filePath = "Video\\2013_3_19_S29_fr_L1_ADMI_B_ok.mp4";
+        String format = "mp4";
+        String nameLanguage = "French";
+
+        int idLanguage = dataBaseTest.searchLanguageByName(nameLanguage).getId();
+
+        Video expResult = new Video(1, name, filePath, format, idLanguage);
+        Video result = dataBaseTest.searchVideoByNameFormat(name, format);
+
+        assertTrue("Problem with search video by name format", expResult.getFilePath().equals(result.getFilePath()) && expResult.getName().equals(result.getName()) && expResult.getFormat().equals(result.getFormat()));
+    }
+
+    /**
+     * Test of searchAudioByNameFormat method, of class DataBase.
+     */
+    public void testSearchAudioByNameFormat() {
+        System.out.println("searchVideoByNameFormat");
+        String name = "sethgeceeks";
+        String filePath = "Audio\\\\sethsbreedd.mp3";
+        String format = "mp3";
+        String nameLanguage = "French";
+
+        int idLanguage = dataBaseTest.searchLanguageByName(nameLanguage).getId();
+
+        Audio expResult = new Audio(1, name, filePath, format, idLanguage);
+        Audio result = dataBaseTest.searchAudioByNameFormat(name, format);
+
+        assertTrue("Problem with audio search by name format", expResult.getFilePath().equals(result.getFilePath()) && expResult.getName().equals(result.getName()) && expResult.getFormat().equals(result.getFormat()));
+    }
+
+    /**
+     * Test of SearchQuestionByContent method, of class DataBase.
+     */
+    public void testSearchQuestionByContent() {
+        System.out.println("searchVideoByNameFormat");
+        String content = "hello everybody how are you?";
+        String nameLanguage = "French";
+
+        int idLanguage = dataBaseTest.searchLanguageByName(nameLanguage).getId();
+
+        Question result = dataBaseTest.searchQuestionByContent(content);
+
+        assertTrue("Problem with question search by content", result.getContent().equals(content));
     }
 
     /**
@@ -267,11 +301,11 @@ public class DataBaseTest {
      */
     public void testCountAudio() {
         System.out.println("countAudio");
-        
+
         int idLanguage = 1;
         int expResult = 4;
         int result = dataBaseTest.countAudio(idLanguage);
-        
+
         assertEquals("problem with count audio", expResult, result);
 
     }
@@ -281,12 +315,12 @@ public class DataBaseTest {
      */
     public void testCountQuestion() {
         System.out.println("countQuestion");
-        
+
         int idLanguage = 1;
         int expResult = 4;
         int result = dataBaseTest.countQuestion(idLanguage);
-        
-        assertEquals(expResult, result);
+
+        assertEquals("Problem with count question",expResult, result);
     }
 
     /**
@@ -294,12 +328,12 @@ public class DataBaseTest {
      */
     public void testCountVideo() {
         System.out.println("countVideo");
-        
+
         int idLanguage = 1;
         int expResult = 2;
         int result = dataBaseTest.countVideo(idLanguage);
-        
-        assertEquals(expResult, result);
+
+        assertEquals("Problem with count video",expResult, result);
     }
 
     /**
@@ -319,7 +353,7 @@ public class DataBaseTest {
         videoListTest = dataBaseTest.getAllVideos();
         for (Video v : videoListTest) {
             System.out.println("The video name is:" + v.getName());
-            if(v.getName().equals(name) && v.getFormat().equals(format)){
+            if (v.getName().equals(name) && v.getFormat().equals(format)) {
                 throw new AssertionError("Video always in DataBase");
             }
         }
@@ -338,12 +372,11 @@ public class DataBaseTest {
         String name = "sethgeceeks";
         String format = "mp3";
         dataBaseTest.rmAudio(name, format);
-        
-        
+
         audioListTest = dataBaseTest.getAllAudios();
         for (Audio v : audioListTest) {
             System.out.println("The audio name is:" + v.getName());
-            if(v.getName().equals(name) && v.getFormat().equals(format)){
+            if (v.getName().equals(name) && v.getFormat().equals(format)) {
                 throw new AssertionError("Audio always in DataBase");
             }
         }
@@ -360,6 +393,8 @@ public class DataBaseTest {
         testAddLanguage();
         testSearchLanguageByName();
         testSearchVideoByNameFormat();
+        testSearchAudioByNameFormat();
+        testSearchQuestionByContent();
         testCountAudio();
         testCountQuestion();
         testAddVideo();
