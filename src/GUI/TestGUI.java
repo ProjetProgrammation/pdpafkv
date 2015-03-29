@@ -2,6 +2,7 @@ package GUI;
 
 import BDD.DataBase;
 import BDD.Language;
+import Controller.ControllerDatabase;
 import Result.User;
 import Controller.MediaSelected;
 import Controller.SelectMedia;
@@ -33,7 +34,7 @@ public class TestGUI extends Parent {
     private MediaSelected mediaSel;
     private SelectMedia selMedia;
     private Language language;
-    private DataBase db;
+    private ControllerDatabase db;
 
     /**
      * Constructs a new Scene with the test template.
@@ -44,7 +45,7 @@ public class TestGUI extends Parent {
      * @param db The BDD which contains media.
      * @param user The user who run the application
      */
-    public TestGUI(Stage stage, int nbQuestion, Language language, DataBase db, User user) {
+    public TestGUI(Stage stage, int nbQuestion, Language language, ControllerDatabase db, User user) {
         this.stage = stage;
         this.nbQuestion = nbQuestion;
         this.db = db;

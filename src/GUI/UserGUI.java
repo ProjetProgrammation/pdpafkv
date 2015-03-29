@@ -6,6 +6,7 @@
 package GUI;
 
 import BDD.*;
+import Controller.ControllerDatabase;
 
 import Errors.Errors;
 import Result.User;
@@ -47,12 +48,13 @@ public class UserGUI {
     private final TextField birthday = new TextField();
     private final TextField motherTongue = new TextField();
     private final TextField yearStudying = new TextField();
+    private final ControllerDatabase db = new ControllerDatabase();
     private Language languageSelect;
     final Errors errors = new Errors();
 
     public UserGUI(Stage primaryStage) {
         this.stage = primaryStage;
-        this.launchUserGUI(this.createDataBase());
+        this.launchUserGUI(this.db);
     }
 
     /**
@@ -62,7 +64,7 @@ public class UserGUI {
      *
      * @param db The BDD which contains media
      */
-    private void launchUserGUI(final DataBase db) {
+    private void launchUserGUI(final ControllerDatabase db) {
         
         //Components design
         final ToggleGroup choose = new ToggleGroup();
@@ -99,7 +101,7 @@ public class UserGUI {
         vBoxLanguage.getStyleClass().add("box");
 
         //languages recovery and radiobuttons design
-        ArrayList<Language> listL = db.getAllLanguages();
+        ArrayList<Language> listL = db.getLanguageList();
         for (Language l : listL) {
             RadioButton tmp = new RadioButton(l.getName().toUpperCase());
             tmp.getStyleClass().add("radio-button");
@@ -232,33 +234,6 @@ public class UserGUI {
         //Add container to the scene
         this.stage.getScene().setRoot(global);
 
-    }
-
-    //Open the datebase
-    private DataBase createDataBase() {
-                DataBase db = new DataBase();
-                db.addLanguage("French");
-                db.addLanguage("English");
-		db.addAudio("seth","Audio\\seth.mp3","mp3","English");
-                db.addAudio("Ska-P-Canabis","Audio\\Ska-P-Canabis.mp3", "mp3","English");
-                db.addAudio("cosmo","Audio\\cosmo.mp3","mp3","French");
-                db.addAudio("wasted","Audio\\wasted.mp3","mp3","French");
-                db.addAudio("mark","Audio\\mark.mp3","mp3","French");
-		db.addVideo("2013_3_19_S29_fr_L1_ADMI_B_ok","Video\\2013_3_19_S29_fr_L1_ADMI_B_ok.mp4","mp4","French");
-		db.addVideo("YouTube-Compilation-des-repliques-de-Kadoc","Video\\YouTube-Compilation-des-repliques-de-Kadoc.flv","flv","English");
-		Language tempLanguage = new Language(1, "French");
-                Language tempLanguage1 = new Language(2, "English");
-		Video tempVideo = new Video(db.manageVideo(tempLanguage));
-		Audio tempAudio = new Audio(db.manageAudio(tempLanguage));              
-                Video tempVideo1 = new Video(db.manageVideo(tempLanguage1));
-		Audio tempAudio1 = new Audio(db.manageAudio(tempLanguage1));
-                db.addQuestion("heureux?", tempVideo, tempAudio, "French");
-                db.addQuestion("colère?", tempVideo1, tempAudio1, "English");
-                db.addQuestion("bien?", tempVideo, tempAudio, "French");
-                db.addQuestion("pas bien?", tempVideo1, tempAudio1, "English");
-                db.addQuestion("izi?", tempVideo, tempAudio, "French");
-                db.addQuestion("pas izi?", tempVideo1, tempAudio1, "English");
-        return db;
     }
 
 }

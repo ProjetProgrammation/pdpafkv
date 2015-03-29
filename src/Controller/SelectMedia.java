@@ -18,7 +18,7 @@ public class SelectMedia {
     private ArrayList<Audio> listAudio;
     private ArrayList<Video> listVideo;
     private ArrayList<Question> listQuestion;
-    private DataBase db;
+    private ControllerDatabase db;
     private Language langSel;
 
     /**
@@ -27,7 +27,7 @@ public class SelectMedia {
      * @param db The BDD which contains media.
      * @param langSel The language choose by the user.
      */
-    public SelectMedia(DataBase db, Language langSel) {
+    public SelectMedia(ControllerDatabase db, Language langSel) {
         this.db = db;
         this.langSel = langSel;
         this.selectAudioList();
