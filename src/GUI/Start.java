@@ -39,7 +39,7 @@ public class Start extends Application {
         Scene scene = new Scene(new BorderPane());
         //Load the font add link design with the style page
         Font.loadFont(UserGUI.class.getResource("HelveticaNeueLTStd-LtCn.ttf").toExternalForm(), 10);
-        File f = new File(FilenameUtils.separatorsToSystem("WindowsTheme.css"));
+        File f = new File(FilenameUtils.separatorsToSystem("src/GUI/WindowsTheme.css"));
         scene.getStylesheets().clear();
         scene.getStylesheets().add(f.toURI().toString());
         //Configuration of the stage
