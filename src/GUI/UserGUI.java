@@ -25,10 +25,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * Cette classe perme de gérer l'interface graphique récupérant les informations
- * sur l'utilisateur
+ * This class allows to manage the graphic interface which gathers user information
  *
- * @author Thibaut
+ * @author Jeremy
  */
 public class UserGUI {
 
@@ -60,8 +59,8 @@ public class UserGUI {
     }
 
     /**
-     * This method allow to create graphic user interface for the identification
-     * page of the user This interface contains all essential components for the
+     * This method allows to create graphic user interface for the identification
+     * page of the user. This interface contains all essential components for the
      * user and their statements
      *
      * @param db The BDD which contains media
