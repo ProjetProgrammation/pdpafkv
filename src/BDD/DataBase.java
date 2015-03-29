@@ -904,8 +904,8 @@ public class DataBase {
                 stmtAdd = c.prepareStatement(query);
                  
                 stmtAdd.setInt(1, tmp.getId());
-                stmtAdd.executeQuery();
-
+                stmtAdd.executeUpdate();
+                c.commit();
                 stmtAdd.close();
                 c.commit();
                 c.close();
