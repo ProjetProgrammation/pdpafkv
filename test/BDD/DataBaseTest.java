@@ -41,7 +41,7 @@ public class DataBaseTest {
      * Test of Connexion method, of class DataBase.
      */
     @Test
-    public void testConnection() {
+    public void testConnexion() {
         assertTrue("The connection failed", dataBaseTest.connexion() != null);
     }
 
@@ -49,7 +49,7 @@ public class DataBaseTest {
      * Test of createTables method, of class DataBase.
      */
     @Test
-    public void testDataBaseTables() {
+    public void testCreateTables() {
 
         Connection c;
         PreparedStatement stmt;
@@ -235,6 +235,42 @@ public class DataBaseTest {
 
         assertTrue("Error in the add of question file", checkLanguage == true);
 
+    }
+
+    /**
+     * Test of searchLanguageByName method, of class DataBase.
+     */
+    @Test
+    public void testSearchLanguageByName() {
+        System.out.println("searchLanguageByName");
+        String englishLanguage = "English";
+        String frenchLanguage = "French";
+        String japaneseLanguage = "Japanese";
+        int expResultEnglish = dataBaseTest.searchLanguageByName(frenchLanguage).getId();
+        int expResultFrench = dataBaseTest.searchLanguageByName(englishLanguage).getId();
+        int expResultJapanese = dataBaseTest.searchLanguageByName(japaneseLanguage).getId();
+        assertNotSame("Error in Language id", expResultEnglish, expResultFrench);
+        assertNotSame("Error in Language id", expResultEnglish, expResultJapanese);
+        assertNotSame("Error in Language id", expResultJapanese, expResultFrench);
+    }
+    
+     /**
+     * Test of searchVideoByNameFormat method, of class DataBase.
+     */
+    @Test
+    public void testSearchVideoByNameFormat() {
+        System.out.println("searchVideoByNameFormat");
+        String name = "2013_3_19_S29_fr_L1_ADMI_B_ok";
+        String filePath = "Video\\2013_3_19_S29_fr_L1_ADMI_B_ok.mp4";
+        String format = "mp4";
+        String nameLanguage = "French";
+        
+        int idLanguage = dataBaseTest.searchLanguageByName(nameLanguage).getId();
+        
+        Video expResult = new Video(1, name, filePath, format, idLanguage);
+        Video result = dataBaseTest.searchVideoByNameFormat(name, format);
+        
+        assertEquals("Problem with search video by name format",expResult,result);
     }
 
 }
