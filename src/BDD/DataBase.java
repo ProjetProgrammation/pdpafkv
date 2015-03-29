@@ -884,8 +884,8 @@ public class DataBase {
                     stmtRm = c.prepareStatement(query);
 
                     stmtRm.setInt(1, tmp.getId());
-                    stmtRm.executeQuery();
-
+                    stmtRm.executeUpdate();
+                    c.commit();
                     stmtRm.close();
                 } else {
                     System.out.println("Video cannot be removed, it is linked to the following question :\n" + tmpQuestion.toString());
@@ -944,8 +944,8 @@ public class DataBase {
                     stmtRm = c.prepareStatement(query);
 
                     stmtRm.setInt(1, tmp.getId());
-                    stmtRm.executeQuery();
-
+                    stmtRm.executeUpdate();
+                    c.commit();
                     stmtRm.close();
                 } else {
                     System.out.println("Audio cannot be removed, it is linked to the following question :\n" + tmpQuestion.toString());

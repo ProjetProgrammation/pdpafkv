@@ -10,13 +10,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import junit.framework.TestSuite;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
-
 
 /**
  * Test all DataBase fonctions.
@@ -27,8 +24,8 @@ public class DataBaseTest {
 
     private DataBase dataBaseTest;
 
-    public DataBaseTest (){
-        
+    public DataBaseTest() {
+
     }
 
     @Before
@@ -201,9 +198,7 @@ public class DataBaseTest {
         }
 
         assertTrue("Error in the add of question file", checkQuestion == true);
-
     }
-
     /**
      * Test of addLanguage method, of class DataBase.
      */
@@ -230,9 +225,7 @@ public class DataBaseTest {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-
         assertTrue("Error in the add of question file", checkLanguage == true);
-
     }
 
     /**
@@ -250,46 +243,49 @@ public class DataBaseTest {
         assertNotSame("Error in Language id", expResultEnglish, expResultJapanese);
         assertNotSame("Error in Language id", expResultJapanese, expResultFrench);
     }
-    
-     /**
+
+    /**
      * Test of searchVideoByNameFormat method, of class DataBase.
      */
     public void testSearchVideoByNameFormat() {
         System.out.println("searchVideoByNameFormat");
-       /* String name = "2013_3_19_S29_fr_L1_ADMI_B_ok";
-        String filePath = "Video\\2013_3_19_S29_fr_L1_ADMI_B_ok.mp4";
-        String format = "mp4";
-        String nameLanguage = "French";
+        /* String name = "2013_3_19_S29_fr_L1_ADMI_B_ok";
+         String filePath = "Video\\2013_3_19_S29_fr_L1_ADMI_B_ok.mp4";
+         String format = "mp4";
+         String nameLanguage = "French";
         
-        int idLanguage = dataBaseTest.searchLanguageByName(nameLanguage).getId();
+         int idLanguage = dataBaseTest.searchLanguageByName(nameLanguage).getId();
         
-        Video expResult = new Video(1, name, filePath, format, idLanguage);
-        Video result = dataBaseTest.searchVideoByNameFormat(name, format);
+         Video expResult = new Video(1, name, filePath, format, idLanguage);
+         Video result = dataBaseTest.searchVideoByNameFormat(name, format);
         
-        assertEquals("Problem with search video by name format",expResult,result);*/
+         assertEquals("Problem with search video by name format",expResult,result);*/
     }
-    
+
     /**
      * Test of countAudio method, of class DataBase.
      */
     public void testCountAudio() {
         System.out.println("countAudio");
+        
         int idLanguage = 1;
         int expResult = 4;
         int result = dataBaseTest.countAudio(idLanguage);
-        assertEquals("problem with count audio",expResult, result);
-       
+        
+        assertEquals("problem with count audio", expResult, result);
+
     }
-    
+
     /**
      * Test of countQuestion method, of class DataBase.
      */
     public void testCountQuestion() {
         System.out.println("countQuestion");
-        int idLanguage = 1;
         
+        int idLanguage = 1;
         int expResult = 4;
         int result = dataBaseTest.countQuestion(idLanguage);
+        
         assertEquals(expResult, result);
     }
 
@@ -298,29 +294,34 @@ public class DataBaseTest {
      */
     public void testCountVideo() {
         System.out.println("countVideo");
+        
         int idLanguage = 1;
         int expResult = 2;
         int result = dataBaseTest.countVideo(idLanguage);
+        
         assertEquals(expResult, result);
     }
-    
-     /**
+
+    /**
      * Test of rmVideo method, of class DataBase.
      */
     public void testRmVideo() {
         System.out.println("rmVideo");
         ArrayList<Video> videoListTest = new ArrayList<Video>();
         videoListTest = dataBaseTest.getAllVideos();
-        for(Video v :videoListTest){
+        for (Video v : videoListTest) {
             System.out.println("The video name is:" + v.getName());
         }
         String name = "sethgecks";
         String format = "mp4";
         dataBaseTest.rmVideo(name, format);
-        
+
         videoListTest = dataBaseTest.getAllVideos();
-        for(Video v :videoListTest){
+        for (Video v : videoListTest) {
             System.out.println("The video name is:" + v.getName());
+            if(v.getName().equals(name) && v.getFormat().equals(format)){
+                throw new AssertionError("Video always in DataBase");
+            }
         }
     }
 
@@ -331,34 +332,39 @@ public class DataBaseTest {
         System.out.println("rmAudio");
         ArrayList<Audio> audioListTest = new ArrayList<Audio>();
         audioListTest = dataBaseTest.getAllAudios();
-        for(Audio v :audioListTest){
+        for (Audio v : audioListTest) {
             System.out.println("The audio name is:" + v.getName());
         }
         String name = "sethgeceeks";
         String format = "mp3";
         dataBaseTest.rmAudio(name, format);
         
+        
         audioListTest = dataBaseTest.getAllAudios();
-        for(Audio v :audioListTest){
+        for (Audio v : audioListTest) {
             System.out.println("The audio name is:" + v.getName());
+            if(v.getName().equals(name) && v.getFormat().equals(format)){
+                throw new AssertionError("Audio always in DataBase");
+            }
         }
     }
-    
+
     @Test
     public void testSuite() {
-         testConnexion();
-         testCreateTables();
-         testAddVideo();
-         testAddAudio();
-         testAddQuestion();
-         testAddLanguage();
-         testSearchLanguageByName();
-         testSearchVideoByNameFormat();
-         testCountAudio();
-         testCountQuestion();
-         testAddVideo();
-         testRmVideo();
-         testRmAudio();
+
+        testConnexion();
+        testCreateTables();
+        testAddVideo();
+        testAddAudio();
+        testAddQuestion();
+        testAddLanguage();
+        testSearchLanguageByName();
+        testSearchVideoByNameFormat();
+        testCountAudio();
+        testCountQuestion();
+        testAddVideo();
+        testRmVideo();
+        testRmAudio();
     }
 
 }
