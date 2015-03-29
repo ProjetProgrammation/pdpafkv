@@ -10,10 +10,6 @@ import Controller.ControllerDatabase;
 
 import Errors.Errors;
 import Result.User;
-import com.google.gson.stream.JsonWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -52,6 +48,12 @@ public class UserGUI {
     private Language languageSelect;
     final Errors errors = new Errors();
 
+    
+    /**
+     * Contructs a new ChooseGUI.
+     * 
+     * @param primaryStage The stage of the interface. 
+     */
     public UserGUI(Stage primaryStage) {
         this.stage = primaryStage;
         this.launchUserGUI(this.db);
