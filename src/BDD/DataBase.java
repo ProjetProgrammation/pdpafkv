@@ -34,6 +34,7 @@ public class DataBase {
     /**
      * Establishes a connection with the database dataBase.db, or create it if
      * it doesn't exist yet.
+     *
      * @return Connection.
      */
     public Connection connexion() {
@@ -45,7 +46,7 @@ public class DataBase {
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
-          }
+        }
         System.out.println("Opened database successfully");
         return c;
     }
@@ -113,13 +114,13 @@ public class DataBase {
             try {
                 Class.forName("org.sqlite.JDBC");
                 c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-                  
+
                 c.setAutoCommit(false);
                 System.out.println("[addVideo]Opened database successfully");
 
                 //Searching the language's id of the Video
                 stmtLang = c.prepareStatement(query);
-                stmtLang.setString(1, nameLanguage);	
+                stmtLang.setString(1, nameLanguage);
                 ResultSet rs = stmtLang.executeQuery();
                 while (rs.next()) {
                     idLang = rs.getInt("id");
@@ -129,7 +130,6 @@ public class DataBase {
                 query = "INSERT INTO Video(name,file_path,id_language,format) VALUES (?,?,?,?);";
                 stmtAdd = c.prepareStatement(query);
 
-                 
                 stmtAdd.setString(1, name);
                 stmtAdd.setString(2, filePath);
                 stmtAdd.setInt(3, idLang);
@@ -169,13 +169,13 @@ public class DataBase {
             try {
                 Class.forName("org.sqlite.JDBC");
                 c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-                  
+
                 c.setAutoCommit(false);
                 System.out.println("[addAudio]Opened database successfully");
 
                 //Searching language's id of the audio
                 stmtLang = c.prepareStatement(query);
-                stmtLang.setString(1, nameLanguage);	
+                stmtLang.setString(1, nameLanguage);
                 ResultSet rs = stmtLang.executeQuery();
                 while (rs.next()) {
                     idLang = rs.getInt("id");
@@ -185,7 +185,6 @@ public class DataBase {
                 query = "INSERT INTO Audio(name,file_path,id_language,format) VALUES (?,?,?,?);";
                 stmtAdd = c.prepareStatement(query);
 
-                 
                 stmtAdd.setString(1, name);
                 stmtAdd.setString(2, filePath);
                 stmtAdd.setInt(3, idLang);
@@ -229,7 +228,7 @@ public class DataBase {
                 System.out.println("[addQuestion]Opened database successfully");
 
                 stmtLang = c.prepareStatement(query);
-                
+
                 stmtLang.setString(1, nameLanguage);
                 ResultSet rs = stmtLang.executeQuery();
                 while (rs.next()) {
@@ -271,7 +270,7 @@ public class DataBase {
             try {
                 Class.forName("org.sqlite.JDBC");
                 c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-                c.setAutoCommit(false);	
+                c.setAutoCommit(false);
                 System.out.println("[addLanguage]Opened database successfully");
 
                 stmt = c.prepareStatement(query);
@@ -428,11 +427,11 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-            c.setAutoCommit(false);	
+            c.setAutoCommit(false);
             System.out.println("[searchLanguageByName]Opened database successfully");
 
             stmt = c.prepareStatement(query);
-            stmt.setString(1, name);	
+            stmt.setString(1, name);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 language.setId(rs.getInt("id"));
@@ -465,11 +464,11 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-            c.setAutoCommit(false);	
+            c.setAutoCommit(false);
             System.out.println("[searchVideoByNameFormat]Opened database successfully");
 
             stmt = c.prepareStatement(query);
-            stmt.setString(1, name);	
+            stmt.setString(1, name);
             stmt.setString(2, format);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -506,11 +505,11 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-            c.setAutoCommit(false);	
+            c.setAutoCommit(false);
             System.out.println("[searchAudioByNameFormat]Opened database successfully");
 
             stmt = c.prepareStatement(query);
-            stmt.setString(1, name);	
+            stmt.setString(1, name);
             stmt.setString(2, format);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -546,7 +545,7 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-              
+
             c.setAutoCommit(false);
             System.out.println("[searchQuestionByContent]Opened database successfully");
 
@@ -586,7 +585,7 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-              
+
             c.setAutoCommit(false);
             System.out.println("[getAllQuestions]Opened database successfully");
 
@@ -628,7 +627,7 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-              
+
             c.setAutoCommit(false);
             System.out.println("[getAllVideo]Opened database successfully");
 
@@ -670,7 +669,7 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-              
+
             c.setAutoCommit(false);
             System.out.println("[getAllAudio]Opened database successfully");
 
@@ -712,7 +711,7 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-              
+
             c.setAutoCommit(false);
             System.out.println("[getAllLanguages]Opened database successfully");
 
@@ -752,7 +751,7 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-              
+
             c.setAutoCommit(false);
             System.out.println("[countAudio]Opened database successfully");
 
@@ -787,7 +786,7 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-              
+
             c.setAutoCommit(false);
             System.out.println("[CountQuestion]Opened database successfully");
 
@@ -823,7 +822,7 @@ public class DataBase {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-              
+
             c.setAutoCommit(false);
             stmt = c.prepareStatement(query);
             stmt.setInt(1, idLanguage);
@@ -849,8 +848,10 @@ public class DataBase {
      */
     public void rmVideo(String videoName, String format) {
         Connection c = null;
-        PreparedStatement stmtAdd = null;
+        PreparedStatement stmtCheck = null;
+        PreparedStatement stmtRm = null;
         int idLang = 0;
+        Question tmpQuestion = new Question();
         Video tmp = new Video(this.searchVideoByNameFormat(videoName, format));
         if (tmp.getId() == 0) {
             System.out.println("[rmVideo]This video doesn't exist.");
@@ -861,14 +862,34 @@ public class DataBase {
                 c.setAutoCommit(false);
                 System.out.println("[rmVideo]Opened database successfully");
 
-                //Removing the Video
-                String query = "DELETE FROM Video WHERE id=?;";
-                stmtAdd = c.prepareStatement(query);
-                 
-                stmtAdd.setInt(1, tmp.getId());
-                stmtAdd.executeUpdate();
-                 c.commit();
-                stmtAdd.close();
+                //Looking for a Question using the video we want to remove
+                String query = "SELECT id, content, id_audio, id_video, id_language FROM Question WHERE id_video=?";
+                stmtCheck = c.prepareStatement(query);
+
+                stmtCheck.setInt(1, tmp.getId());
+                ResultSet rs = stmtCheck.executeQuery();
+                while (rs.next()) {
+                    tmpQuestion.setId(rs.getInt("id"));
+                    tmpQuestion.setContent(rs.getString("content"));
+                    tmpQuestion.setIdAudio(rs.getInt("id_audio"));
+                    tmpQuestion.setIdVideo(rs.getInt("id_video"));
+                    tmpQuestion.setIdLanguage(rs.getInt("id_language"));
+                }
+                rs.close();
+                stmtCheck.close();
+
+                if (tmpQuestion.getId() == 0) {
+                    //Removing the Audio
+                    query = "DELETE FROM Video WHERE id=?;";
+                    stmtRm = c.prepareStatement(query);
+
+                    stmtRm.setInt(1, tmp.getId());
+                    stmtRm.executeQuery();
+
+                    stmtRm.close();
+                } else {
+                    System.out.println("Video cannot be removed, it is linked to the following question :\n" + tmpQuestion.toString());
+                }
                 c.commit();
                 c.close();
             } catch (ClassNotFoundException | SQLException e) {
@@ -887,8 +908,10 @@ public class DataBase {
      */
     public void rmAudio(String audioName, String format) {
         Connection c = null;
-        PreparedStatement stmtAdd = null;
+        PreparedStatement stmtCheck = null;
+        PreparedStatement stmtRm = null;
         int idLang = 0;
+        Question tmpQuestion = new Question();
         Audio tmp = new Audio(this.searchAudioByNameFormat(audioName, format));
         if (tmp.getId() == 0) {
             System.out.println("[rmAudio]This video doesn't exist.");
@@ -899,14 +922,34 @@ public class DataBase {
                 c.setAutoCommit(false);
                 System.out.println("[rmAudio]Opened database successfully");
 
-                //Removng the Audio
-                String query = "DELETE FROM Audio WHERE id=?;";
-                stmtAdd = c.prepareStatement(query);
-                 
-                stmtAdd.setInt(1, tmp.getId());
-                stmtAdd.executeUpdate();
-                c.commit();
-                stmtAdd.close();
+                //Looking for a Question using the audio we want to remove
+                String query = "SELECT id, content, id_audio, id_video, id_language FROM Question WHERE id_audio=?";
+                stmtCheck = c.prepareStatement(query);
+
+                stmtCheck.setInt(1, tmp.getId());
+                ResultSet rs = stmtCheck.executeQuery();
+                while (rs.next()) {
+                    tmpQuestion.setId(rs.getInt("id"));
+                    tmpQuestion.setContent(rs.getString("content"));
+                    tmpQuestion.setIdAudio(rs.getInt("id_audio"));
+                    tmpQuestion.setIdVideo(rs.getInt("id_video"));
+                    tmpQuestion.setIdLanguage(rs.getInt("id_language"));
+                }
+                rs.close();
+                stmtCheck.close();
+
+                if (tmpQuestion.getId() == 0) {
+                    //Removing the Audio
+                    query = "DELETE FROM Audio WHERE id=?;";
+                    stmtRm = c.prepareStatement(query);
+
+                    stmtRm.setInt(1, tmp.getId());
+                    stmtRm.executeQuery();
+
+                    stmtRm.close();
+                } else {
+                    System.out.println("Audio cannot be removed, it is linked to the following question :\n" + tmpQuestion.toString());
+                }
                 c.commit();
                 c.close();
             } catch (ClassNotFoundException | SQLException e) {
