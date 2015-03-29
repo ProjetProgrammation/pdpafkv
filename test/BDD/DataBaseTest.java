@@ -10,11 +10,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import junit.framework.TestSuite;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.*;
+
+
 
 /**
  * Test all DataBase fonctions.
@@ -25,8 +27,8 @@ public class DataBaseTest {
 
     private DataBase dataBaseTest;
 
-    public DataBaseTest() {
-
+    public DataBaseTest (){
+        
     }
 
     @Before
@@ -42,7 +44,6 @@ public class DataBaseTest {
     /**
      * Test of Connexion method, of class DataBase.
      */
-    @Test
     public void testConnexion() {
         assertTrue("The connection failed", dataBaseTest.connexion() != null);
     }
@@ -50,7 +51,6 @@ public class DataBaseTest {
     /**
      * Test of createTables method, of class DataBase.
      */
-    @Test
     public void testCreateTables() {
 
         Connection c;
@@ -99,7 +99,6 @@ public class DataBaseTest {
     /**
      * Test of addVideo method, of class DataBase.
      */
-    @Test
     public void testAddVideo() {
         System.out.println("addVideo test");
         String name = "sethgecks";
@@ -135,7 +134,6 @@ public class DataBaseTest {
     /**
      * Test of addAudio method, of class DataBase.
      */
-    @Test
     public void testAddAudio() {
         System.out.println("addAudio test");
         String name = "sethgeceeks";
@@ -172,7 +170,6 @@ public class DataBaseTest {
     /**
      * Test of addQuestion method, of class DataBase.
      */
-    @Test
     public void testAddQuestion() {
         System.out.println("addQuestion test");
         String content = "hello everybody how are you?";
@@ -210,7 +207,6 @@ public class DataBaseTest {
     /**
      * Test of addLanguage method, of class DataBase.
      */
-    @Test
     public void testAddLanguage() {
         System.out.println("addLanguage");
         String name = "Japanese";
@@ -242,7 +238,6 @@ public class DataBaseTest {
     /**
      * Test of searchLanguageByName method, of class DataBase.
      */
-    @Test
     public void testSearchLanguageByName() {
         System.out.println("searchLanguageByName");
         String englishLanguage = "English";
@@ -259,7 +254,6 @@ public class DataBaseTest {
      /**
      * Test of searchVideoByNameFormat method, of class DataBase.
      */
-    @Test
     public void testSearchVideoByNameFormat() {
         System.out.println("searchVideoByNameFormat");
        /* String name = "2013_3_19_S29_fr_L1_ADMI_B_ok";
@@ -278,7 +272,6 @@ public class DataBaseTest {
     /**
      * Test of countAudio method, of class DataBase.
      */
-    @Test
     public void testCountAudio() {
         System.out.println("countAudio");
         int idLanguage = 1;
@@ -291,7 +284,6 @@ public class DataBaseTest {
     /**
      * Test of countQuestion method, of class DataBase.
      */
-    @Test
     public void testCountQuestion() {
         System.out.println("countQuestion");
         int idLanguage = 1;
@@ -304,7 +296,6 @@ public class DataBaseTest {
     /**
      * Test of countVideo method, of class DataBase.
      */
-    @Test
     public void testCountVideo() {
         System.out.println("countVideo");
         int idLanguage = 1;
@@ -316,7 +307,6 @@ public class DataBaseTest {
      /**
      * Test of rmVideo method, of class DataBase.
      */
-    @Test
     public void testRmVideo() {
         System.out.println("rmVideo");
         ArrayList<Video> videoListTest = new ArrayList<Video>();
@@ -337,7 +327,6 @@ public class DataBaseTest {
     /**
      * Test of rmAudio method, of class DataBase.
      */
-    @Test
     public void testRmAudio() {
         System.out.println("rmAudio");
         ArrayList<Audio> audioListTest = new ArrayList<Audio>();
@@ -353,6 +342,23 @@ public class DataBaseTest {
         for(Audio v :audioListTest){
             System.out.println("The audio name is:" + v.getName());
         }
+    }
+    
+    @Test
+    public void testSuite() {
+         testConnexion();
+         testCreateTables();
+         testAddVideo();
+         testAddAudio();
+         testAddQuestion();
+         testAddLanguage();
+         testSearchLanguageByName();
+         testSearchVideoByNameFormat();
+         testCountAudio();
+         testCountQuestion();
+         testAddVideo();
+         testRmVideo();
+         testRmAudio();
     }
 
 }
