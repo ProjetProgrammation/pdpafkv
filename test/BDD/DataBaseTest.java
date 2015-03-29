@@ -16,6 +16,7 @@ import static org.junit.Assert.*;
 
 /**
  * Test all DataBase fonctions.
+ *
  * @author guillaume21
  */
 public class DataBaseTest {
@@ -36,11 +37,17 @@ public class DataBaseTest {
         dataBaseTest = null;
     }
 
+    /**
+     * Test of Connexion method, of class DataBase.
+     */
     @Test
     public void testConnection() {
         assertTrue("The connection failed", dataBaseTest.connexion() != null);
     }
 
+    /**
+     * Test of createTables method, of class DataBase.
+     */
     @Test
     public void testDataBaseTables() {
 
@@ -87,9 +94,12 @@ public class DataBaseTest {
         assertTrue("error in Language table", tablesName[4].isEmpty());
     }
 
+    /**
+     * Test of addVideo method, of class DataBase.
+     */
     @Test
     public void testAddVideo() {
-        System.out.println("addVideo");
+        System.out.println("addVideo test");
         String name = "sethgecks";
         String filePath = "Audio\\\\sethsbree.mp3";
         String format = "mp3";
@@ -104,10 +114,10 @@ public class DataBaseTest {
 
             ResultSet rs = prepaS.executeQuery();
             while (rs.next()) {
-                String nameBDD = rs.getString("name");
-                String filepathBDD = rs.getString("file_path");
-                String formatBDD = rs.getString("format");
-                if (name.equals(nameBDD) && filePath.equals(filepathBDD) && format.equals(formatBDD) && nameLanguage.equals("French")) {
+                String nameDataBase = rs.getString("name");
+                String filepathDataBase = rs.getString("file_path");
+                String formatDataBase = rs.getString("format");
+                if (name.equals(nameDataBase) && filePath.equals(filepathDataBase) && format.equals(formatDataBase) && nameLanguage.equals("French")) {
                     checkVideo = true;
                     System.out.println("the vidéo was found");
                 }
@@ -120,9 +130,12 @@ public class DataBaseTest {
         assertTrue("Error in the add of audio file", checkVideo == true);
     }
 
+    /**
+     * Test of addAudio method, of class DataBase.
+     */
     @Test
     public void testAddAudio() {
-        System.out.println("addAudio");
+        System.out.println("addAudio test");
         String name = "sethgeceeks";
         String filePath = "Audio\\\\sethsbreedd.mp3";
         String format = "mp3";
@@ -138,10 +151,10 @@ public class DataBaseTest {
 
             ResultSet rs = prepaS.executeQuery();
             while (rs.next()) {
-                String nameBDD = rs.getString("name");
-                String filepathBDD = rs.getString("file_path");
-                String formatBDD = rs.getString("format");
-                if (name.equals(nameBDD) && filePath.equals(filepathBDD) && format.equals(formatBDD) && nameLanguage.equals("French")) {
+                String nameDataBase = rs.getString("name");
+                String filepathDataBase = rs.getString("file_path");
+                String formatDataBase = rs.getString("format");
+                if (name.equals(nameDataBase) && filePath.equals(filepathDataBase) && format.equals(formatDataBase) && nameLanguage.equals("French")) {
                     checkAudio = true;
                     System.out.println("the audio was found");
                 }
@@ -152,6 +165,76 @@ public class DataBaseTest {
         }
 
         assertTrue("Error in the add of audio file", checkAudio == true);
+    }
+
+    /**
+     * Test of addQuestion method, of class DataBase.
+     */
+    @Test
+    public void testAddQuestion() {
+        System.out.println("addQuestion test");
+        String content = "hello everybody how are you?";
+        Audio audioTest = new Audio(2000, "sethgeceeks", "Audio\\sethsbreedd.mp3", "mp3", 1);
+        Video videoTest = new Video(2000, "sethgecks", "Audio\\sethsbree.mp3", "mp3", 1);
+        String nameLanguage = "French";
+        boolean checkQuestion = false;
+
+        dataBaseTest.addQuestion(content, videoTest, audioTest, nameLanguage);
+
+        try {
+            PreparedStatement prepaS;
+            Connection c = dataBaseTest.connexion();
+            String query = "select * from Question where content='" + content + "';)";
+            prepaS = c.prepareStatement(query);
+
+            ResultSet rs = prepaS.executeQuery();
+            while (rs.next()) {
+                String contentDataBase = rs.getString("content");
+                String languageBDD = "French";
+                if (content.equals(contentDataBase) && languageBDD.equals(nameLanguage)) {
+                    checkQuestion = true;
+                    System.out.println("the question was found");
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
+        assertTrue("Error in the add of question file", checkQuestion == true);
+
+    }
+
+    /**
+     * Test of addLanguage method, of class DataBase.
+     */
+    @Test
+    public void testAddLanguage() {
+        System.out.println("addLanguage");
+        String name = "Japanese";
+        dataBaseTest.addLanguage(name);
+        boolean checkLanguage = false;
+
+        dataBaseTest.addLanguage(name);
+
+        try {
+            PreparedStatement prepaS;
+            Connection c = dataBaseTest.connexion();
+            String query = "select * from Language where name='" + name + "';)";
+            prepaS = c.prepareStatement(query);
+
+            ResultSet rs = prepaS.executeQuery();
+            while (rs.next()) {
+                checkLanguage = true;
+                System.out.println("the question was found");
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
+        assertTrue("Error in the add of question file", checkLanguage == true);
+
     }
 
 }
