@@ -12,12 +12,12 @@ package Result;
  */
 public class User {
 
-    private String id;
-    private String lastName;
-    private String firstName;
-    private String birthday;
-    private String motherTongue;
-    private int yearStudying;
+    private final String id;
+    private final String lastName;
+    private final String firstName;
+    private final String birthday;
+    private final String motherTongue;
+    private final int yearStudying;
 
     /**
      * Constructs an User object.

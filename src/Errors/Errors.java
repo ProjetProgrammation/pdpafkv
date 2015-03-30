@@ -5,8 +5,11 @@
  */
 package Errors;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,37 +21,31 @@ import java.util.regex.Pattern;
 public class Errors extends Exception {
 
     /**
-     * Constructs a Errors object.
-     */
-    public Errors() {
-    }
-
-    /**
      * Find errors on last name, first name or mother tongue.
      *
      * @param valueTested null if no errors.
      * @return String.
      */
-    public String errorsMessages(Object valueTested) {
+    public static boolean errorsMessages(Object valueTested) {
 
-        String messageError = null;
+        boolean boolError = true;
 
         if (valueTested instanceof String) {
             Pattern p = Pattern.compile("^[a-zA-Z]+$");
             Matcher m = p.matcher((String) valueTested);
             while (m.find()) {
-                return null;
+                return boolError;
             }
-            messageError = "false";
+            boolError = false;
         } else if (valueTested instanceof Integer) {
             if ((int) valueTested > 125) {
-                messageError = "false";
+                boolError = false;
             } else {
-                return null;
+                return boolError;
             }
 
         }
-        return messageError;
+        return boolError;
     }
 
     /**
@@ -57,23 +54,17 @@ public class Errors extends Exception {
      * @param dateTested birthday of the user.
      * @return String.
      */
-    public String errorDate(String dateTested) {
-        String errorMessage = null;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date d;
-
+    public static boolean errorDate(String dateTested){
         try {
-            d = sdf.parse(dateTested);
-            String t = sdf.format(d);
-            if (t.compareTo(dateTested) != 0) {
-                errorMessage = "false";
-            } else
-                ;
-        } catch (Exception e) {
-            errorMessage = "false";
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            sdf.setLenient(false);
+            Date d = sdf.parse(dateTested);
+        } catch (ParseException ex) {
+            System.out.println(ex.toString());
+            return false;
         }
 
-        return errorMessage;
+        return true;
     }
 
     /**
@@ -81,7 +72,7 @@ public class Errors extends Exception {
      * system version.
      *
      */
-    public void errorsOs() {
+    public static void errorsOs() {
         String nameOS = System.getProperty("os.name");
         String Version = System.getProperty("os.version");
         String javaVersion = System.getProperty("java.home");

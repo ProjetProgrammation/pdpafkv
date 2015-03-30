@@ -25,48 +25,48 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * This class allows to manage the graphic interface which gathers user information
+ * This class allows to manage the graphic interface which gathers user
+ * information
  *
  * @author Jeremy
  */
 public class UserGUI {
 
     private final Stage stage;
-
-    private final int lastNameMistake = 0;
-    private final int firstNameMistake = 0;
-    private final int birthdayMistake = 0;
-    private final int motherTongueMistake = 0;
-    private final int yearStudyingMistake = 0;
-    private final TextField lastName = new TextField();
-    private final TextField firstName = new TextField();
-    private final TextField birthday = new TextField();
-    private final TextField motherTongue = new TextField();
-    private final TextField yearStudying = new TextField();
-    private final ControllerDatabase db = new ControllerDatabase();
+    private final ControllerDatabase db;
     private Language languageSelect;
-    final Errors errors = new Errors();
+    private int lastNameMistake = 0;
+    private int firstNameMistake = 0;
+    private int birthdayMistake = 0;
+    private int motherTongueMistake = 0;
+    private int yearStudyingMistake = 0;
 
-    
     /**
      * Contructs a new ChooseGUI.
-     * 
-     * @param primaryStage The stage of the interface. 
+     *
+     * @param primaryStage The stage of the interface.
      */
     public UserGUI(Stage primaryStage) {
         this.stage = primaryStage;
+        this.db = new ControllerDatabase();
         this.launchUserGUI(this.db);
     }
 
     /**
-     * This method allows to create graphic user interface for the identification
-     * page of the user. This interface contains all essential components for the
-     * user and their statements
+     * This method allows to create graphic user interface for the
+     * identification page of the user. This interface contains all essential
+     * components for the user and their statements
      *
      * @param db The BDD which contains media
      */
     private void launchUserGUI(final ControllerDatabase db) {
-        
+
+        final TextField lastName = new TextField();
+        final TextField firstName = new TextField();
+        final TextField birthday = new TextField();
+        final TextField motherTongue = new TextField();
+        final TextField yearStudying = new TextField();
+
         //Components design
         final ToggleGroup choose = new ToggleGroup();
         birthday.setPromptText("Example : 12/07/1998");
@@ -76,6 +76,7 @@ public class UserGUI {
         Button access = new Button("NEXT");
         access.setPrefSize(100, 40);
 
+        //Create differents containers
         VBox vBoxLanguage = new VBox();
         GridPane root = new GridPane();
         GridPane user = new GridPane();
@@ -116,114 +117,94 @@ public class UserGUI {
         access.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                /*if (lastName.equals("") && firstName.equals("") && motherTongue.equals("") && birthday.equals("") && yearStudying.equals("") && choose.getSelectedToggle().isSelected()==false){
-                 //We'll se, mettre une croix à coté de celui pas ou mal rempli
-                 }
-                 else{ */
+
                 //Récupération données dans les champs
-                /*   String ln = lastName.getText();
-                 if (errors.ErrorsMessages(ln) != null){
-                 System.out.println("Le nom est incorrect");
-                 fauteA ++;
-                 }
-                 else{
-                 if(fauteA != 0){
-                 fauteA --; 
-                 }
-                 }
-                    
-                 String fn = firstName.getText();
-                 if (errors.ErrorsMessages(fn) != null){
-                 System.out.println("Le prénom est incorrect");
-                 fauteB ++;
-                 }
-                 else{
-                 if(fauteB != 0){
-                 fauteB --; 
-                 } 
-                 }
-                    
-                 String mt = motherTongue.getText();
-                 if (errors.ErrorsMessages(mt) != null){
-                 System.out.println("La langue est incorrect");
-                 fauteC ++;
-                 }
-                 else{
-                 if(fauteC != 0){
-                 fauteC --; 
-                 }
-                 }
-                    
-                 String bd = birthday.getText();
-                    
-                 if (errors.errorDate(bd) == null){
-                 if(fauteD != 0){
-                 fauteD --; 
-                 }
-                 }
-                 else {
-                 System.out.println("Le birthday est incorrect");
-                 fauteD ++;
-                 }
-                    
-                 try{
-                 Integer ys = Integer.parseInt(yearStudying.getText());
-                 if (errors.ErrorsMessages(ys) != null){
-                 System.out.println("Le study est incorrect");
-                 fauteE ++;
-                 }
-                 else{
-                 if(fauteE != 0){
-                 fauteE --; 
-                 }
-                 }
-                 }
-                 catch (Exception e){
-                 System.out.println("Le study est incorrect");
-                 fauteE ++;
-                 }
-                 // Création de l'utilisateur
-                 //User us = new User(ln,fn,bd,mt,ys);
-                 // Affichage du bouton sélectionné.
-                   
-                 if (choose.getSelectedToggle() == null){
-                 System.out.println("selectionner une langue");
-                 }
-                 else{
-                 languageSelect = (Language)choose.selectedToggleProperty().get().getUserData();
-                 }
+                String ln = lastName.getText();
+                if (!Errors.errorsMessages(ln)) {
+                    System.out.println("[UserGUI]Wrong last name");
+                    lastNameMistake++;
+                } else {
+                    if (lastNameMistake != 0) {
+                        lastNameMistake--;
+                    }
+                }
 
-                 //Affichage pour voir si ajout OK
+                String fn = firstName.getText();
+                if (!Errors.errorsMessages(fn)) {
+                    System.out.println("[UserGUI]Wrong first name");
+                    firstNameMistake++;
+                } else {
+                    if (firstNameMistake != 0) {
+                        firstNameMistake--;
+                    }
+                }
+
+                String mt = motherTongue.getText();
+                if (!Errors.errorsMessages(mt)) {
+                    System.out.println("[UserGUI]Wrong mother tongue");
+                    motherTongueMistake++;
+                } else {
+                    if (motherTongueMistake != 0) {
+                        motherTongueMistake--;
+                    }
+                }
+
+                String bd = birthday.getText();
+                if (!Errors.errorDate(bd)) {
+                    System.out.println("[UserGUI]Wrong birthday");
+                    birthdayMistake++;
+                } else {
+                    if (birthdayMistake != 0) {
+                        birthdayMistake--;
+                    }
+                }
+
+                Integer ys = Integer.parseInt(yearStudying.getText());
+                if (!Errors.errorsMessages(ys)) {
+                    System.out.println("[UserGUI]Wrong years studying");
+                    yearStudyingMistake++;
+                } else {
+                    if (yearStudyingMistake != 0) {
+                        yearStudyingMistake--;
+                    }
+                }
+
+                //
+                if (choose.getSelectedToggle() == null) {
+                    System.out.println("[UserGUI]Select one language");
+                } else {
+                    languageSelect = (Language) choose.selectedToggleProperty().get().getUserData();
+                }
                 
-                 if (fauteA == 0 && fauteB == 0 && fauteC == 0 && fauteD == 0 && fauteE == 0 && languageSelect != null){
-                 */
-                User user = new User("Thibaut", "Fabre", "26/02/1991", "French", 1);
-                languageSelect = (Language) choose.getSelectedToggle().getUserData();
-                new ChooseGUI(stage, languageSelect, db, user);
+                //
+                if (lastNameMistake == 0 && firstNameMistake == 0 && motherTongueMistake == 0 && birthdayMistake == 0 && yearStudyingMistake == 0 && languageSelect != null) {
 
-                /*
-                 errors.ErrorsOs();
-                 }
-                    
-                 //}*/
+                    //User user = new User("Thibaut", "Fabre", "26/02/1991", "French", 1);
+                    //languageSelect = (Language) choose.getSelectedToggle().getUserData();
+                    User user = new User(ln, fn, bd, mt, ys);
+                    new ChooseGUI(stage, languageSelect, db, user);
+
+                }
+
             }
-        });
+        }
+        );
 
         //Organize the interface
         root.setAlignment(Pos.CENTER);
 
-        user.add(labelLastName, 1, 1);
-        user.add(labelFirstName, 1, 2);
-        user.add(labelBirthday, 1, 3);
-        user.add(labelMotherTongue, 1, 4);
-        user.add(labelYearStudying, 1, 5);
-        user.add(lastName, 2, 1);
-        user.add(firstName, 2, 2);
-        user.add(birthday, 2, 3);
-        user.add(motherTongue, 2, 4);
+        user.add(labelLastName,1, 1);
+        user.add(labelFirstName,1, 2);
+        user.add(labelBirthday,1, 3);
+        user.add(labelMotherTongue,1, 4);
+        user.add(labelYearStudying,1, 5);
+        user.add(lastName,2, 1);
+        user.add(firstName,2, 2);
+        user.add(birthday,2, 3);
+        user.add(motherTongue,2, 4);
         user.add(yearStudying, 2, 5);
-
-        root.add(user, 0, 2);
+        
+        root.add(user,0, 2);
         root.add(vBoxLanguage, 1, 2);
         root.add(access, 1, 3);
         root.add(titleInformations, 0, 1);

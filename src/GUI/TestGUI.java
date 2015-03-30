@@ -15,7 +15,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import static javafx.scene.input.KeyCode.F;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -105,8 +104,6 @@ public class TestGUI extends Parent {
 
         Button mix = new Button("Merge".toUpperCase());
         Button validate = new Button("Next".toUpperCase());
-        mix.setDisable(true);
-        validate.setDisable(true);
 
         //Organize the interface
         BorderPane global = new BorderPane();
@@ -119,37 +116,33 @@ public class TestGUI extends Parent {
         //Add style classe
         title.getStyleClass().add("label-header");
 
-        /* TODO
-         Barre de progression */ 
+        //Barre de progression
         ProgressBar pb = new ProgressBar();
-         double progress = (double) 1 / nbQuestion;
-         double i = progress * currentQuestionNumber;
-         pb.setProgress(i);
-         HBox hb = new HBox();
-         hb.setSpacing(5);
-         hb.setAlignment(Pos.CENTER);
-         hb.getChildren().add(pb);
-         
-        if ((this.selMedia.selectAudio() != null) && (this.selMedia.selectVideo() != null)) {
-            mix.setDisable(false);
-            validate.setDisable(false);
-        };
+        double progress = (double) 1 / nbQuestion;
+        double i = progress * currentQuestionNumber;
+        pb.setProgress(i);
+        HBox hb = new HBox();
+        hb.setSpacing(5);
+        hb.setAlignment(Pos.CENTER);
+        hb.getChildren().add(pb);
 
         //Managing events
         validate.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                currentQuestionNumber++;
-                if ((currentQuestionNumber <= nbQuestion) && (nbQuestion == 3)) {
-                    mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
-                    new TestGUI(stage, nbQuestion, currentQuestionNumber, selMedia, mediaSel);
-                } else if ((currentQuestionNumber <= nbQuestion) && (nbQuestion == 5)) {
-                    new TestGUI(stage, nbQuestion, currentQuestionNumber, selMedia, userSel);
-                } else if ((currentQuestionNumber != nbQuestion) && (nbQuestion == 3)) {
-                    mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
-                    Extract.Extract(mediaSel);
-                } else if ((currentQuestionNumber != nbQuestion) && (nbQuestion == 5)) {
-                    new ChooseGUI(stage, language, db, userSel);
+                if ((video.getVideoSelected() != null)&&(son.getAudioSelected() != null)){
+                    currentQuestionNumber++;
+                    if ((currentQuestionNumber <= nbQuestion) && (nbQuestion == 3)) {
+                        mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
+                        new TestGUI(stage, nbQuestion, currentQuestionNumber, selMedia, mediaSel);
+                    } else if ((currentQuestionNumber <= nbQuestion) && (nbQuestion == 5)) {
+                        new TestGUI(stage, nbQuestion, currentQuestionNumber, selMedia, userSel);
+                    } else if ((currentQuestionNumber != nbQuestion) && (nbQuestion == 3)) {
+                        mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
+                        Extract.Extract(mediaSel);
+                    } else if ((currentQuestionNumber != nbQuestion) && (nbQuestion == 5)) {
+                        new ChooseGUI(stage, language, db, userSel);
+                    }
                 }
             }
         });
