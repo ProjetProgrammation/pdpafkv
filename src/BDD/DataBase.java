@@ -908,13 +908,38 @@ public class DataBase {
             System.out.println("[rmAudio]The video " + tmp.getName() + "." + tmp.getFormat() + " successfuly removed from the DB");
         }
     }
-    
+
     /**
-     * Returns the name of the language which the id is in parameter.
+     * Returns the name of the language which the id is in parameter, returns null if the language doesn't exist.
+     *
      * @param id Language's id.
      * @return String
      */
-    public String getLanguageById(int id){
+    public String getLanguageById(int id) {
+        Connection c = this.connexion();
+        PreparedStatement stmt = null;
+        String result = null;
+        try {
+            c.setAutoCommit(false);
+            System.out.println("[getLanguageById]Opened database successfully");
+            
+            String query = "SELECT name FROM Language WHERE id=?;";
+            stmt = c.prepareStatement(query);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                result=rs.getString("name");
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+            return (result);
+
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
         return "";
     }
 
