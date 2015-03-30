@@ -117,7 +117,7 @@ public class DataBaseTest {
                 String formatDataBase = rs.getString("format");
                 if (name.equals(nameDataBase) && filePath.equals(filepathDataBase) && format.equals(formatDataBase) && nameLanguage.equals("French")) {
                     checkVideo = true;
-                    System.out.println("the vidéo was found");
+                    System.out.println("the video was found");
                 }
             }
         } catch (SQLException e) {
@@ -208,8 +208,6 @@ public class DataBaseTest {
         String name = "Japanese";
         dataBaseTest.addLanguage(name);
         boolean checkLanguage = false;
-
-        dataBaseTest.addLanguage(name);
 
         try {
             PreparedStatement prepaS;
@@ -341,7 +339,7 @@ public class DataBaseTest {
      */
     public void testRmVideo() {
         System.out.println("rmVideo");
-        ArrayList<Video> videoListTest = new ArrayList<Video>();
+        ArrayList<Video> videoListTest;
         videoListTest = dataBaseTest.getAllVideos();
         for (Video v : videoListTest) {
             System.out.println("The video name is:" + v.getName());
@@ -364,7 +362,7 @@ public class DataBaseTest {
      */
     public void testRmAudio() {
         System.out.println("rmAudio");
-        ArrayList<Audio> audioListTest = new ArrayList<Audio>();
+        ArrayList<Audio> audioListTest;
         audioListTest = dataBaseTest.getAllAudios();
         for (Audio v : audioListTest) {
             System.out.println("The audio name is:" + v.getName());
@@ -380,6 +378,48 @@ public class DataBaseTest {
                 throw new AssertionError("Audio always in DataBase");
             }
         }
+    }   
+     /**
+     * Test grey box of AddAudio, AddVideo, AddQuestion and AddLanguage of class DataBase.
+     * We know these methods have to not add a video if it already exist so we try it.
+     */
+    public void test2AddVideoGreyBox() {
+        
+        String name = "sethgecksss";
+        String filePath = "Audio\\\\sethsbreesss.mp4";
+        String format = "mp4";
+        String nameLanguage = "French";
+        
+        dataBaseTest.addVideo(name, filePath, format, nameLanguage);
+        dataBaseTest.addVideo(name, filePath, format, nameLanguage);
+    }
+    
+    public void test2AddAudioGreyBox() {
+        
+        String name = "coupain";
+        String filePath = "Audio\\\\coupain.mp4";
+        String format = "mp3";
+        String nameLanguage = "French";
+        
+        dataBaseTest.addAudio(name, filePath, format, nameLanguage);
+        dataBaseTest.addAudio(name, filePath, format, nameLanguage);
+    }
+    
+     public void test2AddQuestionGreyBox() {
+        Audio audioTest = new Audio(55, "sethgeceekeds", "Audio\\sethsbreedd.mp3", "mp3", 1);
+        Video videoTest = new Video(70, "sethgeckdes", "Video\\sethsbree.mp4", "mp4", 1);
+        String nameLanguage = "French";
+        String content = "we try this";
+        
+        dataBaseTest.addQuestion(content,videoTest, audioTest, nameLanguage);
+        dataBaseTest.addQuestion(content,videoTest, audioTest, nameLanguage);
+    }
+     
+     public void test2AddLanguageGreyBox() {
+        String languageTest = "American";
+        
+        dataBaseTest.addLanguage(languageTest);
+        dataBaseTest.addLanguage(languageTest);
     }
 
     @Test
@@ -388,10 +428,14 @@ public class DataBaseTest {
         testConnexion();
         testCreateTables();
         testAddVideo();
+        test2AddVideoGreyBox();
         testAddAudio();
+        test2AddAudioGreyBox();
         testAddQuestion();
+        test2AddQuestionGreyBox();
         testAddLanguage();
-        testSearchLanguageByName();
+        test2AddLanguageGreyBox();
+        /*testSearchLanguageByName();
         testSearchVideoByNameFormat();
         testSearchAudioByNameFormat();
         testSearchQuestionByContent();
@@ -399,7 +443,7 @@ public class DataBaseTest {
         testCountQuestion();
         testAddVideo();
         testRmVideo();
-        testRmAudio();
+        testRmAudio();*/
     }
 
 }

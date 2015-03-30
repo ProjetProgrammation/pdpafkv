@@ -38,7 +38,7 @@ public class DataBase {
      * @return Connection.
      */
     public Connection connexion() {
-        boolean test = false;
+       
         Connection c = null;
         try {
             Class.forName("org.sqlite.JDBC");
@@ -55,13 +55,9 @@ public class DataBase {
      * Creates the tables in the database.
      */
     private void createTables() {
-        Connection c = null;
-        Statement stmt = null;
+        Connection c = this.connexion();
+        Statement stmt;
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-            System.out.println("[CreateTables]Opened database successfully");
-
             stmt = c.createStatement();
             String sql = "CREATE TABLE IF NOT EXISTS Question ("
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
@@ -87,7 +83,7 @@ public class DataBase {
             stmt.executeUpdate(sql);
             stmt.close();
             c.close();
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
@@ -103,7 +99,7 @@ public class DataBase {
      * @param format Video's format to add.
      */
     public void addVideo(String name, String filePath, String format, String nameLanguage) {
-        Connection c = null;
+        Connection c = this.connexion();
         PreparedStatement stmtLang = null;
         PreparedStatement stmtAdd = null;
         int idLang = 0;
@@ -112,9 +108,7 @@ public class DataBase {
         } else {
             String query = new String("SELECT id FROM Language WHERE Language.name=?;");
             try {
-                Class.forName("org.sqlite.JDBC");
-                c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-
+                
                 c.setAutoCommit(false);
                 System.out.println("[addVideo]Opened database successfully");
 
@@ -141,7 +135,7 @@ public class DataBase {
                 stmtAdd.close();
                 c.commit();
                 c.close();
-            } catch (ClassNotFoundException | SQLException e) {
+            } catch (SQLException e) {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                 System.exit(0);
             }
@@ -158,7 +152,7 @@ public class DataBase {
      * @param format Audio's format to add.
      */
     public void addAudio(String name, String filePath, String format, String nameLanguage) {
-        Connection c = null;
+        Connection c = this.connexion();
         PreparedStatement stmtLang = null;
         PreparedStatement stmtAdd = null;
         int idLang = 0;
@@ -167,9 +161,6 @@ public class DataBase {
         } else {
             String query = new String("SELECT id FROM Language WHERE Language.name=?;");
             try {
-                Class.forName("org.sqlite.JDBC");
-                c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-
                 c.setAutoCommit(false);
                 System.out.println("[addAudio]Opened database successfully");
 
@@ -196,7 +187,7 @@ public class DataBase {
                 stmtAdd.close();
                 c.commit();
                 c.close();
-            } catch (ClassNotFoundException | SQLException e) {
+            } catch (SQLException e) {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                 System.exit(0);
             }
@@ -213,7 +204,7 @@ public class DataBase {
      * @param nameLanguage Question's Language.
      */
     public void addQuestion(String content, Video video, Audio audio, String nameLanguage) {
-        Connection c = null;
+        Connection c = this.connexion();
         PreparedStatement stmtLang = null;
         PreparedStatement stmtAdd = null;
         int idLang = 0;
@@ -222,8 +213,6 @@ public class DataBase {
         } else {
             String query = new String("SELECT id FROM Language WHERE Language.name=?;");
             try {
-                Class.forName("org.sqlite.JDBC");
-                c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
                 c.setAutoCommit(false);
                 System.out.println("[addQuestion]Opened database successfully");
 
@@ -247,7 +236,7 @@ public class DataBase {
                 stmtAdd.close();
                 c.commit();
                 c.close();
-            } catch (ClassNotFoundException | SQLException e) {
+            } catch (SQLException e) {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                 System.exit(0);
             }
@@ -261,15 +250,13 @@ public class DataBase {
      * @param name The language in String type.
      */
     public void addLanguage(String name) {
-        Connection c = null;
+        Connection c = this.connexion();
         PreparedStatement stmt = null;
         if (this.searchLanguageByName(name).getId() != 0) {
             System.out.println("[addLanguage]This language already exists.");
         } else {
             String query = new String("INSERT INTO Language (name) VALUES (?);");
             try {
-                Class.forName("org.sqlite.JDBC");
-                c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
                 c.setAutoCommit(false);
                 System.out.println("[addLanguage]Opened database successfully");
 
@@ -280,7 +267,7 @@ public class DataBase {
                 stmt.close();
                 c.commit();
                 c.close();
-            } catch (ClassNotFoundException | SQLException e) {
+            } catch (SQLException e) {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                 System.exit(0);
             }
@@ -296,14 +283,12 @@ public class DataBase {
      * @return Video
      */
     public Video manageVideo(Language language) {
-        Connection c = null;
+        Connection c = this.connexion();
         PreparedStatement stmt = null;
         Video result = new Video();
         int idLanguage = language.getId();
         String query = new String("SELECT * FROM Video WHERE id_language=? ORDER BY random() LIMIT 1;");
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
             c.setAutoCommit(false);
             System.out.println("[manageVideo]Opened database successfully");
 
@@ -322,7 +307,7 @@ public class DataBase {
             stmt.close();
             c.close();
             return (result);
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
@@ -338,14 +323,12 @@ public class DataBase {
      * @return Audio
      */
     public Audio manageAudio(Language language) {
-        Connection c = null;
+        Connection c = this.connexion();
         PreparedStatement stmt = null;
         Audio result = new Audio();
         int idLanguage = language.getId();
         String query = new String("SELECT * FROM Audio WHERE id_language=? ORDER BY random() LIMIT 1;");
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
             c.setAutoCommit(false);
             System.out.println("[manageAudio]Opened database successfully");
 
@@ -364,7 +347,7 @@ public class DataBase {
             stmt.close();
             c.close();
             return (result);
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
@@ -380,14 +363,12 @@ public class DataBase {
      * @return Question
      */
     public Question manageQuestion(Language language) {
-        Connection c = null;
+        Connection c = this.connexion();
         PreparedStatement stmt = null;
         Question result = new Question();
         int idLanguage = language.getId();
         String query = new String("SELECT * FROM Question WHERE id_language=? ORDER BY random() LIMIT 1;");
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
             c.setAutoCommit(false);
             System.out.println("[manageQuestion]Opened database successfully");
             stmt = c.prepareStatement(query);
@@ -405,7 +386,7 @@ public class DataBase {
             stmt.close();
             c.close();
             return (result);
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
@@ -420,13 +401,11 @@ public class DataBase {
      * @return Language
      */
     public Language searchLanguageByName(String name) {
-        Connection c = null;
+        Connection c = this.connexion();
         PreparedStatement stmt = null;
         Language language = new Language();
         String query = new String("SELECT * FROM Language WHERE Language.name=?;");
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
             c.setAutoCommit(false);
             System.out.println("[searchLanguageByName]Opened database successfully");
 
@@ -441,7 +420,7 @@ public class DataBase {
             stmt.close();
             c.close();
             return (language);
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         System.out.println("[searchLanguageByName]Error");
@@ -457,13 +436,12 @@ public class DataBase {
      * @return Video
      */
     public Video searchVideoByNameFormat(String name, String format) {
-        Connection c = null;
+        Connection c = this.connexion();
         PreparedStatement stmt = null;
         Video video = new Video();
         String query = new String("SELECT * FROM Video WHERE Video.name=? AND Video.format=?;");
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
+           
             c.setAutoCommit(false);
             System.out.println("[searchVideoByNameFormat]Opened database successfully");
 
@@ -482,7 +460,7 @@ public class DataBase {
             stmt.close();
             c.close();
             return (video);
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         System.out.println("[searchVideoByNameFormat]Error");
@@ -498,13 +476,11 @@ public class DataBase {
      * @return Audio
      */
     public Audio searchAudioByNameFormat(String name, String format) {
-        Connection c = null;
+        Connection c = this.connexion();
         PreparedStatement stmt = null;
         Audio audio = new Audio();
         String query = new String("SELECT * FROM Audio WHERE Audio.name=? AND Audio.format=?;");
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
             c.setAutoCommit(false);
             System.out.println("[searchAudioByNameFormat]Opened database successfully");
 
@@ -523,7 +499,7 @@ public class DataBase {
             stmt.close();
             c.close();
             return (audio);
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         System.out.println("[searchAudioByNameFormat]Error");
@@ -538,15 +514,12 @@ public class DataBase {
      * @return Question
      */
     public Question searchQuestionByContent(String content) {
-        Connection c = null;
+        Connection c = this.connexion();
         PreparedStatement stmt = null;
         Question question = new Question();
         String query = new String("SELECT * FROM Question WHERE Question.content=?;");
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-
-            c.setAutoCommit(false);
+                       c.setAutoCommit(false);
             System.out.println("[searchQuestionByContent]Opened database successfully");
 
             stmt = c.prepareStatement(query);
@@ -563,7 +536,7 @@ public class DataBase {
             stmt.close();
             c.close();
             return (question);
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         System.out.println("[searchQuestionByContent]Error");
@@ -576,15 +549,13 @@ public class DataBase {
      * @return ArrayList\<Question\>
      */
     public ArrayList<Question> getAllQuestions() {
-        Connection c = null;
+        Connection c = this.connexion();
         PreparedStatement stmt = null;
         ArrayList<Question> result;
         result = new ArrayList<>();
         Question tempQuestion = new Question();
         String query = new String("SELECT * FROM Question;");
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
 
             c.setAutoCommit(false);
             System.out.println("[getAllQuestions]Opened database successfully");
@@ -605,7 +576,7 @@ public class DataBase {
             stmt.close();
             c.close();
             return (result);
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         System.out.println("[getAllQuestions]Error");
@@ -618,16 +589,13 @@ public class DataBase {
      * @return ArrayList\<Video\>
      */
     public ArrayList<Video> getAllVideos() {
-        Connection c = null;
+        Connection c = this.connexion();
         PreparedStatement stmt = null;
         ArrayList<Video> result;
         result = new ArrayList<>();
         Video tempVideo = new Video();
         String query = new String("SELECT * FROM Video;");
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-
             c.setAutoCommit(false);
             System.out.println("[getAllVideo]Opened database successfully");
 
@@ -647,7 +615,7 @@ public class DataBase {
             stmt.close();
             c.close();
             return (result);
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         System.out.println("[getAllVideos]Error");
@@ -660,16 +628,13 @@ public class DataBase {
      * @return ArrayList\<Audio\>
      */
     public ArrayList<Audio> getAllAudios() {
-        Connection c = null;
+        Connection c = this.connexion();
         PreparedStatement stmt = null;
         ArrayList<Audio> result;
         result = new ArrayList<>();
         Audio tempAudio = new Audio();
         String query = new String("SELECT * FROM Audio;");
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-
             c.setAutoCommit(false);
             System.out.println("[getAllAudio]Opened database successfully");
 
@@ -689,7 +654,7 @@ public class DataBase {
             stmt.close();
             c.close();
             return (result);
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         System.out.println("[getAllAudios]Error");
@@ -702,16 +667,13 @@ public class DataBase {
      * @return ArrayList\<Language\>
      */
     public ArrayList<Language> getAllLanguages() {
-        Connection c = null;
+        Connection c = this.connexion();
         PreparedStatement stmt = null;
         ArrayList<Language> result;
         result = new ArrayList<>();
         Language tempLanguage = new Language();
         String query = new String("SELECT * FROM Language;");
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-
             c.setAutoCommit(false);
             System.out.println("[getAllLanguages]Opened database successfully");
 
@@ -728,7 +690,7 @@ public class DataBase {
             stmt.close();
             c.close();
             return (result);
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         System.out.println("[getAllLanguages]Error");
@@ -745,13 +707,10 @@ public class DataBase {
     public int countAudio(int idLanguage) {
         int result = 0;
 
-        Connection c = null;
+        Connection c = this.connexion();
         PreparedStatement stmt = null;
         String query = new String("SELECT COUNT(*) AS rowcount FROM Audio where id_language = ? ;");
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-
             c.setAutoCommit(false);
             System.out.println("[countAudio]Opened database successfully");
 
@@ -764,7 +723,7 @@ public class DataBase {
             rs.close();
             stmt.close();
             c.close();
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         return result;
@@ -780,13 +739,10 @@ public class DataBase {
     public int countQuestion(int idLanguage) {
         int result = 0;
 
-        Connection c = null;
+        Connection c = this.connexion();
         PreparedStatement stmt = null;
         String query = new String("SELECT COUNT(*) AS rowcount FROM Question where id_language=?;");
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-
             c.setAutoCommit(false);
             System.out.println("[CountQuestion]Opened database successfully");
 
@@ -799,7 +755,7 @@ public class DataBase {
             rs.close();
             stmt.close();
             c.close();
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.out.println("erreurs");
         }
 
@@ -816,13 +772,10 @@ public class DataBase {
     public int countVideo(int idLanguage) {
         int result = 0;
 
-        Connection c = null;
+        Connection c = this.connexion();
         PreparedStatement stmt = null;
         String query = new String("SELECT COUNT(*) AS rowcount FROM Video where id_language = ? ;");
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
-
             c.setAutoCommit(false);
             stmt = c.prepareStatement(query);
             stmt.setInt(1, idLanguage);
@@ -833,7 +786,7 @@ public class DataBase {
             rs.close();
             stmt.close();
             c.close();
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
 
@@ -847,7 +800,7 @@ public class DataBase {
      * @param format Video's format to remove.
      */
     public void rmVideo(String videoName, String format) {
-        Connection c = null;
+        Connection c = this.connexion();
         PreparedStatement stmtCheck = null;
         PreparedStatement stmtRm = null;
         int idLang = 0;
@@ -857,8 +810,6 @@ public class DataBase {
             System.out.println("[rmVideo]This video doesn't exist.");
         } else {
             try {
-                Class.forName("org.sqlite.JDBC");
-                c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
                 c.setAutoCommit(false);
                 System.out.println("[rmVideo]Opened database successfully");
 
@@ -892,7 +843,7 @@ public class DataBase {
                 }
                 c.commit();
                 c.close();
-            } catch (ClassNotFoundException | SQLException e) {
+            } catch (SQLException e) {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                 System.exit(0);
             }
@@ -907,7 +858,7 @@ public class DataBase {
      * @param format Audio's format to remove.
      */
     public void rmAudio(String audioName, String format) {
-        Connection c = null;
+        Connection c = this.connexion();
         PreparedStatement stmtCheck = null;
         PreparedStatement stmtRm = null;
         int idLang = 0;
@@ -917,8 +868,6 @@ public class DataBase {
             System.out.println("[rmAudio]This video doesn't exist.");
         } else {
             try {
-                Class.forName("org.sqlite.JDBC");
-                c = DriverManager.getConnection("jdbc:sqlite:dataBase.db");
                 c.setAutoCommit(false);
                 System.out.println("[rmAudio]Opened database successfully");
 
@@ -952,7 +901,7 @@ public class DataBase {
                 }
                 c.commit();
                 c.close();
-            } catch (ClassNotFoundException | SQLException e) {
+            } catch (SQLException e) {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                 System.exit(0);
             }
