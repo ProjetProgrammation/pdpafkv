@@ -26,7 +26,7 @@ public class Extract {
     public static void Extract(MediaSelected medSelected) {
         try {
             Date date = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("HH-mm-dd-MM-yy");
             String path = sdf.format(date) + "_" + medSelected.getUserSel().getNameToFile() + "_" + medSelected.getLangSel().getName() + ".txt";
             String workingDirectory = System.getProperty("user.dir");	
             File file = new File(workingDirectory, path);
