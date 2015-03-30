@@ -381,6 +381,30 @@ public class DataBaseTest {
             }
         }
     }
+    
+    /**
+     * Test of rmLanguage method, of class DataBase.
+     */
+    public void testRmLanguage() {
+        System.out.println("rmLanguage");
+        ArrayList<Language> languageListTest;
+        languageListTest = dataBaseTest.getAllLanguages();
+        for (Language v : languageListTest) {
+            System.out.println("The language name is:" + v.getName() + v.getId());
+        }
+        String name = "American";
+        
+        dataBaseTest.rmLanguage(name);
+        dataBaseTest.rmLanguage(name);
+        
+       languageListTest = dataBaseTest.getAllLanguages();
+       for (Language v : languageListTest) {
+            System.out.println("The language name is:" + v.getName());
+            if (v.getName().equals(name)) {
+                throw new AssertionError("language always in DataBase");
+            }
+        }
+    }
 
     /**
      * Test grey box of AddAudio, AddVideo, AddQuestion and AddLanguage of class
@@ -444,10 +468,12 @@ public class DataBaseTest {
         testCountVideo();
         testRmVideo();
         testRmAudio();
+       
         test2AddVideoGreyBox();
         test2AddQuestionGreyBox();
         test2AddAudioGreyBox();
         test2AddLanguageGreyBox();
+        testRmLanguage();
     }
 
 }

@@ -910,7 +910,70 @@ public class DataBase {
     }
 
     /**
-     * Returns the name of the language which the id is in parameter, returns null if the language doesn't exist.
+     * Removes a Audio from the database knowing its name and format.
+     *
+     * @param languageName Language's name to remove.
+     */
+    public void rmLanguage(String languageName) {
+        Connection c = this.connexion();
+        PreparedStatement stmtCheck = null;
+        PreparedStatement stmtRm = null;
+        Language tmp = new Language(this.searchLanguageByName(languageName).getId(),this.searchLanguageByName(languageName).getName());
+        Audio audio = null;
+        Video video = null;
+        if (tmp.getId() == 0) {
+            System.out.println("[rmLanguage]This language doesn't exist.");
+        } else {
+            try {
+                c.setAutoCommit(false);
+                System.out.println("[rmLanguge]Opened database successfully");
+
+                String query =  "SELECT id, name, file_path, id_language, format FROM Audio WHERE id_language=?";
+                stmtCheck = c.prepareStatement(query);
+                stmtCheck.setInt(1, tmp.getId());
+                ResultSet rs = stmtCheck.executeQuery();
+                while (rs.next()) {
+                    audio.setId(rs.getInt("id"));
+                }
+                rs.close();
+                stmtCheck.close();
+
+                //Looking for a Question using the audio we want to remove
+                String query2 =  "SELECT id, name, file_path, id_language, format FROM Audio WHERE id_language=?";
+                stmtCheck = c.prepareStatement(query2);
+                stmtCheck.setInt(1, tmp.getId());
+                ResultSet rs2 = stmtCheck.executeQuery();
+                while (rs2.next()) {
+                    video.setId(rs2.getInt("id"));
+                }
+                rs2.close();
+                stmtCheck.close();
+
+                if (audio == null && video == null) {
+                    //Removing the language
+                    query = "DELETE FROM Language WHERE id=?;";
+                    stmtRm = c.prepareStatement(query);
+
+                    stmtRm.setInt(1, tmp.getId());
+                    stmtRm.executeUpdate();
+                    c.commit();
+                    stmtRm.close();
+                } else {
+                    System.out.println("Language cannot be removed, it is linked to the following language :\n" + audio.toString() + video.toString());
+                }
+                c.commit();
+                c.close();
+
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+                System.exit(0);
+            }
+        }
+    }
+
+    /**
+     * Returns the name of the language which the id is in parameter, returns
+     * null if the language doesn't exist.
      *
      * @param id Language's id.
      * @return String
@@ -922,13 +985,13 @@ public class DataBase {
         try {
             c.setAutoCommit(false);
             System.out.println("[getLanguageById]Opened database successfully");
-            
+
             String query = "SELECT name FROM Language WHERE id=?;";
             stmt = c.prepareStatement(query);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                result=rs.getString("name");
+                result = rs.getString("name");
             }
             rs.close();
             stmt.close();
@@ -942,9 +1005,11 @@ public class DataBase {
 
         return "";
     }
-    
+
     /**
-     * Searches and returns a Video object by its id, returns a Video object with id = 0 if not found.
+     * Searches and returns a Video object by its id, returns a Video object
+     * with id = 0 if not found.
+     *
      * @param id Video's id to search.
      * @return Video
      */
@@ -978,9 +1043,11 @@ public class DataBase {
         System.out.println("[searchVideoById]Error");
         return (null);
     }
-    
+
     /**
-     * Searches and returns a Audio object by its id, returns a Audio object with id = 0 if not found.
+     * Searches and returns a Audio object by its id, returns a Audio object
+     * with id = 0 if not found.
+     *
      * @param id Audio's id to search.
      * @return Audio
      */
