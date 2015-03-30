@@ -959,5 +959,14 @@ public class DataBase {
             System.out.println("[rmAudio]The video " + tmp.getName() + "." + tmp.getFormat() + " successfuly removed from the DB");
         }
     }
+    
+    /**
+     * Returns the name of the language which the id is in parameter.
+     * @param id Language's id.
+     * @return String
+     */
+    public String getLanguageById(int id){
+        return "";
+    }
 
 }
