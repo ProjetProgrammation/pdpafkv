@@ -46,7 +46,7 @@ public class SelectMedia {
         do {
             boolean check = false;
             audio = this.db.manageAudio(this.langSel);
-            for(int i = 0; i < this.listAudio.size(); i++) {
+            for(int i = 0; i < this.listAudio.size(); i++) {             
                 if (audio.getFilePath().equals(this.listAudio.get(i).getFilePath())) {
                     check = true;
                 }
@@ -54,7 +54,7 @@ public class SelectMedia {
             if (check == false) {
                 this.listAudio.add(audio);
             }
-        } while (this.listAudio.size() != this.db.countAudio(this.langSel.getId()));
+        } while (this.listAudio.size() == this.db.countAudio(this.langSel.getId()));
     }
 
     /**
@@ -68,8 +68,7 @@ public class SelectMedia {
         do {
             boolean check = false;
             video = this.db.manageVideo(this.langSel);
-            int i;
-            for (i=0; i < this.listVideo.size(); i++) {
+            for (int i=0; i < this.listVideo.size(); i++) {
                 if (video.getFilePath().equals(this.listVideo.get(i).getFilePath())) {
                     check = true;
                 }
@@ -77,7 +76,7 @@ public class SelectMedia {
             if (check == false) {
                 this.listVideo.add(video);
             }
-        } while (this.listVideo.size() != this.db.countVideo(this.langSel.getId()));
+        } while (this.listVideo.size() == this.db.countVideo(this.langSel.getId()));
     }
 
     /**
@@ -99,7 +98,7 @@ public class SelectMedia {
             if (check == false) {
                 this.listQuestion.add(question);
             }
-        } while (this.listQuestion.size() != this.db.countQuestion(this.langSel.getId()));
+        } while (this.listQuestion.size() == this.db.countQuestion(this.langSel.getId()));
 
     }
 

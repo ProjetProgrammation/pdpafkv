@@ -11,6 +11,7 @@ import Controller.ControllerDatabase;
 import Errors.Errors;
 import Result.User;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -40,6 +41,7 @@ public class UserGUI {
     private int birthdayMistake = 0;
     private int motherTongueMistake = 0;
     private int yearStudyingMistake = 0;
+    private int globalMistake = 0;
 
     /**
      * Contructs a new ChooseGUI.
@@ -61,15 +63,8 @@ public class UserGUI {
      */
     private void launchUserGUI(final ControllerDatabase db) {
 
-        final TextField lastName = new TextField();
-        final TextField firstName = new TextField();
-        final TextField birthday = new TextField();
-        final TextField motherTongue = new TextField();
-        final TextField yearStudying = new TextField();
-
         //Components design
         final ToggleGroup choose = new ToggleGroup();
-        birthday.setPromptText("Example : 12/07/1998");
         Label titleInterface = new Label("Prosodic Adventure".toUpperCase());
         Label titleInformations = new Label("ABOUT YOU  ");
         Label titleLangue = new Label("TEST LANGUAGE  ");
@@ -82,13 +77,28 @@ public class UserGUI {
         GridPane user = new GridPane();
         BorderPane global = new BorderPane();
 
+        //TextField's design for user case  
+        final TextField lastName = new TextField();
+        final TextField firstName = new TextField();
+        final TextField birthday = new TextField();
+        birthday.setPromptText("Example : 12/07/1998");
+        final TextField motherTongue = new TextField();
+        final TextField yearStudying = new TextField();
+        
+        //Add style classes
+        lastName.getStyleClass().add("text-field-valid");
+        firstName.getStyleClass().add("text-field-valid");
+        birthday.getStyleClass().add("text-field-valid");
+        motherTongue.getStyleClass().add("text-field-valid");
+        yearStudying.getStyleClass().add("text-field-valid");
+        
         //Label's design for user case
         Label labelLastName = new Label("Last Name".toUpperCase());
         Label labelFirstName = new Label("First Name".toUpperCase());
         Label labelBirthday = new Label("Birthday".toUpperCase());
         Label labelMotherTongue = new Label("Mother Tongue".toUpperCase());
-        Label labelYearStudying = new Label("Years Studying".toUpperCase());
-
+        Label labelYearStudying = new Label("Years Studying".toUpperCase());       
+        
         //Add style classes
         titleInterface.getStyleClass().add("label-header");
         titleInformations.getStyleClass().add("label-header-2");
@@ -121,52 +131,75 @@ public class UserGUI {
                 //Récupération données dans les champs
                 String ln = lastName.getText();
                 if (!Errors.errorsMessages(ln)) {
+                    lastName.getStyleClass().add("text-field-error");
                     System.out.println("[UserGUI]Wrong last name");
                     lastNameMistake++;
+                    globalMistake++;
                 } else {
                     if (lastNameMistake != 0) {
                         lastNameMistake--;
+                        globalMistake--;
                     }
                 }
 
                 String fn = firstName.getText();
                 if (!Errors.errorsMessages(fn)) {
+                    firstName.getStyleClass().add("text-field-error");
+                    for (int i=0;i<firstName.getStyleClass().size();i++){
+                        System.out.println(firstName.getStyleClass().get(i).toString());
+                    }
                     System.out.println("[UserGUI]Wrong first name");
                     firstNameMistake++;
+                    globalMistake++;
                 } else {
                     if (firstNameMistake != 0) {
                         firstNameMistake--;
+                        globalMistake--;
                     }
                 }
 
                 String mt = motherTongue.getText();
                 if (!Errors.errorsMessages(mt)) {
+                    motherTongue.getStyleClass().add("text-field-error");
                     System.out.println("[UserGUI]Wrong mother tongue");
                     motherTongueMistake++;
+                    globalMistake++;
                 } else {
                     if (motherTongueMistake != 0) {
                         motherTongueMistake--;
+                        globalMistake--;
                     }
                 }
 
                 String bd = birthday.getText();
                 if (!Errors.errorDate(bd)) {
+                    birthday.getStyleClass().add("text-field-error");
                     System.out.println("[UserGUI]Wrong birthday");
                     birthdayMistake++;
+                    globalMistake++;
                 } else {
                     if (birthdayMistake != 0) {
                         birthdayMistake--;
+                        globalMistake--;
                     }
                 }
-
-                Integer ys = Integer.parseInt(yearStudying.getText());
-                if (!Errors.errorsMessages(ys)) {
-                    System.out.println("[UserGUI]Wrong years studying");
-                    yearStudyingMistake++;
-                } else {
-                    if (yearStudyingMistake != 0) {
-                        yearStudyingMistake--;
-                    }
+                
+                Integer ys=0;
+                try{
+                    ys = Integer.parseInt(yearStudying.getText());
+                    if (!Errors.errorsMessages(ys)) {
+                        yearStudying.getStyleClass().add("text-field-error");
+                        System.out.println("[UserGUI]Wrong years studying");
+                        yearStudyingMistake++;
+                        globalMistake++;
+                    } else {
+                        if (yearStudyingMistake != 0) {
+                            yearStudyingMistake--;
+                            globalMistake--;
+                        }
+                }
+                }catch(NumberFormatException ex){
+                    System.out.println("[UserGUI]String in TextField yearsStudying");
                 }
 
                 //
@@ -177,11 +210,11 @@ public class UserGUI {
                 }
                 
                 //
-                if (lastNameMistake == 0 && firstNameMistake == 0 && motherTongueMistake == 0 && birthdayMistake == 0 && yearStudyingMistake == 0 && languageSelect != null) {
+                if (globalMistake == 0 && languageSelect != null) {
 
                     //User user = new User("Thibaut", "Fabre", "26/02/1991", "French", 1);
                     //languageSelect = (Language) choose.getSelectedToggle().getUserData();
-                    User user = new User(ln, fn, bd, mt, ys);
+                    User user = new User(ln,fn,bd,mt,ys);
                     new ChooseGUI(stage, languageSelect, db, user);
 
                 }

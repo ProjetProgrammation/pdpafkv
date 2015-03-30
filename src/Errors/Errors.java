@@ -8,8 +8,6 @@ package Errors;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,7 +22,7 @@ public class Errors extends Exception {
      * Find errors on last name, first name or mother tongue.
      *
      * @param valueTested null if no errors.
-     * @return String.
+     * @return boolean.
      */
     public static boolean errorsMessages(Object valueTested) {
 
@@ -52,7 +50,7 @@ public class Errors extends Exception {
      * Errors on birthday.
      *
      * @param dateTested birthday of the user.
-     * @return String.
+     * @return boolean.
      */
     public static boolean errorDate(String dateTested){
         try {
@@ -60,10 +58,9 @@ public class Errors extends Exception {
             sdf.setLenient(false);
             Date d = sdf.parse(dateTested);
         } catch (ParseException ex) {
-            System.out.println(ex.toString());
+            System.out.println("[errorDate]Wrong birthday inform in UserGUI");
             return false;
         }
-
         return true;
     }
 
@@ -78,6 +75,7 @@ public class Errors extends Exception {
         String javaVersion = System.getProperty("java.home");
 
         if (nameOS.contains("Windows") || nameOS.contains("MAC") || nameOS.contains("Linux")) {
+            
         } else {
             System.out.println("Votre système d'exploitation n'est pas pris en charge");
         }
@@ -85,7 +83,7 @@ public class Errors extends Exception {
         Pattern p = Pattern.compile("jdk1.8.0_31");
         Matcher m = p.matcher(javaVersion);
         if (m.find()) {
-            System.out.println("a jour");;
+            System.out.println("a jour");
         } else {
             System.out.println("Il faut que vous metiez votre java à jour");
         }

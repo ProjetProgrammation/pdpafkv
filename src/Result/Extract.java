@@ -35,7 +35,7 @@ public class Extract {
             extractAnswers(medSelected, fw);
             fw.close();
         } catch (Exception e) {
-            System.out.println("Error to create JSON file");
+            System.out.println("[Extract]Problem to create file");
         }
     }
 
@@ -43,7 +43,7 @@ public class Extract {
      * Extract information on user in Json format.
      *
      * @param medSelected current occurence of mediaSelect.
-     * @param json current occurence of JsonWriter
+     * @param fw current occurence of FileWriter
      */
     private static void extractLanguageUser(MediaSelected medSelected, FileWriter fw) {
         try {
@@ -62,7 +62,7 @@ public class Extract {
             fw.write("     Years learning tongue selected   " + medSelected.getUserSel().getYearStudying());
             fw.write(System.getProperty("line.separator"));
         } catch (Exception e) {
-            System.out.println("Error to extract tongue and user information to JSON file");
+            System.out.println("[extractLanguageUser]Problem to extract user & language");
         }
     }
 
@@ -70,7 +70,7 @@ public class Extract {
      * Extract answers of the user in Json format.
      *
      * @param medSelected current occurence of mediaSelect.
-     * @param json current occurence of JsonWriter
+     * @param fw current occurence of FileWriter
      */
     private static void extractAnswers(MediaSelected medSelected, FileWriter fw) {
 
@@ -90,7 +90,7 @@ public class Extract {
                 i++;
             }
         } catch (Exception e) {
-            System.out.println("Error to extract answers information to JSON file");
+            System.out.println("[extractAnswers]Problem to extract answers");
         }
     }
 }

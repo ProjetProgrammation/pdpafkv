@@ -104,7 +104,15 @@
     -fx-background-color: black;
 }
 
-.text-field {
+.text-field-valid {
+    -fx-font-size: 12pt;
+    -fx-font-family: "HelveticaNeueLTStd-LtCn";
+    -fx-focus-color: transparent;
+    -fx-background-radius: 0;
+    -fx-background-color: #ffffff;
+}
+
+.text-field-error {
     -fx-font-size: 12pt;
     -fx-font-family: "HelveticaNeueLTStd-LtCn";
     -fx-focus-color: transparent;
