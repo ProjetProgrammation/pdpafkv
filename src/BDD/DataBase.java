@@ -942,5 +942,77 @@ public class DataBase {
 
         return "";
     }
+    
+    /**
+     * Searches and returns a Video object by its id, returns a Video object with id = 0 if not found.
+     * @param id Video's id to search.
+     * @return Video
+     */
+    public Video searchVideoById(int id) {
+        Connection c = this.connexion();
+        PreparedStatement stmt = null;
+        Video video = new Video();
+        String query = new String("SELECT * FROM Video WHERE Video.id=?;");
+        try {
+
+            c.setAutoCommit(false);
+            System.out.println("[searchVideoById]Opened database successfully");
+
+            stmt = c.prepareStatement(query);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                video.setId(rs.getInt("id"));
+                video.setName(rs.getString("name"));
+                video.setFormat(rs.getString("format"));
+                video.setFilePath(rs.getString("file_path"));
+                video.setIdLanguage(rs.getInt("id_language"));
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+            return (video);
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        System.out.println("[searchVideoById]Error");
+        return (null);
+    }
+    
+    /**
+     * Searches and returns a Audio object by its id, returns a Audio object with id = 0 if not found.
+     * @param id Audio's id to search.
+     * @return Audio
+     */
+    public Audio searchAudioById(int id) {
+        Connection c = this.connexion();
+        PreparedStatement stmt = null;
+        Audio audio = new Audio();
+        String query = new String("SELECT * FROM Audio WHERE Audio.id=?;");
+        try {
+
+            c.setAutoCommit(false);
+            System.out.println("[searchAudioById]Opened database successfully");
+
+            stmt = c.prepareStatement(query);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                audio.setId(rs.getInt("id"));
+                audio.setName(rs.getString("name"));
+                audio.setFormat(rs.getString("format"));
+                audio.setFilePath(rs.getString("file_path"));
+                audio.setIdLanguage(rs.getInt("id_language"));
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+            return (audio);
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        System.out.println("[searchAudioById]Error");
+        return (null);
+    }
 
 }
