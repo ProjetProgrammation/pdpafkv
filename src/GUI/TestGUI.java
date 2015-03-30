@@ -122,7 +122,7 @@ public class TestGUI extends Parent {
         /* TODO
          Barre de progression */ 
         ProgressBar pb = new ProgressBar();
-         double progress = (double)1 / 6;
+         double progress = (double) 1 / nbQuestion;
          double i = progress * currentQuestionNumber;
          pb.setProgress(i);
          HBox hb = new HBox();
