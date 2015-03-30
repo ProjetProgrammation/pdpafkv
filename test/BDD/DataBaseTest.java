@@ -318,7 +318,7 @@ public class DataBaseTest {
         int expResult = 4;
         int result = dataBaseTest.countQuestion(idLanguage);
 
-        assertEquals("Problem with count question",expResult, result);
+        assertEquals("Problem with count question", expResult, result);
     }
 
     /**
@@ -331,7 +331,7 @@ public class DataBaseTest {
         int expResult = 2;
         int result = dataBaseTest.countVideo(idLanguage);
 
-        assertEquals("Problem with count video",expResult, result);
+        assertEquals("Problem with count video", expResult, result);
     }
 
     /**
@@ -346,6 +346,7 @@ public class DataBaseTest {
         }
         String name = "sethgecks";
         String format = "mp4";
+        dataBaseTest.rmVideo(name, format);
         dataBaseTest.rmVideo(name, format);
 
         videoListTest = dataBaseTest.getAllVideos();
@@ -370,6 +371,7 @@ public class DataBaseTest {
         String name = "sethgeceeks";
         String format = "mp3";
         dataBaseTest.rmAudio(name, format);
+        dataBaseTest.rmAudio(name, format);
 
         audioListTest = dataBaseTest.getAllAudios();
         for (Audio v : audioListTest) {
@@ -378,72 +380,74 @@ public class DataBaseTest {
                 throw new AssertionError("Audio always in DataBase");
             }
         }
-    }   
-     /**
-     * Test grey box of AddAudio, AddVideo, AddQuestion and AddLanguage of class DataBase.
-     * We know these methods have to not add a video if it already exist so we try it.
+    }
+
+    /**
+     * Test grey box of AddAudio, AddVideo, AddQuestion and AddLanguage of class
+     * DataBase. We know these methods have to not add a video if it already
+     * exist so we try it.
      */
     public void test2AddVideoGreyBox() {
-        
+
         String name = "sethgecksss";
         String filePath = "Audio\\\\sethsbreesss.mp4";
         String format = "mp4";
         String nameLanguage = "French";
-        
+
         dataBaseTest.addVideo(name, filePath, format, nameLanguage);
         dataBaseTest.addVideo(name, filePath, format, nameLanguage);
     }
-    
+
     public void test2AddAudioGreyBox() {
-        
+
         String name = "coupain";
         String filePath = "Audio\\\\coupain.mp4";
         String format = "mp3";
         String nameLanguage = "French";
-        
+
         dataBaseTest.addAudio(name, filePath, format, nameLanguage);
         dataBaseTest.addAudio(name, filePath, format, nameLanguage);
     }
-    
-     public void test2AddQuestionGreyBox() {
+
+    public void test2AddQuestionGreyBox() {
         Audio audioTest = new Audio(55, "sethgeceekeds", "Audio\\sethsbreedd.mp3", "mp3", 1);
         Video videoTest = new Video(70, "sethgeckdes", "Video\\sethsbree.mp4", "mp4", 1);
         String nameLanguage = "French";
         String content = "we try this";
-        
-        dataBaseTest.addQuestion(content,videoTest, audioTest, nameLanguage);
-        dataBaseTest.addQuestion(content,videoTest, audioTest, nameLanguage);
-    }
-     
-     public void test2AddLanguageGreyBox() {
-        String languageTest = "American";
-        
-        dataBaseTest.addLanguage(languageTest);
-        dataBaseTest.addLanguage(languageTest);
+
+        dataBaseTest.addQuestion(content, videoTest, audioTest, nameLanguage);
+        dataBaseTest.addQuestion(content, videoTest, audioTest, nameLanguage);
     }
 
+    public void test2AddLanguageGreyBox() {
+        String languageTest = "American";
+
+        dataBaseTest.addLanguage(languageTest);
+        dataBaseTest.addLanguage(languageTest);
+    }
+    
     @Test
     public void testSuite() {
 
         testConnexion();
         testCreateTables();
         testAddVideo();
-        test2AddVideoGreyBox();
         testAddAudio();
-        test2AddAudioGreyBox();
         testAddQuestion();
-        test2AddQuestionGreyBox();
         testAddLanguage();
-        test2AddLanguageGreyBox();
-        /*testSearchLanguageByName();
+        testSearchLanguageByName();
         testSearchVideoByNameFormat();
         testSearchAudioByNameFormat();
         testSearchQuestionByContent();
         testCountAudio();
         testCountQuestion();
-        testAddVideo();
+        testCountVideo();
         testRmVideo();
-        testRmAudio();*/
+        testRmAudio();
+        test2AddVideoGreyBox();
+        test2AddQuestionGreyBox();
+        test2AddAudioGreyBox();
+        test2AddLanguageGreyBox();
     }
 
 }

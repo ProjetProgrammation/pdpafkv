@@ -38,7 +38,7 @@ public class DataBase {
      * @return Connection.
      */
     public Connection connexion() {
-       
+
         Connection c = null;
         try {
             Class.forName("org.sqlite.JDBC");
@@ -108,7 +108,7 @@ public class DataBase {
         } else {
             String query = new String("SELECT id FROM Language WHERE Language.name=?;");
             try {
-                
+
                 c.setAutoCommit(false);
                 System.out.println("[addVideo]Opened database successfully");
 
@@ -441,7 +441,7 @@ public class DataBase {
         Video video = new Video();
         String query = new String("SELECT * FROM Video WHERE Video.name=? AND Video.format=?;");
         try {
-           
+
             c.setAutoCommit(false);
             System.out.println("[searchVideoByNameFormat]Opened database successfully");
 
@@ -519,7 +519,7 @@ public class DataBase {
         Question question = new Question();
         String query = new String("SELECT * FROM Question WHERE Question.content=?;");
         try {
-                       c.setAutoCommit(false);
+            c.setAutoCommit(false);
             System.out.println("[searchQuestionByContent]Opened database successfully");
 
             stmt = c.prepareStatement(query);
