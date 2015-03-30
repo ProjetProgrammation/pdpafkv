@@ -54,7 +54,7 @@ public class SelectMedia {
             if (check == false) {
                 this.listAudio.add(audio);
             }
-        } while (this.listAudio.size() == this.db.countAudio(this.langSel.getId()));
+        } while (this.listAudio.size() != this.db.countAudio(this.langSel.getId()));
     }
 
     /**
@@ -76,7 +76,7 @@ public class SelectMedia {
             if (check == false) {
                 this.listVideo.add(video);
             }
-        } while (this.listVideo.size() == this.db.countVideo(this.langSel.getId()));
+        } while (this.listVideo.size() != this.db.countVideo(this.langSel.getId()));
     }
 
     /**
@@ -98,7 +98,7 @@ public class SelectMedia {
             if (check == false) {
                 this.listQuestion.add(question);
             }
-        } while (this.listQuestion.size() == this.db.countQuestion(this.langSel.getId()));
+        } while (this.listQuestion.size() != this.db.countQuestion(this.langSel.getId()));
 
     }
 

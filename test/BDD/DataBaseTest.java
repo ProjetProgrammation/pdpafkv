@@ -396,7 +396,7 @@ public class DataBaseTest {
         
         dataBaseTest.rmLanguage(name);
         dataBaseTest.rmLanguage(name);
-        
+        dataBaseTest.rmLanguage("Japanese");
        languageListTest = dataBaseTest.getAllLanguages();
        for (Language v : languageListTest) {
             System.out.println("The language name is:" + v.getName());
