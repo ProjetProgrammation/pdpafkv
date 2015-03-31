@@ -35,9 +35,9 @@ public class ChooseGUI {
         this.stage = primaryStage;
         this.userSel = user;
         this.launchChooseGUI(langSel, db);
-
     }
-
+    
+    
     /**
      * Launches the user interface.
      *

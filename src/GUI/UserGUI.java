@@ -114,10 +114,10 @@ public class UserGUI {
 
         //languages recovery and radiobuttons design
         ArrayList<Language> listL = db.getLanguageList();
-        for (Language l : listL) {
-            RadioButton tmp = new RadioButton(l.getName().toUpperCase());
+        for (Language lang : listL) {
+            RadioButton tmp = new RadioButton(lang.getName().toUpperCase());
             tmp.getStyleClass().add("radio-button");
-            tmp.setUserData(l);
+            tmp.setUserData(lang);
             tmp.setToggleGroup(choose);
             tmp.setFocusTraversable(false);
             vBoxLanguage.getChildren().add(tmp);
@@ -212,9 +212,9 @@ public class UserGUI {
                 //
                 if (globalMistake == 0 && languageSelect != null) {
 
-                    //User user = new User("Thibaut", "Fabre", "26/02/1991", "French", 1);
+                    User user = new User("Thibaut", "Fabre", "26/02/1991", "French", 1);
                     //languageSelect = (Language) choose.getSelectedToggle().getUserData();
-                    User user = new User(ln,fn,bd,mt,ys);
+                    //User user = new User(ln,fn,bd,mt,ys);
                     new ChooseGUI(stage, languageSelect, db, user);
 
                 }

@@ -135,16 +135,16 @@ public class TestGUI extends Parent {
             @Override
             public void handle(ActionEvent event) {
                 if ((video.getVideoSelected() != null) && (son.getAudioSelected() != null)) {
-                    if ((currentQuestionNumber < nbQuestion) && nbQuestion == 5) {
+                    if ((currentQuestionNumber < nbQuestion) && nbQuestion == 3) {
                         currentQuestionNumber++;
                         new TestGUI(stage,nbQuestion,currentQuestionNumber,selMedia,userSel);
-                    }else if ((currentQuestionNumber == nbQuestion) && nbQuestion == 5) {
+                    }else if ((currentQuestionNumber == nbQuestion) && nbQuestion == 3) {
                         System.out.println("[TestGUI]End of train");
                         new ChooseGUI(stage, language, db, userSel);
-                    }else if ((currentQuestionNumber < nbQuestion) && nbQuestion == 3) {
+                    }else if ((currentQuestionNumber < nbQuestion) && nbQuestion == 5) {
                         currentQuestionNumber++;
                         new TestGUI(stage, nbQuestion, currentQuestionNumber,selMedia,mediaSel);
-                    }else if ((currentQuestionNumber == nbQuestion) && nbQuestion == 3) {
+                    }else if ((currentQuestionNumber == nbQuestion) && nbQuestion == 5) {
                         System.out.println("[TestGUI]End of test");
                         Extract.Extract(mediaSel);
                         new EndGUI(stage);
