@@ -101,6 +101,10 @@ public class SelectMedia {
         } while (this.listQuestion.size() != this.db.countQuestion(this.langSel.getId()));
 
     }
+    
+    public ArrayList<Question> getQuestionsList(){
+        return listQuestion;
+    }
 
     /**
      *

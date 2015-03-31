@@ -46,16 +46,7 @@ public class QuestionGUI extends Parent {
 
         textQuestion.getStyleClass().add("label-header-2");
 
-        //Question
-        /*if (questions.size() == 0){
-         texte_entier.setText("rien");    
-         //If pour savoir si il reste des questions disponibles
-         if (questions.isEmpty()){
-         texte_entier.setText("Plus de questions disponibles"); 
-         }
-         else{
-         texte_entier.setText(select.SelectQuestion(questions).getContent());  
-         }*/
+       
         this.questionSelected = this.selMedia.selectQuestion();
         textQuestion.setText(this.questionSelected.getContent().toUpperCase());
 

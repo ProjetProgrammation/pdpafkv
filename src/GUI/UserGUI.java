@@ -130,7 +130,7 @@ public class UserGUI {
 
                 //Récupération données dans les champs
                 String ln = lastName.getText();
-                if (!Errors.errorsMessages(ln)) {
+              /*  if (!Errors.errorsMessages(ln)) {
                     lastName.getStyleClass().add("text-field-error");
                     System.out.println("[UserGUI]Wrong last name");
                     lastNameMistake++;
@@ -140,10 +140,10 @@ public class UserGUI {
                         lastNameMistake--;
                         globalMistake--;
                     }
-                }
+                }*/
 
                 String fn = firstName.getText();
-                if (!Errors.errorsMessages(fn)) {
+               /* if (!Errors.errorsMessages(fn)) {
                     firstName.getStyleClass().add("text-field-error");
                     for (int i=0;i<firstName.getStyleClass().size();i++){
                         System.out.println(firstName.getStyleClass().get(i).toString());
@@ -156,10 +156,10 @@ public class UserGUI {
                         firstNameMistake--;
                         globalMistake--;
                     }
-                }
+                }*/
 
                 String mt = motherTongue.getText();
-                if (!Errors.errorsMessages(mt)) {
+               /* if (!Errors.errorsMessages(mt)) {
                     motherTongue.getStyleClass().add("text-field-error");
                     System.out.println("[UserGUI]Wrong mother tongue");
                     motherTongueMistake++;
@@ -169,10 +169,10 @@ public class UserGUI {
                         motherTongueMistake--;
                         globalMistake--;
                     }
-                }
+                }*/
 
                 String bd = birthday.getText();
-                if (!Errors.errorDate(bd)) {
+              /*  if (!Errors.errorDate(bd)) {
                     birthday.getStyleClass().add("text-field-error");
                     System.out.println("[UserGUI]Wrong birthday");
                     birthdayMistake++;
@@ -182,10 +182,10 @@ public class UserGUI {
                         birthdayMistake--;
                         globalMistake--;
                     }
-                }
+                }*/
                 
                 Integer ys=0;
-                try{
+              /* try{
                     ys = Integer.parseInt(yearStudying.getText());
                     if (!Errors.errorsMessages(ys)) {
                         yearStudying.getStyleClass().add("text-field-error");
@@ -201,7 +201,7 @@ public class UserGUI {
                 }catch(NumberFormatException ex){
                     System.out.println("[UserGUI]String in TextField yearsStudying");
                 }
-
+*/
                 //
                 if (choose.getSelectedToggle() == null) {
                     System.out.println("[UserGUI]Select one language");

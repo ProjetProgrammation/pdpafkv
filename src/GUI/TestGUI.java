@@ -45,13 +45,14 @@ public class TestGUI extends Parent {
      * @param db The BDD which contains media.
      * @param user The user who run the application
      */
-    public TestGUI(Stage stage, int nbQuestion, Language language, ControllerDatabase db, User user) {
+    public TestGUI(Stage stage, Language language, ControllerDatabase db, User user) {
         this.stage = stage;
-        this.nbQuestion = nbQuestion;
+        
         this.db = db;
         this.language = language;
         this.mediaSel = new MediaSelected(user, this.language);
         this.selMedia = new SelectMedia(this.db, this.language);
+        nbQuestion = selMedia.getQuestionsList().size();
         this.launchTestGUI();
     }
 
@@ -131,21 +132,29 @@ public class TestGUI extends Parent {
             @Override
             public void handle(ActionEvent event) {
                 if ((video.getVideoSelected() != null)&&(son.getAudioSelected() != null)){
-                    currentQuestionNumber++;
-                    if ((currentQuestionNumber <= nbQuestion) && (nbQuestion == 3)) {
+                    
+                    if ((currentQuestionNumber < nbQuestion)) {
+                        currentQuestionNumber++;   
                         mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
                         new TestGUI(stage, nbQuestion, currentQuestionNumber, selMedia, mediaSel);
-                    } else if ((currentQuestionNumber <= nbQuestion) && (nbQuestion == 5)) {
-                        new TestGUI(stage, nbQuestion, currentQuestionNumber, selMedia, userSel);
-                    } else if ((currentQuestionNumber != nbQuestion) && (nbQuestion == 3)) {
+                    }else if((currentQuestionNumber == nbQuestion)) {
+                        System.out.println("fin test");
                         mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
-                        Extract.Extract(mediaSel);
-                    } else if ((currentQuestionNumber != nbQuestion) && (nbQuestion == 5)) {
+                        Extract.Extract(mediaSel); 
+                        endTest endTest = new endTest(stage, userSel);
+                    } 
+                    
+                    /* else if ((currentQuestionNumber <= nbQuestion) && (nbQuestion == 5)) {
+                        new TestGUI(stage, nbQuestion, currentQuestionNumber, selMedia, userSel);*/
+                     
+                    
+                    /*else if ((currentQuestionNumber != nbQuestion) && (nbQuestion == 5)) {
                         new ChooseGUI(stage, language, db, userSel);
-                    }
-                }
+                    }*/
+              
             }
-        });
+         }
+    });
 
         mix.setOnAction(new EventHandler<ActionEvent>() {
             @Override
