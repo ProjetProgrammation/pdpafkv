@@ -1,5 +1,6 @@
 package GUI;
 
+import BDD.DataBase;
 import BDD.Language;
 import Controller.ControllerDatabase;
 import Result.User;
@@ -40,18 +41,19 @@ public class TestGUI extends Parent {
      * Constructs a new Scene with the test template.
      *
      * @param stage The interface's stage.
+     * @param nbQuestion The number of questions.
      * @param language User's choice of language.
      * @param db The BDD which contains media.
      * @param user The user who run the application
      */
-    public TestGUI(Stage stage, Language language, ControllerDatabase db, User user) {
-        this.stage = stage;
+    public TestGUI(Stage stage, int nbQuestion, Language language, ControllerDatabase db, User user) {
 
+        this.stage = stage;
         this.db = db;
         this.language = language;
         this.mediaSel = new MediaSelected(user, this.language);
         this.selMedia = new SelectMedia(this.db, this.language);
-        nbQuestion = selMedia.getQuestionsList().size();
+        this.nbQuestion = nbQuestion;
         this.launchTestGUI();
     }
 
@@ -92,6 +94,29 @@ public class TestGUI extends Parent {
         this.launchTestGUI();
     }
 
+    /**
+     *
+     * Constructs a new Scene with the test template.
+     *
+     * @param primaryStage The stage of the interface.
+     * @param nbQuest The number of questions.
+     * @param numCourant Current question number.
+     * @param selectMedia The current entity of selectMedia.
+     * @param mediaSelected The current entity of mediaSelected.
+     * @param language User's choice of language.
+     * @param db The BDD which contains media.
+     */
+    public TestGUI(Stage primaryStage, int nbQuest, int numCourant, SelectMedia selectMedia, MediaSelected mediaSelected, ControllerDatabase db, Language language) {
+        this.stage = primaryStage;
+        this.db = db;
+        this.currentQuestionNumber = numCourant;
+        this.language = language;
+        this.mediaSel = mediaSelected;
+        this.selMedia = selectMedia;
+        this.nbQuestion = nbQuest;
+        this.launchTestGUI();
+    }
+
     private void launchTestGUI() {
 
         //Components design
@@ -100,7 +125,8 @@ public class TestGUI extends Parent {
         final VideoGUI video = new VideoGUI(this.selMedia);
 
         Label title = new Label("Prosodic Adventure".toUpperCase());
-
+        Label title2 = new Label("Prosodic Adventure train".toUpperCase());
+        
         Button mix = new Button("Merge".toUpperCase());
         Button validate = new Button("Next".toUpperCase());
 
@@ -114,7 +140,8 @@ public class TestGUI extends Parent {
 
         //Add style classe
         title.getStyleClass().add("label-header");
-
+        title2.getStyleClass().add("label-header");
+        
         //Barre de progression
         ProgressBar pb = new ProgressBar();
         double progress = (double) 1 / nbQuestion;
@@ -131,21 +158,24 @@ public class TestGUI extends Parent {
             public void handle(ActionEvent event) {
                 if ((video.getVideoSelected() != null) && (son.getAudioSelected() != null)) {
 
-                    if ((currentQuestionNumber < nbQuestion)) {
+                    if ((currentQuestionNumber < nbQuestion) && nbQuestion == 5) {
                         currentQuestionNumber++;
                         mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
                         new TestGUI(stage, nbQuestion, currentQuestionNumber, selMedia, mediaSel);
-                    } else if ((currentQuestionNumber == nbQuestion)) {
+                    } else if ((currentQuestionNumber == nbQuestion) && nbQuestion == 5) {
                         System.out.println("end test");
                         mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
                         Extract.Extract(mediaSel);
-                        EndTest endTest = new EndTest(stage, userSel);
+                        endTest endTest = new endTest(stage, userSel);
+                    } 
+                    
+                    else if ((currentQuestionNumber < nbQuestion) && nbQuestion == 3) {
+                        currentQuestionNumber++;
+                        new TestGUI(stage, nbQuestion, currentQuestionNumber, selMedia, mediaSel, db, language);
+                    } else if ((currentQuestionNumber == nbQuestion) && nbQuestion == 3) {
+                        System.out.println("end train");
+                        new TestGUI(stage, 5, language, db, userSel);
                     }
-                    /* else if ((currentQuestionNumber <= nbQuestion) && (nbQuestion == 5)) {
-                     new TestGUI(stage, nbQuestion, currentQuestionNumber, selMedia, userSel);*/
-                    /*else if ((currentQuestionNumber != nbQuestion) && (nbQuestion == 5)) {
-                     new ChooseGUI(stage, language, db, userSel);
-                     }*/
                 }
             }
         });
@@ -171,8 +201,13 @@ public class TestGUI extends Parent {
 
         GridPane.setHalignment(mix, HPos.CENTER);
         GridPane.setHalignment(validate, HPos.RIGHT);
-
-        global.setTop(title);
+        if(nbQuestion == 3){
+             global.setTop(title2);
+        }
+        else{
+             global.setTop(title);
+        }
+       
         global.setCenter(root);
 
         //Add container to the scene
