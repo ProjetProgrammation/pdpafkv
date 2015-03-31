@@ -28,27 +28,18 @@ import javafx.stage.Stage;
  *
  * @author guillaume
  */
-public class EndTest {
-    private User userSel;
-    private int currentQuestionNumber = 1;
-    private int nbQuestion;
-    private Stage stage;
-    private MediaSelected mediaSel;
-    private SelectMedia selMedia;
-    private Language language;
-    private ControllerDatabase db;
-
-   
+public class EndGUI {
+    
+    private Stage stage;   
+    
     /**
      * 
      * Constructs a new Scene with the test template.
      * 
      * @param stage The stage of the interface.
-     * @param userSel The user who run the application.
      */
-    public EndTest(Stage stage,User userSel) {
+    public EndGUI(Stage stage) {
         this.stage = stage;
-        this.userSel = userSel;
         this.launchEndGUI();
     }
     
@@ -56,19 +47,27 @@ public class EndTest {
 
 
         Label title = new Label("Prosodic Adventure".toUpperCase());
-        Label titleThanks = new Label("Merci pour avoir effectué notre test".toUpperCase());
-        Button validate = new Button("Next".toUpperCase());
+        Label titleThanks = new Label("Thanks you for your participation".toUpperCase());
+        Button validate = new Button("Return".toUpperCase());
+        validate.setPrefSize(100, 40);
 
         //Organize the interface
         BorderPane global = new BorderPane();
         BorderPane root = new BorderPane();
         root.setCenter(titleThanks);
+        root.setBottom(validate);
         
+        validate.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.gc();
+                new UserGUI(stage);
+            }
+        });
 
         //Add style classe
         title.getStyleClass().add("label-header");
 
-        
         GridPane.setHalignment(validate, HPos.RIGHT);
 
         global.setTop(title);

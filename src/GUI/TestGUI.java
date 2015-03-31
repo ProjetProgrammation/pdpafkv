@@ -1,12 +1,10 @@
 package GUI;
 
-import BDD.DataBase;
 import BDD.Language;
 import Controller.ControllerDatabase;
 import Result.User;
 import Controller.MediaSelected;
 import Controller.SelectMedia;
-import Result.Answer;
 import Result.Extract;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -41,44 +39,47 @@ public class TestGUI extends Parent {
      * Constructs a new Scene with the test template.
      *
      * @param stage The interface's stage.
-     * @param nbQuestion The number of questions.
+     * @param nbQuestion Number of questions. 
      * @param language User's choice of language.
      * @param db The BDD which contains media.
      * @param user The user who run the application
      */
     public TestGUI(Stage stage, int nbQuestion, Language language, ControllerDatabase db, User user) {
-
         this.stage = stage;
+        this.nbQuestion = nbQuestion;
         this.db = db;
         this.language = language;
-        this.mediaSel = new MediaSelected(user, this.language);
         this.selMedia = new SelectMedia(this.db, this.language);
-        this.nbQuestion = nbQuestion;
+        if (nbQuestion == 20)
+            this.mediaSel = new MediaSelected(user, this.language);
+        else
+            this.mediaSel = null;
         this.launchTestGUI();
     }
 
     /**
-     *
+     * 
      * Constructs a new Scene with the test template.
-     *
+     * 
      * @param stage The stage of the interface.
      * @param nbQuestion The number of questions.
      * @param currentQuestionNumber Current question number.
      * @param selMedia The current entity of selectMedia.
      * @param userSel The user who run the application.
      */
-    /*public TestGUI(Stage stage, int nbQuestion, int currentQuestionNumber, SelectMedia selMedia, User userSel) {
-     this.stage = stage;
-     this.nbQuestion = nbQuestion;
-     this.currentQuestionNumber = currentQuestionNumber;
-     this.selMedia = selMedia;
-     this.userSel = userSel;
-     this.launchTestGUI();
-     }*/
-    /**
+    public TestGUI(Stage stage, int nbQuestion, int currentQuestionNumber, SelectMedia selMedia, User userSel) {
+        this.stage = stage;
+        this.nbQuestion = nbQuestion;
+        this.currentQuestionNumber = currentQuestionNumber;
+        this.selMedia = selMedia;
+        this.userSel = userSel;
+        this.mediaSel=null;
+        this.launchTestGUI();
+    }
+        /**
      *
      * Constructs a new Scene with the test template.
-     *
+     * 
      * @param primaryStage The stage of the interface.
      * @param nbQuest The number of questions.
      * @param numCourant Current question number.
@@ -91,29 +92,6 @@ public class TestGUI extends Parent {
         this.currentQuestionNumber = numCourant;
         this.selMedia = selectMedia;
         this.mediaSel = mediaSelected;
-        this.launchTestGUI();
-    }
-
-    /**
-     *
-     * Constructs a new Scene with the test template.
-     *
-     * @param primaryStage The stage of the interface.
-     * @param nbQuest The number of questions.
-     * @param numCourant Current question number.
-     * @param selectMedia The current entity of selectMedia.
-     * @param mediaSelected The current entity of mediaSelected.
-     * @param language User's choice of language.
-     * @param db The BDD which contains media.
-     */
-    public TestGUI(Stage primaryStage, int nbQuest, int numCourant, SelectMedia selectMedia, MediaSelected mediaSelected, ControllerDatabase db, Language language) {
-        this.stage = primaryStage;
-        this.db = db;
-        this.currentQuestionNumber = numCourant;
-        this.language = language;
-        this.mediaSel = mediaSelected;
-        this.selMedia = selectMedia;
-        this.nbQuestion = nbQuest;
         this.launchTestGUI();
     }
 
@@ -157,24 +135,19 @@ public class TestGUI extends Parent {
             @Override
             public void handle(ActionEvent event) {
                 if ((video.getVideoSelected() != null) && (son.getAudioSelected() != null)) {
-
                     if ((currentQuestionNumber < nbQuestion) && nbQuestion == 5) {
                         currentQuestionNumber++;
-                        mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
-                        new TestGUI(stage, nbQuestion, currentQuestionNumber, selMedia, mediaSel);
-                    } else if ((currentQuestionNumber == nbQuestion) && nbQuestion == 5) {
-                        System.out.println("end test");
-                        mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
-                        Extract.Extract(mediaSel);
-                        endTest endTest = new endTest(stage, userSel);
-                    } 
-                    
-                    else if ((currentQuestionNumber < nbQuestion) && nbQuestion == 3) {
+                        new TestGUI(stage,nbQuestion,currentQuestionNumber,selMedia,userSel);
+                    }else if ((currentQuestionNumber == nbQuestion) && nbQuestion == 5) {
+                        System.out.println("[TestGUI]End of train");
+                        new ChooseGUI(stage, language, db, userSel);
+                    }else if ((currentQuestionNumber < nbQuestion) && nbQuestion == 3) {
                         currentQuestionNumber++;
-                        new TestGUI(stage, nbQuestion, currentQuestionNumber, selMedia, mediaSel, db, language);
-                    } else if ((currentQuestionNumber == nbQuestion) && nbQuestion == 3) {
-                        System.out.println("end train");
-                        new TestGUI(stage, 5, language, db, userSel);
+                        new TestGUI(stage, nbQuestion, currentQuestionNumber,selMedia,mediaSel);
+                    }else if ((currentQuestionNumber == nbQuestion) && nbQuestion == 3) {
+                        System.out.println("[TestGUI]End of test");
+                        Extract.Extract(mediaSel);
+                        new EndGUI(stage);
                     }
                 }
             }
@@ -184,7 +157,7 @@ public class TestGUI extends Parent {
             @Override
             public void handle(ActionEvent event) {
                 //TODO Mix du son et de la vidéo
-                MediaPlayer.load("E:\\Document\\NetBeansProject\\ProjectProg\\Video\\2013_3_19_S29_fr_L1_ADMI_B_ok.mp4");
+                //MediaPlayer.load("E:\\Document\\NetBeansProject\\ProjectProg\\Video\\2013_3_19_S29_fr_L1_ADMI_B_ok.mp4");
             }
         });
 
