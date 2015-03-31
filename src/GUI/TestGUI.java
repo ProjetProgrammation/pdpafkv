@@ -96,6 +96,18 @@ public class TestGUI extends Parent {
         this.mediaSel = mediaSelected;
         this.launchTestGUI();
     }
+    
+     public TestGUI(Stage primaryStage, int nbQuest, int numCourant, SelectMedia selectMedia, MediaSelected mediaSelected,Language language,User userSel, ControllerDatabase controller ) {
+        this.stage = primaryStage;
+        this.nbQuestion = nbQuest;
+        this.db = controller;
+        this.language = language;
+        this.userSel = userSel;
+        this.currentQuestionNumber = numCourant;
+        this.selMedia = selectMedia;
+        this.mediaSel = mediaSelected;
+        this.launchTestGUI();
+    }
 
     private void launchTestGUI() {
 
@@ -146,7 +158,7 @@ public class TestGUI extends Parent {
                         new ChooseGUI(stage, language, db, userSel);
                     }else if ((currentQuestionNumber < nbQuestion) && nbQuestion == 3) {
                         currentQuestionNumber++;
-                        new TestGUI(stage, nbQuestion, currentQuestionNumber,selMedia,mediaSel);
+                        new TestGUI(stage, nbQuestion, currentQuestionNumber,selMedia,mediaSel,language, userSel,db);
                     }else if ((currentQuestionNumber == nbQuestion) && nbQuestion == 5) {
                         System.out.println("[TestGUI]End of test");
                         mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
