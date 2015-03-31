@@ -1,3 +1,4 @@
+
 package GUI;
 
 import BDD.Language;
@@ -5,6 +6,7 @@ import Controller.ControllerDatabase;
 import Result.User;
 import Controller.MediaSelected;
 import Controller.SelectMedia;
+import Result.Answer;
 import Result.Extract;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -50,7 +52,7 @@ public class TestGUI extends Parent {
         this.db = db;
         this.language = language;
         this.selMedia = new SelectMedia(this.db, this.language);
-        if (nbQuestion == 20)
+        if (nbQuestion == 5)
             this.mediaSel = new MediaSelected(user, this.language);
         else
             this.mediaSel = null;
@@ -67,13 +69,13 @@ public class TestGUI extends Parent {
      * @param selMedia The current entity of selectMedia.
      * @param userSel The user who run the application.
      */
-    public TestGUI(Stage stage, int nbQuestion, int currentQuestionNumber, SelectMedia selMedia, User userSel) {
+    public TestGUI(Stage stage, int nbQuestion, int currentQuestionNumber, SelectMedia selMedia, User userSel, MediaSelected mediaSelected) {
         this.stage = stage;
         this.nbQuestion = nbQuestion;
         this.currentQuestionNumber = currentQuestionNumber;
         this.selMedia = selMedia;
         this.userSel = userSel;
-        this.mediaSel=null;
+        this.mediaSel=mediaSelected;
         this.launchTestGUI();
     }
         /**
@@ -135,17 +137,19 @@ public class TestGUI extends Parent {
             @Override
             public void handle(ActionEvent event) {
                 if ((video.getVideoSelected() != null) && (son.getAudioSelected() != null)) {
-                    if ((currentQuestionNumber < nbQuestion) && nbQuestion == 3) {
+                    if ((currentQuestionNumber < nbQuestion) && nbQuestion == 5) {
                         currentQuestionNumber++;
-                        new TestGUI(stage,nbQuestion,currentQuestionNumber,selMedia,userSel);
+                        mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
+                        new TestGUI(stage,nbQuestion,currentQuestionNumber,selMedia,userSel, mediaSel);
                     }else if ((currentQuestionNumber == nbQuestion) && nbQuestion == 3) {
                         System.out.println("[TestGUI]End of train");
                         new ChooseGUI(stage, language, db, userSel);
-                    }else if ((currentQuestionNumber < nbQuestion) && nbQuestion == 5) {
+                    }else if ((currentQuestionNumber < nbQuestion) && nbQuestion == 3) {
                         currentQuestionNumber++;
                         new TestGUI(stage, nbQuestion, currentQuestionNumber,selMedia,mediaSel);
                     }else if ((currentQuestionNumber == nbQuestion) && nbQuestion == 5) {
                         System.out.println("[TestGUI]End of test");
+                        mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
                         Extract.Extract(mediaSel);
                         new EndGUI(stage);
                     }
