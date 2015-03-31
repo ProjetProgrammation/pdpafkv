@@ -5,23 +5,12 @@
  */
 package GUI;
 
-import BDD.Language;
-import Controller.ControllerDatabase;
-import Controller.MediaSelected;
-import Controller.SelectMedia;
-import Result.Answer;
-import Result.Extract;
-import Result.User;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /**
@@ -54,8 +43,8 @@ public class EndGUI {
         //Organize the interface
         BorderPane global = new BorderPane();
         BorderPane root = new BorderPane();
-        root.setCenter(titleThanks);
-        root.setBottom(validate);
+        root.setTop(titleThanks);
+        root.setCenter(validate);
         
         validate.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -67,8 +56,6 @@ public class EndGUI {
 
         //Add style classe
         title.getStyleClass().add("label-header");
-
-        GridPane.setHalignment(validate, HPos.RIGHT);
 
         global.setTop(title);
         global.setCenter(root);
