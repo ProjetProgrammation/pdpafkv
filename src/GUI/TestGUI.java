@@ -139,7 +139,7 @@ public class TestGUI extends Parent {
                         System.out.println("end test");
                         mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
                         Extract.Extract(mediaSel);
-                        endTest endTest = new endTest(stage, userSel);
+                        EndTest endTest = new EndTest(stage, userSel);
                     }
                     /* else if ((currentQuestionNumber <= nbQuestion) && (nbQuestion == 5)) {
                      new TestGUI(stage, nbQuestion, currentQuestionNumber, selMedia, userSel);*/

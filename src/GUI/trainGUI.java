@@ -66,16 +66,14 @@ public class trainGUI {
      * @param nbQuest The number of questions.
      * @param numCourant Current question number.
      * @param selectMedia The current entity of selectMedia.
-     * @param mediaSelected The current entity of mediaSelected.
      */
-    public trainGUI(Stage primaryStage, int nbQuest, int numCourant, SelectMedia selectMedia, MediaSelected mediaSelected, ControllerDatabase db, Language language) {
+    public trainGUI(Stage primaryStage, int nbQuest, int numCourant, SelectMedia selectMedia, ControllerDatabase db, Language language) {
         this.stage = primaryStage;
         this.nbQuestion = nbQuest;
         this.db = db;
         this.language = language;
         this.currentQuestionNumber = numCourant;
         this.selMedia = selectMedia;
-        this.mediaSel = mediaSelected;
         this.launchTestGUI();
     }
 
@@ -119,7 +117,7 @@ public class trainGUI {
                 if ((video.getVideoSelected() != null) && (son.getAudioSelected() != null)) {
                     if ((currentQuestionNumber < nbQuestion)) {
                         currentQuestionNumber++;
-                        new trainGUI(stage, nbQuestion, currentQuestionNumber, selMedia, mediaSel, db, language);
+                        new trainGUI(stage, nbQuestion, currentQuestionNumber, selMedia, db, language);
                     } else if ((currentQuestionNumber == nbQuestion)) {
                         System.out.println("end train");
                         new TestGUI(stage, language, db, userSel);
