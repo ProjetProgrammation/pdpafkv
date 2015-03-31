@@ -70,14 +70,14 @@ public class ChooseGUI {
         learnOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                new trainGUI(stage,3, langSel, db, userSel);
+                new TestGUI(stage,3, langSel, db, userSel);
             }
         });
 
         testOption.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                new TestGUI(stage, langSel, db, userSel);
+                new TestGUI(stage,5, langSel, db, userSel);
             }
         });
 
