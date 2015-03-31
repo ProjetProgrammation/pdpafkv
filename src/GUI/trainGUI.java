@@ -1,16 +1,9 @@
 package GUI;
 
-
 import BDD.Language;
 import Controller.ControllerDatabase;
 import Controller.MediaSelected;
 import Controller.SelectMedia;
-import GUI.MediaPlayer;
-import GUI.QuestionGUI;
-import GUI.SonGUI;
-import GUI.TestGUI;
-import GUI.VideoGUI;
-import GUI.endTest;
 import Result.Answer;
 import Result.Extract;
 import Result.User;
@@ -31,31 +24,31 @@ import javafx.stage.Stage;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author guillaume
  */
 public class trainGUI {
-     private User userSel;
+
+    private User userSel;
     private int currentQuestionNumber = 1;
-    private int nbQuestion;
-    private Stage stage;
-    private MediaSelected mediaSel;
-    private SelectMedia selMedia;
-    private Language language;
-    private ControllerDatabase db;
+    private final int nbQuestion;
+    private final Stage stage;
+    private final MediaSelected mediaSel;
+    private final SelectMedia selMedia;
+    private final Language language;
+    private final ControllerDatabase db;
 
     /**
-     * Constructs a new Scene with the test template.
+     * Constructs a new Scene with the train template.
      *
      * @param stage The interface's stage.
-     * @param nbQuestion Number of questions. 
+     * @param nbQuestion Number of questions.
      * @param language User's choice of language.
      * @param db The BDD which contains media.
      * @param user The user who run the application
      */
-    public trainGUI(Stage stage,int nbQuestion, Language language, ControllerDatabase db, User user) {
+    public trainGUI(Stage stage, int nbQuestion, Language language, ControllerDatabase db, User user) {
         this.stage = stage;
         this.db = db;
         this.language = language;
@@ -67,15 +60,15 @@ public class trainGUI {
 
     /**
      *
-     * Constructs a new Scene with the test template.
-     * 
+     * Constructs a new Scene with the train template.
+     *
      * @param primaryStage The stage of the interface.
      * @param nbQuest The number of questions.
      * @param numCourant Current question number.
      * @param selectMedia The current entity of selectMedia.
      * @param mediaSelected The current entity of mediaSelected.
      */
-    public trainGUI(Stage primaryStage, int nbQuest, int numCourant, SelectMedia selectMedia, MediaSelected mediaSelected, ControllerDatabase db , Language language) {
+    public trainGUI(Stage primaryStage, int nbQuest, int numCourant, SelectMedia selectMedia, MediaSelected mediaSelected, ControllerDatabase db, Language language) {
         this.stage = primaryStage;
         this.nbQuestion = nbQuest;
         this.db = db;
@@ -123,21 +116,17 @@ public class trainGUI {
         validate.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if ((video.getVideoSelected() != null)&&(son.getAudioSelected() != null)){
-                    
+                if ((video.getVideoSelected() != null) && (son.getAudioSelected() != null)) {
                     if ((currentQuestionNumber < nbQuestion)) {
-                        currentQuestionNumber++;   
-                        mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
+                        currentQuestionNumber++;
                         new trainGUI(stage, nbQuestion, currentQuestionNumber, selMedia, mediaSel, db, language);
-                    }else if((currentQuestionNumber == nbQuestion)) {
-                        System.out.println("fin test");
-                        mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
-                        Extract.Extract(mediaSel); 
+                    } else if ((currentQuestionNumber == nbQuestion)) {
+                        System.out.println("end train");
                         new TestGUI(stage, language, db, userSel);
-                    } 
+                    }
+                }
             }
-         }
-    });
+        });
 
         mix.setOnAction(new EventHandler<ActionEvent>() {
             @Override

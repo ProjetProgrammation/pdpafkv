@@ -29,10 +29,10 @@ public class TestGUI extends Parent {
 
     private User userSel;
     private int currentQuestionNumber = 1;
-    private int nbQuestion;
+    private final int nbQuestion;
     private final Stage stage;
-    private MediaSelected mediaSel;
-    private SelectMedia selMedia;
+    private final MediaSelected mediaSel;
+    private final SelectMedia selMedia;
     private Language language;
     private ControllerDatabase db;
 
@@ -40,14 +40,13 @@ public class TestGUI extends Parent {
      * Constructs a new Scene with the test template.
      *
      * @param stage The interface's stage.
-     * @param nbQuestion Number of questions. 
      * @param language User's choice of language.
      * @param db The BDD which contains media.
      * @param user The user who run the application
      */
     public TestGUI(Stage stage, Language language, ControllerDatabase db, User user) {
         this.stage = stage;
-        
+
         this.db = db;
         this.language = language;
         this.mediaSel = new MediaSelected(user, this.language);
@@ -57,9 +56,9 @@ public class TestGUI extends Parent {
     }
 
     /**
-     * 
+     *
      * Constructs a new Scene with the test template.
-     * 
+     *
      * @param stage The stage of the interface.
      * @param nbQuestion The number of questions.
      * @param currentQuestionNumber Current question number.
@@ -67,18 +66,17 @@ public class TestGUI extends Parent {
      * @param userSel The user who run the application.
      */
     /*public TestGUI(Stage stage, int nbQuestion, int currentQuestionNumber, SelectMedia selMedia, User userSel) {
-        this.stage = stage;
-        this.nbQuestion = nbQuestion;
-        this.currentQuestionNumber = currentQuestionNumber;
-        this.selMedia = selMedia;
-        this.userSel = userSel;
-        this.launchTestGUI();
-    }*/
-
+     this.stage = stage;
+     this.nbQuestion = nbQuestion;
+     this.currentQuestionNumber = currentQuestionNumber;
+     this.selMedia = selMedia;
+     this.userSel = userSel;
+     this.launchTestGUI();
+     }*/
     /**
      *
      * Constructs a new Scene with the test template.
-     * 
+     *
      * @param primaryStage The stage of the interface.
      * @param nbQuest The number of questions.
      * @param numCourant Current question number.
@@ -131,30 +129,26 @@ public class TestGUI extends Parent {
         validate.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if ((video.getVideoSelected() != null)&&(son.getAudioSelected() != null)){
-                    
+                if ((video.getVideoSelected() != null) && (son.getAudioSelected() != null)) {
+
                     if ((currentQuestionNumber < nbQuestion)) {
-                        currentQuestionNumber++;   
+                        currentQuestionNumber++;
                         mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
                         new TestGUI(stage, nbQuestion, currentQuestionNumber, selMedia, mediaSel);
-                    }else if((currentQuestionNumber == nbQuestion)) {
-                        System.out.println("fin test");
+                    } else if ((currentQuestionNumber == nbQuestion)) {
+                        System.out.println("end test");
                         mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
-                        Extract.Extract(mediaSel); 
+                        Extract.Extract(mediaSel);
                         endTest endTest = new endTest(stage, userSel);
-                    } 
-                    
+                    }
                     /* else if ((currentQuestionNumber <= nbQuestion) && (nbQuestion == 5)) {
-                        new TestGUI(stage, nbQuestion, currentQuestionNumber, selMedia, userSel);*/
-                     
-                    
+                     new TestGUI(stage, nbQuestion, currentQuestionNumber, selMedia, userSel);*/
                     /*else if ((currentQuestionNumber != nbQuestion) && (nbQuestion == 5)) {
-                        new ChooseGUI(stage, language, db, userSel);
-                    }*/
-              
+                     new ChooseGUI(stage, language, db, userSel);
+                     }*/
+                }
             }
-         }
-    });
+        });
 
         mix.setOnAction(new EventHandler<ActionEvent>() {
             @Override
