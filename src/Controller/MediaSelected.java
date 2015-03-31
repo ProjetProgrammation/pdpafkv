@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Retrieve answers of the user for questions.
  *
- * @author guillaume21
+ * @author thibaut
  */
 public class MediaSelected {
 
