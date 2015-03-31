@@ -97,7 +97,7 @@ public class TestGUI extends Parent {
         this.launchTestGUI();
     }
     
-     public TestGUI(Stage primaryStage, int nbQuest, int numCourant, SelectMedia selectMedia, MediaSelected mediaSelected,Language language,User userSel, ControllerDatabase controller ) {
+     public TestGUI(Stage primaryStage, int nbQuest, int numCourant,SelectMedia selectMedia,Language language,User userSel,ControllerDatabase controller) {
         this.stage = primaryStage;
         this.nbQuestion = nbQuest;
         this.db = controller;
@@ -105,7 +105,7 @@ public class TestGUI extends Parent {
         this.userSel = userSel;
         this.currentQuestionNumber = numCourant;
         this.selMedia = selectMedia;
-        this.mediaSel = mediaSelected;
+        this.mediaSel = null;
         this.launchTestGUI();
     }
 
@@ -152,13 +152,13 @@ public class TestGUI extends Parent {
                     if ((currentQuestionNumber < nbQuestion) && nbQuestion == 5) {
                         currentQuestionNumber++;
                         mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
-                        new TestGUI(stage,nbQuestion,currentQuestionNumber,selMedia,userSel, mediaSel);
+                        new TestGUI(stage,nbQuestion,currentQuestionNumber,selMedia,userSel,mediaSel);
                     }else if ((currentQuestionNumber == nbQuestion) && nbQuestion == 3) {
                         System.out.println("[TestGUI]End of train");
                         new ChooseGUI(stage, language, db, userSel);
                     }else if ((currentQuestionNumber < nbQuestion) && nbQuestion == 3) {
                         currentQuestionNumber++;
-                        new TestGUI(stage, nbQuestion, currentQuestionNumber,selMedia,mediaSel,language, userSel,db);
+                        new TestGUI(stage, nbQuestion, currentQuestionNumber,selMedia,language, userSel,db);
                     }else if ((currentQuestionNumber == nbQuestion) && nbQuestion == 5) {
                         System.out.println("[TestGUI]End of test");
                         mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));

@@ -8,6 +8,7 @@ package GUI;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -45,6 +46,8 @@ public class EndGUI {
         BorderPane root = new BorderPane();
         root.setTop(titleThanks);
         root.setCenter(validate);
+        BorderPane.setAlignment(titleThanks, Pos.CENTER);
+        
         
         validate.setOnAction(new EventHandler<ActionEvent>() {
             @Override

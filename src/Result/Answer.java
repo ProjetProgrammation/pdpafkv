@@ -5,7 +5,6 @@
  */
 package Result;
 
-import java.util.ArrayList;
 import BDD.*;
 
 /**

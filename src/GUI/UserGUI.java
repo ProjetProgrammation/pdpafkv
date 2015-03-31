@@ -7,11 +7,8 @@ package GUI;
 
 import BDD.*;
 import Controller.ControllerDatabase;
-
-import Errors.Errors;
 import Result.User;
 import java.util.ArrayList;
-import java.util.Calendar;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
