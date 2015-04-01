@@ -37,9 +37,13 @@ public class EndGUI {
 
 
         Label title = new Label("Prosodic Adventure".toUpperCase());
-        Label titleThanks = new Label("Thanks you for your participation".toUpperCase());
+        Label titleThanks = new Label("Thank you for your participation".toUpperCase());
         Button validate = new Button("Return".toUpperCase());
         validate.setPrefSize(100, 40);
+        
+        //Add style classe
+        title.getStyleClass().add("label-header");
+        titleThanks.getStyleClass().add("label-header-2");
 
         //Organize the interface
         BorderPane global = new BorderPane();
@@ -56,9 +60,6 @@ public class EndGUI {
                 new UserGUI(stage);
             }
         });
-
-        //Add style classe
-        title.getStyleClass().add("label-header");
 
         global.setTop(title);
         global.setCenter(root);
