@@ -178,6 +178,7 @@ public class TestGUI extends Parent {
         });
 
         //Organize the interface
+        questionBox.setAlignment(Pos.CENTER);
         root.setTop(questionBox);
         root.setCenter(subRoot);
 
