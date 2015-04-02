@@ -306,13 +306,12 @@ public class DataBase {
             rs.close();
             stmt.close();
             c.close();
-            return (result);
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
         System.out.println("[manageVideo]Error");
-        return (null);
+        return result;
     }
 
     /**
@@ -346,13 +345,12 @@ public class DataBase {
             rs.close();
             stmt.close();
             c.close();
-            return (result);
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
         System.out.println("[manageAudio]Error");
-        return (null);
+        return result;
     }
 
     /**
@@ -385,13 +383,12 @@ public class DataBase {
             rs.close();
             stmt.close();
             c.close();
-            return (result);
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
         System.out.println("[manageQuestion]Error");
-        return (null);
+        return result;
     }
 
     /**
@@ -419,12 +416,10 @@ public class DataBase {
             rs.close();
             stmt.close();
             c.close();
-            return (language);
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-        System.out.println("[searchLanguageByName]Error");
-        return (null);
+        return language;
     }
 
     /**
@@ -459,12 +454,11 @@ public class DataBase {
             rs.close();
             stmt.close();
             c.close();
-            return (video);
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-        System.out.println("[searchVideoByNameFormat]Error");
-        return (null);
+        
+        return video;
     }
 
     /**
@@ -498,12 +492,11 @@ public class DataBase {
             rs.close();
             stmt.close();
             c.close();
-            return (audio);
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-        System.out.println("[searchAudioByNameFormat]Error");
-        return (null);
+       
+        return audio;
     }
 
     /**
@@ -535,12 +528,10 @@ public class DataBase {
             rs.close();
             stmt.close();
             c.close();
-            return (question);
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-        System.out.println("[searchQuestionByContent]Error");
-        return (null);
+        return question;
     }
 
     /**
@@ -575,12 +566,11 @@ public class DataBase {
             rs.close();
             stmt.close();
             c.close();
-            return (result);
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-        System.out.println("[getAllQuestions]Error");
-        return (null);
+       
+        return result;
     }
 
     /**
@@ -614,12 +604,11 @@ public class DataBase {
             rs.close();
             stmt.close();
             c.close();
-            return (result);
+            
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-        System.out.println("[getAllVideos]Error");
-        return (null);
+        return result;
     }
 
     /**
@@ -653,12 +642,11 @@ public class DataBase {
             rs.close();
             stmt.close();
             c.close();
-            return (result);
+            
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-        System.out.println("[getAllAudios]Error");
-        return (null);
+        return result;
     }
 
     /**
@@ -689,12 +677,11 @@ public class DataBase {
             rs.close();
             stmt.close();
             c.close();
-            return (result);
+            
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-        System.out.println("[getAllLanguages]Error");
-        return (null);
+        return result;
     }
 
     /**
@@ -1038,14 +1025,14 @@ public class DataBase {
             rs.close();
             stmt.close();
             c.close();
-            return (result);
+            
 
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
 
-        return "";
+        return result;
     }
     
     /**
@@ -1073,8 +1060,7 @@ public class DataBase {
             rs.close();
             stmt.close();
             c.close();
-            return (result);
-
+            
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -1113,12 +1099,12 @@ public class DataBase {
             rs.close();
             stmt.close();
             c.close();
-            return (video);
+           
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         System.out.println("[searchVideoById]Error");
-        return (null);
+        return video;
     }
 
     /**
@@ -1151,12 +1137,11 @@ public class DataBase {
             rs.close();
             stmt.close();
             c.close();
-            return (audio);
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         System.out.println("[searchAudioById]Error");
-        return (null);
+        return audio;
     }
 
 }
