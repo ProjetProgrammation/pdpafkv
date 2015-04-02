@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Media.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ProjectProg&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">BDD</a> &gt; <span class="el_source">Media.java</span></div><h1>Media.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package BDD;
+
+/**
+ * Use this class to create object Media, which has to be instantiated with
+ * Video or Audio constructor.
+ *
+ * @author akervadec
+ */
+<span class="fc" id="L14">public abstract class Media {</span>
+
+    protected int id;
+    protected String name;
+    protected String filePath;
+    protected String format;
+    protected int idLanguage;
+
+    /**
+     * Returns the id
+     *
+     * @return int
+     */
+    public int getId() {
+<span class="fc" id="L28">        return id;</span>
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return String
+     */
+    public String getName() {
+<span class="fc" id="L37">        return name;</span>
+    }
+
+    /**
+     * Returns the filePath
+     *
+     * @return String
+     */
+    public String getFilePath() {
+<span class="fc" id="L46">        return filePath;</span>
+    }
+
+    /**
+     * Returns the format
+     *
+     * @return String
+     */
+    public String getFormat() {
+<span class="fc" id="L55">        return format;</span>
+    }
+
+    /**
+     * Returns the idLanguage
+     *
+     * @return int
+     */
+    public int getIdLanguage() {
+<span class="fc" id="L64">        return idLanguage;</span>
+    }
+
+    /**
+     * Set the id
+     *
+     * @param id L'id de l'audio
+     */
+    public void setId(int id) {
+<span class="fc" id="L73">        this.id = id;</span>
+<span class="fc" id="L74">    }</span>
+
+    /**
+     * Set the name
+     *
+     * @param name Le nom de l'audio
+     */
+    public void setName(String name) {
+<span class="fc" id="L82">        this.name = name;</span>
+<span class="fc" id="L83">    }</span>
+
+    /**
+     * Set the filePath
+     *
+     * @param filePath
+     */
+    public void setFilePath(String filePath) {
+<span class="fc" id="L91">        this.filePath = filePath;</span>
+<span class="fc" id="L92">    }</span>
+
+    /**
+     * Set the format
+     *
+     * @param format
+     */
+    public void setFormat(String format) {
+<span class="fc" id="L100">        this.format = format;</span>
+<span class="fc" id="L101">    }</span>
+
+    /**
+     * Set the idLanguage
+     *
+     * @param idLanguage
+     */
+    public void setIdLanguage(int idLanguage) {
+<span class="fc" id="L109">        this.idLanguage = idLanguage;</span>
+<span class="fc" id="L110">    }</span>
+
+    /**
+     * Returns a string representation of the object.
+     *
+     * @return String
+     */
+    @Override
+    public String toString() {
+<span class="nc" id="L119">        return (&quot;Details about the video :&quot;</span>
+                + &quot;\n\tid : &quot; + this.id
+                + &quot;\n\tname : &quot; + this.name
+                + &quot;\n\tformat : &quot; + this.format
+                + &quot;\n\tfile path : &quot; + this.filePath
+                + &quot;\n\tid language : &quot; + this.idLanguage);
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

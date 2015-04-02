@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>UserGUI.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ProjectProg&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">GUI</a> &gt; <span class="el_source">UserGUI.java</span></div><h1>UserGUI.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package GUI;
+
+import BDD.*;
+import Controller.ControllerDatabase;
+import Result.User;
+import java.util.ArrayList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+/**
+ * This class allows to manage the graphic interface which gathers user
+ * information
+ *
+ * @author Jeremy
+ */
+public class UserGUI {
+
+    private final Stage stage;
+    private final ControllerDatabase db;
+    private Language languageSelect;
+<span class="nc" id="L36">    private int lastNameMistake = 0;</span>
+<span class="nc" id="L37">    private int firstNameMistake = 0;</span>
+<span class="nc" id="L38">    private int birthdayMistake = 0;</span>
+<span class="nc" id="L39">    private int motherTongueMistake = 0;</span>
+<span class="nc" id="L40">    private int yearStudyingMistake = 0;</span>
+<span class="nc" id="L41">    private int globalMistake = 0;</span>
+
+    /**
+     * Contructs a new ChooseGUI.
+     *
+     * @param primaryStage The stage of the interface.
+     */
+<span class="nc" id="L48">    public UserGUI(Stage primaryStage) {</span>
+<span class="nc" id="L49">        this.stage = primaryStage;</span>
+<span class="nc" id="L50">        this.db = new ControllerDatabase();</span>
+<span class="nc" id="L51">        this.launchUserGUI(this.db);</span>
+<span class="nc" id="L52">    }</span>
+
+    /**
+     * This method allows to create graphic user interface for the
+     * identification page of the user. This interface contains all essential
+     * components for the user and their statements
+     *
+     * @param db The BDD which contains media
+     */
+    private void launchUserGUI(final ControllerDatabase db) {
+
+        //Components design
+<span class="nc" id="L64">        final ToggleGroup choose = new ToggleGroup();</span>
+<span class="nc" id="L65">        Label titleInterface = new Label(&quot;Prosodic Adventure&quot;.toUpperCase());</span>
+<span class="nc" id="L66">        Label titleInformations = new Label(&quot;ABOUT YOU  &quot;);</span>
+<span class="nc" id="L67">        Label titleLangue = new Label(&quot;TEST LANGUAGE  &quot;);</span>
+<span class="nc" id="L68">        Button access = new Button(&quot;NEXT&quot;);</span>
+<span class="nc" id="L69">        access.setPrefSize(100, 40);</span>
+
+        //Create differents containers
+<span class="nc" id="L72">        VBox vBoxLanguage = new VBox();</span>
+<span class="nc" id="L73">        GridPane root = new GridPane();</span>
+<span class="nc" id="L74">        GridPane user = new GridPane();</span>
+<span class="nc" id="L75">        BorderPane global = new BorderPane();</span>
+
+        //TextField's design for user case  
+<span class="nc" id="L78">        final TextField lastName = new TextField();</span>
+<span class="nc" id="L79">        final TextField firstName = new TextField();</span>
+<span class="nc" id="L80">        final TextField birthday = new TextField();</span>
+<span class="nc" id="L81">        birthday.setPromptText(&quot;Example : 12/07/1998&quot;);</span>
+<span class="nc" id="L82">        final TextField motherTongue = new TextField();</span>
+<span class="nc" id="L83">        final TextField yearStudying = new TextField();</span>
+        
+        //Add style classes
+<span class="nc" id="L86">        lastName.getStyleClass().add(&quot;text-field-valid&quot;);</span>
+<span class="nc" id="L87">        firstName.getStyleClass().add(&quot;text-field-valid&quot;);</span>
+<span class="nc" id="L88">        birthday.getStyleClass().add(&quot;text-field-valid&quot;);</span>
+<span class="nc" id="L89">        motherTongue.getStyleClass().add(&quot;text-field-valid&quot;);</span>
+<span class="nc" id="L90">        yearStudying.getStyleClass().add(&quot;text-field-valid&quot;);</span>
+        
+        //Label's design for user case
+<span class="nc" id="L93">        Label labelLastName = new Label(&quot;Last Name&quot;.toUpperCase());</span>
+<span class="nc" id="L94">        Label labelFirstName = new Label(&quot;First Name&quot;.toUpperCase());</span>
+<span class="nc" id="L95">        Label labelBirthday = new Label(&quot;Birthday&quot;.toUpperCase());</span>
+<span class="nc" id="L96">        Label labelMotherTongue = new Label(&quot;Mother Tongue&quot;.toUpperCase());</span>
+<span class="nc" id="L97">        Label labelYearStudying = new Label(&quot;Years Studying&quot;.toUpperCase());       </span>
+        
+        //Add style classes
+<span class="nc" id="L100">        titleInterface.getStyleClass().add(&quot;label-header&quot;);</span>
+<span class="nc" id="L101">        titleInformations.getStyleClass().add(&quot;label-header-2&quot;);</span>
+<span class="nc" id="L102">        titleLangue.getStyleClass().add(&quot;label-header-2&quot;);</span>
+<span class="nc" id="L103">        labelLastName.getStyleClass().add(&quot;label-bright&quot;);</span>
+<span class="nc" id="L104">        labelFirstName.getStyleClass().add(&quot;label-bright&quot;);</span>
+<span class="nc" id="L105">        labelBirthday.getStyleClass().add(&quot;label-bright&quot;);</span>
+<span class="nc" id="L106">        labelMotherTongue.getStyleClass().add(&quot;label-bright&quot;);</span>
+<span class="nc" id="L107">        labelYearStudying.getStyleClass().add(&quot;label-bright&quot;);</span>
+
+<span class="nc" id="L109">        user.getStyleClass().add(&quot;box&quot;);</span>
+<span class="nc" id="L110">        vBoxLanguage.getStyleClass().add(&quot;box&quot;);</span>
+
+        //languages recovery and radiobuttons design
+<span class="nc" id="L113">        ArrayList&lt;Language&gt; listL = db.getLanguageList();</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">        for (Language lang : listL) {</span>
+<span class="nc" id="L115">            RadioButton tmp = new RadioButton(lang.getName().toUpperCase());</span>
+<span class="nc" id="L116">            tmp.getStyleClass().add(&quot;radio-button&quot;);</span>
+<span class="nc" id="L117">            tmp.setUserData(lang);</span>
+<span class="nc" id="L118">            tmp.setToggleGroup(choose);</span>
+<span class="nc" id="L119">            tmp.setFocusTraversable(false);</span>
+<span class="nc" id="L120">            vBoxLanguage.getChildren().add(tmp);</span>
+<span class="nc" id="L121">        }</span>
+
+        //Managing event since the push on NEXT
+<span class="nc" id="L124">        access.setOnAction(new EventHandler&lt;ActionEvent&gt;() {</span>
+            @Override
+            public void handle(ActionEvent event) {
+
+                //Récupération données dans les champs
+<span class="nc" id="L129">                String ln = lastName.getText();</span>
+              /*  if (!Errors.errorsMessages(ln)) {
+                    lastName.getStyleClass().add(&quot;text-field-error&quot;);
+                    System.out.println(&quot;[UserGUI]Wrong last name&quot;);
+                    lastNameMistake++;
+                    globalMistake++;
+                } else {
+                    if (lastNameMistake != 0) {
+                        lastNameMistake--;
+                        globalMistake--;
+                    }
+                }*/
+
+<span class="nc" id="L142">                String fn = firstName.getText();</span>
+               /* if (!Errors.errorsMessages(fn)) {
+                    firstName.getStyleClass().add(&quot;text-field-error&quot;);
+                    for (int i=0;i&lt;firstName.getStyleClass().size();i++){
+                        System.out.println(firstName.getStyleClass().get(i).toString());
+                    }
+                    System.out.println(&quot;[UserGUI]Wrong first name&quot;);
+                    firstNameMistake++;
+                    globalMistake++;
+                } else {
+                    if (firstNameMistake != 0) {
+                        firstNameMistake--;
+                        globalMistake--;
+                    }
+                }*/
+
+<span class="nc" id="L158">                String mt = motherTongue.getText();</span>
+               /* if (!Errors.errorsMessages(mt)) {
+                    motherTongue.getStyleClass().add(&quot;text-field-error&quot;);
+                    System.out.println(&quot;[UserGUI]Wrong mother tongue&quot;);
+                    motherTongueMistake++;
+                    globalMistake++;
+                } else {
+                    if (motherTongueMistake != 0) {
+                        motherTongueMistake--;
+                        globalMistake--;
+                    }
+                }*/
+
+<span class="nc" id="L171">                String bd = birthday.getText();</span>
+              /*  if (!Errors.errorDate(bd)) {
+                    birthday.getStyleClass().add(&quot;text-field-error&quot;);
+                    System.out.println(&quot;[UserGUI]Wrong birthday&quot;);
+                    birthdayMistake++;
+                    globalMistake++;
+                } else {
+                    if (birthdayMistake != 0) {
+                        birthdayMistake--;
+                        globalMistake--;
+                    }
+                }*/
+                
+<span class="nc" id="L184">                Integer ys=0;</span>
+              /* try{
+                    ys = Integer.parseInt(yearStudying.getText());
+                    if (!Errors.errorsMessages(ys)) {
+                        yearStudying.getStyleClass().add(&quot;text-field-error&quot;);
+                        System.out.println(&quot;[UserGUI]Wrong years studying&quot;);
+                        yearStudyingMistake++;
+                        globalMistake++;
+                    } else {
+                        if (yearStudyingMistake != 0) {
+                            yearStudyingMistake--;
+                            globalMistake--;
+                        }
+                }
+                }catch(NumberFormatException ex){
+                    System.out.println(&quot;[UserGUI]String in TextField yearsStudying&quot;);
+                }
+*/
+                //
+<span class="nc bnc" id="L203" title="All 2 branches missed.">                if (choose.getSelectedToggle() == null) {</span>
+<span class="nc" id="L204">                    System.out.println(&quot;[UserGUI]Select one language&quot;);</span>
+                } else {
+<span class="nc" id="L206">                    languageSelect = (Language) choose.selectedToggleProperty().get().getUserData();</span>
+                }
+                
+                //
+<span class="nc bnc" id="L210" title="All 4 branches missed.">                if (globalMistake == 0 &amp;&amp; languageSelect != null) {</span>
+
+<span class="nc" id="L212">                    User user = new User(&quot;Thibaut&quot;, &quot;Fabre&quot;, &quot;26/02/1991&quot;, &quot;French&quot;, 1);</span>
+                    //languageSelect = (Language) choose.getSelectedToggle().getUserData();
+                    //User user = new User(ln,fn,bd,mt,ys);
+<span class="nc" id="L215">                    new ChooseGUI(stage, languageSelect, db, user);</span>
+
+                }
+
+<span class="nc" id="L219">            }</span>
+        }
+        );
+
+        //Organize the interface
+<span class="nc" id="L224">        root.setAlignment(Pos.CENTER);</span>
+
+<span class="nc" id="L226">        user.add(labelLastName,1, 1);</span>
+<span class="nc" id="L227">        user.add(labelFirstName,1, 2);</span>
+<span class="nc" id="L228">        user.add(labelBirthday,1, 3);</span>
+<span class="nc" id="L229">        user.add(labelMotherTongue,1, 4);</span>
+<span class="nc" id="L230">        user.add(labelYearStudying,1, 5);</span>
+<span class="nc" id="L231">        user.add(lastName,2, 1);</span>
+<span class="nc" id="L232">        user.add(firstName,2, 2);</span>
+<span class="nc" id="L233">        user.add(birthday,2, 3);</span>
+<span class="nc" id="L234">        user.add(motherTongue,2, 4);</span>
+<span class="nc" id="L235">        user.add(yearStudying, 2, 5);</span>
+        
+<span class="nc" id="L237">        root.add(user,0, 2);</span>
+<span class="nc" id="L238">        root.add(vBoxLanguage, 1, 2);</span>
+<span class="nc" id="L239">        root.add(access, 1, 3);</span>
+<span class="nc" id="L240">        root.add(titleInformations, 0, 1);</span>
+<span class="nc" id="L241">        root.add(titleLangue, 1, 1);</span>
+
+<span class="nc" id="L243">        global.setTop(titleInterface);</span>
+<span class="nc" id="L244">        global.setCenter(root);</span>
+
+        //Add container to the scene
+<span class="nc" id="L247">        this.stage.getScene().setRoot(global);</span>
+
+<span class="nc" id="L249">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

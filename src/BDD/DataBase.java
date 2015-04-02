@@ -905,12 +905,12 @@ public class DataBase {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                 System.exit(0);
             }
-            System.out.println("[rmAudio]The video " + tmp.getName() + "." + tmp.getFormat() + " successfuly removed from the DB");
+            System.out.println("[rmAudio]The audio " + tmp.getName() + "." + tmp.getFormat() + " successfuly removed from the DB");
         }
     }
 
     /**
-     * Removes a Audio from the database knowing its name and format.
+     * Removes a Language from the database knowing its name.
      *
      * @param languageName Language's name to remove.
      */
@@ -918,7 +918,7 @@ public class DataBase {
         Connection c = this.connexion();
         PreparedStatement stmtCheck = null;
         PreparedStatement stmtRm = null;
-        Language tmp = new Language(this.searchLanguageByName(languageName).getId(),this.searchLanguageByName(languageName).getName());
+        Language tmp = new Language(this.searchLanguageByName(languageName).getId(), this.searchLanguageByName(languageName).getName());
         Audio audio = null;
         Video video = null;
         if (tmp.getId() == 0) {
@@ -926,9 +926,9 @@ public class DataBase {
         } else {
             try {
                 c.setAutoCommit(false);
-                System.out.println("[rmLanguge]Opened database successfully");
+                System.out.println("[rmLanguage]Opened database successfully");
 
-                String query =  "SELECT id, name, file_path, id_language, format FROM Audio WHERE id_language=?";
+                String query = "SELECT id, name, file_path, id_language, format FROM Audio WHERE id_language=?";
                 stmtCheck = c.prepareStatement(query);
                 stmtCheck.setInt(1, tmp.getId());
                 ResultSet rs = stmtCheck.executeQuery();
@@ -939,7 +939,7 @@ public class DataBase {
                 stmtCheck.close();
 
                 //Looking for a Question using the audio we want to remove
-                String query2 =  "SELECT id, name, file_path, id_language, format FROM Audio WHERE id_language=?";
+                String query2 = "SELECT id, name, file_path, id_language, format FROM Audio WHERE id_language=?";
                 stmtCheck = c.prepareStatement(query2);
                 stmtCheck.setInt(1, tmp.getId());
                 ResultSet rs2 = stmtCheck.executeQuery();
@@ -962,6 +962,40 @@ public class DataBase {
                     System.out.println("Language cannot be removed, it is linked to the following language :\n" + audio.toString() + video.toString());
                 }
                 c.commit();
+                c.close();
+
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+                System.exit(0);
+            }
+        }
+    }
+
+    /**
+     * Removes a Question from the database knowing its content.
+     *
+     * @param content Question's content.
+     */
+    public void rmQuestion(String content) {
+        Connection c = this.connexion();
+        PreparedStatement stmtRm = null;
+        Question tmp = new Question(this.searchQuestionByContent(content));
+        if (tmp.getId() == 0) {
+            System.out.println("[rmQuestion]This language doesn't exist.");
+        } else {
+            try {
+                c.setAutoCommit(false);
+                System.out.println("[rmQuestion]Opened database successfully");
+
+                //Removing the language
+                String query = "DELETE FROM Question WHERE id=?;";
+                stmtRm = c.prepareStatement(query);
+
+                stmtRm.setInt(1, tmp.getId());
+                stmtRm.executeUpdate();
+
+                c.commit();
+                stmtRm.close();
                 c.close();
 
             } catch (SQLException e) {

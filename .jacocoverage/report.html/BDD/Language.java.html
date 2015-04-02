@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Language.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ProjectProg&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">BDD</a> &gt; <span class="el_source">Language.java</span></div><h1>Language.java</h1><pre class="source lang-java linenums">/*
+ * 
+ */
+package BDD;
+
+/**
+ *
+ * Use this class to create a new Language.
+ *
+ * @author akervadec
+ */
+public class Language {
+
+    private int id;
+    private String name;
+
+    /**
+     * Constructs an empty Language object with a id = 0.
+     */
+<span class="fc" id="L20">    public Language() {</span>
+<span class="fc" id="L21">        this.name = new String();</span>
+<span class="fc" id="L22">    }</span>
+
+    /**
+     * Constructs a Language object wih its name in parameter.
+     *
+     * @param name Language's name
+     */
+<span class="nc" id="L29">    public Language(String name) {</span>
+<span class="nc" id="L30">        this.name = name;</span>
+<span class="nc" id="L31">    }</span>
+
+    /**
+     * Constructs a Language object with its name and id in parameter.
+     *
+     * @param id Language's id.
+     * @param name Language's name.
+     */
+<span class="fc" id="L39">    public Language(int id, String name) {</span>
+<span class="fc" id="L40">        this.id = id;</span>
+<span class="fc" id="L41">        this.name = new String(name);</span>
+<span class="fc" id="L42">    }</span>
+
+    /**
+     * Constructs a copy of the Language object in parameter.
+     *
+     * @param language The Language to copy into the new object.
+     */
+<span class="nc" id="L49">    public Language(Language language) {</span>
+<span class="nc" id="L50">        this.name = language.getName();</span>
+<span class="nc" id="L51">    }</span>
+
+    /**
+     * Returns the id.
+     *
+     * @return int
+     */
+    public int getId() {
+<span class="fc" id="L59">        return this.id;</span>
+    }
+
+    /**
+     * Returns the name.
+     *
+     * @return String
+     */
+    public String getName() {
+<span class="fc" id="L68">        return this.name;</span>
+    }
+
+    /**
+     * Set the id.
+     *
+     * @param id Language's id.
+     */
+    public void setId(int id) {
+<span class="fc" id="L77">        this.id = id;</span>
+<span class="fc" id="L78">    }</span>
+
+    /**
+     * Set the name.
+     *
+     * @param name Language's name.
+     */
+    public void setName(String name) {
+<span class="fc" id="L86">        this.name = name;</span>
+<span class="fc" id="L87">    }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L91">        return (&quot;Details about the language :&quot;</span>
+                + &quot;\n\tid : &quot; + this.id
+                + &quot;\n\tname : &quot; + this.name);
+    }
+
+    /**
+     * Returns a String with all the data necessary to the extraction.
+     *
+     * @return String
+     */
+    public String getLanguageExtract() {
+<span class="nc" id="L102">        return &quot;\&quot;Language\&quot;: \&quot;&quot; + this.name + &quot;\&quot;,&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
