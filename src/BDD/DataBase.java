@@ -70,7 +70,9 @@ public class DataBase {
                     + "name VARCHAR(50) UNIQUE NOT NULL,"
                     + "file_path VARCHAR(255) NOT NULL,"
                     + "id_language INTEGER NOT NULL,"
-                    + "format VARCHAR(25));"
+                    + "format VARCHAR(25),"
+                    + "thumbnail_pic_path VARCHAR(255) NOT NULL,"
+                    + "thumbnail_gif_path VARCHAR(255) NOT NULL);"
                     + "CREATE TABLE IF NOT EXISTS Audio ("
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
                     + "name VARCHAR(50) UNIQUE NOT NULL,"
@@ -97,8 +99,10 @@ public class DataBase {
      * @param filePath Video's file path to add.
      * @param nameLanguage Video's language to add.
      * @param format Video's format to add.
+     * @param thumbnailPicPath Video's thumbnail picture path.
+     * @param thumbnailGifPath Video's thumbnail GIF path.
      */
-    public void addVideo(String name, String filePath, String format, String nameLanguage) {
+    public void addVideo(String name, String filePath, String format, String nameLanguage, String thumbnailPicPath, String thumbnailGifPath) {
         Connection c = this.connexion();
         PreparedStatement stmtLang = null;
         PreparedStatement stmtAdd = null;
@@ -121,13 +125,15 @@ public class DataBase {
                 }
 
                 //Adding the Video
-                query = "INSERT INTO Video(name,file_path,id_language,format) VALUES (?,?,?,?);";
+                query = "INSERT INTO Video(name,file_path,id_language,format,thumbnail_pic_path,thumbnail_gif_path) VALUES (?,?,?,?,?,?);";
                 stmtAdd = c.prepareStatement(query);
 
                 stmtAdd.setString(1, name);
                 stmtAdd.setString(2, filePath);
                 stmtAdd.setInt(3, idLang);
                 stmtAdd.setString(4, format);
+                stmtAdd.setString(5, thumbnailPicPath);
+                stmtAdd.setString(6, thumbnailGifPath);
                 stmtAdd.executeUpdate();
 
                 rs.close();
@@ -196,7 +202,7 @@ public class DataBase {
     }
 
     /**
-     * dds a Question object to the database.
+     * Adds a Question object to the database.
      *
      * @param content Question's content.
      * @param video Question's Video expected.
@@ -301,7 +307,9 @@ public class DataBase {
                         rs.getString("name"),
                         rs.getString("file_path"),
                         rs.getString("format"),
-                        rs.getInt("id_language"));
+                        rs.getInt("id_language"),
+                        rs.getString("thumbnail_pic_path"),
+                        rs.getString("thumbnail_gif_path"));
             }
             rs.close();
             stmt.close();
@@ -450,6 +458,8 @@ public class DataBase {
                 video.setFormat(rs.getString("format"));
                 video.setFilePath(rs.getString("file_path"));
                 video.setIdLanguage(rs.getInt("id_language"));
+                video.setThumbnailPicPath(rs.getString("thumbnail_pic_path"));
+                video.setThumbnailGifPath(rs.getString("thumbnail_gif_path"));
             }
             rs.close();
             stmt.close();
@@ -598,6 +608,8 @@ public class DataBase {
                 tempVideo.setFilePath(rs.getString("file_path"));
                 tempVideo.setIdLanguage(rs.getInt("id_language"));
                 tempVideo.setFormat(rs.getString("format"));
+                tempVideo.setThumbnailPicPath(rs.getString("thumbnail_pic_path"));
+                tempVideo.setThumbnailGifPath(rs.getString("thumbnail_gif_path"));
                 //Transfering tempVideo into the ArrayList
                 result.add(tempVideo);
             }
@@ -930,7 +942,7 @@ public class DataBase {
                 stmtCheck.close();
 
                 //Looking for a Question using the audio we want to remove
-                String query2 = "SELECT id, name, file_path, id_language, format FROM Video WHERE id_language=?";
+                String query2 = "SELECT id, name, file_path, id_language, format, thumbnail_pic_path, thumbnail_gif_path FROM Video WHERE id_language=?";
                 stmtCheck = c.prepareStatement(query2);
                 stmtCheck.setInt(1, tmp.getId());
                 ResultSet rs2 = stmtCheck.executeQuery();
@@ -940,6 +952,8 @@ public class DataBase {
                     video.setFilePath(rs2.getString("file_path"));
                     video.setIdLanguage(rs2.getInt("id_language"));
                     video.setFormat(rs2.getString("format"));
+                    video.setThumbnailPicPath(rs2.getString("thumbnail_pic_path"));
+                    video.setThumbnailGifPath(rs2.getString("thumbnail_gif_path"));
                 }
                 rs2.close();
                 stmtCheck.close();
@@ -1095,6 +1109,8 @@ public class DataBase {
                 video.setFormat(rs.getString("format"));
                 video.setFilePath(rs.getString("file_path"));
                 video.setIdLanguage(rs.getInt("id_language"));
+                video.setThumbnailPicPath(rs.getString("thumbnail_pic_path"));
+                video.setThumbnailGifPath(rs.getString("thumbnail_gif_path"));
             }
             rs.close();
             stmt.close();
