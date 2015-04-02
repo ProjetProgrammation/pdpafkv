@@ -319,11 +319,7 @@ public class DataBaseTest {
 
         dataBaseTest.rmAudio(name, format);
         dataBaseTest.rmAudio(name, format);
-        dataBaseTest.rmAudio("cosmo", "mp3");
         dataBaseTest.rmAudio("seth", "mp3");
-        dataBaseTest.rmAudio("Ska-P-Canabis", "mp3");
-        dataBaseTest.rmAudio("wasted", "mp3");
-        dataBaseTest.rmAudio("mark", "mp3");
     }
 
     public void testManageAudio() {
