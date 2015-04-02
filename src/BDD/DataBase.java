@@ -1039,6 +1039,41 @@ public class DataBase {
 
         return "";
     }
+    
+    /**
+     * Returns the id of the language which the name is in parameter, returns
+     * 0 if the language doesn't exist.
+     *
+     * @param name Language's name.
+     * @return int
+     */
+    public int getLanguageByName(String name) {
+        Connection c = this.connexion();
+        PreparedStatement stmt = null;
+        int result = 0;
+        try {
+            c.setAutoCommit(false);
+            System.out.println("[getLanguageByName]Opened database successfully");
+
+            String query = "SELECT id FROM Language WHERE name=?;";
+            stmt = c.prepareStatement(query);
+            stmt.setString(1, name);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                result = rs.getInt("id");
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+            return (result);
+
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
+        return result;
+    }
 
     /**
      * Searches and returns a Video object by its id, returns a Video object
