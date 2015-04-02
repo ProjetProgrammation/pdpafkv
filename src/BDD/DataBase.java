@@ -919,8 +919,8 @@ public class DataBase {
         PreparedStatement stmtCheck = null;
         PreparedStatement stmtRm = null;
         Language tmp = new Language(this.searchLanguageByName(languageName).getId(), this.searchLanguageByName(languageName).getName());
-        Audio audio = null;
-        Video video = null;
+        Audio audio = new Audio();
+        Video video = new Video();
         if (tmp.getId() == 0) {
             System.out.println("[rmLanguage]This language doesn't exist.");
         } else {
@@ -934,22 +934,30 @@ public class DataBase {
                 ResultSet rs = stmtCheck.executeQuery();
                 while (rs.next()) {
                     audio.setId(rs.getInt("id"));
+                    audio.setName(rs.getString("name"));
+                    audio.setFilePath(rs.getString("file_path"));
+                    audio.setIdLanguage(rs.getInt("id_language"));
+                    audio.setFormat(rs.getString("format"));
                 }
                 rs.close();
                 stmtCheck.close();
 
                 //Looking for a Question using the audio we want to remove
-                String query2 = "SELECT id, name, file_path, id_language, format FROM Audio WHERE id_language=?";
+                String query2 = "SELECT id, name, file_path, id_language, format FROM Video WHERE id_language=?";
                 stmtCheck = c.prepareStatement(query2);
                 stmtCheck.setInt(1, tmp.getId());
                 ResultSet rs2 = stmtCheck.executeQuery();
                 while (rs2.next()) {
                     video.setId(rs2.getInt("id"));
+                    video.setName(rs2.getString("name"));
+                    video.setFilePath(rs2.getString("file_path"));
+                    video.setIdLanguage(rs2.getInt("id_language"));
+                    video.setFormat(rs2.getString("format"));
                 }
                 rs2.close();
                 stmtCheck.close();
 
-                if (audio == null && video == null) {
+                if (audio.getFilePath().isEmpty() && video.getFilePath().isEmpty()) {
                     //Removing the language
                     query = "DELETE FROM Language WHERE id=?;";
                     stmtRm = c.prepareStatement(query);

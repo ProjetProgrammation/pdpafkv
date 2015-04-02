@@ -145,15 +145,7 @@ public class DataBaseTest {
     }
     
     
-    public void testCountVideo() {
-        System.out.println("countVideo");
-
-        int idLanguage = 1;
-        int expResult = 2;
-        int result = dataBaseTest.countVideo(idLanguage);
-
-        assertEquals("Problem with count video", expResult, result);
-    }
+  
     
     
     public void testRmVideo() {
@@ -177,6 +169,23 @@ public class DataBaseTest {
         }
     }
     
+      public void testCountVideo() {
+        System.out.println("countVideo");
+
+        int idLanguage = 1;
+        int expResult = 0;
+        int result = dataBaseTest.countVideo(idLanguage);
+        
+        ArrayList<Video> videoListTest;
+        videoListTest = dataBaseTest.getAllVideos();
+        for (Video v : videoListTest) {
+            if (v.getIdLanguage() == idLanguage){
+                 expResult += 1;
+            }
+        }
+
+        assertEquals("Problem with count video", expResult, result);
+    }
     
     
     public void test2AddVideoWhiteBox() {
@@ -292,8 +301,17 @@ public class DataBaseTest {
         System.out.println("countAudio");
 
         int idLanguage = 1;
-        int expResult = 4;
+        int expResult = 0;
         int result = dataBaseTest.countAudio(idLanguage);
+        
+        ArrayList<Audio> audioListTest;
+        audioListTest = dataBaseTest.getAllAudios();
+        for (Audio v : audioListTest) {
+            if(v.getIdLanguage() == idLanguage){
+                expResult += 1;
+            }
+        }
+
 
         assertEquals("problem with count audio", expResult, result);
 
@@ -366,11 +384,11 @@ public class DataBaseTest {
     }
     
     public void testRmQuestion(){
-       /* 
+        
         ArrayList<Question> questionsListTest;
         questionsListTest = dataBaseTest.getAllQuestions();
         for (Question v : questionsListTest) {
-            System.out.println("The audio name is:" + v.getContent());
+            System.out.println("The question content is:" + v.getContent());
         }
        
         String content = "hello everybody how are you?";
@@ -382,7 +400,7 @@ public class DataBaseTest {
             if (v.getContent().equals(content)) {
                 throw new AssertionError("Audio always in DataBase");
             }
-        }*/
+        }
     }
     
     public void testSearchQuestionByContent() {
@@ -401,8 +419,16 @@ public class DataBaseTest {
         System.out.println("countQuestion");
 
         int idLanguage = 1;
-        int expResult = 4;
+        int expResult = 0;
         int result = dataBaseTest.countQuestion(idLanguage);
+        
+        ArrayList<Question> questionListTest;
+        questionListTest = dataBaseTest.getAllQuestions();
+        for (Question v : questionListTest) {
+            if(v.getIdLanguage() == idLanguage){
+                expResult += 1;
+            }
+        }
 
         assertEquals("Problem with count question", expResult, result);
     }
@@ -416,6 +442,16 @@ public class DataBaseTest {
         dataBaseTest.addQuestion(content, videoTest, audioTest, nameLanguage);
         dataBaseTest.addQuestion(content, videoTest, audioTest, nameLanguage);
     }
+      
+      public void testRmQuestionWhiteBox(){
+        String content = "hello everybody how are you?";
+        Audio audioTest = new Audio(2000, "sethgeceeks", "Audio\\sethsbreedd.mp3", "mp3", 1);
+        Video videoTest = new Video(2000, "sethgecks", "Audio\\sethsbree.mp3", "mp3", 1);
+        String nameLanguage = "French";
+        dataBaseTest.addQuestion(content, videoTest, audioTest, content);
+        dataBaseTest.rmQuestion(content);
+        dataBaseTest.rmQuestion(content);
+      }
       
       
      public void testManageQuestion(){
@@ -443,13 +479,13 @@ public class DataBaseTest {
             ResultSet rs = prepaS.executeQuery();
             while (rs.next()) {
                 checkLanguage = true;
-                System.out.println("the question was found");
+                System.out.println("the language was found");
             }
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        assertTrue("Error in the add of question file", checkLanguage == true);
+        assertTrue("Error in the add of language file", checkLanguage == true);
     }
 
     public void testSearchLanguageByName() {
@@ -472,7 +508,7 @@ public class DataBaseTest {
         for (Language v : languageListTest) {
             System.out.println("The language name is:" + v.getName() + v.getId());
         }
-        String name = "American";
+        String name = "Japanese";
         
         dataBaseTest.rmLanguage(name);
         
@@ -480,6 +516,7 @@ public class DataBaseTest {
        languageListTest = dataBaseTest.getAllLanguages();
        for (Language v : languageListTest) {
             System.out.println("The language name is:" + v.getName());
+            System.out.println("The language name is:" + v.getId());
             if (v.getName().equals(name)) {
                 throw new AssertionError("language always in DataBase");
             }
@@ -487,13 +524,12 @@ public class DataBaseTest {
     }
     
     public void testRmLanguageWhiteBox(){
-         String name = "Japanese";
-        dataBaseTest.addLanguage(name);
+       String name = "Japanese";
+       dataBaseTest.addLanguage(name);
         
        dataBaseTest.rmLanguage(name);
        dataBaseTest.rmLanguage(name);
        dataBaseTest.rmLanguage("French");
-       dataBaseTest.rmLanguage("Japanese");
     }
 
     public void test2AddLanguageWhiteBox() {
@@ -501,6 +537,21 @@ public class DataBaseTest {
 
         dataBaseTest.addLanguage(languageTest);
         dataBaseTest.addLanguage(languageTest);
+    }
+    
+    public void testgetLanguageById(){
+        
+        Language langueTest = new Language(1,dataBaseTest.getLanguageById(1));
+        
+       ArrayList<Language> languageListTest;
+       languageListTest = dataBaseTest.getAllLanguages();
+       for (Language v : languageListTest) {
+            System.out.println("The language name is:" + v.getName());
+            if (!(v.getName().equals(langueTest.getName())) && v.getId() == langueTest.getId()) {
+                throw new AssertionError("getLanguageById have a problem");
+            }
+        }
+        
     }
     
    
@@ -511,32 +562,42 @@ public class DataBaseTest {
 
         testConnexion();
         testCreateTables();
+        
         testAddVideo();
         testAddAudio();
         testAddQuestion();
         testAddLanguage();
+        
         testSearchLanguageByName();
         testSearchVideoByNameFormat();
         testSearchAudioByNameFormat();
         testSearchQuestionByContent();
+        
+        testRmVideo();
+        testRmAudio();
+        testRmLanguage();
+        testRmQuestion();
+        
         testCountAudio();
         testCountQuestion();
         testCountVideo();
-        testRmVideo();
-        testRmAudio();
-       
+        
+        
         test2AddVideoWhiteBox();
         test2AddQuestionWhiteBox();
         test2AddAudioWhiteBox();
         test2AddLanguageWhiteBox();
-        testRmLanguage();
-        testRmQuestion();
+      
         testManageVideo();
         testManageQuestion();
         testManageAudio();
+        
         testRmVideoWhiteBox();
         testRmAudioWhiteBox();
+        testRmQuestionWhiteBox();
         testRmLanguageWhiteBox();
+        
+        testgetLanguageById();
     }
 
 }
