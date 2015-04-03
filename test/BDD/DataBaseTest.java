@@ -17,7 +17,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Test all DataBase fonctions.
+ * This class tests all DataBase fonctions.
  *
  * @author guillaume21
  */
@@ -40,14 +40,14 @@ public class DataBaseTest {
     }
 
     /**
-     * Test of Connexion method, of class DataBase.
+     *Connexion method test for DataBase class.
      */
     public void testConnexion() {
-        assertTrue("The connexion failed", dataBaseTest.connexion() != null);
+        assertTrue("Connexion failed", dataBaseTest.connexion() != null);
     }
 
     /**
-     * Test of createTables method, of class DataBase.
+     *CreateTables method Test for DataBase Class.
      */
     public void testCreateTables() {
 
@@ -95,8 +95,8 @@ public class DataBaseTest {
     }
 
     /**
-     * Test of video methods, of class DataBase. There are white-box testing and
-     * black-box testsing
+     * Video methods Test for DataBase Class. White-box tests and
+     * black-box tests.
      */
     public void testBlackBoxAddVideo() {
         System.out.println("addVideo test");
@@ -123,7 +123,7 @@ public class DataBaseTest {
                 String formatDataBase = rs.getString("format");
                 if (name.equals(nameDataBase) && filePath.equals(filepathDataBase) && format.equals(formatDataBase) && nameLanguage.equals("French")) {
                     checkVideo = true;
-                    System.out.println("the video was found");
+                    System.out.println("Video found");
                 }
             }
         } catch (SQLException e) {
@@ -155,7 +155,7 @@ public class DataBaseTest {
         ArrayList<Video> videoListTest;
         videoListTest = dataBaseTest.getAllVideos();
         for (Video v : videoListTest) {
-            System.out.println("The video name is:" + v.getName());
+            System.out.println("Video name :" + v.getName());
         }
 
         String name = "sethgecks";
@@ -164,7 +164,7 @@ public class DataBaseTest {
 
         videoListTest = dataBaseTest.getAllVideos();
         for (Video v : videoListTest) {
-            System.out.println("The video name is:" + v.getName());
+            System.out.println("Video name :" + v.getName());
             if (v.getName().equals(name) && v.getFormat().equals(format)) {
                 throw new AssertionError("Problem with BlackBoxRmVideo");
             }
@@ -231,7 +231,7 @@ public class DataBaseTest {
         Video videoTest = dataBaseTest.searchVideoById(idVideo);
         dataBaseTest.rmVideo(videoTest.getName(), videoTest.format);
 
-        //we add again the video in the data base to have the same number of video as the begin of tests
+        //We add the video again in the data base to keep the same amount at the begin of tests
         String languageTest = dataBaseTest.getLanguageById(videoTest.getIdLanguage());
         dataBaseTest.addVideo(videoTest.getName(), videoTest.getFilePath(), videoTest.getFormat(), languageTest, videoTest.getThumbnailPicPath(), videoTest.getThumbnailGifPath());
     }
@@ -253,16 +253,16 @@ public class DataBaseTest {
         videoListTest = dataBaseTest.getAllVideos();
 
         for (Video v : videoListTest) {
-            System.out.println("The video name is:" + v.getName());
+            System.out.println("Video name:" + v.getName());
             if (!(v.getName().equals(video.getName())) && v.getId() == (video.getId())) {
-                throw new AssertionError("BlackBoxSearchVideoById have a problem");
+                throw new AssertionError("BlackBoxSearchVideoById problem");
             }
         }
     }
 
     /**
-     * Test of audio methods, of class DataBase. There are white-box testing and
-     * black-box testsing
+     * Audio methods Test for DataBase class. White-box tests and
+     * black-box tests.
      */
     public void testBlackBoxAddAudio() {
         System.out.println("BlackBoxAddAudio");
@@ -403,13 +403,13 @@ public class DataBaseTest {
     }
 
     /**
-     * Test of questions methods, of class DataBase. There are white-box testing
-     * and black-box testsing
+     * Questions methods for DataBase class. White-box tests
+     * and black-box tests.
      */
     public void testBlackBoxAddQuestion() {
         System.out.println("BlackBoxAddQuestion");
 
-        String content = "hello everybody how are you?";
+        String content = "hello everybody, how are you?";
         Audio audioTest = new Audio(2000, "sethgeceeks", "Audio\\sethsbreedd.mp3", "mp3", 1);
         Video videoTest = new Video(2000, "sethgecks", "Audio\\sethsbree.mp3", "mp3", 1);
         String nameLanguage = "French";
@@ -429,7 +429,7 @@ public class DataBaseTest {
                 String languageBDD = "French";
                 if (content.equals(contentDataBase) && languageBDD.equals(nameLanguage)) {
                     checkQuestion = true;
-                    System.out.println("the question was found");
+                    System.out.println("Question found");
                 }
             }
         } catch (SQLException e) {
@@ -450,7 +450,7 @@ public class DataBaseTest {
         for (Audio v : audioListTest) {
             System.out.println("The audio name is:" + v.getName());
             if (!(v.getName().equals(audio.getName())) && v.getId() == (audio.getId())) {
-                throw new AssertionError("BlackBoxSearchAudioById have a problem");
+                throw new AssertionError("BlackBoxSearchAudioById problem");
             }
         }
         dataBaseTest.searchAudioById(dataBaseTest.getAllAudios().size() + 1);
@@ -471,7 +471,7 @@ public class DataBaseTest {
 
         questionsListTest = dataBaseTest.getAllQuestions();
         for (Question v : questionsListTest) {
-            System.out.println("The question name is:" + v.getContent());
+            System.out.println("Question name :" + v.getContent());
             if (v.getContent().equals(content)) {
                 throw new AssertionError("Error in BlackBoxRmQuestion");
             }
@@ -543,8 +543,8 @@ public class DataBaseTest {
     }
 
     /**
-     * Test of language methods, of class DataBase. There are white-box testing
-     * and black-box testsing
+     * Language methods test for DataBase class. White-box tests
+     * and black-box tests.
      */
     public void testBlackBoxAddLanguage() {
         System.out.println("BlackBoxAddLanguage");
@@ -640,7 +640,7 @@ public class DataBaseTest {
         ArrayList<Language> languageListTest;
         languageListTest = dataBaseTest.getAllLanguages();
         for (Language v : languageListTest) {
-            System.out.println("The language name is:" + v.getName());
+            System.out.println("Language name:" + v.getName());
             if (!(v.getName().equals(langueTest.getName())) && v.getId() == langueTest.getId()) {
                 throw new AssertionError("BlackBoxGetLanguageById have a problem");
             }
