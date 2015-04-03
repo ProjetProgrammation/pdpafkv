@@ -70,7 +70,7 @@ public class UserGUI {
         access.setPrefSize(100, 40);
 
         //Create differents containers
-        VBox vBoxLanguage = new VBox();
+        final VBox vBoxLanguage = new VBox();
         GridPane root = new GridPane();
         GridPane user = new GridPane();
         BorderPane global = new BorderPane();
@@ -218,7 +218,9 @@ public class UserGUI {
                 //
                 if (choose.getSelectedToggle() == null) {
                     System.out.println("[UserGUI]Select one language");
+                    vBoxLanguage.getStyleClass().add("boxError");
                 } else {
+                    vBoxLanguage.getStyleClass().remove("boxError");
                     languageSelect = (Language) choose.selectedToggleProperty().get().getUserData();
                 }
                 
