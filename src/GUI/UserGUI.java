@@ -135,6 +135,8 @@ public class UserGUI {
                     globalMistake++;
                 } else {
                     if (lastNameMistake != 0) {
+                        lastName.getStyleClass().remove("text-field-error");
+                        lastName.getStyleClass().add("text-field");
                         lastNameMistake--;
                         globalMistake--;
                     }
@@ -148,6 +150,8 @@ public class UserGUI {
                     globalMistake++;
                 } else {
                     if (firstNameMistake != 0) {
+                        firstName.getStyleClass().remove("text-field-error");
+                        firstName.getStyleClass().add("text-field");
                         firstNameMistake--;
                         globalMistake--;
                     }
@@ -161,6 +165,8 @@ public class UserGUI {
                     globalMistake++;
                 } else {
                     if (motherTongueMistake != 0) {
+                        motherTongue.getStyleClass().remove("text-field-error");
+                        motherTongue.getStyleClass().add("text-field");
                         motherTongueMistake--;
                         globalMistake--;
                     }
@@ -174,6 +180,8 @@ public class UserGUI {
                     globalMistake++;
                 } else {
                     if (birthdayMistake != 0) {
+                        birthday.getStyleClass().remove("text-field-error");
+                        birthday.getStyleClass().add("text-field");
                         birthdayMistake--;
                         globalMistake--;
                     }
@@ -189,6 +197,8 @@ public class UserGUI {
                         globalMistake++;
                     } else {
                         if (yearStudyingMistake != 0) {
+                        yearStudying.getStyleClass().remove("text-field-error");
+                        yearStudying.getStyleClass().add("text-field");
                             yearStudyingMistake--;
                             globalMistake--;
                         }
