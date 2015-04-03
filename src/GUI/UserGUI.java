@@ -218,9 +218,9 @@ public class UserGUI {
                 //
                 if (choose.getSelectedToggle() == null) {
                     System.out.println("[UserGUI]Select one language");
-                    vBoxLanguage.getStyleClass().add("boxError");
+                    vBoxLanguage.getStyleClass().add("box-error");
                 } else {
-                    vBoxLanguage.getStyleClass().remove("boxError");
+                    vBoxLanguage.getStyleClass().remove("box-error");
                     languageSelect = (Language) choose.selectedToggleProperty().get().getUserData();
                 }
                 

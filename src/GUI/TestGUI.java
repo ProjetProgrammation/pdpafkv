@@ -136,6 +136,7 @@ public class TestGUI extends Parent {
         
         //Barre de progression
         ProgressBar pb = new ProgressBar();
+        pb.getStyleClass().add("progress-bar");        
         double progress = (double) 1 / nbQuestion;
         double i = progress * currentQuestionNumber;
         pb.setProgress(i);
