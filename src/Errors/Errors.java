@@ -37,7 +37,7 @@ public class Errors extends Exception {
         }
         
         else if (valueTested instanceof Integer) {
-            if ((int) valueTested < 100) {
+            if ((int) valueTested < 100 && (int) valueTested > 0) {
                boolError = true;
             } 
         }
@@ -63,20 +63,25 @@ public class Errors extends Exception {
     }
 
     /**
-     * Find errors in your Java version, operating system and your operating
-     * system version.
-     *
+     * Find errors in your operating system.
+     * 
+     * @throws java.lang.Exception
      */
-    public static void errorsOs() {
+    public void nameOs() throws Exception {
         String nameOS = System.getProperty("os.name");
-        String Version = System.getProperty("os.version");
-        String javaVersion = System.getProperty("java.home");
-
-        if (nameOS.contains("Windows") || nameOS.contains("MAC") || nameOS.contains("Linux")) {
-            
-        } else {
-            System.out.println("Votre système d'exploitation n'est pas pris en charge");
+        
+        if (!nameOS.contains("Windows") || !nameOS.contains("MAC") || !nameOS.contains("Linux")) {
+            throw new Exception("OS Problem");
         }
+    }
+   
+    /**
+     * Find errors in your java version.
+     * 
+     */
+    public static void javaVersion() {
+        
+        String javaVersion = System.getProperty("java.home");
 
         Pattern p = Pattern.compile("jdk1.8.0_31");
         Matcher m = p.matcher(javaVersion);
@@ -86,5 +91,7 @@ public class Errors extends Exception {
             System.out.println("Il faut que vous metiez votre java à jour");
         }
     }
+        
+        
 
 }

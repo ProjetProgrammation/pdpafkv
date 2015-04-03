@@ -15,17 +15,17 @@ import static org.junit.Assert.*;
  * @author guillaume
  */
 public class ErrorsTest {
-    
+
     ErrorsTest errorTest;
-    
+
     public ErrorsTest() {
     }
-    
+
     @Before
     public void setUp() {
         errorTest = new ErrorsTest();
     }
-    
+
     @After
     public void tearDown() {
         errorTest = null;
@@ -34,43 +34,98 @@ public class ErrorsTest {
     /**
      * Test of errorsMessages method, of class Errors.
      */
-    public void testErrorsMessageslackBox() {
-        System.out.println("ErrorsMessageslackBox");
-        
-        Object valueTested = null;
-        boolean expResult = false;
-        boolean result = Errors.errorsMessages(valueTested);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testErrorsMessagesBlackBox() {
+        System.out.println("ErrorsMessagesBlackBox");
+        boolean expResult;
+        Object valueTested;
+        boolean result;
+
+        valueTested = null;
+        expResult = false;
+        result = Errors.errorsMessages(valueTested);
+        assertEquals("Error in ErrorsMessagesBlackBox", expResult, result);
+
+        valueTested = "Guillaume";
+        expResult = true;
+        result = Errors.errorsMessages(valueTested);
+        assertEquals("Error in ErrorsMessagesBlackBox", expResult, result);
+
+        valueTested = "150";
+        expResult = false;
+        result = Errors.errorsMessages(valueTested);
+        assertEquals("Error in ErrorsMessagesBlackBox", expResult, result);
+
+        valueTested = "guillaume2-ver";
+        expResult = false;
+        result = Errors.errorsMessages(valueTested);
+        assertEquals("Error in ErrorsMessagesBlackBox", expResult, result);
+
+        valueTested = 22;
+        expResult = true;
+        result = Errors.errorsMessages(valueTested);
+        assertEquals("Error in ErrorsMessagesBlackBox", expResult, result);
+
+        valueTested = -1;
+        expResult = false;
+        result = Errors.errorsMessages(valueTested);
+        assertEquals("Error in ErrorsMessagesBlackBox", expResult, result);
+
+        valueTested = 150;
+        expResult = false;
+        result = Errors.errorsMessages(valueTested);
+        assertEquals("Error in ErrorsMessagesBlackBox", expResult, result);
+
     }
 
     /**
      * Test of errorDate method, of class Errors.
      */
-    public void testErrorDate() {
-        System.out.println("errorDate");
+    public void testErrorDateBlackBox() {
+        System.out.println("ErrorDateBlackBox");
         String dateTested = "";
-        boolean expResult = false;
-        boolean result = Errors.errorDate(dateTested);
+        boolean expResult;
+        boolean result;
+
+        dateTested = "12-12-1992";
+        expResult = false;
+        result = Errors.errorDate(dateTested);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        dateTested = "1992/12/12";
+        expResult = false;
+        result = Errors.errorDate(dateTested);
+        assertEquals(expResult, result);
+
+        dateTested = "12/23/1992";
+        expResult = false;
+        result = Errors.errorDate(dateTested);
+        assertEquals(expResult, result);
+
+        dateTested = "12/12";
+        expResult = false;
+        result = Errors.errorDate(dateTested);
+        assertEquals(expResult, result);
+
+        dateTested = "12";
+        expResult = false;
+        result = Errors.errorDate(dateTested);
+        assertEquals(expResult, result);
+
+        dateTested = "date";
+        expResult = false;
+        result = Errors.errorDate(dateTested);
+        assertEquals(expResult, result);
+
+        dateTested = "12/12/1992";
+        expResult = true;
+        result = Errors.errorDate(dateTested);
+        assertEquals(expResult, result);
     }
 
-    /**
-     * Test of errorsOs method, of class Errors.
-     */
-    public void testErrorsOs() {
-        System.out.println("errorsOs");
-        Errors.errorsOs();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
     @Test
-    public void test(){
-        testErrorsMessageslackBox();
+    public void test() {
+        testErrorsMessagesBlackBox();
+        testErrorDateBlackBox();
     }
-    
+
 }
