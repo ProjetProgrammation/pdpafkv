@@ -21,8 +21,8 @@ public class TestDB {
                 db.addAudio("cosmo","Audio\\cosmo.mp3","mp3","French");
                 db.addAudio("wasted","Audio\\wasted.mp3","mp3","French");
                 db.addAudio("mark","Audio\\mark.mp3","mp3","French");
-		db.addVideo("2013_3_19_S29_fr_L1_ADMI_B_ok","Video\\2013_3_19_S29_fr_L1_ADMI_B_ok.mp4","mp4","French");
-		db.addVideo("YouTube-Compilation-des-repliques-de-Kadoc","Video\\YouTube-Compilation-des-repliques-de-Kadoc.flv","flv","English");
+		db.addVideo("2013_3_19_S29_fr_L1_ADMI_B_ok","Video\\2013_3_19_S29_fr_L1_ADMI_B_ok.mp4","mp4","French","pouet.jpg","pouet.gif");
+		db.addVideo("YouTube-Compilation-des-repliques-de-Kadoc","Video\\YouTube-Compilation-des-repliques-de-Kadoc.flv","flv","English","pouet.jpg","pouet.gif");
 		Language tempLanguage = new Language(1, "French");
                 Language tempLanguage1 = new Language(2, "English");
 		Video tempVideo = new Video(db.manageVideo(tempLanguage));
