@@ -54,7 +54,7 @@ public class DataBase {
     /**
      * Creates the tables in the database.
      */
-    private void createTables() {
+    public void createTables() {
         Connection c = this.connexion();
         Statement stmt;
         try {

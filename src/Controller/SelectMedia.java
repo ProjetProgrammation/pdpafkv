@@ -40,7 +40,7 @@ public class SelectMedia {
      * List of audio files which contains all differents audio files of the
      * database.
      */
-    private void selectAudioList() {
+    public void selectAudioList() {
         Audio audio;
         this.listAudio = new ArrayList<>();
         do {
@@ -62,7 +62,7 @@ public class SelectMedia {
      * List of video files which contains all differents video files of the
      * database.
      */
-    private void selectVideoList() {
+    public void selectVideoList() {
         Video video;
         this.listVideo = new ArrayList<>();
         do {
@@ -84,7 +84,7 @@ public class SelectMedia {
      * List of questions which contains all differents questions of the
      * database.
      */
-    private void selectQuestionList() {
+    public void selectQuestionList() {
         Question question = null;
         this.listQuestion = new ArrayList<>();
         do {
@@ -104,6 +104,14 @@ public class SelectMedia {
     
     public ArrayList<Question> getQuestionsList(){
         return listQuestion;
+    }
+    
+     public ArrayList<Audio> getAudioList(){
+        return listAudio;
+    }
+     
+      public ArrayList<Video> getVideoList(){
+        return listVideo;
     }
 
     /**

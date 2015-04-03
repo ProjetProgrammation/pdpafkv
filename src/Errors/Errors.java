@@ -26,22 +26,20 @@ public class Errors extends Exception {
      */
     public static boolean errorsMessages(Object valueTested) {
 
-        boolean boolError = true;
+        boolean boolError = false;
 
         if (valueTested instanceof String) {
             Pattern p = Pattern.compile("^[a-zA-Z]+$");
             Matcher m = p.matcher((String) valueTested);
             while (m.find()) {
-                return boolError;
+                boolError = true;
             }
-            boolError = false;
-        } else if (valueTested instanceof Integer) {
-            if ((int) valueTested > 125) {
-                boolError = false;
-            } else {
-                return boolError;
-            }
-
+        }
+        
+        else if (valueTested instanceof Integer) {
+            if ((int) valueTested < 100) {
+               boolError = true;
+            } 
         }
         return boolError;
     }
