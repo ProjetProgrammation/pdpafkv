@@ -50,6 +50,8 @@ public class VideoGUI extends Parent {
         playVideo.setDisable(true);
 
         GridPane zoneVideo = new GridPane();
+        zoneVideo.setHgap(10);
+        zoneVideo.setVgap(10);
 
         final ToggleGroup groupVideo = new ToggleGroup();
         ArrayList<RadioButton> listRB = new ArrayList<>();
@@ -59,8 +61,10 @@ public class VideoGUI extends Parent {
             RadioButton tmpRB = new RadioButton("Face " + (i + 1));
             tmpRB.getStyleClass().add("radio-button");
             tmpRB.setUserData(videoTmp);
+            //tmpRB.
             tmpRB.setToggleGroup(groupVideo);
             tmpRB.setFocusTraversable(false);
+            
             if (i < 5) {
                 zoneVideo.add(tmpRB, i, 0);
             } else {

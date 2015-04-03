@@ -9,7 +9,6 @@ import BDD.*;
 import Controller.ControllerDatabase;
 import Errors.Errors;
 import Result.User;
-import java.io.File;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,7 +22,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.apache.commons.io.FilenameUtils;
 
 /**
  * This class allows to manage the graphic interface which gathers user
@@ -145,9 +143,6 @@ public class UserGUI {
                 String fn = firstName.getText();
                if (!Errors.errorsMessages(fn)) {
                     firstName.getStyleClass().add("text-field-error");
-                    for (int i=0;i<firstName.getStyleClass().size();i++){
-                        System.out.println(firstName.getStyleClass().get(i).toString());
-                    }
                     System.out.println("[UserGUI]Wrong first name");
                     firstNameMistake++;
                     globalMistake++;
