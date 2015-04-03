@@ -34,11 +34,11 @@ public class UserGUI {
     private final Stage stage;
     private final ControllerDatabase db;
     private Language languageSelect;
-    private int lastNameMistake = 0;
-    private int firstNameMistake = 0;
-    private int birthdayMistake = 0;
-    private int motherTongueMistake = 0;
-    private int yearStudyingMistake = 0;
+    private boolean lastNameMistake = false;
+    private boolean firstNameMistake = false;
+    private boolean birthdayMistake = false;
+    private boolean motherTongueMistake = false;
+    private boolean yearStudyingMistake = false;
     private int globalMistake = 0;
 
     /**
@@ -129,82 +129,90 @@ public class UserGUI {
                 //Récupération données dans les champs
                 String ln = lastName.getText();
                if (!Errors.errorsMessages(ln)) {
-                    lastName.getStyleClass().add("text-field-error");
-                    //System.out.println("[UserGUI]Wrong last name");
-                    lastNameMistake++;
+                    System.out.println("[UserGUI]Wrong last name");
+                    if (!lastNameMistake){
+                        lastName.getStyleClass().add("text-field-error");
+                        lastNameMistake=true;
+                    }
                     globalMistake++;
                 } else {
-                    if (lastNameMistake != 0) {
+                    if (lastNameMistake) {
                         lastName.getStyleClass().remove("text-field-error");
-                        lastName.getStyleClass().add("text-field");
-                        lastNameMistake--;
+                        lastNameMistake=false;
                         globalMistake--;
                     }
                 }
 
                 String fn = firstName.getText();
                if (!Errors.errorsMessages(fn)) {
-                    firstName.getStyleClass().add("text-field-error");
                     System.out.println("[UserGUI]Wrong first name");
-                    firstNameMistake++;
+                    if (!firstNameMistake){
+                        firstName.getStyleClass().add("text-field-error");
+                        firstNameMistake=true;
+                    }
                     globalMistake++;
                 } else {
-                    if (firstNameMistake != 0) {
+                    if (firstNameMistake) {
                         firstName.getStyleClass().remove("text-field-error");
-                        firstName.getStyleClass().add("text-field");
-                        firstNameMistake--;
+                        firstNameMistake=false;
                         globalMistake--;
                     }
                 }
 
                 String mt = motherTongue.getText();
                 if (!Errors.errorsMessages(mt)) {
-                    motherTongue.getStyleClass().add("text-field-error");
                     System.out.println("[UserGUI]Wrong mother tongue");
-                    motherTongueMistake++;
+                    if (!motherTongueMistake){
+                        motherTongue.getStyleClass().add("text-field-error");
+                        motherTongueMistake=true;
+                    }
                     globalMistake++;
                 } else {
-                    if (motherTongueMistake != 0) {
+                    if (motherTongueMistake) {
                         motherTongue.getStyleClass().remove("text-field-error");
-                        motherTongue.getStyleClass().add("text-field");
-                        motherTongueMistake--;
+                        motherTongueMistake=false;
                         globalMistake--;
                     }
                 }
 
                 String bd = birthday.getText();
                 if (!Errors.errorDate(bd)) {
-                    birthday.getStyleClass().add("text-field-error");
                     System.out.println("[UserGUI]Wrong birthday");
-                    birthdayMistake++;
+                    if (!birthdayMistake){
+                        birthday.getStyleClass().add("text-field-error");
+                        birthdayMistake=true;
+                    }
                     globalMistake++;
                 } else {
-                    if (birthdayMistake != 0) {
+                    if (birthdayMistake) {
                         birthday.getStyleClass().remove("text-field-error");
-                        birthday.getStyleClass().add("text-field");
-                        birthdayMistake--;
+                        birthdayMistake=false;
                         globalMistake--;
                     }
                 }
                 
-                Integer ys=0;
+               Integer ys=0;
                try{
                     ys = Integer.parseInt(yearStudying.getText());
                     if (!Errors.errorsMessages(ys)) {
-                        yearStudying.getStyleClass().add("text-field-error");
                         System.out.println("[UserGUI]Wrong years studying");
-                        yearStudyingMistake++;
-                        globalMistake++;
-                    } else {
-                        if (yearStudyingMistake != 0) {
-                        yearStudying.getStyleClass().remove("text-field-error");
-                        yearStudying.getStyleClass().add("text-field");
-                            yearStudyingMistake--;
-                            globalMistake--;
+                        if (!yearStudyingMistake){
+                            yearStudying.getStyleClass().add("text-field-error");
+                            yearStudyingMistake=true;
                         }
-                }
+                    } else {
+                        if (yearStudyingMistake) {
+                            yearStudying.getStyleClass().remove("text-field-error");
+                            yearStudyingMistake=false;
+                        }
+                    }
+                    
                 }catch(NumberFormatException ex){
                     System.out.println("[UserGUI]String in TextField yearsStudying");
+                    if (!yearStudying.getStyleClass().contains(new String("text-field-error"))){
+                        yearStudying.getStyleClass().add("text-field-error");
+                        yearStudyingMistake=true;
+                    }
                 }
 
                 //
@@ -215,13 +223,12 @@ public class UserGUI {
                 }
                 
                 //
-                if (globalMistake == 0 && languageSelect != null) {
+                if (!lastNameMistake && !firstNameMistake && !birthdayMistake && !motherTongueMistake && !yearStudyingMistake && languageSelect != null) {
 
                     User user = new User("Thibaut", "Fabre", "26/02/1991", "French", 1);
                     //languageSelect = (Language) choose.getSelectedToggle().getUserData();
                     //User user = new User(ln,fn,bd,mt,ys);
                     new ChooseGUI(stage, languageSelect, db, user);
-
                 }
 
             }
