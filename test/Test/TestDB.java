@@ -40,12 +40,12 @@ public class TestDB {
 		//System.out.println(db.searchVideoByNameFormat(tempVideo.getName(), tempVideo.getFormat()));
 		//String tempQuestion1 = new String("C'est ici le ramonage de cheminée ?");
 		//String tempQuestion2 = new String("On dit merci qui ?");
-                db.addQuestion("heureux?", tempVideo, tempAudio, "French");
-                db.addQuestion("colère?", tempVideo1, tempAudio1, "English");
-                db.addQuestion("bien?", tempVideo, tempAudio, "French");
-                db.addQuestion("pas bien?", tempVideo1, tempAudio1, "English");
-                db.addQuestion("izi?", tempVideo, tempAudio, "French");
-                db.addQuestion("pas izi?", tempVideo1, tempAudio1, "English");
+                db.addQuestion("Exprimer la colère?", tempVideo, tempAudio, "French");
+                db.addQuestion("Express anger?", tempVideo1, tempAudio1, "English");
+                db.addQuestion("Exprimer la joie?", tempVideo, tempAudio, "French");
+                db.addQuestion("Express appeal?", tempVideo1, tempAudio1, "English");
+                db.addQuestion("Exprimer la tristesse?", tempVideo, tempAudio, "French");
+                db.addQuestion("Express questioning?", tempVideo1, tempAudio1, "English");
 		//System.out.println(db.manageVideo(tempLanguage));
 		//System.out.println(db.manageAudio(tempLanguage));
 		//System.out.println(db.manageQuestion(tempLanguage));
