@@ -50,6 +50,8 @@ public class UserGUI {
         this.stage = primaryStage;
         this.db = new ControllerDatabase();
         this.launchUserGUI(this.db);
+        SynchGUI synch = new SynchGUI();
+        synch.synchAudioVideo();
         try{
             error.javaVersion();
             error.nameOs();
@@ -57,6 +59,7 @@ public class UserGUI {
         catch (Exception e){
             new Error("Error system");
         }
+        
     }
 
     /**
