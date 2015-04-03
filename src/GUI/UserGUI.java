@@ -40,16 +40,18 @@ public class UserGUI {
     private boolean motherTongueMistake = false;
     private boolean yearStudyingMistake = false;
     private int globalMistake = 0;
-
+    private Errors error = new Errors();
     /**
      * Contructs a new ChooseGUI.
      *
      * @param primaryStage The stage of the interface.
      */
-    public UserGUI(Stage primaryStage) {
+    public UserGUI(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
         this.db = new ControllerDatabase();
         this.launchUserGUI(this.db);
+        error.javaVersion();
+        error.nameOs();
     }
 
     /**

@@ -68,9 +68,11 @@ public class Errors extends Exception {
      * @throws java.lang.Exception
      */
     public void nameOs() throws Exception {
-        String nameOS = System.getProperty("os.name");
+        String nameOS = System.getProperty("os.name").toLowerCase();
         
-        if (!nameOS.contains("Windows") || !nameOS.contains("MAC") || !nameOS.contains("Linux")) {
+        if (nameOS.contains("win") || nameOS.contains("mac") || nameOS.contains("nux") || nameOS.contains("nix") || nameOS.contains("aix")) {
+        }
+        else{
             throw new Exception("OS Problem");
         }
     }
