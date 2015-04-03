@@ -481,7 +481,7 @@ public class DataBaseTest {
     public void testBlackBoxSearchQuestionByContent() {
         System.out.println("BlackBoxSearchQuestionByContent");
 
-        String content = "hello everybody how are you?";
+        String content = "hello everybody, how are you?";
         String nameLanguage = "French";
         int idLanguage = dataBaseTest.searchLanguageByName(nameLanguage).getId();
         Question result = dataBaseTest.searchQuestionByContent(content);
