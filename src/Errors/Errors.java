@@ -34,12 +34,10 @@ public class Errors extends Exception {
             while (m.find()) {
                 boolError = true;
             }
-        }
-        
-        else if (valueTested instanceof Integer) {
+        } else if (valueTested instanceof Integer) {
             if ((int) valueTested < 100 && (int) valueTested > 0) {
-               boolError = true;
-            } 
+                boolError = true;
+            }
         }
         return boolError;
     }
@@ -50,7 +48,7 @@ public class Errors extends Exception {
      * @param dateTested birthday of the user.
      * @return boolean.
      */
-    public static boolean errorDate(String dateTested){
+    public static boolean errorDate(String dateTested) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             sdf.setLenient(false);
@@ -64,25 +62,24 @@ public class Errors extends Exception {
 
     /**
      * Find errors in your operating system.
-     * 
+     *
      * @throws java.lang.Exception
      */
     public void nameOs() throws Exception {
         String nameOS = System.getProperty("os.name").toLowerCase();
-        
+
         if (nameOS.contains("win") || nameOS.contains("mac") || nameOS.contains("nux") || nameOS.contains("nix") || nameOS.contains("aix")) {
-        }
-        else{
+        } else {
             throw new Exception("OS Problem");
         }
     }
-   
+
     /**
      * Find errors in your java version.
-     * 
+     *
      */
     public static void javaVersion() {
-        
+
         String javaVersion = System.getProperty("java.home");
 
         Pattern p = Pattern.compile("jdk1.8.0_31");
@@ -93,7 +90,5 @@ public class Errors extends Exception {
             System.out.println("Il faut que vous metiez votre java à jour");
         }
     }
-        
-        
 
 }

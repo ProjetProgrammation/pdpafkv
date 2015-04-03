@@ -46,12 +46,20 @@ public class UserGUI {
      *
      * @param primaryStage The stage of the interface.
      */
-    public UserGUI(Stage primaryStage) throws Exception {
+    public UserGUI(Stage primaryStage) {
         this.stage = primaryStage;
         this.db = new ControllerDatabase();
         this.launchUserGUI(this.db);
-        error.javaVersion();
-        error.nameOs();
+       /* SynchGUI synch = new SynchGUI();
+        synch.synchAudioVideo();*/
+        try{
+            error.javaVersion();
+            error.nameOs();
+        }
+        catch (Exception e){
+            new Error("Error system");
+        }
+        
     }
 
     /**
