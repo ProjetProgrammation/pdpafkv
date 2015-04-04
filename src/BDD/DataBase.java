@@ -29,6 +29,11 @@ public class DataBase {
     public DataBase() {
         this.connexion();
         this.createTables();
+        this.addLanguage("French");
+        this.addLanguage("English");
+        this.addLanguage("Portuguese");
+        this.addLanguage("Japonese");
+        this.addLanguage("American");
     }
 
     /**

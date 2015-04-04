@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package GUI;
-
+/*
 import com.xuggle.mediatool.IMediaWriter;
 import com.xuggle.mediatool.ToolFactory;
 import com.xuggle.xuggler.IAudioSamples;
@@ -14,7 +14,7 @@ import com.xuggle.xuggler.IPacket;
 import com.xuggle.xuggler.IStream;
 import com.xuggle.xuggler.IStreamCoder;
 import com.xuggle.xuggler.IVideoPicture;
-
+*/
 /**
  *
  * @author guillaume
@@ -27,7 +27,7 @@ public class SynchGUI {
      */
     public SynchGUI() {
     }
-
+/*
     public void synchAudioVideo() {
 
         String filenamevideo = "Video\\2013_3_19_S29_fr_L1_ADMI_B_ok.mp4"; //this is the input file for video. you can change extension
@@ -154,5 +154,5 @@ public class SynchGUI {
             }
 
         }
-    }
+    }*/
 }
