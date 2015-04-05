@@ -1,5 +1,5 @@
 .root {
-    -fx-background-color: #128425;
+    -fx-background-color: white;
 }
 
 .label {
@@ -104,20 +104,12 @@
     -fx-background-color: black;
 }
 
-.text-field-valid {
+.text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "HelveticaNeueLTStd-LtCn";
     -fx-focus-color: transparent;
     -fx-background-radius: 0;
     -fx-background-color: #ffffff;
-}
-
-.text-field-error {
-    -fx-font-size: 12pt;
-    -fx-font-family: "HelveticaNeueLTStd-LtCn";
-    -fx-focus-color: transparent;
-    -fx-background-radius: 0;
-    -fx-background-color: red;
 }
 
 .button {
@@ -207,6 +199,7 @@
     -fx-background-insets: 0 20 20 0;
     -fx-background-width: 600;
 }
+
 .box-error {
     -fx-background-color: #3A9548;
     -fx-padding: 20 40 40 20;

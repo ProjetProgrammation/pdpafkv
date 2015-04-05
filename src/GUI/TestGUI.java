@@ -132,7 +132,7 @@ public class TestGUI extends Parent {
         GridPane subRoot = new GridPane();
         BorderPane root = new BorderPane();
         HBox questionBox = new HBox(question);
-        HBox videoBox = new HBox(video);
+        final HBox videoBox = new HBox(video);
         HBox sonBox = new HBox(son);
 
         //Add style classe
@@ -171,6 +171,9 @@ public class TestGUI extends Parent {
                         Extract.Extract(mediaSel);
                         new EndGUI(stage);
                     }
+                }
+                else{
+                    videoBox.getStyleClass().add("box-error");
                 }
             }
         });
