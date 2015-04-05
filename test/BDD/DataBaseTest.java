@@ -62,20 +62,20 @@ public class DataBaseTest {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 System.out.println(rs.getString("name"));
-                if (rs.getString("name").contains(tablesName[0]) && !tablesName[0].isEmpty()) {
+                if ((rs.getString("name").contains(tablesName[0])) && (!tablesName[0].isEmpty())) {
                     tablesName[0] = "";
                 }
-                if (rs.getString("name").contains(tablesName[1]) && !tablesName[1].isEmpty()) {
+                if ((rs.getString("name").contains(tablesName[1])) && (!tablesName[1].isEmpty())) {
                     tablesName[1] = "";
                 }
-                if (rs.getString("name").contains(tablesName[2]) && !tablesName[2].isEmpty()) {
+                if ((rs.getString("name").contains(tablesName[2])) && (!tablesName[2].isEmpty())) {
                     tablesName[2] = "";
                 }
-                if (rs.getString("name").contains(tablesName[3]) && !tablesName[3].isEmpty()) {
+                if ((rs.getString("name").contains(tablesName[3])) && (!tablesName[3].isEmpty())) {
                     tablesName[3] = "";
                 }
 
-                if (rs.getString("name").contains(tablesName[4]) && !tablesName[4].isEmpty()) {
+                if ((rs.getString("name").contains(tablesName[4])) && (!tablesName[4].isEmpty())) {
                     tablesName[4] = "";
                 }
             }
@@ -121,7 +121,7 @@ public class DataBaseTest {
                 String nameDataBase = rs.getString("name");
                 String filepathDataBase = rs.getString("file_path");
                 String formatDataBase = rs.getString("format");
-                if (name.equals(nameDataBase) && filePath.equals(filepathDataBase) && format.equals(formatDataBase) && nameLanguage.equals("French")) {
+                if ((name.equals(nameDataBase)) && (filePath.equals(filepathDataBase)) && (format.equals(formatDataBase)) && (nameLanguage.equals("French"))) {
                     checkVideo = true;
                     System.out.println("Video found");
                 }
@@ -146,7 +146,7 @@ public class DataBaseTest {
         Video expResult = new Video(1, name, filePath, format, idLanguage);
         Video result = dataBaseTest.searchVideoByNameFormat(name, format);
 
-        assertTrue("Problem BlackBoxSearchVideoByNameFormat", expResult.getFilePath().equals(result.getFilePath()) && expResult.getName().equals(result.getName()) && expResult.getFormat().equals(result.getFormat()));
+        assertTrue("Problem BlackBoxSearchVideoByNameFormat", (expResult.getFilePath().equals(result.getFilePath())) && (expResult.getName().equals(result.getName())) && (expResult.getFormat().equals(result.getFormat())));
     }
 
     public void testBlackBoxRmVideo() {
@@ -165,7 +165,7 @@ public class DataBaseTest {
         videoListTest = dataBaseTest.getAllVideos();
         for (Video v : videoListTest) {
             System.out.println("Video name :" + v.getName());
-            if (v.getName().equals(name) && v.getFormat().equals(format)) {
+            if ((v.getName().equals(name)) && (v.getFormat().equals(format))) {
                 throw new AssertionError("Problem with BlackBoxRmVideo");
             }
         }
@@ -200,7 +200,8 @@ public class DataBaseTest {
 
         dataBaseTest.addVideo(name, filePath, format, nameLanguage, thumbnail, thumbnailgif);
         dataBaseTest.addVideo(name, filePath, format, nameLanguage, thumbnail, thumbnailgif);
-    }
+        
+     }
 
     public void testRmVideoWhiteBox() {
         System.out.println("RmVideoWhiteBox");
@@ -218,14 +219,11 @@ public class DataBaseTest {
 
         ArrayList<Question> questionListTest;
         questionListTest = dataBaseTest.getAllQuestions();
-        int resulVideo = 0;
         int idVideo = -1;
 
         for (Question v : questionListTest) {
-            if (resulVideo == 0) {
                 idVideo = v.getIdVideo();
-                resulVideo++;
-            }
+                break;
         }
 
         Video videoTest = dataBaseTest.searchVideoById(idVideo);
@@ -254,7 +252,7 @@ public class DataBaseTest {
 
         for (Video v : videoListTest) {
             System.out.println("Video name:" + v.getName());
-            if (!(v.getName().equals(video.getName())) && v.getId() == (video.getId())) {
+            if (!(v.getName().equals(video.getName())) && (v.getId() == (video.getId()))) {
                 throw new AssertionError("BlackBoxSearchVideoById problem");
             }
         }
@@ -286,7 +284,7 @@ public class DataBaseTest {
                 String nameDataBase = rs.getString("name");
                 String filepathDataBase = rs.getString("file_path");
                 String formatDataBase = rs.getString("format");
-                if (name.equals(nameDataBase) && filePath.equals(filepathDataBase) && format.equals(formatDataBase) && nameLanguage.equals("French")) {
+                if ((name.equals(nameDataBase)) && (filePath.equals(filepathDataBase)) && (format.equals(formatDataBase)) && (nameLanguage.equals("French"))) {
                     checkAudio = true;
                     System.out.println("the audio was found");
                 }
@@ -316,7 +314,7 @@ public class DataBaseTest {
 
         for (Audio v : audioListTest) {
             System.out.println("The audio name is:" + v.getName());
-            if (v.getName().equals(name) && v.getFormat().equals(format)) {
+            if ((v.getName().equals(name)) && (v.getFormat().equals(format))) {
                 throw new AssertionError("Problem with BlackBoxRmAudio");
             }
         }
@@ -335,7 +333,7 @@ public class DataBaseTest {
         Audio expResult = new Audio(1, name, filePath, format, idLanguage);
         Audio result = dataBaseTest.searchAudioByNameFormat(name, format);
 
-        assertTrue("Problem with BlackBoxSearchAudioByNameFormat", expResult.getFilePath().equals(result.getFilePath()) && expResult.getName().equals(result.getName()) && expResult.getFormat().equals(result.getFormat()));
+        assertTrue("Problem with BlackBoxSearchAudioByNameFormat", (expResult.getFilePath().equals(result.getFilePath())) && (expResult.getName().equals(result.getName())) && (expResult.getFormat().equals(result.getFormat())));
     }
 
     public void testBlackBoxCountAudio() {
@@ -378,14 +376,12 @@ public class DataBaseTest {
 
         ArrayList<Question> questionListTest;
         questionListTest = dataBaseTest.getAllQuestions();
-        int resulAudio = 0;
         int idAudio = -1;
 
         for (Question v : questionListTest) {
-            if (resulAudio == 0) {
+            
                 idAudio = v.getIdAudio();
-                resulAudio++;
-            }
+                break;
         }
 
         Audio audioTest = dataBaseTest.searchAudioById(idAudio);
@@ -427,7 +423,7 @@ public class DataBaseTest {
             while (rs.next()) {
                 String contentDataBase = rs.getString("content");
                 String languageBDD = "French";
-                if (content.equals(contentDataBase) && languageBDD.equals(nameLanguage)) {
+                if ((content.equals(contentDataBase)) && (languageBDD.equals(nameLanguage))) {
                     checkQuestion = true;
                     System.out.println("Question found");
                 }
@@ -449,7 +445,7 @@ public class DataBaseTest {
         audioListTest = dataBaseTest.getAllAudios();
         for (Audio v : audioListTest) {
             System.out.println("The audio name is:" + v.getName());
-            if (!(v.getName().equals(audio.getName())) && v.getId() == (audio.getId())) {
+            if (!(v.getName().equals(audio.getName())) && (v.getId() == (audio.getId()))) {
                 throw new AssertionError("BlackBoxSearchAudioById problem");
             }
         }
@@ -514,10 +510,13 @@ public class DataBaseTest {
         Audio audioTest = new Audio(55, "sethgeceekeds", "Audio\\sethsbreedd.mp3", "mp3", 1);
         Video videoTest = new Video(70, "sethgeckdes", "Video\\sethsbree.mp4", "mp4", 1);
         String nameLanguage = "French";
-        String content = "we try this";
+        String content = "we try this!";
 
         dataBaseTest.addQuestion(content, videoTest, audioTest, nameLanguage);
         dataBaseTest.addQuestion(content, videoTest, audioTest, nameLanguage);
+        dataBaseTest.addQuestion(content, videoTest, audioTest, "Coreen");
+        
+        dataBaseTest.rmQuestion(content);
     }
 
     public void testRmQuestionWhiteBox() {
@@ -531,6 +530,13 @@ public class DataBaseTest {
         dataBaseTest.addQuestion(content, videoTest, audioTest, content);
         dataBaseTest.rmQuestion(content);
         dataBaseTest.rmQuestion(content);
+        
+        ArrayList<Question> questionListTest;
+        questionListTest = dataBaseTest.getAllQuestions();
+        for (Question v : questionListTest) {
+                dataBaseTest.rmQuestion(v.getContent());
+                break;
+        }
     }
 
     public void testBlackBoxManageQuestion() {
@@ -617,10 +623,9 @@ public class DataBaseTest {
         ArrayList<Language> languageListTest;
         languageListTest = dataBaseTest.getAllLanguages();
         for (Language v : languageListTest) {
-            if (languageName == 0) {
                 dataBaseTest.rmLanguage(v.getName());
-                languageName++;
-            }
+                dataBaseTest.addLanguage(v.getName());
+                break;
         }
     }
 
@@ -641,7 +646,7 @@ public class DataBaseTest {
         languageListTest = dataBaseTest.getAllLanguages();
         for (Language v : languageListTest) {
             System.out.println("Language name:" + v.getName());
-            if (!(v.getName().equals(langueTest.getName())) && v.getId() == langueTest.getId()) {
+            if (!(v.getName().equals(langueTest.getName())) && (v.getId() == langueTest.getId())) {
                 throw new AssertionError("BlackBoxGetLanguageById have a problem");
             }
         }
@@ -656,7 +661,7 @@ public class DataBaseTest {
         languageListTest = dataBaseTest.getAllLanguages();
         for (Language v : languageListTest) {
             System.out.println("The language name is:" + v.getName());
-            if (v.getName().equals(langueTest.getName()) && !(v.getId() == langueTest.getId())) {
+            if ((v.getName().equals(langueTest.getName())) && !(v.getId() == langueTest.getId())) {
                 throw new AssertionError("BlackBoxGetLanguageByName have a problem");
             }
         }
