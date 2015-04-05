@@ -51,4 +51,12 @@ public class ControllerDatabase {
     public int countQuestion(int idLanguage){
         return(this.db.countAudio(idLanguage));
     }
+    
+    public Video searchVideoById (int id){
+        return(this.db.searchVideoById(id));
+    }
+    
+    public Audio searchAudioById (int id){
+        return(this.db.searchAudioById(id));
+    }
 }

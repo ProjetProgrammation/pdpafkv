@@ -5,11 +5,15 @@
  */
 package Result;
 
+import BDD.Audio;
+import BDD.Video;
+import Controller.ControllerDatabase;
 import Controller.MediaSelected;
 import java.io.File;
 import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  * Write on file results of the user
@@ -23,16 +27,16 @@ public class Extract {
      *
      * @param medSelected current occurence of mediaSelect.
      */
-    public static void Extract(MediaSelected medSelected) {
+    public static void Extract(MediaSelected medSelected,ControllerDatabase db) {
         try {
             Date date = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("HH-mm-dd-MM-yy");
-            String path = sdf.format(date) + "_" + medSelected.getUserSel().getNameToFile() + "_" + medSelected.getLangSel().getName() + ".txt";
+            String path = "\\"+ sdf.format(date) + "_" + medSelected.getUserSel().getNameToFile() + "_" + medSelected.getLangSel().getName() + ".txt";
             String workingDirectory = System.getProperty("user.dir");	
-            File file = new File(workingDirectory, path);
+            File file = new File(workingDirectory+FilenameUtils.separatorsToSystem(path));
             FileWriter fw = new FileWriter(file);                
             extractLanguageUser(medSelected,fw);
-            extractAnswers(medSelected, fw);
+            extractAnswers(medSelected,fw,db);
             fw.close();
         } catch (Exception e) {
             System.out.println("[Extract]Problem to create file");
@@ -72,7 +76,7 @@ public class Extract {
      * @param medSelected current occurence of mediaSelect.
      * @param fw current occurence of FileWriter
      */
-    private static void extractAnswers(MediaSelected medSelected, FileWriter fw) {
+    private static void extractAnswers(MediaSelected medSelected, FileWriter fw,ControllerDatabase db) {
 
         try {
             int i=1;
@@ -83,10 +87,20 @@ public class Extract {
                 fw.write(System.getProperty("line.separator"));
                 fw.write("          Question:   " + answer.getQuestSel().getContent());
                 fw.write(System.getProperty("line.separator"));
-                fw.write("          Video   " + answer.getVideoSel().getName());
+                fw.write("              By the user ");
                 fw.write(System.getProperty("line.separator"));
-                fw.write("          Audio   " + answer.getAudioSel().getName());
+                fw.write("                  Video   " + answer.getVideoSel().getName());
                 fw.write(System.getProperty("line.separator"));
+                fw.write("                  Audio   " + answer.getAudioSel().getName());
+                fw.write(System.getProperty("line.separator"));
+                fw.write("              Expected ");
+                fw.write(System.getProperty("line.separator"));
+                Video video = db.searchVideoById(answer.getQuestSel().getIdVideo());
+                System.out.println("[video.getName] "+video.getName());
+                fw.write("                  Video   " + video.getName());
+                fw.write(System.getProperty("line.separator"));
+                Audio audio = db.searchAudioById(answer.getQuestSel().getIdAudio());
+                fw.write("                  Audio   " + audio.getName());
                 i++;
             }
         } catch (Exception e) {
