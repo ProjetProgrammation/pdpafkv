@@ -24,17 +24,17 @@ import java.util.ArrayList;
  *
  * @author akervadec
  */
-public class DataBase {
+public final class DataBase {
 
     
-    public DataBase() {
-        this.connexion();
-        this.createTables();
-        this.addLanguage("French");
-        this.addLanguage("English");
-        this.addLanguage("Portuguese");
-        this.addLanguage("Japonese");
-        this.addLanguage("American");
+    public static void initiateDataBase() {
+        DataBase.connexion();
+        DataBase.createTables();
+        DataBase.addLanguage("French");
+        DataBase.addLanguage("English");
+        DataBase.addLanguage("Portuguese");
+        DataBase.addLanguage("Japonese");
+        DataBase.addLanguage("American");
     }
 
     /**
@@ -43,7 +43,7 @@ public class DataBase {
      *
      * @return Connection.
      */
-    public Connection connexion() {
+    public static Connection connexion() {
 
         Connection c = null;
         try {
@@ -60,8 +60,8 @@ public class DataBase {
     /**
      * Creates the tables in the database.
      */
-    public void createTables() {
-        Connection c = this.connexion();
+    public static void createTables() {
+        Connection c = DataBase.connexion();
         Statement stmt;
         try {
             stmt = c.createStatement();
@@ -108,12 +108,12 @@ public class DataBase {
      * @param thumbnailPicPath Video's thumbnail picture path.
      * @param thumbnailGifPath Video's thumbnail GIF path.
      */
-    public void addVideo(String name, String filePath, String format, String nameLanguage, String thumbnailPicPath, String thumbnailGifPath) {
-        Connection c = this.connexion();
+    public static void addVideo(String name, String filePath, String format, String nameLanguage, String thumbnailPicPath, String thumbnailGifPath) {
+        Connection c = DataBase.connexion();
         PreparedStatement stmtLang = null;
         PreparedStatement stmtAdd = null;
         int idLang = 0;
-        if (this.searchVideoByNameFormat(name, format).getId() != 0) {
+        if (DataBase.searchVideoByNameFormat(name, format).getId() != 0) {
             System.out.println("[addVideo]This video already exists.");
         } else {
             String query = new String("SELECT id FROM Language WHERE Language.name=?;");
@@ -163,12 +163,12 @@ public class DataBase {
      * @param nameLanguage Audio's language to add.
      * @param format Audio's format to add.
      */
-    public void addAudio(String name, String filePath, String format, String nameLanguage) {
-        Connection c = this.connexion();
+    public static void addAudio(String name, String filePath, String format, String nameLanguage) {
+        Connection c = DataBase.connexion();
         PreparedStatement stmtLang = null;
         PreparedStatement stmtAdd = null;
         int idLang = 0;
-        if (this.searchAudioByNameFormat(name, format).getId() != 0) {
+        if (DataBase.searchAudioByNameFormat(name, format).getId() != 0) {
             System.out.println("[addAudio]This audio already exists.");
         } else {
             String query = new String("SELECT id FROM Language WHERE Language.name=?;");
@@ -215,12 +215,12 @@ public class DataBase {
      * @param audio Question's Audio expected.
      * @param nameLanguage Question's Language.
      */
-    public void addQuestion(String content, Video video, Audio audio, String nameLanguage) {
-        Connection c = this.connexion();
+    public static void addQuestion(String content, Video video, Audio audio, String nameLanguage) {
+        Connection c = DataBase.connexion();
         PreparedStatement stmtLang = null;
         PreparedStatement stmtAdd = null;
         int idLang = 0;
-        if (this.searchQuestionByContent(content).getId() != 0) {
+        if (DataBase.searchQuestionByContent(content).getId() != 0) {
             System.out.println("[addQuestion]This Question already exists.");
         } else {
             String query = new String("SELECT id FROM Language WHERE Language.name=?;");
@@ -261,10 +261,10 @@ public class DataBase {
      *
      * @param name The language in String type.
      */
-    public void addLanguage(String name) {
-        Connection c = this.connexion();
+    public static void addLanguage(String name) {
+        Connection c = DataBase.connexion();
         PreparedStatement stmt = null;
-        if (this.searchLanguageByName(name).getId() != 0) {
+        if (DataBase.searchLanguageByName(name).getId() != 0) {
             System.out.println("[addLanguage]This language already exists.");
         } else {
             String query = new String("INSERT INTO Language (name) VALUES (?);");
@@ -294,8 +294,8 @@ public class DataBase {
      * @param language Video's Language wanted.
      * @return Video
      */
-    public Video manageVideo(Language language) {
-        Connection c = this.connexion();
+    public static Video manageVideo(Language language) {
+        Connection c = DataBase.connexion();
         PreparedStatement stmt = null;
         Video result = new Video();
         int idLanguage = language.getId();
@@ -335,8 +335,8 @@ public class DataBase {
      * @param language Audio's Language wanted.
      * @return Audio
      */
-    public Audio manageAudio(Language language) {
-        Connection c = this.connexion();
+    public static Audio manageAudio(Language language) {
+        Connection c = DataBase.connexion();
         PreparedStatement stmt = null;
         Audio result = new Audio();
         int idLanguage = language.getId();
@@ -374,8 +374,8 @@ public class DataBase {
      * @param language Question's Language wanted.
      * @return Question
      */
-    public Question manageQuestion(Language language) {
-        Connection c = this.connexion();
+    public static Question manageQuestion(Language language) {
+        Connection c = DataBase.connexion();
         PreparedStatement stmt = null;
         Question result = new Question();
         int idLanguage = language.getId();
@@ -411,8 +411,8 @@ public class DataBase {
      * @param name Language's name to search.
      * @return Language
      */
-    public Language searchLanguageByName(String name) {
-        Connection c = this.connexion();
+    public static Language searchLanguageByName(String name) {
+        Connection c = DataBase.connexion();
         PreparedStatement stmt = null;
         Language language = new Language();
         String query = new String("SELECT * FROM Language WHERE Language.name=?;");
@@ -444,8 +444,8 @@ public class DataBase {
      * @param format Video's format searched.
      * @return Video
      */
-    public Video searchVideoByNameFormat(String name, String format) {
-        Connection c = this.connexion();
+    public static Video searchVideoByNameFormat(String name, String format) {
+        Connection c = DataBase.connexion();
         PreparedStatement stmt = null;
         Video video = new Video();
         String query = new String("SELECT * FROM Video WHERE Video.name=? AND Video.format=?;");
@@ -485,8 +485,8 @@ public class DataBase {
      * @param format Audio's format searched.
      * @return Audio
      */
-    public Audio searchAudioByNameFormat(String name, String format) {
-        Connection c = this.connexion();
+    public static Audio searchAudioByNameFormat(String name, String format) {
+        Connection c = DataBase.connexion();
         PreparedStatement stmt = null;
         Audio audio = new Audio();
         String query = new String("SELECT * FROM Audio WHERE Audio.name=? AND Audio.format=?;");
@@ -522,8 +522,8 @@ public class DataBase {
      * @param content Question's content searched.
      * @return Question
      */
-    public Question searchQuestionByContent(String content) {
-        Connection c = this.connexion();
+    public static Question searchQuestionByContent(String content) {
+        Connection c = DataBase.connexion();
         PreparedStatement stmt = null;
         Question question = new Question();
         String query = new String("SELECT * FROM Question WHERE Question.content=?;");
@@ -555,8 +555,8 @@ public class DataBase {
      *
      * @return ArrayList\<Question\>
      */
-    public ArrayList<Question> getAllQuestions() {
-        Connection c = this.connexion();
+    public static ArrayList<Question> getAllQuestions() {
+        Connection c = DataBase.connexion();
         PreparedStatement stmt = null;
         ArrayList<Question> result;
         result = new ArrayList<>();
@@ -594,8 +594,8 @@ public class DataBase {
      *
      * @return ArrayList\<Video\>
      */
-    public ArrayList<Video> getAllVideos() {
-        Connection c = this.connexion();
+    public static ArrayList<Video> getAllVideos() {
+        Connection c = DataBase.connexion();
         PreparedStatement stmt = null;
         ArrayList<Video> result;
         result = new ArrayList<>();
@@ -634,8 +634,8 @@ public class DataBase {
      *
      * @return ArrayList\<Audio\>
      */
-    public ArrayList<Audio> getAllAudios() {
-        Connection c = this.connexion();
+    public static ArrayList<Audio> getAllAudios() {
+        Connection c = DataBase.connexion();
         PreparedStatement stmt = null;
         ArrayList<Audio> result;
         result = new ArrayList<>();
@@ -672,8 +672,8 @@ public class DataBase {
      *
      * @return ArrayList\<Language\>
      */
-    public ArrayList<Language> getAllLanguages() {
-        Connection c = this.connexion();
+    public static ArrayList<Language> getAllLanguages() {
+        Connection c = DataBase.connexion();
         PreparedStatement stmt = null;
         ArrayList<Language> result;
         result = new ArrayList<>();
@@ -709,10 +709,10 @@ public class DataBase {
      * @param idLanguage Audios idLanguage to search.
      * @return int
      */
-    public int countAudio(int idLanguage) {
+    public static int countAudio(int idLanguage) {
         int result = 0;
 
-        Connection c = this.connexion();
+        Connection c = DataBase.connexion();
         PreparedStatement stmt = null;
         String query = new String("SELECT COUNT(*) AS rowcount FROM Audio where id_language = ? ;");
         try {
@@ -741,10 +741,10 @@ public class DataBase {
      * @param idLanguage Question idLanguage to search.
      * @return int
      */
-    public int countQuestion(int idLanguage) {
+    public static int countQuestion(int idLanguage) {
         int result = 0;
 
-        Connection c = this.connexion();
+        Connection c = DataBase.connexion();
         PreparedStatement stmt = null;
         String query = new String("SELECT COUNT(*) AS rowcount FROM Question where id_language=?;");
         try {
@@ -773,10 +773,10 @@ public class DataBase {
      * @param idLanguage Video idLanguage to search.
      * @return int
      */
-    public int countVideo(int idLanguage) {
+    public static int countVideo(int idLanguage) {
         int result = 0;
 
-        Connection c = this.connexion();
+        Connection c = DataBase.connexion();
         PreparedStatement stmt = null;
         String query = new String("SELECT COUNT(*) AS rowcount FROM Video where id_language = ? ;");
         try {
@@ -803,13 +803,13 @@ public class DataBase {
      * @param videoName Video's name to remove.
      * @param format Video's format to remove.
      */
-    public void rmVideo(String videoName, String format) {
-        Connection c = this.connexion();
+    public static void rmVideo(String videoName, String format) {
+        Connection c = DataBase.connexion();
         PreparedStatement stmtCheck = null;
         PreparedStatement stmtRm = null;
         int idLang = 0;
         Question tmpQuestion = new Question();
-        Video tmp = new Video(this.searchVideoByNameFormat(videoName, format));
+        Video tmp = new Video(DataBase.searchVideoByNameFormat(videoName, format));
         if (tmp.getId() == 0) {
             System.out.println("[rmVideo]This video doesn't exist.");
         } else {
@@ -861,13 +861,13 @@ public class DataBase {
      * @param audioName Audio's name to remove.
      * @param format Audio's format to remove.
      */
-    public void rmAudio(String audioName, String format) {
-        Connection c = this.connexion();
+    public static void rmAudio(String audioName, String format) {
+        Connection c = DataBase.connexion();
         PreparedStatement stmtCheck = null;
         PreparedStatement stmtRm = null;
         int idLang = 0;
         Question tmpQuestion = new Question();
-        Audio tmp = new Audio(this.searchAudioByNameFormat(audioName, format));
+        Audio tmp = new Audio(DataBase.searchAudioByNameFormat(audioName, format));
         if (tmp.getId() == 0) {
             System.out.println("[rmAudio]This video doesn't exist.");
         } else {
@@ -918,11 +918,11 @@ public class DataBase {
      *
      * @param languageName Language's name to remove.
      */
-    public void rmLanguage(String languageName) {
-        Connection c = this.connexion();
+    public static void rmLanguage(String languageName) {
+        Connection c = DataBase.connexion();
         PreparedStatement stmtCheck = null;
         PreparedStatement stmtRm = null;
-        Language tmp = new Language(this.searchLanguageByName(languageName).getId(), this.searchLanguageByName(languageName).getName());
+        Language tmp = new Language(DataBase.searchLanguageByName(languageName).getId(), DataBase.searchLanguageByName(languageName).getName());
         Audio audio = new Audio();
         Video video = new Video();
         if (tmp.getId() == 0) {
@@ -990,10 +990,10 @@ public class DataBase {
      *
      * @param content Question's content.
      */
-    public void rmQuestion(String content) {
-        Connection c = this.connexion();
+    public static void rmQuestion(String content) {
+        Connection c = DataBase.connexion();
         PreparedStatement stmtRm = null;
-        Question tmp = new Question(this.searchQuestionByContent(content));
+        Question tmp = new Question(DataBase.searchQuestionByContent(content));
         if (tmp.getId() == 0) {
             System.out.println("[rmQuestion]This language doesn't exist.");
         } else {
@@ -1026,8 +1026,8 @@ public class DataBase {
      * @param id Language's id.
      * @return String
      */
-    public String getLanguageById(int id) {
-        Connection c = this.connexion();
+    public static String getLanguageById(int id) {
+        Connection c = DataBase.connexion();
         PreparedStatement stmt = null;
         String result = null;
         try {
@@ -1061,8 +1061,8 @@ public class DataBase {
      * @param name Language's name.
      * @return int
      */
-    public int getLanguageByName(String name) {
-        Connection c = this.connexion();
+    public static int getLanguageByName(String name) {
+        Connection c = DataBase.connexion();
         PreparedStatement stmt = null;
         int result = 0;
         try {
@@ -1095,8 +1095,8 @@ public class DataBase {
      * @param id Video's id to search.
      * @return Video
      */
-    public Video searchVideoById(int id) {
-        Connection c = this.connexion();
+    public static Video searchVideoById(int id) {
+        Connection c = DataBase.connexion();
         PreparedStatement stmt = null;
         Video video = new Video();
         String query = new String("SELECT * FROM Video WHERE Video.id=?;");
@@ -1136,8 +1136,8 @@ public class DataBase {
      * @param id Audio's id to search.
      * @return Audio
      */
-    public Audio searchAudioById(int id) {
-        Connection c = this.connexion();
+    public static Audio searchAudioById(int id) {
+        Connection c = DataBase.connexion();
         PreparedStatement stmt = null;
         Audio audio = new Audio();
         String query = new String("SELECT * FROM Audio WHERE Audio.id=?;");

@@ -16,39 +16,37 @@ import java.util.ArrayList;
  * Use this class to create a database (if it doesn't exist) and get all languages available.
  * @author alexandre
  */
-public class ControllerDatabase {
-    
-    private DataBase db;
+public final class ControllerDatabase {
     
     public ControllerDatabase(){
-        db = new DataBase();
+        DataBase.initiateDataBase();
     }
     
     public ArrayList getLanguageList(){
-        return(this.db.getAllLanguages());
+        return(DataBase.getAllLanguages());
     }
     
     public Audio manageAudio(Language language){
-        return(this.db.manageAudio(language));
+        return(DataBase.manageAudio(language));
     }
     
     public Video manageVideo(Language language){
-        return(this.db.manageVideo(language));
+        return(DataBase.manageVideo(language));
     }
     
     public Question manageQuestion(Language language){
-        return(this.db.manageQuestion(language));
+        return(DataBase.manageQuestion(language));
     }
     
     public int countAudio(int idLanguage){
-        return(this.db.countAudio(idLanguage));
+        return(DataBase.countAudio(idLanguage));
     }
     
     public int countVideo(int idLanguage){
-        return(this.db.countVideo(idLanguage));
+        return(DataBase.countVideo(idLanguage));
     }
     
     public int countQuestion(int idLanguage){
-        return(this.db.countAudio(idLanguage));
+        return(DataBase.countAudio(idLanguage));
     }
 }
