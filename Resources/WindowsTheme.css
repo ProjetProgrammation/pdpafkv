@@ -219,6 +219,18 @@
     -fx-border-color: red;
     -fx-border-padding:20 40 40 20;
 }
+
+.label-valid {
+    -fx-text-fill: #128425;  
+    -fx-font-size: 25pt;
+}
+.label-error {
+    -fx-visibility: visible;
+    -fx-font-size: 25pt;
+    -fx-font-family: "HelveticaNeueLTStd-LtCn";
+    -fx-text-fill: red;
+    -fx-opacity: 0.6;
+}
 .progress-bar > .bar {
     -fx-accent: #128425;
     -fx-background-color: linear-gradient(

@@ -127,6 +127,8 @@ public class TestGUI extends Parent {
 
         Label title = new Label("Prosodic Adventure".toUpperCase());
         Label title2 = new Label("Prosodic Adventure train".toUpperCase());
+        final Label videoError = new Label("Please select a video");
+        final Label soundError = new Label("Please Select a sound");
         
         Button mix = new Button("Merge".toUpperCase());
         Button validate = new Button("Next".toUpperCase());
@@ -137,11 +139,13 @@ public class TestGUI extends Parent {
         BorderPane root = new BorderPane();
         HBox questionBox = new HBox(question);
         final HBox videoBox = new HBox(video);
-        HBox sonBox = new HBox(son);
+        final HBox sonBox = new HBox(son);
 
         //Add style classe
         title.getStyleClass().add("label-header");
         title2.getStyleClass().add("label-header");
+        videoError.getStyleClass().add("label-valid");
+        soundError.getStyleClass().add("label-valid");
         
         //Barre de progression
         ProgressBar pb = new ProgressBar();
@@ -176,8 +180,15 @@ public class TestGUI extends Parent {
                         new EndGUI(stage);
                     }
                 }
-                else{
-                    videoBox.getStyleClass().add("box-error");
+                else if ((video.getVideoSelected() == null) && (son.getAudioSelected() == null)){
+                    videoError.getStyleClass().add("label-error");
+                    soundError.getStyleClass().add("label-error");
+                }else if ((video.getVideoSelected() == null) && (son.getAudioSelected() != null)){
+                    videoError.getStyleClass().add("label-error");                    
+                    soundError.getStyleClass().remove("label-error");
+                }else if ((video.getVideoSelected() != null) && (son.getAudioSelected() == null)){
+                    videoError.getStyleClass().remove("label-error");                    
+                    soundError.getStyleClass().add("label-error");
                 }
             }
         });
@@ -199,6 +210,9 @@ public class TestGUI extends Parent {
         subRoot.add(mix, 2, 2, 1, 1);
         subRoot.add(validate, 2, 2, 2, 1);
         subRoot.add(pb, 2, 2, 2, 2);
+        subRoot.add(videoError, 1, 0);
+        subRoot.add(soundError, 2, 0);
+        
         subRoot.setAlignment(Pos.CENTER);
 
         GridPane.setHalignment(mix, HPos.CENTER);
