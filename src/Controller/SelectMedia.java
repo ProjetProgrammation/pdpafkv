@@ -22,6 +22,7 @@ public class SelectMedia {
     private ArrayList<Question> listQuestion;
     private ControllerDatabase db;
     private Language langSel;
+    private boolean problemDB=false;
 
     /**
      * Constructs a SelectMedia object.
@@ -46,18 +47,19 @@ public class SelectMedia {
         Audio audio;
         this.listAudioTest = new ArrayList<>();
         this.listAudio = new ArrayList<>();
+        //Fill listAudio with all Audio in db
         do {
-            boolean check = false;
             audio = this.db.manageAudio(this.langSel);
-            for(int i = 0; i < this.listAudio.size(); i++) {             
-                if (audio.getFilePath().equals(this.listAudio.get(i).getFilePath())) {
-                    check = true;
-                }
-            }
-            if (check == false) {
+            //if Audio selected is not inside the list so we add it
+            if (!this.listAudio.contains(audio)){
                 this.listAudio.add(audio);
             }
-        } while (this.listAudio.size() != this.db.countAudio(this.langSel.getId()));
+        } while (this.listAudio.size() != this.db.countAudio(this.langSel.getId())&&audio.getId()!=0);
+        //if no Audio in db, so problem = true
+        if (audio.getId()==0){
+            System.out.println("[selectAudioList]None audio in your database");
+            problemDB=true;
+        }
     }
 
     /**
@@ -69,18 +71,19 @@ public class SelectMedia {
         Video video;
         this.listVideoTest = new ArrayList<>();
         this.listVideo = new ArrayList<>();
+        //Fill listVideo with all Video in db
         do {
-            boolean check = false;
             video = this.db.manageVideo(this.langSel);
-            for (int i=0; i < this.listVideo.size(); i++) {
-                if (video.getFilePath().equals(this.listVideo.get(i).getFilePath())) {
-                    check = true;
-                }
-            }
-            if (check == false) {
+            //if Video selected is not inside the list so we add it
+            if (!this.listVideo.contains(video)){
                 this.listVideo.add(video);
             }
-        } while (this.listVideo.size() != this.db.countVideo(this.langSel.getId()));
+        } while (this.listVideo.size() != this.db.countVideo(this.langSel.getId())&&video.getId()!=0);
+        //if no Video in db, so problem = true
+        if (video.getId()==0){
+            System.out.println("[selectVideoList]None video in your database");
+            problemDB=true;
+        }   
     }
 
     /**
@@ -91,14 +94,19 @@ public class SelectMedia {
     public void selectQuestionList() {
         Question question = null;
         this.listQuestion = new ArrayList<>();
-        int i=0;
+        //Fill listQuestion with all Video in db
         do {
             question = this.db.manageQuestion(this.langSel);
+            //if Question selected is not inside the list so we add it.
             if(!this.listQuestion.contains(question)){
                 this.listQuestion.add(question);
             }
-        } while (this.listQuestion.size() != this.db.countQuestion(this.langSel.getId()));
-
+        } while (this.listQuestion.size() != this.db.countQuestion(this.langSel.getId())&&question.getId()!=0);
+        //if no Question in db, so problem = true
+        if (question.getId()==0){
+            System.out.println("[selectQuestionList]None question in your database");
+            problemDB=true;
+        }
     }
     
     public ArrayList<Question> getQuestionsList(){
@@ -176,9 +184,23 @@ public class SelectMedia {
         return question;
     }
     
+    /**
+     * 
+     * Clear lists of audio and video for the next test.
+     */
     public void listAudioVideoZero(){
         this.listAudioTest.clear();
         this.listVideoTest.clear();
     }
 
+     /**
+     *
+     * Return boolean value.
+     * if true, the db is wrong.
+     *
+     * @return boolean
+     */
+    public boolean isProblemDB() {
+        return problemDB;
+    }
 }

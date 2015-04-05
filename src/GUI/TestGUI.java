@@ -52,6 +52,10 @@ public class TestGUI extends Parent {
         this.db = db;
         this.language = language;
         this.selMedia = new SelectMedia(this.db, this.language);
+        if (this.selMedia.isProblemDB()){
+            System.out.println("[TestGUI]Problem whith de database");
+            System.exit(0);
+        }
         if (nbQuestion == 5)
             this.mediaSel = new MediaSelected(user, this.language);
         else
