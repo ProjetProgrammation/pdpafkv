@@ -74,6 +74,7 @@ public class TestGUI extends Parent {
         this.nbQuestion = nbQuestion;
         this.currentQuestionNumber = currentQuestionNumber;
         this.selMedia = selMedia;
+        this.selMedia.listAudioVideoZero();
         this.userSel = userSel;
         this.mediaSel=mediaSelected;
         this.launchTestGUI();
@@ -92,7 +93,8 @@ public class TestGUI extends Parent {
         this.stage = primaryStage;
         this.nbQuestion = nbQuest;
         this.currentQuestionNumber = numCourant;
-        this.selMedia = selectMedia;
+        this.selMedia = selectMedia;        
+        this.selMedia.listAudioVideoZero();
         this.mediaSel = mediaSelected;
         this.launchTestGUI();
     }
@@ -105,11 +107,14 @@ public class TestGUI extends Parent {
         this.userSel = userSel;
         this.currentQuestionNumber = numCourant;
         this.selMedia = selectMedia;
+        this.selMedia.listAudioVideoZero();
         this.mediaSel = null;
         this.launchTestGUI();
     }
 
     private void launchTestGUI() {
+        
+        System.out.println("launchTestGUI");
 
         //Components design
         final QuestionGUI question = new QuestionGUI(this.selMedia);
@@ -159,7 +164,7 @@ public class TestGUI extends Parent {
                         new ChooseGUI(stage, language, db, userSel);
                     }else if ((currentQuestionNumber < nbQuestion) && nbQuestion == 3) {
                         currentQuestionNumber++;
-                        new TestGUI(stage, nbQuestion, currentQuestionNumber,selMedia,language, userSel,db);
+                        new TestGUI(stage, nbQuestion, currentQuestionNumber,selMedia,language,userSel,db);
                     }else if ((currentQuestionNumber == nbQuestion) && nbQuestion == 5) {
                         System.out.println("[TestGUI]End of test");
                         mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
@@ -174,7 +179,6 @@ public class TestGUI extends Parent {
             @Override
             public void handle(ActionEvent event) {
                 //TODO Mix du son et de la vidéo
-                //MediaPlayer.load("E:\\Document\\NetBeansProject\\ProjectProg\\Video\\2013_3_19_S29_fr_L1_ADMI_B_ok.mp4");
             }
         });
 

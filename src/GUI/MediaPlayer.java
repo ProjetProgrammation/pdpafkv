@@ -32,7 +32,8 @@ public class MediaPlayer {
      */
     public static void load(String pathV) {
         String path = System.getProperty("user.dir") + FilenameUtils.separatorsToSystem("\\VLC");
-        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), path);
+        String path1 = "E:\\Programme\\VLC";
+        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), path1);
         Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
         empComponent = new EmbeddedMediaPlayerComponent();
         frame.setContentPane(empComponent);
@@ -55,6 +56,12 @@ public class MediaPlayer {
         empComponent.getMediaPlayer().playMedia(path);
         empComponent.getMediaPlayer().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
 
+            @Override
+            public void playing(uk.co.caprica.vlcj.player.MediaPlayer mediaPlayer) {
+                mediaPlayer.mute(true);
+            }
+
+            
             @Override
             public void finished(uk.co.caprica.vlcj.player.MediaPlayer mediaPlayer) {
                 mediaPlayer.stop();

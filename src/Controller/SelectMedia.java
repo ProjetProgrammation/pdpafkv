@@ -16,7 +16,9 @@ import java.util.Random;
 public class SelectMedia {
 
     private ArrayList<Audio> listAudio;
+    private ArrayList<Audio> listAudioTest;
     private ArrayList<Video> listVideo;
+    private ArrayList<Video> listVideoTest;
     private ArrayList<Question> listQuestion;
     private ControllerDatabase db;
     private Language langSel;
@@ -42,6 +44,7 @@ public class SelectMedia {
      */
     public void selectAudioList() {
         Audio audio;
+        this.listAudioTest = new ArrayList<>();
         this.listAudio = new ArrayList<>();
         do {
             boolean check = false;
@@ -64,6 +67,7 @@ public class SelectMedia {
      */
     public void selectVideoList() {
         Video video;
+        this.listVideoTest = new ArrayList<>();
         this.listVideo = new ArrayList<>();
         do {
             boolean check = false;
@@ -87,15 +91,10 @@ public class SelectMedia {
     public void selectQuestionList() {
         Question question = null;
         this.listQuestion = new ArrayList<>();
+        int i=0;
         do {
-            boolean check = false;
             question = this.db.manageQuestion(this.langSel);
-            for (int i = 0; i < this.listQuestion.size(); i++) {
-                if (question.getContent().equals(this.listQuestion.get(i).getContent())) {
-                    check = true;
-                }
-            }
-            if (check == false) {
+            if(!this.listQuestion.contains(question)){
                 this.listQuestion.add(question);
             }
         } while (this.listQuestion.size() != this.db.countQuestion(this.langSel.getId()));
@@ -122,10 +121,19 @@ public class SelectMedia {
      */
     public Audio selectAudio() {
         Audio audio = null;
-        Random r = new Random();
-        int random = r.nextInt(this.listAudio.size());
-        audio = this.listAudio.get(random);
-        //this.listAudio.remove(audio);
+        if(this.listAudioTest.isEmpty()){
+            Random r = new Random();
+            int random = r.nextInt(this.listAudio.size());
+            audio = this.listAudio.get(random);
+        }
+        else{
+            do{
+                Random r = new Random();
+                int random = r.nextInt(this.listAudio.size());
+                audio = this.listAudio.get(random);
+            }while(this.listAudioTest.contains(audio));
+        }
+        this.listAudioTest.add(audio);
         return audio;
     }
 
@@ -137,10 +145,19 @@ public class SelectMedia {
      */
     public Video selectVideo() {
         Video video = null;
-        Random r = new Random();
-        int random = r.nextInt(this.listVideo.size());
-        video = this.listVideo.get(random);
-        //this.listVideo.remove(video);
+        if (this.listVideoTest.isEmpty()){
+            Random r = new Random();
+            int random = r.nextInt(this.listVideo.size());
+            video = this.listVideo.get(random);
+        }
+        else{
+            do{
+                Random r = new Random();
+                int random = r.nextInt(this.listVideo.size());
+                video = this.listVideo.get(random);
+            }while(this.listVideoTest.contains(video));
+        }
+        this.listVideoTest.add(video);
         return video;
     }
 
@@ -155,8 +172,13 @@ public class SelectMedia {
         Random r = new Random();
         int random = r.nextInt(this.listQuestion.size());
         question = this.listQuestion.get(random);
-        //this.listQuestion.remove(question);
+        this.listQuestion.remove(question);
         return question;
+    }
+    
+    public void listAudioVideoZero(){
+        this.listAudioTest.clear();
+        this.listVideoTest.clear();
     }
 
 }

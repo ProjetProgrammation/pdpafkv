@@ -14,6 +14,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import org.apache.commons.io.FilenameUtils;
@@ -58,13 +61,12 @@ public class VideoGUI extends Parent {
         //ToggleGroup Design
         for (int i = 0; i < 10; i++) {
             Video videoTmp = this.selMedia.selectVideo();
-            RadioButton tmpRB = new RadioButton("Face " + (i + 1));
+            RadioButton tmpRB = new RadioButton("");
             tmpRB.getStyleClass().add("radio-button");
             tmpRB.setUserData(videoTmp);
-            //tmpRB.
+            tmpRB.setGraphic(new ImageView(new Image(FilenameUtils.separatorsToSystem("file:\\") + System.getProperty("user.dir") + FilenameUtils.separatorsToSystem(videoTmp.getThumbnailPicPath()))));
             tmpRB.setToggleGroup(groupVideo);
             tmpRB.setFocusTraversable(false);
-            
             if (i < 5) {
                 zoneVideo.add(tmpRB, i, 0);
             } else {
@@ -73,6 +75,24 @@ public class VideoGUI extends Parent {
             listRB.add(tmpRB);
         }
 
+        for (final RadioButton tmpEventRB:listRB){
+            tmpEventRB.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    Video videoTmp = (Video)tmpEventRB.getUserData();
+                    tmpEventRB.setGraphic(new ImageView(new Image(FilenameUtils.separatorsToSystem("file:\\") + System.getProperty("user.dir") + FilenameUtils.separatorsToSystem(videoTmp.getThumbnailGifPath()))));
+                }
+            });
+
+            tmpEventRB.setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    Video videoTmp = (Video)tmpEventRB.getUserData();
+                    tmpEventRB.setGraphic(new ImageView(new Image(FilenameUtils.separatorsToSystem("file:\\") + System.getProperty("user.dir") + FilenameUtils.separatorsToSystem(videoTmp.getThumbnailPicPath()))));
+                }
+            });
+        }
+        
         //Events properties
         groupVideo.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
