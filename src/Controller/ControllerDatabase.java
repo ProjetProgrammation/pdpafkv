@@ -51,10 +51,10 @@ public final class ControllerDatabase {
     }
     
     public Video searchVideoById (int id){
-        return(this.db.searchVideoById(id));
+        return(DataBase.searchVideoById(id));
     }
     
     public Audio searchAudioById (int id){
-        return(this.db.searchAudioById(id));
+        return(DataBase.searchAudioById(id));
     }
 }

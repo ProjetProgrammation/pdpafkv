@@ -104,7 +104,8 @@ public class Extract {
                 i++;
             }
         } catch (Exception e) {
-            System.out.println("[extractAnswers]Problem to extract answers");
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
         }
     }
 }
