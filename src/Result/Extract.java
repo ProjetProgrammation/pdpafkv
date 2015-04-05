@@ -77,7 +77,6 @@ public class Extract {
      * @param fw current occurence of FileWriter
      */
     private static void extractAnswers(MediaSelected medSelected, FileWriter fw,ControllerDatabase db) {
-
         try {
             int i=1;
             fw.write("List of answers");
@@ -95,12 +94,12 @@ public class Extract {
                 fw.write(System.getProperty("line.separator"));
                 fw.write("              Expected ");
                 fw.write(System.getProperty("line.separator"));
-                Video video = db.searchVideoById(answer.getQuestSel().getIdVideo());
-                System.out.println("[video.getName] "+video.getName());
+                Video video = BDD.DataBase.searchVideoById(answer.getQuestSel().getIdVideo());
                 fw.write("                  Video   " + video.getName());
                 fw.write(System.getProperty("line.separator"));
-                Audio audio = db.searchAudioById(answer.getQuestSel().getIdAudio());
+                Audio audio = BDD.DataBase.searchAudioById(answer.getQuestSel().getIdAudio());
                 fw.write("                  Audio   " + audio.getName());
+                fw.write(System.getProperty("line.separator"));
                 i++;
             }
         } catch (Exception e) {

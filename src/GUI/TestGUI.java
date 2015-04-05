@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -118,8 +119,6 @@ public class TestGUI extends Parent {
 
     private void launchTestGUI() {
         
-        System.out.println("launchTestGUI");
-
         //Components design
         final QuestionGUI question = new QuestionGUI(this.selMedia);
         final SonGUI son = new SonGUI(this.selMedia);
@@ -129,6 +128,8 @@ public class TestGUI extends Parent {
         Label title2 = new Label("Prosodic Adventure train".toUpperCase());
         final Label videoError = new Label("Please select a video");
         final Label soundError = new Label("Please Select a sound");
+        videoError.setVisible(false);
+        soundError.setVisible(false);
         
         Button mix = new Button("Merge".toUpperCase());
         Button validate = new Button("Next".toUpperCase());
@@ -144,8 +145,8 @@ public class TestGUI extends Parent {
         //Add style classe
         title.getStyleClass().add("label-header");
         title2.getStyleClass().add("label-header");
-        videoError.getStyleClass().add("label-valid");
-        soundError.getStyleClass().add("label-valid");
+        videoError.getStyleClass().add("label-error");
+        soundError.getStyleClass().add("label-error");
         
         //Barre de progression
         ProgressBar pb = new ProgressBar();
@@ -181,14 +182,20 @@ public class TestGUI extends Parent {
                     }
                 }
                 else if ((video.getVideoSelected() == null) && (son.getAudioSelected() == null)){
-                    videoError.getStyleClass().add("label-error");
-                    soundError.getStyleClass().add("label-error");
+                    videoError.setVisible(true);
+                    soundError.setVisible(true);
+                    //videoError.getStyleClass().add("label-error");
+                    //soundError.getStyleClass().add("label-error");
                 }else if ((video.getVideoSelected() == null) && (son.getAudioSelected() != null)){
-                    videoError.getStyleClass().add("label-error");                    
-                    soundError.getStyleClass().remove("label-error");
+                    videoError.setVisible(true);
+                    soundError.setVisible(false);
+                    //videoError.getStyleClass().add("label-error");                    
+                    //soundError.getStyleClass().remove("label-error");
                 }else if ((video.getVideoSelected() != null) && (son.getAudioSelected() == null)){
-                    videoError.getStyleClass().remove("label-error");                    
-                    soundError.getStyleClass().add("label-error");
+                    videoError.setVisible(false);
+                    soundError.setVisible(true);
+                    //videoError.getStyleClass().remove("label-error");                    
+                    //soundError.getStyleClass().add("label-error");
                 }
             }
         });
@@ -214,9 +221,11 @@ public class TestGUI extends Parent {
         subRoot.add(soundError, 2, 0);
         
         subRoot.setAlignment(Pos.CENTER);
-
+        GridPane.setValignment(videoBox, VPos.CENTER);
+        GridPane.setValignment(sonBox, VPos.CENTER);
         GridPane.setHalignment(mix, HPos.CENTER);
         GridPane.setHalignment(validate, HPos.RIGHT);
+        
         if(nbQuestion == 3){
              global.setTop(title2);
         }
