@@ -172,7 +172,7 @@ public class TestGUI extends Parent {
                     }else if ((currentQuestionNumber == nbQuestion) && nbQuestion == 5) {
                         System.out.println("[TestGUI]End of test");
                         mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
-                        Extract.Extract(mediaSel);
+                        Extract.Extract(mediaSel,db);
                         new EndGUI(stage);
                     }
                 }
