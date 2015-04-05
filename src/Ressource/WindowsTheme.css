@@ -117,7 +117,7 @@
     -fx-font-family: "HelveticaNeueLTStd-LtCn";
     -fx-focus-color: transparent;
     -fx-background-radius: 0;
-    -fx-background-color: #ffffff;
+    -fx-background-color: red;
 }
 
 .button {
@@ -206,4 +206,23 @@
     -fx-padding: 20 40 40 20;
     -fx-background-insets: 0 20 20 0;
     -fx-background-width: 600;
+}
+.box-error {
+    -fx-background-color: #3A9548;
+    -fx-padding: 20 40 40 20;
+    -fx-background-insets: 0 20 20 0;
+    -fx-background-width: 600;
+    -fx-border-color: red;
+}
+
+.progress-bar > .bar {
+    -fx-accent: #128425;
+    -fx-background-color: linear-gradient(
+        from 0px .75em to .75em 0px,
+        repeat,
+        -fx-accent 0%,
+        -fx-accent 49%,
+        derive(-fx-accent, 30%) 50%,
+        derive(-fx-accent, 30%) 99%
+    );
 }

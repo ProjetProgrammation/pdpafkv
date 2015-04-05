@@ -112,15 +112,6 @@
     -fx-background-color: #ffffff;
 }
 
-.text-field-error {
-    -fx-font-size: 12pt;
-    -fx-font-family: "HelveticaNeueLTStd-LtCn";
-    -fx-focus-color: transparent;
-    -fx-background-radius: 0;
-    -fx-background-color: #ffffff;
-    -fx-border-color: red;
-}
-
 .button {
     -fx-padding: 5 22 5 22;   
     -fx-border-color: #e2e2e2;
@@ -215,8 +206,6 @@
     -fx-background-insets: 0 20 20 0;
     -fx-background-width: 600;
     -fx-border-color: red;
-    -fx-border-padding:20 40 40 20;
-    -fx-border-insets: 0 20 20 0;
 }
 
 .progress-bar > .bar {
