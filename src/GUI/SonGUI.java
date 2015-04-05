@@ -8,6 +8,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -16,6 +17,7 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import org.apache.commons.io.FilenameUtils;
 
 /**
@@ -45,30 +47,35 @@ public class SonGUI extends Parent {
     private void launchSonGUI() {
 
         //Components design
-        FlowPane flowAudio = new FlowPane();
-        flowAudio.getStyleClass().add("box");
-        flowAudio.setAlignment(Pos.CENTER);
-
+        VBox vboxAudio = new VBox();
+        vboxAudio.getStyleClass().add("box");
+        vboxAudio.setAlignment(Pos.CENTER);
+        vboxAudio.setSpacing(10);
+        
         final Button playSound = new Button("Preview voice");
         playSound.setDisable(true);
 
         GridPane soundArea = new GridPane();
-
+        soundArea.setVgap(10);
+        soundArea.setHgap(10);
+        
         final ToggleGroup groupAudio = new ToggleGroup();
         ArrayList<RadioButton> listRB = new ArrayList<>();
 
         //ToggleGroup Design
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 9; i++) {
             Audio audioTmp = this.selMedia.selectAudio();
             RadioButton tmpRB = new RadioButton("Voice " + (i + 1));
             tmpRB.getStyleClass().add("radio-button");
             tmpRB.setUserData(audioTmp);
             tmpRB.setToggleGroup(groupAudio);
             tmpRB.setFocusTraversable(false);
-            if (i < 5) {
+            if (i < 3) {
                 soundArea.add(tmpRB, i, 0);
+            } else if (i < 6) {
+                soundArea.add(tmpRB, i - 3, 2);
             } else {
-                soundArea.add(tmpRB, i - 5, 2);
+                soundArea.add(tmpRB, i - 6, 4);
             }
             listRB.add(tmpRB);
         }
@@ -92,9 +99,9 @@ public class SonGUI extends Parent {
         });
 
         //Adding in flowPane
-        flowAudio.getChildren().add(soundArea);
-        flowAudio.getChildren().add(playSound);
-        this.getChildren().add(flowAudio);
+        vboxAudio.getChildren().add(soundArea);
+        vboxAudio.getChildren().add(playSound);
+        this.getChildren().add(vboxAudio);
     }
 
     /**

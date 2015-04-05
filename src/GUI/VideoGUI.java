@@ -59,7 +59,7 @@ public class VideoGUI extends Parent {
         final ToggleGroup groupVideo = new ToggleGroup();
         ArrayList<RadioButton> listRB = new ArrayList<>();
         //ToggleGroup Design
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 9; i++) {
             Video videoTmp = this.selMedia.selectVideo();
             RadioButton tmpRB = new RadioButton("");
             tmpRB.getStyleClass().add("radio-button");
@@ -67,10 +67,12 @@ public class VideoGUI extends Parent {
             tmpRB.setGraphic(new ImageView(new Image(FilenameUtils.separatorsToSystem("file:\\") + System.getProperty("user.dir") + FilenameUtils.separatorsToSystem(videoTmp.getThumbnailPicPath()))));
             tmpRB.setToggleGroup(groupVideo);
             tmpRB.setFocusTraversable(false);
-            if (i < 5) {
+            if (i < 3) {
                 zoneVideo.add(tmpRB, i, 0);
+            } else if (i < 6) {
+                zoneVideo.add(tmpRB, i - 3, 2);
             } else {
-                zoneVideo.add(tmpRB, i - 5, 2);
+                zoneVideo.add(tmpRB, i - 6, 4);
             }
             listRB.add(tmpRB);
         }
