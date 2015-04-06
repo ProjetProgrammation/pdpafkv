@@ -177,25 +177,19 @@ public class TestGUI extends Parent {
                     }else if ((currentQuestionNumber == nbQuestion) && nbQuestion == 5) {
                         System.out.println("[TestGUI]End of test");
                         mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
-                        Extract.Extract(mediaSel,db);
+                        Extract.Extract(mediaSel,selMedia);
                         new EndGUI(stage);
                     }
                 }
                 else if ((video.getVideoSelected() == null) && (son.getAudioSelected() == null)){
                     videoError.setVisible(true);
                     soundError.setVisible(true);
-                    //videoError.getStyleClass().add("label-error");
-                    //soundError.getStyleClass().add("label-error");
                 }else if ((video.getVideoSelected() == null) && (son.getAudioSelected() != null)){
                     videoError.setVisible(true);
                     soundError.setVisible(false);
-                    //videoError.getStyleClass().add("label-error");                    
-                    //soundError.getStyleClass().remove("label-error");
                 }else if ((video.getVideoSelected() != null) && (son.getAudioSelected() == null)){
                     videoError.setVisible(false);
                     soundError.setVisible(true);
-                    //videoError.getStyleClass().remove("label-error");                    
-                    //soundError.getStyleClass().add("label-error");
                 }
             }
         });

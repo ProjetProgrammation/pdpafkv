@@ -138,7 +138,7 @@ public class UserGUI {
 
                 //Récupération données dans les champs
                 String ln = lastName.getText();
-               if (!Errors.errorsMessages(ln)) {
+                if (!Errors.errorsMessages(ln)) {
                     System.out.println("[UserGUI]Wrong last name");
                     if (!lastNameMistake){
                         lastName.getStyleClass().add("text-field-error");
@@ -237,9 +237,8 @@ public class UserGUI {
                 //
                 if (!lastNameMistake && !firstNameMistake && !birthdayMistake && !motherTongueMistake && !yearStudyingMistake && languageSelect != null) {
 
-                    User user = new User("Thibaut", "Fabre", "26/02/1991", "French", 1);
-                    //languageSelect = (Language) choose.getSelectedToggle().getUserData();
-                    //User user = new User(ln,fn,bd,mt,ys);
+                    //User user = new User("Thibaut", "Fabre", "26/02/1991", "French", 1);
+                    User user = new User(ln,fn,bd,mt,ys);
                     new ChooseGUI(stage, languageSelect, db, user);
                 }
 
