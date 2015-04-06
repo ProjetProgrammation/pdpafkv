@@ -7,7 +7,6 @@ package Result;
 
 import BDD.Audio;
 import BDD.Video;
-import Controller.ControllerDatabase;
 import Controller.MediaSelected;
 import Controller.SelectMedia;
 import java.io.File;
@@ -35,7 +34,6 @@ public class Extract {
             SimpleDateFormat sdf = new SimpleDateFormat("HH-mm-dd-MM-yy");
             String path = "\\"+ sdf.format(date) + "_" + medSelected.getUserSel().getNameToFile() + "_" + medSelected.getLangSel().getName() + ".txt";
             String workingDirectory = System.getProperty("user.dir");	
-            System.out.println("extract file");
             File file = new File(workingDirectory+FilenameUtils.separatorsToSystem(path));
             FileWriter fw = new FileWriter(file);                
             extractLanguageUser(medSelected,fw);

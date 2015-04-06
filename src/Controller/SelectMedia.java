@@ -109,14 +109,24 @@ public class SelectMedia {
         }
     }
     
+    /**
+     * Get the list of question
+     * @return ArrayList
+     */
     public ArrayList<Question> getQuestionsList(){
         return listQuestion;
     }
-    
+    /**
+     * Get the list of Audio
+     * @return ArrayList
+     */
      public ArrayList<Audio> getAudioList(){
         return listAudio;
     }
-     
+     /**
+      * Get the list of Video
+      * @return ArrayList
+      */
       public ArrayList<Video> getVideoList(){
         return listVideo;
     }
