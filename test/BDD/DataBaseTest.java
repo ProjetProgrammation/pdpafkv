@@ -23,30 +23,15 @@ import static org.junit.Assert.*;
  */
 public class DataBaseTest {
 
-
-    public DataBaseTest() {
-
-    }
-
-    @Before
-    public void setUp() {
-        DataBase.initiateDataBase();
-    }
-
-    @After
-    public void tearDown() {
-        DataBase = null;
-    }
-
     /**
-     *Connexion method test for DataBase class.
+     * Connexion method test for DataBase class.
      */
     public void testConnexion() {
         assertTrue("Connexion failed", DataBase.connexion() != null);
     }
 
     /**
-     *CreateTables method Test for DataBase Class.
+     * CreateTables method Test for DataBase Class.
      */
     public void testCreateTables() {
 
@@ -94,8 +79,8 @@ public class DataBaseTest {
     }
 
     /**
-     * Video methods Test for DataBase Class. White-box tests and
-     * black-box tests.
+     * Video methods Test for DataBase Class. White-box tests and black-box
+     * tests.
      */
     public void testBlackBoxAddVideo() {
         System.out.println("addVideo test");
@@ -199,8 +184,8 @@ public class DataBaseTest {
 
         DataBase.addVideo(name, filePath, format, nameLanguage, thumbnail, thumbnailgif);
         DataBase.addVideo(name, filePath, format, nameLanguage, thumbnail, thumbnailgif);
-        
-     }
+
+    }
 
     public void testRmVideoWhiteBox() {
         System.out.println("RmVideoWhiteBox");
@@ -221,8 +206,8 @@ public class DataBaseTest {
         int idVideo = -1;
 
         for (Question v : questionListTest) {
-                idVideo = v.getIdVideo();
-                break;
+            idVideo = v.getIdVideo();
+            break;
         }
 
         Video videoTest = DataBase.searchVideoById(idVideo);
@@ -258,8 +243,8 @@ public class DataBaseTest {
     }
 
     /**
-     * Audio methods Test for DataBase class. White-box tests and
-     * black-box tests.
+     * Audio methods Test for DataBase class. White-box tests and black-box
+     * tests.
      */
     public void testBlackBoxAddAudio() {
         System.out.println("BlackBoxAddAudio");
@@ -378,9 +363,9 @@ public class DataBaseTest {
         int idAudio = -1;
 
         for (Question v : questionListTest) {
-            
-                idAudio = v.getIdAudio();
-                break;
+
+            idAudio = v.getIdAudio();
+            break;
         }
 
         Audio audioTest = DataBase.searchAudioById(idAudio);
@@ -398,8 +383,8 @@ public class DataBaseTest {
     }
 
     /**
-     * Questions methods for DataBase class. White-box tests
-     * and black-box tests.
+     * Questions methods for DataBase class. White-box tests and black-box
+     * tests.
      */
     public void testBlackBoxAddQuestion() {
         System.out.println("BlackBoxAddQuestion");
@@ -514,7 +499,7 @@ public class DataBaseTest {
         DataBase.addQuestion(content, videoTest, audioTest, nameLanguage);
         DataBase.addQuestion(content, videoTest, audioTest, nameLanguage);
         DataBase.addQuestion(content, videoTest, audioTest, "Coreen");
-        
+
         DataBase.rmQuestion(content);
     }
 
@@ -529,12 +514,12 @@ public class DataBaseTest {
         DataBase.addQuestion(content, videoTest, audioTest, content);
         DataBase.rmQuestion(content);
         DataBase.rmQuestion(content);
-        
+
         ArrayList<Question> questionListTest;
         questionListTest = DataBase.getAllQuestions();
         for (Question v : questionListTest) {
-                DataBase.rmQuestion(v.getContent());
-                break;
+            DataBase.rmQuestion(v.getContent());
+            break;
         }
     }
 
@@ -548,8 +533,8 @@ public class DataBaseTest {
     }
 
     /**
-     * Language methods test for DataBase class. White-box tests
-     * and black-box tests.
+     * Language methods test for DataBase class. White-box tests and black-box
+     * tests.
      */
     public void testBlackBoxAddLanguage() {
         System.out.println("BlackBoxAddLanguage");
@@ -622,9 +607,9 @@ public class DataBaseTest {
         ArrayList<Language> languageListTest;
         languageListTest = DataBase.getAllLanguages();
         for (Language v : languageListTest) {
-                DataBase.rmLanguage(v.getName());
-                DataBase.addLanguage(v.getName());
-                break;
+            DataBase.rmLanguage(v.getName());
+            DataBase.addLanguage(v.getName());
+            break;
         }
     }
 
