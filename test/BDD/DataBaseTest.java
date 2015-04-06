@@ -101,7 +101,7 @@ public class DataBaseTest {
         System.out.println("addVideo test");
 
         String name = "2013_3_20_S33_fr_L1_TEST_B_ok";
-        String filePath = "Audio\\\\2013_3_20_S33_fr_L1_TEST_B_ok.mp4";
+        String filePath = "Video\\2013_3_20_S33_fr_L1_TEST_B_ok.mp4";
         String format = "mp4";
         String nameLanguage = "French";
         String thumbnail = "2013_3_20_S33_fr_L1_TEST_B_ok.jpg";
@@ -126,27 +126,18 @@ public class DataBaseTest {
     public void testBlackBoxSearchVideoByNameFormat() {
         System.out.println("searchVideoByNameFormat");
 
-        String name = "2013_3_19_S29_fr_L1_ADMK_B_ok";
-        String filePath = "Video\\2013_3_19_S29_fr_L1_ADMK_B_ok.mp4";
+        String name = "2013_3_20_S33_fr_L1_TEST_B_ok";
+        String filePath = "Video\\2013_3_20_S33_fr_L1_TEST_B_ok.mp4";
         String format = "mp4";
-        String nameLanguage = "French";
-        String thumbnail = "sethgecks.jpg";
-        String thumbnailgif = "sethgecks.gif";
-        int idLanguage = DataBase.searchLanguageByName(nameLanguage).getId();
-
-        Video expResult = new Video(DataBase.getAllVideos().size() + 1, name, filePath, format, idLanguage);
-        DataBase.addVideo(name, filePath, format, nameLanguage, thumbnailgif, thumbnailgif);
+        
         Video result = DataBase.searchVideoByNameFormat(name, format);
-        assertTrue("Problem BlackBoxSearchVideoByNameFormat", (expResult.getFilePath().equals(result.getFilePath())) && (expResult.getName().equals(result.getName())) && (expResult.getFormat().equals(result.getFormat())));
-        
-        
+        assertTrue("Problem BlackBoxSearchVideoByNameFormat", (filePath.equals(result.getFilePath())) && (name.equals(result.getName())) && (format.equals(result.getFormat())));
         DataBase.searchVideoByNameFormat("salut", "mp4");
         DataBase.searchVideoByNameFormat(name, "mp3");
-        DataBase.rmVideo(name, format);
     }
 
     public void testBlackBoxRmVideo() {
-        System.out.println("BlackBoxrmVideo");
+        System.out.println("BlackBoxRmVideo");
 
         ArrayList<Video> videoListTest;
         videoListTest = DataBase.getAllVideos();
@@ -189,8 +180,8 @@ public class DataBaseTest {
         String filePath = "Video\\2013_3_19_S29_fr_L1_ADMK_B_ok.mp4";
         String format = "mp4";
         String nameLanguage = "French";
-        String thumbnail = "sethgecks.jpg";
-        String thumbnailgif = "sethgecks.gif";
+        String thumbnail = "2013_3_19_S29_fr_L1_ADMK_B_ok.jpg";
+        String thumbnailgif = "2013_3_19_S29_fr_L1_ADMK_B_ok.gif";
 
         DataBase.addVideo(name, filePath, format, nameLanguage, thumbnail, thumbnailgif);
         DataBase.addVideo(name, filePath, format, nameLanguage, thumbnail, thumbnailgif);
@@ -251,7 +242,7 @@ public class DataBaseTest {
         System.out.println("BlackBoxAddAudio");
 
         String name = "2013_3_20_S33_fr_L1_TEST";
-        String filePath = "Audio\\\\2013_3_20_S33_fr_L1_TEST";
+        String filePath = "Audio\\2013_3_20_S33_fr_L1_TEST.mp3";
         String format = "mp3";
         String nameLanguage = "French";
         boolean checkAudio = false;
@@ -297,21 +288,16 @@ public class DataBaseTest {
     public void testBlackBoxSearchAudioByNameFormat() {
         System.out.println("BlackBoxSearchAudioByNameFormat");
 
-        String name = "2013_3_20_S33_fr_L1_TEST2";
-        String filePath = "Audio\\\\2013_3_20_S33_fr_L1_TEST2.mp3";
+        String name = "2013_3_20_S33_fr_L1_TEST";
+        String filePath = "Audio\\2013_3_20_S33_fr_L1_TEST.mp3";
         String format = "mp3";
         String nameLanguage = "French";
 
-        int idLanguage = DataBase.searchLanguageByName(nameLanguage).getId();
-
-        Audio expResult = new Audio(DataBase.getAllAudios().size() + 1,name, filePath, format, idLanguage);
-        DataBase.addAudio(name, filePath, format, nameLanguage);
         Audio result = DataBase.searchAudioByNameFormat(name, format);
 
-        assertTrue("Problem with BlackBoxSearchAudioByNameFormat", (expResult.getFilePath().equals(result.getFilePath())) && (expResult.getName().equals(result.getName())) && (expResult.getFormat().equals(result.getFormat())));
+        assertTrue("Problem with BlackBoxSearchAudioByNameFormat", (filePath.equals(result.getFilePath())) && (name.equals(result.getName())) && (format.equals(result.getFormat())));
         DataBase.searchAudioByNameFormat(name, "mp3");
         DataBase.searchAudioByNameFormat("test", format);
-        DataBase.rmAudio(name, format);
     }
 
     public void testBlackBoxCountAudio() {
@@ -374,6 +360,23 @@ public class DataBaseTest {
         assertTrue("error in BlackBoxManageAudio", languageTest.getId() == audio.getIdLanguage());
     }
 
+    
+    public void testBlackBoxSearchAudioById() {
+        System.out.println("BlackBoxSearchAudioById");
+
+        Audio audio = new Audio(DataBase.searchAudioById(DataBase.getAllAudios().size()));
+
+        ArrayList<Audio> audioListTest;
+        audioListTest = DataBase.getAllAudios();
+        for (Audio v : audioListTest) {
+            System.out.println("The audio name is:" + v.getName());
+            if (!(v.getName().equals(audio.getName())) && (v.getId() == (audio.getId()))) {
+                throw new AssertionError("BlackBoxSearchAudioById problem");
+            }
+        }
+        DataBase.searchAudioById(DataBase.getAllAudios().size() + 1);
+    }
+
     /**
      * Questions methods for DataBase class. White-box tests
      * and black-box tests.
@@ -382,7 +385,7 @@ public class DataBaseTest {
         System.out.println("BlackBoxAddQuestion");
 
         String content = "hello everybody, how are you?";
-        Audio audioTest = new Audio(DataBase.getAllAudios().size() + 1, "2013_3_20_S33_fr_L1_TEST", "Audio\\2013_3_20_S33_fr_L1_TEST.mp3", "mp3", 1);
+        Audio audioTest = new Audio(DataBase.getAllAudios().size()+ 1, "2013_3_20_S33_fr_L1_TEST", "Audio\\2013_3_20_S33_fr_L1_TEST.mp3", "mp3", 1);
         Video videoTest = new Video(DataBase.getAllVideos().size() + 1, "2013_3_20_S33_fr_L1_TEST_B_ok", "Video\\2013_3_20_S33_fr_L1_TEST_B_ok.mp4", "mp4", 1);
         String nameLanguage = "French";
         boolean checkQuestion = false;
@@ -398,22 +401,6 @@ public class DataBaseTest {
            }
         }
         assertTrue("Error in BlackBoxAddQuestion", checkQuestion == true);
-    }
-
-    public void testBlackBoxSearchAudioById() {
-        System.out.println("BlackBoxSearchAudioById");
-
-        Audio audio = new Audio(DataBase.searchAudioById(DataBase.getAllAudios().size()));
-
-        ArrayList<Audio> audioListTest;
-        audioListTest = DataBase.getAllAudios();
-        for (Audio v : audioListTest) {
-            System.out.println("The audio name is:" + v.getName());
-            if (!(v.getName().equals(audio.getName())) && (v.getId() == (audio.getId()))) {
-                throw new AssertionError("BlackBoxSearchAudioById problem");
-            }
-        }
-        DataBase.searchAudioById(DataBase.getAllAudios().size() + 1);
     }
 
     public void testBlackBoxRmQuestion() {
@@ -478,7 +465,7 @@ public class DataBaseTest {
 
         DataBase.addQuestion(content, videoTest, audioTest, nameLanguage);
         DataBase.addQuestion(content, videoTest, audioTest, nameLanguage);
-        DataBase.addQuestion(content, videoTest, audioTest, "Coreen");
+        DataBase.addQuestion("test", videoTest, audioTest, "Coreen");
         
     }
 
@@ -511,21 +498,14 @@ public class DataBaseTest {
         String name = "Japanese";
         DataBase.addLanguage(name);
         boolean checkLanguage = false;
+        
+        ArrayList<Language> languageListTest;
+        languageListTest = DataBase.getAllLanguages();
 
-        try {
-            PreparedStatement prepaS;
-            Connection c = DataBase.connexion();
-            String query = "select * from Language where name='" + name + "';)";
-            prepaS = c.prepareStatement(query);
-
-            ResultSet rs = prepaS.executeQuery();
-            while (rs.next()) {
-                checkLanguage = true;
-                System.out.println("the language was found");
-            }
-        } catch (SQLException e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
+        for (Language v : languageListTest) {
+           if(name.equals(v.getName())){
+               checkLanguage = true;
+           }
         }
         assertTrue("Error with BlackBoxAddLanguage", checkLanguage == true);
     }
@@ -555,8 +535,7 @@ public class DataBaseTest {
 
         languageListTest = DataBase.getAllLanguages();
         for (Language v : languageListTest) {
-            System.out.println("The language name is:" + v.getName());
-            System.out.println("The language name is:" + v.getId());
+            System.out.println("The language name is:" + v.getName() + v.getId());
             if (v.getName().equals(name)) {
                 throw new AssertionError("Problem with BlackBoxRmLanguage");
             }
@@ -567,8 +546,6 @@ public class DataBaseTest {
         System.out.println("RmLanguageWhiteBox");
 
         String name = "Coreen";
-        int languageName = 0;
-        DataBase.addLanguage(name);
         DataBase.rmLanguage(name);
         DataBase.rmLanguage(name);
 
@@ -583,7 +560,7 @@ public class DataBaseTest {
     public void testAddLanguageWhiteBox() {
         System.out.println("AddLanguageWhiteBox");
 
-        String languageTest = "American";
+        String languageTest = "Coreen";
         DataBase.addLanguage(languageTest);
         DataBase.addLanguage(languageTest);
     }
@@ -624,7 +601,11 @@ public class DataBaseTest {
 
         testConnexion();
         testCreateTables();
-
+        
+        testBlackBoxCountAudio();
+        testBlackBoxCountQuestion();
+        testBlackBoxCountVideo();
+        
         testBlackBoxAddVideo();
         testBlackBoxAddAudio();
         testBlackBoxAddQuestion();
@@ -639,10 +620,6 @@ public class DataBaseTest {
         testBlackBoxRmAudio();
         testBlackBoxRmLanguage();
         testBlackBoxRmQuestion();
-
-        testBlackBoxCountAudio();
-        testBlackBoxCountQuestion();
-        testBlackBoxCountVideo();
 
         testAddVideoWhiteBox();
         testAddQuestionWhiteBox();
