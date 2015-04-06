@@ -44,7 +44,7 @@ public class QuestionGUI extends Parent {
         flowQuestion.autosize();
         flowQuestion.setAlignment(Pos.CENTER);
         
-         flowQuestion.getStyleClass().add("box");
+        flowQuestion.getStyleClass().add("box");
         textQuestion.getStyleClass().add("label-header-2");
        
        

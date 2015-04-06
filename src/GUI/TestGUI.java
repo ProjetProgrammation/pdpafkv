@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -118,8 +119,6 @@ public class TestGUI extends Parent {
 
     private void launchTestGUI() {
         
-        System.out.println("launchTestGUI");
-
         //Components design
         final QuestionGUI question = new QuestionGUI(this.selMedia);
         final SonGUI son = new SonGUI(this.selMedia);
@@ -127,6 +126,10 @@ public class TestGUI extends Parent {
 
         Label title = new Label("Prosodic Adventure".toUpperCase());
         Label title2 = new Label("Prosodic Adventure train".toUpperCase());
+        final Label videoError = new Label("Please select a video");
+        final Label soundError = new Label("Please Select a sound");
+        videoError.setVisible(false);
+        soundError.setVisible(false);
         
         Button mix = new Button("Merge".toUpperCase());
         Button validate = new Button("Next".toUpperCase());
@@ -137,11 +140,13 @@ public class TestGUI extends Parent {
         BorderPane root = new BorderPane();
         HBox questionBox = new HBox(question);
         final HBox videoBox = new HBox(video);
-        HBox sonBox = new HBox(son);
+        final HBox sonBox = new HBox(son);
 
         //Add style classe
         title.getStyleClass().add("label-header");
         title2.getStyleClass().add("label-header");
+        videoError.getStyleClass().add("label-error");
+        soundError.getStyleClass().add("label-error");
         
         //Barre de progression
         ProgressBar pb = new ProgressBar();
@@ -172,12 +177,19 @@ public class TestGUI extends Parent {
                     }else if ((currentQuestionNumber == nbQuestion) && nbQuestion == 5) {
                         System.out.println("[TestGUI]End of test");
                         mediaSel.addAnswer(new Answer(question.getQuestionSelected(), video.getVideoSelected(), son.getAudioSelected()));
-                        Extract.Extract(mediaSel,db);
+                        Extract.Extract(mediaSel,selMedia);
                         new EndGUI(stage);
                     }
                 }
-                else{
-                    videoBox.getStyleClass().add("box-error");
+                else if ((video.getVideoSelected() == null) && (son.getAudioSelected() == null)){
+                    videoError.setVisible(true);
+                    soundError.setVisible(true);
+                }else if ((video.getVideoSelected() == null) && (son.getAudioSelected() != null)){
+                    videoError.setVisible(true);
+                    soundError.setVisible(false);
+                }else if ((video.getVideoSelected() != null) && (son.getAudioSelected() == null)){
+                    videoError.setVisible(false);
+                    soundError.setVisible(true);
                 }
             }
         });
@@ -199,10 +211,15 @@ public class TestGUI extends Parent {
         subRoot.add(mix, 2, 2, 1, 1);
         subRoot.add(validate, 2, 2, 2, 1);
         subRoot.add(pb, 2, 2, 2, 2);
+        subRoot.add(videoError, 1, 0);
+        subRoot.add(soundError, 2, 0);
+        
         subRoot.setAlignment(Pos.CENTER);
-
+        GridPane.setValignment(videoBox, VPos.CENTER);
+        GridPane.setValignment(sonBox, VPos.CENTER);
         GridPane.setHalignment(mix, HPos.CENTER);
         GridPane.setHalignment(validate, HPos.RIGHT);
+        
         if(nbQuestion == 3){
              global.setTop(title2);
         }

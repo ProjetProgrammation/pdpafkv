@@ -1120,12 +1120,10 @@ public final class DataBase {
             rs.close();
             stmt.close();
             c.close();
-            return video;
            
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-        System.out.println("[searchVideoById]Error");
         return video;
     }
 
@@ -1159,11 +1157,10 @@ public final class DataBase {
             rs.close();
             stmt.close();
             c.close();
-            return audio;
+           
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-        System.out.println("[searchAudioById]Error");
         return audio;
     }
 

@@ -9,6 +9,7 @@ import BDD.Audio;
 import BDD.Video;
 import Controller.ControllerDatabase;
 import Controller.MediaSelected;
+import Controller.SelectMedia;
 import java.io.File;
 import java.io.FileWriter;
 import java.text.SimpleDateFormat;
@@ -25,18 +26,20 @@ public class Extract {
     /**
      * Constructs an Extract object.
      *
-     * @param medSelected current occurence of mediaSelect.
+     * @param medSelected current occurence of MediaSelected.
+     * @param selMed current occurence of SelectMedia
      */
-    public static void Extract(MediaSelected medSelected,ControllerDatabase db) {
+    public static void Extract(MediaSelected medSelected,SelectMedia selMed) {
         try {
             Date date = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("HH-mm-dd-MM-yy");
             String path = "\\"+ sdf.format(date) + "_" + medSelected.getUserSel().getNameToFile() + "_" + medSelected.getLangSel().getName() + ".txt";
             String workingDirectory = System.getProperty("user.dir");	
+            System.out.println("extract file");
             File file = new File(workingDirectory+FilenameUtils.separatorsToSystem(path));
             FileWriter fw = new FileWriter(file);                
             extractLanguageUser(medSelected,fw);
-            extractAnswers(medSelected,fw,db);
+            extractAnswers(medSelected,fw,selMed);
             fw.close();
         } catch (Exception e) {
             System.out.println("[Extract]Problem to create file");
@@ -76,8 +79,7 @@ public class Extract {
      * @param medSelected current occurence of mediaSelect.
      * @param fw current occurence of FileWriter
      */
-    private static void extractAnswers(MediaSelected medSelected, FileWriter fw,ControllerDatabase db) {
-
+    private static void extractAnswers(MediaSelected medSelected, FileWriter fw, SelectMedia selMed) {
         try {
             int i=1;
             fw.write("List of answers");
@@ -95,12 +97,12 @@ public class Extract {
                 fw.write(System.getProperty("line.separator"));
                 fw.write("              Expected ");
                 fw.write(System.getProperty("line.separator"));
-                Video video = db.searchVideoById(answer.getQuestSel().getIdVideo());
-                System.out.println("[video.getName] "+video.getName());
+                Video video = selMed.getDb().searchVideoById(answer.getQuestSel().getIdVideo());
                 fw.write("                  Video   " + video.getName());
                 fw.write(System.getProperty("line.separator"));
-                Audio audio = db.searchAudioById(answer.getQuestSel().getIdAudio());
+                Audio audio = selMed.getDb().searchAudioById(answer.getQuestSel().getIdAudio());
                 fw.write("                  Audio   " + audio.getName());
+                fw.write(System.getProperty("line.separator"));
                 i++;
             }
         } catch (Exception e) {

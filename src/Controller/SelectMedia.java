@@ -203,4 +203,15 @@ public class SelectMedia {
     public boolean isProblemDB() {
         return problemDB;
     }
+
+    /**
+     * 
+     * Get the ControllerDatabase
+     * @return ControllerDatabase
+     */
+    public ControllerDatabase getDb() {
+        return db;
+    }
+    
+    
 }
