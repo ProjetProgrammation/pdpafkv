@@ -32,29 +32,5 @@ Sur Ubuntu (et autres distributions compatibles, il faut installer cette solutio
 <code>sudo apt-get install oracle-java8-installer</code><br>
 </p>
 
-<H2>Notes de réunion</H2>
 
-<ul>
-<li><strong>Prochain rendez-vous avec F.Frey : 17.02 à 17h15</strong></li>
-<li>Ce qu'il se passe >> dans un fichier texte (pour repérer d'éventuelles erreurs lors de l'exécution)</li>
-<li>Vidéo : Avoir fini pour le 16.02 (prochain rendez-vous avec J.Frey)</li>
-</ul>
 
-<H3>Réunion avec JL.Rouas</H3>
-
-<ul>
-<li>JL.Rouas dit : "Pas mal" en parlant de l'application</li>
-<li>JL.Rouas dit : "J'ai pas d'algorithme de fusion audio/vidéo"</li>
-<li>JL.Rouas dit : "J'ai juste des algorithmes pour modifier la prosodie d'un audio"</li>
-<li>JL.Rouas dit : "Mes algorithmes sont en MatLab, bon courage."</li>
-<li>JL.Rouas dit : "Je vous prépare ça pour la semaine prochaine."</li>
-<li>JL.Rouas dit : "Au revoir."</li>
-<ul>
-
-<H3>Réunion J.Frey</H3>
-
-<ul>
-<li>Rapport : prochaine séance mais parler un peu de ce que l'on a fait, des difficultés (rapidement).</li>
-<li>QCM : bon chance (langage objet, acronymes, ...).</li>
-<li>Rapport : vidéo de démo à bannir quand c'es tjuste de l'illustration, ça reste un support.</li>
-<ul>
