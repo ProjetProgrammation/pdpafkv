@@ -43,7 +43,7 @@ public class VideoGUI extends Parent {
     }
 
     private void launchVideoGUI() {
-
+         final String nameOS = System.getProperty("os.name").toLowerCase();
         //Components design
         FlowPane flowVideo = new FlowPane();
         flowVideo.getStyleClass().add("box");
@@ -64,7 +64,13 @@ public class VideoGUI extends Parent {
             RadioButton tmpRB = new RadioButton("");
             tmpRB.getStyleClass().add("radio-button");
             tmpRB.setUserData(videoTmp);
-            tmpRB.setGraphic(new ImageView(new Image(FilenameUtils.separatorsToSystem("file:\\") + System.getProperty("user.dir") + FilenameUtils.separatorsToSystem(videoTmp.getThumbnailPicPath()))));
+            if (nameOS.contains("win")){
+                tmpRB.setGraphic(new ImageView(new Image(FilenameUtils.separatorsToSystem("file:\\") + System.getProperty("user.dir") + FilenameUtils.separatorsToSystem(videoTmp.getThumbnailPicPath()))));   
+            }
+            else{
+                tmpRB.setGraphic(new ImageView(new Image(FilenameUtils.separatorsToSystem("file:\\\\") + System.getProperty("user.dir") + FilenameUtils.separatorsToSystem(videoTmp.getThumbnailPicPath()))));
+            }
+            
             tmpRB.setToggleGroup(groupVideo);
             tmpRB.setFocusTraversable(false);
             if (i < 3) {
@@ -82,7 +88,13 @@ public class VideoGUI extends Parent {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     Video videoTmp = (Video)tmpEventRB.getUserData();
-                    tmpEventRB.setGraphic(new ImageView(new Image(FilenameUtils.separatorsToSystem("file:\\") + System.getProperty("user.dir") + FilenameUtils.separatorsToSystem(videoTmp.getThumbnailGifPath()))));
+                    if (nameOS.contains("win")){
+                        tmpEventRB.setGraphic(new ImageView(new Image(FilenameUtils.separatorsToSystem("file:\\") + System.getProperty("user.dir") + FilenameUtils.separatorsToSystem(videoTmp.getThumbnailGifPath()))));
+                    }
+                    else{
+                        tmpEventRB.setGraphic(new ImageView(new Image(FilenameUtils.separatorsToSystem("file:\\\\") + System.getProperty("user.dir") + FilenameUtils.separatorsToSystem(videoTmp.getThumbnailGifPath()))));
+                    }
+                    
                 }
             });
 
@@ -90,7 +102,11 @@ public class VideoGUI extends Parent {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     Video videoTmp = (Video)tmpEventRB.getUserData();
+                if (nameOS.contains("win")){
                     tmpEventRB.setGraphic(new ImageView(new Image(FilenameUtils.separatorsToSystem("file:\\") + System.getProperty("user.dir") + FilenameUtils.separatorsToSystem(videoTmp.getThumbnailPicPath()))));
+                } else{
+                    tmpEventRB.setGraphic(new ImageView(new Image(FilenameUtils.separatorsToSystem("file:\\\\") + System.getProperty("user.dir") + FilenameUtils.separatorsToSystem(videoTmp.getThumbnailPicPath()))));
+                }
                 }
             });
         }
